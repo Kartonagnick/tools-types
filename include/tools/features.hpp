@@ -1,8 +1,10 @@
-
-// [2021y-02m-05d] Idrisov Denis R.
+// [2021y-02m-05d][18:41:19] Idrisov Denis R.
+// [2021y-03m-10d][23:23:35] Idrisov Denis R. 108
+// [2021y-03m-15d][18:28:44] Idrisov Denis R. 109
+// [2021y-03m-17d][23:19:45] Idrisov Denis R. 110
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 101
+#define dTOOLS_FEATURES_USED_ 110
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -14,28 +16,84 @@
 #endif
 
 //==============================================================================
-//=== dHAS_RVALUE_REFERENCES ===================================================
+//=== dHAS_NULLPTR =============================================================
+
+#if defined(__GNUC__) && __GNUC__ * 10 + __GNUC_MINOR__ >= 46
+    #define dHAS_NULLPTR 1
+#endif
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1600
+    // #pragma message("build for msvc2010 (or newer)")
+    #define dHAS_TYPE_TRAITS 1
+    #define dHAS_NULLPTR 1
+    #define dHAS_HASH 1
+#endif
+
+#if __cplusplus >= 201103L
+    #define dHAS_NULLPTR 1
+#endif
+
+#ifdef dHAS_NULLPTR
+    typedef decltype(nullptr) nullptr_t;
+#endif
+
+//==============================================================================
+//=== dSTATIC_ASSERT ===========================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1600
+    // #pragma message("build for msvc2010 (or newer)")
+    #define dHAS_CSTDINT 1
+
+    #define dHAS_STATIC_ASSERT 1
+
+    #define dSTATIC_ASSERT(expr, msg) \
+        static_assert(expr, #msg)
+#else
+    namespace static_
+    {
+        template<bool> struct assert_;
+        template<> struct assert_<true> {};
+
+    } // namespace static_
+
+    #define dSTATIC_ASSERT(expr, msg)   \
+    {                                   \
+        ::static_::assert_<(expr)> msg; \
+        (void) msg;                     \
+    } void()
+#endif
+
+//==============================================================================
+//=== dHAS_RVALUE_REFERENCES/dHAS_ATOMIC =======================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1700
-    // #pragma message("build for msvc2010 (or newer) or other compiler")
+    // #pragma message("build for msvc2012 (or newer) or other compiler")
     #define dHAS_RVALUE_REFERENCES 1
+    #define dHAS_ENUM_CLASS 1
+    #define dHAS_EMPLACE 1    
+    #define dHAS_CHRONO 1
+    #define dHAS_ATOMIC 1
 #endif
-    
+
 //==============================================================================
 //=== dHAS_CPP11 ===============================================================
 
 #if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
     // #pragma message("build for msvc2015 (or newer) or other compiler")
     // #pragma message("build for c++11 (or newer)")
-    #define dHAS_CPP11 1
-    #define dHAS_CONSTEXPR_CPP11 1
+    // #define dHAS_TRAILING_RETURN_TYPE 1
+    // #define dHAS_AUTO_RETURN_TYPE 1
     #define dCONSTEXPR_CPP11 constexpr
+    #define dHAS_CONSTEXPR_CPP11 1
+    #define dHAS_CPP11 1
 #else 
     #define dCONSTEXPR_CPP11 inline
 #endif
 
-#ifdef dHAS_CPP11
-    using nullptr_t = decltype(nullptr);
+#ifdef dHAS_CONSTEXPR_CPP11
+    #define dCONSTANT constexpr
+#else
+    #define dCONSTANT const
 #endif
 
 //==============================================================================
@@ -45,7 +103,9 @@
     // #pragma message("build for msvc2013 (or newer) or other compiler")
     // #pragma message("build for c++11 (or newer)")
     #define dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM 1
+    #define dHAS_AGGREGATE_INITIALIZE 1
     #define dHAS_DELETING_FUNCTIONS 1
+    #define dHAS_VARIADIC_TEMPLATE 1
     #define dHAS_USING_ALIAS 1
 #endif
 
@@ -85,6 +145,24 @@
     #define dNOEXCEPT throw()
 #endif
 
+
+//==============================================================================
+//=== dTHREAD_LOCAL ============================================================
+
+#ifdef _MSC_VER
+    #define dTHREAD_LOCAL_EXTENSION  __declspec(thread)
+#else
+    #define dTHREAD_LOCAL_EXTENSION  __thread
+#endif
+
+#if defined (_MSC_VER) && _MSC_VER >= 1900
+    // #pragma message("build for msvc2015 (or newer) or other compiler")
+    #define dHAS_THREAD_LOCAL 1
+#elif __cplusplus >= 201103L
+    // #pragma message("build for c++11")
+    #define dHAS_THREAD_LOCAL 1
+#endif
+
 //==============================================================================
 //=== dCONSTEXPR_CPP14 =========================================================
 
@@ -111,15 +189,19 @@
 
 #if (defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L
     // #pragma message("build for c++17 (or newer))
-    #define dHAS_CPP17 1
     #define dNODISCARD [[nodiscard]]
+    #define dHAS_CPP17 1
 #else
     #define dNODISCARD
 #endif
 
 //==============================================================================
+//=== dHAS_ZERO_SIZE_ARRAY =====================================================
+
+#ifndef _MSC_VER
+    #define dHAS_ZERO_SIZE_ARRAY 1
+#endif 
+
+//==============================================================================
 //==============================================================================
 #endif // !dTOOLS_FEATURES_USED_
-
-// trailing-syntaxis-for-auto (since C++11)
-// example: auto foo() -> int

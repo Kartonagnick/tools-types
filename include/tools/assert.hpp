@@ -1,5 +1,4 @@
-
-// [2021y-02m-07d] Idrisov Denis R.
+// [2021y-02m-07d][18:40:18] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_ASSERT_USED_
 #define dTOOLS_ASSERT_USED_ 100
@@ -10,7 +9,7 @@
     #define dASSERT(...)
 #else
     #include <cassert>
-    #define dASSERT(...) assert(__VA_ARGS__)
+    #define dASSERT(...) assert((__VA_ARGS__))
 #endif
 
 //==============================================================================
