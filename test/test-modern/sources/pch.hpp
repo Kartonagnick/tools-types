@@ -1,6 +1,5 @@
-﻿
-// [2021y-02m-16d] Idrisov Denis R.
-// [2021y-02m-20d] birthday of the project
+﻿// [2021y-02m-16d][23:00:41] Idrisov Denis R.
+// [2021y-02m-20d][23:00:41] birthday of the project
 #pragma once
 //================================================================================
 //================================================================================
@@ -9,7 +8,8 @@
     #define WIN32_LEAN_AND_MEAN
 #endif
 
-#define dBUILD_TARGET [test] tools/types
+#define dBUILD_TARGET [test-modern] tools
+//#include <tools/confbuild.hpp>
 #include <../sources/confbuild.hpp>
 #include <mygtest/confinfo.hpp>
 #include <mygtest/pch_used.hpp>
@@ -20,6 +20,7 @@
 
 #include <tools/features.hpp>
 #include <tools/assert.hpp>
+#include <stdexcept>
 #include <cassert>
 #include <cstddef>
 #include <sstream>

@@ -1,5 +1,4 @@
-
-// [2021y-02m-05d] Idrisov Denis R.
+// [2021y-02m-05d][23:00:41] Idrisov Denis R.
 #include <mygtest/test-list.hpp>
 //==============================================================================
 //==============================================================================
@@ -43,7 +42,15 @@ namespace
 
 TEST(TEST_CASE_NAME, TEST_NUMBER(000))
 {
-    ASSERT_DEATH_DEBUG(foo());
+    if(testing::stress)
+        std::cout << "enabled: testing::stress\n";
+    else
+        std::cout << "disabled: testing::stress\n";
+
+    if(testing::generate)
+        std::cout << "enabled: testing::generate\n";
+    else
+        std::cout << "disabled: testing::generate\n";
 }
 
 TEST(TEST_CASE_NAME, TEST_NUMBER(001))
