@@ -1,6 +1,7 @@
 
-// [2021y-02m-20d] Idrisov Denis R.
-// [2021y-02m-20d] birthday of the project
+// [2021y-02m-20d][16:14:09] Idrisov Denis R.
+// [2021y-02m-20d][16:14:09] birthday of the project
+// [2021y-03m-18d][23:28:30] birthday of the project
 #pragma once
 //==============================================================================
 //==============================================================================
@@ -39,9 +40,9 @@
     #define dTXT_RELEASE_STABLE "unstable"
 #endif
 
-#define dVERSION_MAJOR      0
+#define dVERSION_MAJOR      1
 #define dVERSION_MINOR      0
-#define dVERSION_PATCH      1
+#define dVERSION_PATCH      0
 
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
