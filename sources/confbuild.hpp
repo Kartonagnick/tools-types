@@ -1,8 +1,10 @@
 
 // [2021y-02m-20d][16:14:09] Idrisov Denis R.
 // [2021y-02m-20d][16:14:09] birthday of the project
-// [2021y-03m-18d][23:28:30] birthday of the project
+// [2021y-03m-18d][23:51:55] 101
 #pragma once
+#ifndef dTOOLS_TYPES_CONFBUILD_USED_
+#define dTOOLS_TYPES_CONFBUILD_USED_ 101
 //==============================================================================
 //==============================================================================
 
@@ -23,26 +25,26 @@
 #endif
 
 #if defined(dX64)
-    #define dTXT_ADDRESS_MODEL "64-bit"
+    #define dTXT_AMODEL "64-bit"
 #elif defined(dX32)
-    #define dTXT_ADDRESS_MODEL "32-bit"
+    #define dTXT_AMODEL "32-bit"
 #endif
 
 #ifdef NDEBUG
-    #define dTXT_CONFIGURATION "release"
+    #define dTXT_CONFIG "release"
 #else
-    #define dTXT_CONFIGURATION "debug"
+    #define dTXT_CONFIG "debug"
 #endif
 
 #ifdef STABLE_RELEASE
-    #define dTXT_RELEASE_STABLE "stable"
+    #define dTXT_STABLE "stable"
 #else
-    #define dTXT_RELEASE_STABLE "unstable"
+    #define dTXT_STABLE "unstable"
 #endif
 
 #define dVERSION_MAJOR      1
 #define dVERSION_MINOR      0
-#define dVERSION_PATCH      0
+#define dVERSION_PATCH      1
 
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
@@ -52,9 +54,10 @@
 #define dFILE_VERSION_STR   dSSTRINGIZE(dVERSION_MAJOR.dVERSION_MINOR.dVERSION_PATCH)
 
 #define dABOUT_ME \
-    dTXT_CONFIGURATION "-" dTXT_ADDRESS_MODEL ", " dTXT_RELEASE_STABLE 
+    dTXT_CONFIG "-" dTXT_AMODEL ", " dTXT_STABLE 
 
 #define dFULL_VERSION dFILE_VERSION_STR ", " dABOUT_ME
 
 //==============================================================================
 //==============================================================================
+#endif // !dTOOLS_TYPES_CONFBUILD_USED_

@@ -1,10 +1,10 @@
 ﻿
-[P]: ../../images/progress.png
-[V]: ../../images/success.png
-[X]: ../../images/failed.png
-[D]: ../../images/danger.png
-[E]: ../../images/empty.png
-[N]: ../../images/na.png
+[P]: ../../icons/progress.png
+[V]: ../../icons/success.png
+[X]: ../../icons/failed.png
+[D]: ../../icons/danger.png
+[E]: ../../icons/empty.png
+[N]: ../../icons/na.png
 
 version 1.0.0
 ---
