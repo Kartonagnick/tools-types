@@ -23,14 +23,14 @@ rem ============================================================================
     set "MG72=mingw720:64:release:static"
     set "MG=%MG72%;%MG73%;%MG81%;"
 
-    rem set "order=%VC%"
+    set "order=%VC19%"
     rem set "order=%MG%"
     rem set "order=%VC%; %MG%"
-    set "order=%VC%;%MG%"
+    rem set "order=%VC%;%MG%"
     rem set "order=all"
 
     rem for development
-    rem (call :generate) && (goto :success) || (goto :failed)
+    (call :generate) && (goto :success) || (goto :failed)
 
     rem (call :clean)    || (goto :failed)
     (call :build)    || (goto :failed)

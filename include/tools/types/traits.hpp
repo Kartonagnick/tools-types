@@ -1,4 +1,4 @@
-// [2021y-03-11d][01:46:56] Idrisov Denis R.
+// [2021y-03m-11d][01:46:56] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
 #define dTOOLS_TRAITS_USED_ 2

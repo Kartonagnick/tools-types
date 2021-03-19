@@ -1,6 +1,6 @@
-// [2021y-03-16d][16:55:29] Idrisov Denis R. 100
-// [2021y-03-17d][23:51:45] Idrisov Denis R. 101
-// [2021y-03-19d][18:22:39] Idrisov Denis R. 102 PRE
+// [2021y-03m-16d][16:55:29] Idrisov Denis R. 100
+// [2021y-03m-17d][23:51:45] Idrisov Denis R. 101
+// [2021y-03m-19d][19:00:21] Idrisov Denis R. 102
 #pragma once
 #ifndef dTOOLS_TYPES_USED_ 
 #define dTOOLS_TYPES_USED_ 102
