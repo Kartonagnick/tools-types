@@ -35,7 +35,6 @@
     #else
         #define dCRT "MT"
     #endif
-
 #else
     #define dTXT_CONFIG "debug"
 
@@ -62,7 +61,7 @@
     dVERSION_STR(NAME##_MAJOR, NAME##_MINOR, NAME##_PATHS)   
 
 #define dABOUT_ME \
-    dTXT_CONFIG "-" dTXT_AMODEL ", " dTXT_STABLE 
+    dTXT_AMODEL "-" dTXT_CONFIG "-" dCRT ", " dTXT_STABLE 
 
 #define dFULL_VERSION(NAME) dGET_VERSION(NAME) ", " dABOUT_ME
 
