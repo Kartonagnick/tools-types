@@ -1,9 +1,42 @@
 // [2021y-03m-11d][01:46:56] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 2
+#define dTOOLS_TRAITS_USED_ 3
 
 #include <tools/features.hpp>
+
+//==============================================================================
+//=== integral_constant ========================================================
+#ifndef dTOOLS_INTEGRAL_CONSTANT_USED_ 
+#define dTOOLS_INTEGRAL_CONSTANT_USED_ 1
+namespace tools
+{
+    template <class t, t val>
+    struct integral_constant 
+    {
+        enum { value = val };
+
+        typedef t value_type;
+
+        typedef integral_constant 
+            type;
+
+        dCONSTEXPR_CPP11 operator value_type() const dNOEXCEPT
+            { return value; }
+
+        dNODISCARD dCONSTEXPR_CPP11
+        value_type operator()() const dNOEXCEPT
+            { return value; }
+    };
+
+    typedef integral_constant<bool, true> 
+        true_type;
+
+    typedef integral_constant<bool, false>
+        false_type;
+
+} // namespace tools 
+#endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
 
 //==============================================================================
 //=== decay ====================================================================

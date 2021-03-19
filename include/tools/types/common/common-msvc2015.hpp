@@ -2,11 +2,50 @@
 // [2021y-03m-17d][23:05:40] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 100
-// msvc2013 has bug: std::is_lvalue_reference is not worked
-// dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM
-// dHAS_USING_ALIAS
+#define dTOOLS_COMMON_NEW_USED_ 101
+
 #include <type_traits>
+
+#define dDETAIL_CONSTANT(...) \
+    ::std::integral_constant<bool, detail::__VA_ARGS__::value>
+
+
+//==============================================================================
+//=== find_type ================================================================
+#ifndef dTOOLS_FIND_TYPE_USED_ 
+#define dTOOLS_FIND_TYPE_USED_ 100
+namespace tools
+{
+    // if type 't' is in the list 'args' --> true
+    namespace detail
+    {
+        template<class t, class ...args>
+            struct find_type;
+
+        template<class t, class s, class ...args>
+        struct find_type<t, s, args...>
+        {
+            using x = ::tools::detail::find_type<t, args...>;
+            enum { cur = ::std::is_same<t, s>::value };
+            enum { value = cur || x::value };
+        };
+
+        template<class t> struct find_type<t>
+        {
+            enum { value = false };
+        };
+
+    } // namespace detail
+
+    // if type 't' is in the list 'args' --> true
+    template<class t, class ...args>
+    struct find_type
+        : dDETAIL_CONSTANT(find_type<t, args...>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_FIND_TYPE_USED_
+
 
 //==============================================================================
 //=== degradate ================================================================
@@ -74,6 +113,7 @@ namespace tools
 
 } // namespace tools
 #endif // !dTOOLS_FOR_RVALUE_USED_
+
 
 //==============================================================================
 //==============================================================================

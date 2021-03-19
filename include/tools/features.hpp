@@ -4,7 +4,7 @@
 // [2021y-03m-17d][23:19:45] Idrisov Denis R. 110
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 110
+#define dTOOLS_FEATURES_USED_ 111
 
 //==============================================================================
 //=== dMESSAGE =================================================================
@@ -76,27 +76,6 @@
 #endif
 
 //==============================================================================
-//=== dHAS_CPP11 ===============================================================
-
-#if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
-    // #pragma message("build for msvc2015 (or newer) or other compiler")
-    // #pragma message("build for c++11 (or newer)")
-    // #define dHAS_TRAILING_RETURN_TYPE 1
-    // #define dHAS_AUTO_RETURN_TYPE 1
-    #define dCONSTEXPR_CPP11 constexpr
-    #define dHAS_CONSTEXPR_CPP11 1
-    #define dHAS_CPP11 1
-#else 
-    #define dCONSTEXPR_CPP11 inline
-#endif
-
-#ifdef dHAS_CONSTEXPR_CPP11
-    #define dCONSTANT constexpr
-#else
-    #define dCONSTANT const
-#endif
-
-//==============================================================================
 //=== dHAS_DELETING_FUNCTIONS ==================================================
 
 #if (defined(_MSC_VER) && _MSC_VER >= 1800) || __cplusplus >= 201103L
@@ -119,6 +98,28 @@
     #define dNOCOPYABLE(Class) \
         Class(const Class&);   \
         Class& operator=(const Class&)
+#endif
+
+//==============================================================================
+//=== dHAS_CPP11 ===============================================================
+
+#if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
+    // #pragma message("build for msvc2015 (or newer) or other compiler")
+    // #pragma message("build for c++11 (or newer)")
+    // #define dHAS_TRAILING_RETURN_TYPE 1
+    // #define dHAS_AUTO_RETURN_TYPE 1
+    #define dCONSTEXPR_CPP11 constexpr
+    #define dHAS_CONSTEXPR_CPP11 1
+    #define dHAS_ABOMINABLE 1
+    #define dHAS_CPP11 1
+#else 
+    #define dCONSTEXPR_CPP11 inline
+#endif
+
+#ifdef dHAS_CONSTEXPR_CPP11
+    #define dCONSTANT constexpr
+#else
+    #define dCONSTANT const
 #endif
 
 //==============================================================================
