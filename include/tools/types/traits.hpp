@@ -220,7 +220,7 @@ namespace tools
 #define dTOOLS_ENUM_TYPE_USED_ 1
 namespace tools
 {
-    template<class t, bool = ::std::is_enum<t>::value >
+    template<class t, bool = ::std::is_enum<t>::value>
     struct type_of_enum
     {
         typedef typename ::std::underlying_type<t>::type

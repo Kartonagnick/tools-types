@@ -1,10 +1,7 @@
-
-// [2021y-02m-20d][16:14:09] Idrisov Denis R.
-// [2021y-02m-20d][16:14:09] birthday of the project
-// [2021y-03m-18d][23:51:55] 101
+// [2021y-03m-19d][14:33:03] 100
 #pragma once
-#ifndef dTOOLS_TYPES_CONFBUILD_USED_
-#define dTOOLS_TYPES_CONFBUILD_USED_ 101
+#ifndef dTOOLS_CONFBUILD_USED_
+#define dTOOLS_CONFBUILD_USED_ 100
 //==============================================================================
 //==============================================================================
 
@@ -25,15 +22,27 @@
 #endif
 
 #if defined(dX64)
-    #define dTXT_AMODEL "64-bit"
+    #define dTXT_AMODEL "x64"
 #elif defined(dX32)
-    #define dTXT_AMODEL "32-bit"
+    #define dTXT_AMODEL "x86"
 #endif
 
 #ifdef NDEBUG
     #define dTXT_CONFIG "release"
+
+    #ifdef _DLL
+        #define dCRT "MD"
+    #else
+        #define dCRT "MT"
+    #endif
 #else
     #define dTXT_CONFIG "debug"
+
+    #ifdef _DLL
+        #define dCRT "MDd"
+    #else
+        #define dCRT "MTd"
+    #endif
 #endif
 
 #ifdef STABLE_RELEASE
@@ -42,22 +51,26 @@
     #define dTXT_STABLE "unstable"
 #endif
 
-#define dVERSION_MAJOR      1
-#define dVERSION_MINOR      0
-#define dVERSION_PATCH      1
-
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
 
-#define dFILE_VERSION       dVERSION_MAJOR, dVERSION_MINOR, dVERSION_PATCH
-#define dFILE_VERSION_NUM   dVERSION_MAJOR * 100 + dVERSION_MINOR * 10 + dVERSION_PATCH
-#define dFILE_VERSION_STR   dSSTRINGIZE(dVERSION_MAJOR.dVERSION_MINOR.dVERSION_PATCH)
+#define dVERSION_NUM(MAJOR, MINOR, PATCH)   MAJOR * 100 + MINOR * 10 + PATCH
+#define dVERSION_STR(MAJOR, MINOR, PATCH)   dSSTRINGIZE(MAJOR.MINOR.PATCH)
+
+#define dGET_VERSION(NAME) \
+    dVERSION_STR(NAME##_MAJOR, NAME##_MINOR, NAME##_PATHS)   
 
 #define dABOUT_ME \
-    dTXT_CONFIG "-" dTXT_AMODEL ", " dTXT_STABLE 
+    dTXT_AMODEL "-" dTXT_CONFIG "-" dCRT ", " dTXT_STABLE 
 
-#define dFULL_VERSION dFILE_VERSION_STR ", " dABOUT_ME
+#define dFULL_VERSION(NAME) dGET_VERSION(NAME) ", " dABOUT_ME
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_TYPES_CONFBUILD_USED_
+#endif // !dTOOLS_CONFBUILD_USED_
+
+
+// example extract: 
+// #define dGET_MAJOR(value) value / 100
+// #define dGET_MINOR(value) (value % 100)/10
+// #define dGET_PATHS(value) value % 10

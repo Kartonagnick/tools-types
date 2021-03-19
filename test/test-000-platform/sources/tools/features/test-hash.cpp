@@ -13,9 +13,9 @@
 
 #ifdef dHAS_HASH
     dMESSAGE("[test] tools: enabled -> dHAS_HASH")
+    #include <functional>
 #else
     dMESSAGE("[test] tools: disabled -> dHAS_HASH")
-    #include <functional>
 #endif
 
 //==============================================================================

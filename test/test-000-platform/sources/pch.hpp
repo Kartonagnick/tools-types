@@ -1,34 +1,67 @@
 ﻿// [2021y-02m-16d][04:21:08] Idrisov Denis R.
 // [2021y-02m-20d][04:21:08] birthday of the project
 #pragma once
-//================================================================================
-//================================================================================
+//==============================================================================
+//=== [pch] ====================================================================
 
-#if defined(_MSC_VER) && !defined(WIN32_LEAN_AND_MEAN)
-    #define WIN32_LEAN_AND_MEAN
-#endif
+#define dPCH_USED 1
+#include <tools/pragma/view_build.hpp>
 
-#define dBUILD_TARGET [test-000-platform] tools
-//#include <tools/confbuild.hpp>
-#include <../sources/confbuild.hpp>
-#include <mygtest/confinfo.hpp>
+//==============================================================================
+//=== [view build`s info =======================================================
+#include <tools/types/version.hpp>
+dVIEW_BUILD("[test-000-platform]", dTYPES)
+
+//==============================================================================
+//=== [mygtest] ================================================================
 #include <mygtest/pch_used.hpp>
 #include <mygtest/main.hpp>
 
-//================================================================================
-//================================================================================
-
+//==============================================================================
+//=== [tools] ==================================================================
+#include <tools/dfunction.hpp>
 #include <tools/features.hpp>
 #include <tools/assert.hpp>
+
+//==============================================================================
+//=== [standart] ===============================================================
+#include <stdexcept>
 #include <cassert>
 #include <cstddef>
+
+#ifdef dHAS_TYPE_TRAITS
+    #include <type_traits>
+#endif
+
+//==============================================================================
+//=== [unit-test] ==============================================================
+
+#include <stdexcept>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <vector>
+#include <list>
+#include <map>
 
 #ifdef dHAS_ATOMIC
     #include <thread>
+    #include <future>
+    #include <atomic>
+#endif
+
+#ifdef dHAS_CHRONO
+    #include <chrono>
+#endif
+
+#ifdef dHAS_CSTDINT
+    #include <cstdint>
+#endif
+
+#ifdef dHAS_HASH
+    #include <functional>
 #endif
 
 //==============================================================================
 //==============================================================================
+

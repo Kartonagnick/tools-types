@@ -1,4 +1,5 @@
 // [2021y-02-20d][18:40:18] Idrisov Denis R.
+// [2021y-03-17d][20:25:15] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
 #define dTOOLS_COMMON_USED_ 100

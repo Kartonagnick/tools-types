@@ -1,4 +1,3 @@
-
 // [2020y-09m-06d][00:00:00] Idrisov Denis R.
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-17d][22:25:08] Idrisov Denis R.
