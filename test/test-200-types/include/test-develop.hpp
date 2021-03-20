@@ -33,6 +33,7 @@
     #define TEST_TOOLS_IS_FUNCTOR                           // ready!
 
     #define TEST_TOOLS_IS_ZERO_ARRAY                        // in progress...
+    #define TEST_TOOLS_SIZE_ARRAY                           // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================
