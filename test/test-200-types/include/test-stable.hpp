@@ -12,7 +12,7 @@
     #define INCLUDE_LONG_TESTS
 
 //==============================================================================
-//===== tools/types ========================================||==================
+//===== tools/types/traits =================================||==================
     #define TEST_IS_FLOATING                                // ready!
     #define TEST_IS_SIGNED                                  // ready!
     #define TEST_IS_INTEGRAL                                // ready!
@@ -23,8 +23,7 @@
     #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_REMOVE_REFERENCE                           // ready!
     #define TEST_DECAY                                      // ready!
-
-    #define TEST_IS_CLASS                                   // in progress...
+    #define TEST_IS_CLASS                                   // ready!
 
 //==============================================================================
 //===== tools/types/common =================================||==================
@@ -32,8 +31,9 @@
     #define TEST_TOOLS_FOR_LVALUE                           // ready!
     #define TEST_TOOLS_FOR_RVALUE                           // ready!
     #define TEST_TOOLS_FIND_TYPE                            // ready!
+    #define TEST_TOOLS_IS_FUNCTOR                           // ready!
 
-    #define TEST_TOOLS_IS_FUNCTOR                           // in progress...
+    #define TEST_TOOLS_IS_ZERO_ARRAY                        // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================
