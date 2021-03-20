@@ -1,8 +1,9 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-17d][20:59:19] Idrisov Denis R.
+// [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 102
+#define dTOOLS_COMMON_NEW_USED_ 103
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 
@@ -125,6 +126,35 @@ namespace tools
 } // namespace tools
 #endif // !dTOOLS_FOR_LVALUE_USED_
 
+
+//==============================================================================
+//=== is_zero_array ============================================================
+#ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+namespace tools 
+{
+    #ifdef dHAS_ZERO_SIZE_ARRAY
+        dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
+        template<class s> struct is_zero_array
+            : ::std::false_type
+        { using type = s; };
+
+
+        template<class s> struct is_zero_array<s[0]>
+            : ::std::true_type
+        { using type = s; };
+
+        dPRAGMA_POP
+    #else
+
+        template<class s> struct is_zero_array
+            : ::std::false_type
+        { using type = s; };
+
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_IS_ZERO_ARRAY_USED_
 
 //==============================================================================
 //==============================================================================

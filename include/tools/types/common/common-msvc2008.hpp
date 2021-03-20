@@ -1,7 +1,8 @@
 // [2021y-03m-19d][19:47:19] Idrisov Denis R.
+// [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 102
+#define dTOOLS_COMMON_NEW_USED_ 103
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
@@ -209,6 +210,37 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_FUNCTOR_USED_
+
+
+//==============================================================================
+//=== is_zero_array ============================================================
+#ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+namespace tools 
+{
+    #ifdef dHAS_ZERO_SIZE_ARRAY
+        dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
+        template<class s> struct is_zero_array
+            : dMY::false_type
+        { typedef s type; };
+
+
+        template<class s> struct is_zero_array<s[0]>
+            : dMY::true_type
+        { typedef s type; };
+
+        dPRAGMA_POP
+    #else
+
+        template<class s> struct is_zero_array
+            : dMY::false_type
+        { typedef s type; };
+
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_IS_ZERO_ARRAY_USED_
+
 
 //==============================================================================
 //==============================================================================
