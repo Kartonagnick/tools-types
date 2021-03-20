@@ -1,8 +1,9 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-17d][20:59:19] Idrisov Denis R.
+// [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 102
+#define dTOOLS_COMMON_NEW_USED_ 103 PRE
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 
@@ -125,6 +126,168 @@ namespace tools
 } // namespace tools
 #endif // !dTOOLS_FOR_LVALUE_USED_
 
+
+//==============================================================================
+//=== is_zero_array ============================================================
+#ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+namespace tools 
+{
+    #ifdef dHAS_ZERO_SIZE_ARRAY
+        dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
+        template<class s> struct is_zero_array
+            : ::std::false_type
+        { using type = s; };
+
+
+        template<class s> struct is_zero_array<s[0]>
+            : ::std::true_type
+        { using type = s; };
+
+        dPRAGMA_POP
+    #else
+
+        template<class s> struct is_zero_array
+            : ::std::false_type
+        { using type = s; };
+
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_IS_ZERO_ARRAY_USED_
+
+
+//==============================================================================
+//=== size_array ===========================================(is_zero_array) ====
+#ifndef dTOOLS_SIZE_ARRAY_USED_ 
+#define dTOOLS_SIZE_ARRAY_USED_ 100
+namespace tools
+{
+    template<class s> class size_array
+    {
+        using view = ::tools::is_zero_array<s>;
+        using view_t = typename view::type;
+        enum
+        {
+            z = ::tools::is_zero_array<s>::value
+        };
+    public:
+        size_array() = delete;
+        enum { valid = 0 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 }; // fucking windows:  #define small char
+        enum { empty = 0 };
+        enum { zero  = z };
+        using type = view_t;
+        using arr  = type;
+        using ref  = type&;
+        using rval = type&&;
+    };
+    template<class s, size_t N> class size_array<s[N]>
+    {
+    public:
+        size_array() = delete;
+        enum { valid = 1        };
+        enum { value = N        };
+        enum { big   = N  > 255 };
+        enum { Small = N <= 255 };
+        enum { empty = 0        };
+        enum { zero  = N == 0   };
+        using type = s;
+        using arr  = type[value];
+        using ref  = type(&)[value];
+        using rval = type(&&)[value];
+    };
+    template<class s> class size_array<s[]>
+    {
+    public:
+        size_array() = delete;
+        enum { valid = 1 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 };
+        enum { empty = 1 };
+        enum { zero  = 0 };
+        using type = s;
+        using arr  = type[];
+        using ref  = type(&)[];
+        using rval = type(&&)[];
+    };
+
+    #define dif_big_array(arr, ret)     \
+        ::std::enable_if_t<             \
+            ::tools::size_array<        \
+                ::tools::degradate<arr> \
+            >::big, ret                 \
+        >
+
+    #define dif_small_array(arr, ret)   \
+        ::std::enable_if_t<             \
+            ::tools::size_array<        \
+                ::tools::degradate<arr> \
+            >::Small, ret               \
+        >
+
+    #define dfor_big_array(arr)         \
+        dif_big_array(arr, void) * = nullptr
+
+    #define dfor_small_array(arr)        \
+        dif_small_array(arr, void) * = nullptr
+
+} // namespace tools 
+#endif // !dTOOLS_SIZE_ARRAY_USED_
+
+
+//==============================================================================
+//=== small_array =================================(degradate)(size_array) =====
+#ifndef dTOOLS_SMALL_ARRAY_USED_ 
+#define dTOOLS_SMALL_ARRAY_USED_ 100
+namespace tools 
+{
+    template<class s1, class s2>
+    class small_array_selector
+    {
+        using x  = ::std::remove_reference_t<s1>;
+        using z  = ::std::remove_reference_t<s2>;
+        using xx = ::tools::size_array<x>;
+        using zz = ::tools::size_array<z>;
+
+        enum { small1 = xx::Small && xx::valid };
+        enum { small2 = zz::Small && zz::valid };
+    public:
+        small_array_selector() = delete;
+        enum { value = small1 && small2 };
+    };
+
+    template<class arr1, class arr2, class ret = void>
+    using for_big_arrays 
+        = ::std::enable_if_t< 
+            !::tools::small_array_selector<arr1, arr2>::value,
+            ret
+        >;
+
+    template<class arr1, class arr2, class ret = void>
+    using for_small_arrays 
+        = ::std::enable_if_t<
+            ::tools::small_array_selector<arr1, arr2>::value, 
+            ret
+        >;
+
+    #define dif_big_arrays(arr1, arr2, ret) \
+        ::tools::for_big_arrays<arr1, arr2, ret>
+
+    #define dif_small_arrays(arr1, arr2, ret) \
+        ::tools::for_small_arrays<arr1, arr2, ret>
+
+    #define dfor_big_arrays(arr1, arr2) \
+        ::tools::for_big_arrays<arr1, arr2>* = nullptr
+
+    #define dfor_small_arrays(arr1, arr2) \
+        ::tools::for_small_arrays<arr1, arr2>* = nullptr
+
+} // namespace tools 
+#endif // !dTOOLS_SMALL_ARRAY_USED_
 
 //==============================================================================
 //==============================================================================

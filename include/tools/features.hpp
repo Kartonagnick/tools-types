@@ -4,9 +4,10 @@
 // [2021y-03m-17d][23:19:45] Idrisov Denis R. 110
 // [2021y-03m-19d][16:14:09] Idrisov Denis R. 111
 // [2021y-03m-20d][02:13:22] Idrisov Denis R. 112
+// [2021y-03m-20d][18:46:57] Idrisov Denis R. 113
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 112 PRE
+#define dTOOLS_FEATURES_USED_ 113 PRE
 //==============================================================================
 //=== dMESSAGE =================================================================
 
@@ -30,6 +31,9 @@
     #define dHAS_NULLPTR 1
     #define dHAS_LAMBDA 1
     #define dHAS_HASH 1
+    #define dTRAIT std
+#else
+    #define dTRAIT tools
 #endif
 
 #if __cplusplus >= 201103L

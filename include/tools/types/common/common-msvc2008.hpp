@@ -1,18 +1,17 @@
 // [2021y-03m-19d][19:47:19] Idrisov Denis R.
+// [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 102
+#define dTOOLS_COMMON_NEW_USED_ 103 PRE
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
-    #define dMY ::std
 #else
     #include <tools/types/traits.hpp>
-    #define dMY ::tools
 #endif
 
 #define dDETAIL_CONSTANT(...) \
-    dMY::integral_constant<bool, detail::__VA_ARGS__::value>
+    dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 
 #define dVARIADIC_7 \
     class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
@@ -33,57 +32,57 @@ namespace tools
         template<class t1, class t2, class t3, class t4, class t5, class t6, class t7> 
         struct find_type
         {
-            enum { r1 = dMY::is_same<t1, t2>::value };
-            enum { r2 = dMY::is_same<t1, t3>::value };
-            enum { r3 = dMY::is_same<t1, t4>::value };
-            enum { r4 = dMY::is_same<t1, t5>::value };
-            enum { r5 = dMY::is_same<t1, t6>::value };
-            enum { r6 = dMY::is_same<t1, t7>::value };
+            enum { r1 = dTRAIT::is_same<t1, t2>::value };
+            enum { r2 = dTRAIT::is_same<t1, t3>::value };
+            enum { r3 = dTRAIT::is_same<t1, t4>::value };
+            enum { r4 = dTRAIT::is_same<t1, t5>::value };
+            enum { r5 = dTRAIT::is_same<t1, t6>::value };
+            enum { r6 = dTRAIT::is_same<t1, t7>::value };
             enum { value = r1 || r2 || r3 || r4 || r5 || r6 };
         };
 
         template<class t1, class t2, class t3, class t4, class t5, class t6> 
         struct find_type<t1, t2, t3, t4, t5, t6, empty>
         {
-            enum { r1 = dMY::is_same<t1, t2>::value };
-            enum { r2 = dMY::is_same<t1, t3>::value };
-            enum { r3 = dMY::is_same<t1, t4>::value };
-            enum { r4 = dMY::is_same<t1, t5>::value };
-            enum { r5 = dMY::is_same<t1, t6>::value };
+            enum { r1 = dTRAIT::is_same<t1, t2>::value };
+            enum { r2 = dTRAIT::is_same<t1, t3>::value };
+            enum { r3 = dTRAIT::is_same<t1, t4>::value };
+            enum { r4 = dTRAIT::is_same<t1, t5>::value };
+            enum { r5 = dTRAIT::is_same<t1, t6>::value };
             enum { value = r1 || r2 || r3 || r4 || r5 };
         };
 
         template<class t1, class t2, class t3, class t4, class t5> 
         struct find_type<t1, t2, t3, t4, t5, empty, empty>
         {
-            enum { r1 = dMY::is_same<t1, t2>::value };
-            enum { r2 = dMY::is_same<t1, t3>::value };
-            enum { r3 = dMY::is_same<t1, t4>::value };
-            enum { r4 = dMY::is_same<t1, t5>::value };
+            enum { r1 = dTRAIT::is_same<t1, t2>::value };
+            enum { r2 = dTRAIT::is_same<t1, t3>::value };
+            enum { r3 = dTRAIT::is_same<t1, t4>::value };
+            enum { r4 = dTRAIT::is_same<t1, t5>::value };
             enum { value = r1 || r2 || r3 || r4 };
         };
 
         template<class t1, class t2, class t3, class t4> 
         struct find_type<t1, t2, t3, t4, empty, empty, empty>
         {
-            enum { r1 = dMY::is_same<t1, t2>::value };
-            enum { r2 = dMY::is_same<t1, t3>::value };
-            enum { r3 = dMY::is_same<t1, t4>::value };
+            enum { r1 = dTRAIT::is_same<t1, t2>::value };
+            enum { r2 = dTRAIT::is_same<t1, t3>::value };
+            enum { r3 = dTRAIT::is_same<t1, t4>::value };
             enum { value = r1 || r2 || r3 };
         };
 
         template<class t1, class t2, class t3> 
         struct find_type<t1, t2, t3, empty, empty, empty, empty>
         {
-            enum { r1 = dMY::is_same<t1, t2>::value };
-            enum { r2 = dMY::is_same<t1, t3>::value };
+            enum { r1 = dTRAIT::is_same<t1, t2>::value };
+            enum { r2 = dTRAIT::is_same<t1, t3>::value };
             enum { value = r1 || r2 };
         };
 
         template<class t1, class t2> 
         struct find_type<t1, t2, empty, empty, empty, empty, empty>
         {
-            enum { value = dMY::is_same<t1, t2>::value };
+            enum { value = dTRAIT::is_same<t1, t2>::value };
         };
 
         template<class t1> 
@@ -103,9 +102,9 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_FIND_TYPE_USED_
 
-#if 0
 //=== working but outdated version =============================================
 //=== is_functor ===============================================================
+#if 0
 #ifndef dTOOLS_IS_FUNCTOR_USED_ 
 #define dTOOLS_IS_FUNCTOR_USED_ 100
 namespace tools
@@ -144,12 +143,12 @@ namespace tools
         template <class t>
         struct is_functor
         {
-            typedef dMY::remove_reference<t>
+            typedef dTRAIT::remove_reference<t>
                 noref;
             typedef typename noref::type 
                 x;
 
-            enum { ok    = dMY::is_class<x>::value   };
+            enum { ok    = dTRAIT::is_class<x>::value   };
             enum { value = is_functor_<x, ok>::value };
         };
 
@@ -192,12 +191,12 @@ namespace tools
 
         template <class t> struct is_functor
         {
-            typedef dMY::remove_reference<t>
+            typedef dTRAIT::remove_reference<t>
                 noref;
             typedef typename noref::type 
                 x;
 
-            enum { ok = dMY::is_class<x>::value  };
+            enum { ok = dTRAIT::is_class<x>::value  };
             enum { value = is_functor_<x, ok>::value };
         };
 
@@ -210,10 +209,163 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_IS_FUNCTOR_USED_
 
+
+//==============================================================================
+//=== is_zero_array ============================================================
+#ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+namespace tools 
+{
+    #ifdef dHAS_ZERO_SIZE_ARRAY
+        dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
+        template<class s> struct is_zero_array
+            : dTRAIT::false_type
+        { typedef s type; };
+
+
+        template<class s> struct is_zero_array<s[0]>
+            : dTRAIT::true_type
+        { typedef s type; };
+
+        dPRAGMA_POP
+    #else
+
+        template<class s> struct is_zero_array
+            : dTRAIT::false_type
+        { typedef s type; };
+
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_IS_ZERO_ARRAY_USED_
+
+
+//==============================================================================
+//=== size_array ===========================================(is_zero_array) ====
+#ifndef dTOOLS_SIZE_ARRAY_USED_ 
+#define dTOOLS_SIZE_ARRAY_USED_ 100
+namespace tools
+{
+    template<class s> class size_array
+    {
+        typedef ::tools::is_zero_array<s> 
+            view;
+
+        enum
+        {
+            z = ::tools::is_zero_array<s>::value
+        };
+    public:
+        enum { valid = 0 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 }; // fucking windows:  #define small char
+        enum { empty = 0 };
+        enum { zero  = z };
+
+        typedef typename view::type  
+            type;
+
+        typedef type   arr;
+        typedef type&  ref;
+        #ifdef dHAS_RVALUE_REFERENCE
+        typedef type&& rval;
+        #endif
+    };
+    template<class s, size_t N> class size_array<s[N]>
+    {
+    public:
+        enum { valid = 1        };
+        enum { value = N        };
+        enum { big   = N  > 255 };
+        enum { Small = N <= 255 };
+        enum { empty = 0        };
+        enum { zero  = N == 0   };
+        
+        typedef s type;
+        typedef type arr[value];
+        typedef type(&ref)[value];
+        #ifdef dHAS_RVALUE_REFERENCE
+        typedef type(&&rval)[value];
+        #endif
+    };
+    template<class s> class size_array<s[]>
+    {
+    public:
+        enum { valid = 1 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 };
+        enum { empty = 1 };
+        enum { zero  = 0 };
+
+        typedef s type;
+        typedef type arr[];
+
+        #ifdef dHAS_ZERO_SIZE_ARRAY
+        typedef type(&ref)[];
+        #ifdef dHAS_RVALUE_REFERENCE
+        typedef type(&&rval)[];
+        #endif
+        #endif // dHAS_ZERO_SIZE_ARRAY
+
+    };
+
+    #define dif_big_array(arr, ret)                          \
+        typename dTRAIT::enable_if<                          \
+            ::tools::size_array<                             \
+                typename dTRAIT::remove_reference<arr>::type \
+            >::big, ret                                      \
+        >::type
+
+    #define dif_small_array(arr, ret)                        \
+        typename dTRAIT::enable_if<                          \
+            ::tools::size_array<                             \
+                typename dTRAIT::remove_reference<arr>::type \
+            >::Small, ret                                    \
+        >::type
+
+} // namespace tools 
+#endif // !dTOOLS_SIZE_ARRAY_USED_
+
+
+//==============================================================================
+//=== small_array =================================(degradate)(size_array) =====
+#ifndef dTOOLS_SMALL_ARRAY_USED_ 
+#define dTOOLS_SMALL_ARRAY_USED_ 100
+namespace tools 
+{
+    template<class s1, class s2>
+    class small_array_selector
+    {
+        typedef typename dTRAIT::remove_reference<s1>::type x;
+        typedef typename dTRAIT::remove_reference<s2>::type z;
+
+        typedef ::tools::size_array<x> xx;
+        typedef ::tools::size_array<z> zz;
+
+        enum { small1 = xx::Small && xx::valid };
+        enum { small2 = zz::Small && zz::valid };
+    public:
+        enum { value = small1 && small2 };
+    };
+
+    #define dif_big_arrays(a, b, ret)                    \
+        typename dTRAIT::enable_if<                      \
+            !::tools::small_array_selector<a, b>::value, \
+            ret                                          \
+        >::type 
+
+    #define dif_small_arrays(a, b, ret)                  \
+        typename dTRAIT::enable_if<                      \
+            ::tools::small_array_selector<a, b>::value,  \
+            ret                                          \
+        >::type 
+
+} // namespace tools 
+#endif // !dTOOLS_SMALL_ARRAY_USED_
+
 //==============================================================================
 //==============================================================================
-#undef dMY
 #endif // !dTOOLS_COMMON_NEW_USED_
-
-
 

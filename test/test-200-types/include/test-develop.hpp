@@ -22,8 +22,7 @@
     #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_REMOVE_REFERENCE                           // ready!
     #define TEST_DECAY                                      // ready!
-
-    #define TEST_IS_CLASS                                   // in progress...
+    #define TEST_IS_CLASS                                   // ready!
 
 //==============================================================================
 //===== tools/types/common =================================||==================
@@ -31,8 +30,11 @@
     #define TEST_TOOLS_FOR_LVALUE                           // ready!
     #define TEST_TOOLS_FOR_RVALUE                           // ready!
     #define TEST_TOOLS_FIND_TYPE                            // ready!
+    #define TEST_TOOLS_IS_FUNCTOR                           // ready!
 
-    #define TEST_TOOLS_IS_FUNCTOR                           // in progress...
+    #define TEST_TOOLS_IS_ZERO_ARRAY                        // in progress...
+    #define TEST_TOOLS_SIZE_ARRAY                           // in progress...
+    #define TEST_TOOLS_SMALL_ARRAY                          // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================
