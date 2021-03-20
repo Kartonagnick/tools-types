@@ -7,39 +7,135 @@
 
 **История изменений**  
 
+
+**Версия 1.0.4 (предварительная)**  
+----------------------------------
+[2021y-03m-20d][04:27:55] #11_is_functor
+1) обновлен: version                    104
+2) обновлен: types                      104
+3) обновлен: common                     102
+     - добавлен: is_functor             100
+4) обновлен: features                   112
+     - добавлен: dHAS_DECLTYPE
+     - добавлен: dHAS_LAMBDA
+5) обновлен: traits                     004
+     - добавлен: is_class               1
+
+
 **Версия 1.0.3 (предварительная)**  
 ----------------------------------
-[2021y-03m-19d][23:15:45]
-1) Обновление: tools/types/traits.hpp (0.0.3)  
-    - integral_constant  
-
-2) Добавлен: tools/types/common.hpp  
-    - common-msvc2008.hpp  
-    - find_type  
-
-3) Добавлен: tools/features.hpp  
-    - dHAS_ABOMINABLE  
+[2021y-03m-19d][23:13:45] #9_find_type
+1) обновлен: version                   103
+2) обновлен: types                     103
+3) обновлен: features                  111
+     - добавлен: dHAS_ABOMINABLE
+4) обновлен: traits                    003
+     - добавлен: integral_constant     001
+5) обновлен: common                    101
+     - добавлен: common-msvc2008       101
+         - добавлен: find_type         100
+     - обновлен: common-msvc2013       101
+         - добавлен: find_type         100
+     - обновлен: common-msvc2015       101
+         - добавлен: find_type         100
 
 
 **Версия 1.0.2 (предварительная)**  
 ----------------------------------
-[2021y-03m-19d][19:06:17]
-1) Рефактор: pragma/view_build.  
+[2021y-03m-19d][23:01:17] #7_version
+1) обновлен: types            102
+2) добавлен: version          102
+3) добавлен: view_build       100
+4) добавлен: pragma/confbuild 100
 
 
 **Версия 1.0.1 (предварительная)**  
 ----------------------------------
-[2021y-03m-17d][23:44:05]
-1) Добавлен common.  
-
-
-**Версия 1.0.0 (предварительная)**  
-----------------------------------
-[2021y-03m-11d][00:30:56]
-1) Добавлен traits.  
-2) Добавлен fixed.  
+[2021-03m-18d][23:45:05] #5_reorganozation
+1) обновлен: features 110
+    - добавлен: dHAS_NULLPTR
+    - добавлен: dHAS_TYPE_TRAITS
+    - добавлен: dHAS_HASH
+    - добавлен: dSTATIC_ASSERT
+    - добавлен: dHAS_CSTDINT
+    - добавлен: dHAS_ENUM_CLASS
+    - добавлен: dHAS_EMPLACE
+    - добавлен: dHAS_CHRONO
+    - добавлен: dHAS_ATOMIC
+    - добавлен: dCONSTANT
+    - добавлен: dHAS_AGGREGATE_INITIALIZE
+    - добавлен: dHAS_VARIADIC_TEMPLATE
+    - добавлен: dTHREAD_LOCAL_EXTENSION
+    - добавлен: dHAS_THREAD_LOCAL
+    - добавлен: dHAS_ZERO_SIZE_ARRAY
+2) обновлен: confbuild                101
+3) обновлен: docs
+    - обновлен: docs/icons
+    - обновлен: docs/adm
+    - обновлен: docs/code
+    - обновлен: docs/table
+    - обновлен: docs/test
+4) добавлен: pragma                    100
+5) добавлен: types                     101
+    - добавлен: traits                 002
+      - добавлен: decay                1
+      - добавлен: is_same              1
+      - добавлен: remove_cv            1
+      - добавлен: remove_reference     1
+      - добавлен: is_signed            1
+      - добавлен: is_floating          1
+      - добавлен: is_integral          1
+      - добавлен: conditional          1 
+      - добавлен: enable_if            1
+      - добавлен: type_of_enum         1
+    - добавлен: common                 100
+      - добавлен: common-msvc2013      100
+        - добавлен: degradate          100
+        - добавлен: dfor_lvalue        100
+      - добавлен: common-msvc2015      100
+        - добавлен: degradate          100
+        - добавлен: dfor_lvalue        100
+        - добавлен: dfor_rvalue        100
+    - добавлен: fixed                  100
+      - добавлен: fixed-cpp98          100
+      - добавлен: fixed-cpp11          100
 
 
 **Версия 0.0.1 (предварительная)**  
 ----------------------------------
-1) Добавлен docs.  
+[2021y-02m-20d][16:13:00] #3_sources
+1) добавлен: deploy
+2) добавлен: features 101
+     - добавлен: dMESSAGE
+     - добавлен: dHAS_CPP11
+     - добавлен: dHAS_CPP14
+     - добавлен: dHAS_CPP17	 
+     - добавлен: dHAS_CONSTEXPR_CPP11
+     - добавлен: dHAS_CONSTEXPR_CPP14
+     - добавлен: dCONSTEXPR_CPP11
+     - добавлен: dCONSTEXPR_CPP14
+     - добавлен: dHAS_DELETING_FUNCTIONS
+     - добавлен: dHAS_TEMPLATE_FUNCTION_DEFAULT_PARAM
+     - добавлен: dHAS_DELETING_FUNCTIONS
+     - добавлен: dHAS_RVALUE_REFERENCES
+     - добавлен: dHAS_RVALUE_ARRAY	 
+     - добавлен: dHAS_USING_ALIAS
+     - добавлен: dHAS_NOEXCEPT	 
+     - добавлен: dNOCOPYABLE
+     - добавлен: dNOEXCEPT
+     - добавлен: dNODISCARD
+
+3) добавлен: confbuild 001
+
+
+**Версия 0.0.1 (предварительная)**  
+----------------------------------
+[2021y-02m-20d][15:19:37] #1_first
+1) добавлена: первая задача  
+2) добавлен: .gitignore  
+3) добавлены: иконки  
+  
+
+
+
+
