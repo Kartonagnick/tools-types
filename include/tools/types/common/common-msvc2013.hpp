@@ -203,34 +203,91 @@ namespace tools
     {
     public:
         size_array() = delete;
-        enum { valid = 1  };
-        enum { value = 0  };
-        enum { big   = 0  };
+        enum { valid = 1 };
+        enum { value = 0 };
+        enum { big   = 0 };
         enum { Small = 0 };
-        enum { empty = 1  };
-        enum { zero  = 0  };
+        enum { empty = 1 };
+        enum { zero  = 0 };
         using type = s;
         using arr  = type[];
         using ref  = type(&)[];
         using rval = type(&&)[];
     };
 
-    #define dfor_big_array(arr)         \
+    #define dif_big_array(arr, ret)     \
         ::std::enable_if_t<             \
             ::tools::size_array<        \
                 ::tools::degradate<arr> \
-            >::big                      \
-        >* = nullptr
+            >::big, ret                 \
+        >
 
-    #define dfor_small_array(arr)       \
+    #define dif_small_array(arr, ret)   \
         ::std::enable_if_t<             \
             ::tools::size_array<        \
                 ::tools::degradate<arr> \
-            >::Small                    \
-        >* = nullptr
+            >::Small, ret               \
+        >
+
+    #define dfor_big_array(arr)         \
+        dif_big_array(arr, void) * = nullptr
+
+    #define dfor_small_array(arr)        \
+        dif_small_array(arr, void) * = nullptr
 
 } // namespace tools 
 #endif // !dTOOLS_SIZE_ARRAY_USED_
+
+
+//==============================================================================
+//=== small_array =================================(degradate)(size_array) =====
+#ifndef dTOOLS_SMALL_ARRAY_USED_ 
+#define dTOOLS_SMALL_ARRAY_USED_ 113
+namespace tools 
+{
+    template<class s1, class s2>
+    class small_array_selector
+    {
+        using x  = ::std::remove_reference_t<s1>;
+        using z  = ::std::remove_reference_t<s2>;
+        using xx = ::tools::size_array<x>;
+        using zz = ::tools::size_array<z>;
+
+        enum { small1 = xx::Small && xx::valid };
+        enum { small2 = zz::Small && zz::valid };
+    public:
+        small_array_selector() = delete;
+        enum { value = small1 && small2 };
+    };
+
+    template<class arr1, class arr2, class ret = void>
+    using for_big_arrays 
+        = ::std::enable_if_t< 
+            !::tools::small_array_selector<arr1, arr2>::value,
+            ret
+        >;
+
+    template<class arr1, class arr2, class ret = void>
+    using for_small_arrays 
+        = ::std::enable_if_t<
+            ::tools::small_array_selector<arr1, arr2>::value, 
+            ret
+        >;
+
+    #define dif_big_arrays(arr1, arr2, ret) \
+        ::tools::for_big_arrays<arr1, arr2, ret>
+
+    #define dif_small_arrays(arr1, arr2, ret) \
+        ::tools::for_small_arrays<arr1, arr2, ret>
+
+    #define dfor_big_arrays(arr1, arr2) \
+        ::tools::for_big_arrays<arr1, arr2>* = nullptr
+
+    #define dfor_small_arrays(arr1, arr2) \
+        ::tools::for_small_arrays<arr1, arr2>* = nullptr
+
+} // namespace tools 
+#endif // !dTOOLS_SMALL_ARRAY_USED_
 
 //==============================================================================
 //==============================================================================
