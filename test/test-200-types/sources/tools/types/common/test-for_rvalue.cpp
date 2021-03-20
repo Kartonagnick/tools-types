@@ -8,7 +8,7 @@
 #ifdef dHAS_CPP11
 // #pragma message("build for msvc2015 (or newer) or other compiler")
 
-#define dTEST_COMPONENT tools, types
+#define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD for_rvalue
 #define dTEST_TAG tdd
 

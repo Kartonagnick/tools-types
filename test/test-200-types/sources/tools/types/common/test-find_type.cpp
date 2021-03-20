@@ -3,7 +3,7 @@
 
 #ifdef TEST_TOOLS_FIND_TYPE
 
-#define dTEST_COMPONENT tools, types
+#define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD find_type
 #define dTEST_TAG tdd
 

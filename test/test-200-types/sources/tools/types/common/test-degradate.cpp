@@ -8,7 +8,7 @@
 #ifdef dHAS_USING_ALIAS
 // #pragma message("build for msvc2013 (or newer) or other compiler")
 
-#define dTEST_COMPONENT tools, types
+#define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD degradate
 #define dTEST_TAG tdd
 
