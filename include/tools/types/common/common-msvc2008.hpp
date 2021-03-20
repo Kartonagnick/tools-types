@@ -2,7 +2,7 @@
 // [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103
+#define dTOOLS_COMMON_NEW_USED_ 103 PRE
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
@@ -102,9 +102,9 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_FIND_TYPE_USED_
 
-#if 0
 //=== working but outdated version =============================================
 //=== is_functor ===============================================================
+#if 0
 #ifndef dTOOLS_IS_FUNCTOR_USED_ 
 #define dTOOLS_IS_FUNCTOR_USED_ 100
 namespace tools
@@ -243,7 +243,7 @@ namespace tools
 //==============================================================================
 //=== size_array ===========================================(is_zero_array) ====
 #ifndef dTOOLS_SIZE_ARRAY_USED_ 
-#define dTOOLS_SIZE_ARRAY_USED_
+#define dTOOLS_SIZE_ARRAY_USED_ 100
 namespace tools
 {
     template<class s> class size_array
@@ -256,7 +256,6 @@ namespace tools
             z = ::tools::is_zero_array<s>::value
         };
     public:
-        size_array();
         enum { valid = 0 };
         enum { value = 0 };
         enum { big   = 0 };
@@ -276,7 +275,6 @@ namespace tools
     template<class s, size_t N> class size_array<s[N]>
     {
     public:
-        size_array();
         enum { valid = 1        };
         enum { value = N        };
         enum { big   = N  > 255 };
@@ -294,7 +292,6 @@ namespace tools
     template<class s> class size_array<s[]>
     {
     public:
-        size_array();
         enum { valid = 1 };
         enum { value = 0 };
         enum { big   = 0 };
@@ -307,25 +304,25 @@ namespace tools
 
         #ifdef dHAS_ZERO_SIZE_ARRAY
         typedef type(&ref)[];
-        #endif
-
         #ifdef dHAS_RVALUE_REFERENCE
         typedef type(&&rval)[];
         #endif
+        #endif // dHAS_ZERO_SIZE_ARRAY
+
     };
 
-    #define dif_big_array(arr, ret)                           \
+    #define dif_big_array(arr, ret)                          \
         typename dTRAIT::enable_if<                          \
-            ::tools::size_array<                              \
+            ::tools::size_array<                             \
                 typename dTRAIT::remove_reference<arr>::type \
-            >::big, ret                                       \
+            >::big, ret                                      \
         >::type
 
-    #define dif_small_array(arr, ret)                         \
+    #define dif_small_array(arr, ret)                        \
         typename dTRAIT::enable_if<                          \
-            ::tools::size_array<                              \
+            ::tools::size_array<                             \
                 typename dTRAIT::remove_reference<arr>::type \
-            >::Small, ret                                     \
+            >::Small, ret                                    \
         >::type
 
 } // namespace tools 
@@ -335,7 +332,7 @@ namespace tools
 //==============================================================================
 //=== small_array =================================(degradate)(size_array) =====
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 108
+#define dTOOLS_SMALL_ARRAY_USED_ 100
 namespace tools 
 {
     template<class s1, class s2>
@@ -350,30 +347,20 @@ namespace tools
         enum { small1 = xx::Small && xx::valid };
         enum { small2 = zz::Small && zz::valid };
     public:
-        small_array_selector();
         enum { value = small1 && small2 };
     };
 
-    template<class a, class b> struct is_small_
-    {
-        typedef tools::small_array_selector<a, b> x;
-        enum { value = x::value };
-    };
-    template<class a, class b> struct is_big_
-    {
-        typedef tools::small_array_selector<a, b> x;
-        enum { value = !x::value };
-    };
+    #define dif_big_arrays(a, b, ret)                    \
+        typename dTRAIT::enable_if<                      \
+            !::tools::small_array_selector<a, b>::value, \
+            ret                                          \
+        >::type 
 
-    #define dif_big_arrays(a, b, ret)        \
-        typename dTRAIT::enable_if<           \
-            tools::is_big_<a, b>::value, ret \
-        >::type
-
-    #define dif_small_arrays(a, b, ret)        \
-        typename dTRAIT::enable_if<             \
-            tools::is_small_<a, b>::value, ret \
-        >::type
+    #define dif_small_arrays(a, b, ret)                  \
+        typename dTRAIT::enable_if<                      \
+            ::tools::small_array_selector<a, b>::value,  \
+            ret                                          \
+        >::type 
 
 } // namespace tools 
 #endif // !dTOOLS_SMALL_ARRAY_USED_
@@ -382,22 +369,3 @@ namespace tools
 //==============================================================================
 #endif // !dTOOLS_COMMON_NEW_USED_
 
-
-
-
-
-
-
-#if 0
-    #define dif_big_arrays(arr1, arr2, ret)                    \
-        = typename ::tools::enable_if<                         \
-            !::tools::small_array_selector<arr1, arr2>::value, \
-            ret                                                \
-        >::type 
-
-    #define dif_small_arrays(arr1, arr2, ret)                  \
-        = typename ::tools::enable_if<                         \
-            ::tools::small_array_selector<arr1, arr2>::value,  \
-            ret                                                \
-        >::type 
-#endif

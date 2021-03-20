@@ -3,7 +3,7 @@
 // [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103
+#define dTOOLS_COMMON_NEW_USED_ 103 PRE
 
 #include <type_traits>
 
@@ -14,7 +14,7 @@
 //==============================================================================
 //=== find_type ================================================================
 #ifndef dTOOLS_FIND_TYPE_USED_ 
-#define dTOOLS_FIND_TYPE_USED_ 115
+#define dTOOLS_FIND_TYPE_USED_ 100
 namespace tools
 {
     // if type 't' is in the list 'args' --> true

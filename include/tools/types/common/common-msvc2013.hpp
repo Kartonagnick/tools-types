@@ -3,7 +3,7 @@
 // [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103
+#define dTOOLS_COMMON_NEW_USED_ 103 PRE
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 
@@ -160,7 +160,7 @@ namespace tools
 //==============================================================================
 //=== size_array ===========================================(is_zero_array) ====
 #ifndef dTOOLS_SIZE_ARRAY_USED_ 
-#define dTOOLS_SIZE_ARRAY_USED_
+#define dTOOLS_SIZE_ARRAY_USED_ 100
 namespace tools
 {
     template<class s> class size_array
@@ -242,7 +242,7 @@ namespace tools
 //==============================================================================
 //=== small_array =================================(degradate)(size_array) =====
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 113
+#define dTOOLS_SMALL_ARRAY_USED_ 100
 namespace tools 
 {
     template<class s1, class s2>
