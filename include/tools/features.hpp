@@ -30,6 +30,9 @@
     #define dHAS_NULLPTR 1
     #define dHAS_LAMBDA 1
     #define dHAS_HASH 1
+    #define dTRAIT std
+#else
+    #define dTRAIT tools
 #endif
 
 #if __cplusplus >= 201103L
