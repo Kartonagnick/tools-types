@@ -243,6 +243,97 @@ namespace tools
 
 
 //==============================================================================
+//=== size_array ===========================================(is_zero_array) ====
+#ifndef dTOOLS_SIZE_ARRAY_USED_ 
+#define dTOOLS_SIZE_ARRAY_USED_
+namespace tools
+{
+    template<class s> class size_array
+    {
+        typedef ::tools::is_zero_array<s> 
+            view;
+
+        enum
+        {
+            z = ::tools::is_zero_array<s>::value
+        };
+    public:
+        size_array();
+        enum { valid = 0 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 }; // fucking windows:  #define small char
+        enum { empty = 0 };
+        enum { zero  = z };
+
+        typedef typename view::type  
+            type;
+
+        typedef type   arr;
+        typedef type&  ref;
+        #ifdef dHAS_RVALUE_REFERENCE
+        typedef type&& rval;
+        #endif
+    };
+    template<class s, size_t N> class size_array<s[N]>
+    {
+    public:
+        size_array();
+        enum { valid = 1        };
+        enum { value = N        };
+        enum { big   = N  > 255 };
+        enum { Small = N <= 255 };
+        enum { empty = 0        };
+        enum { zero  = N == 0   };
+        
+        typedef s type;
+        typedef type arr[value];
+        typedef type(&ref)[value];
+        #ifdef dHAS_RVALUE_REFERENCE
+        typedef type(&&rval)[value];
+        #endif
+    };
+    template<class s> class size_array<s[]>
+    {
+    public:
+        size_array();
+        enum { valid = 1 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 };
+        enum { empty = 1 };
+        enum { zero  = 0 };
+
+        typedef s type;
+        typedef type arr[];
+
+        #ifdef dHAS_ZERO_SIZE_ARRAY
+        typedef type(&ref)[];
+        #endif
+
+        #ifdef dHAS_RVALUE_REFERENCE
+        typedef type(&&rval)[];
+        #endif
+    };
+
+    #define dfor_big_array(arr)                         \
+    typename tools::enable_if<                          \
+            tools::size_array<                          \
+            typename tools::remove_reference<arr>::type \
+            >::big                                      \
+    >::type* = nullptr
+
+    #define dfor_small_array(arr)                           \
+        typename ::tools::enable_if<                        \
+            tools::size_array<                              \
+                typename tools::remove_reference<arr>::type \
+            >::Small                                        \
+        >::type* = nullptr
+
+} // namespace tools 
+#endif // !dTOOLS_SIZE_ARRAY_USED_
+
+//==============================================================================
 //==============================================================================
 #undef dMY
 #endif // !dTOOLS_COMMON_NEW_USED_

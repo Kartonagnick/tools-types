@@ -181,6 +181,82 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_IS_ZERO_ARRAY_USED_
 
+
+//==============================================================================
+//=== size_array ===========================================(is_zero_array) ====
+#ifndef dTOOLS_SIZE_ARRAY_USED_ 
+#define dTOOLS_SIZE_ARRAY_USED_
+namespace tools
+{
+    template<class s> class size_array
+    {
+        using view = ::tools::is_zero_array<s>;
+        using view_t = typename view::type;
+        enum
+        {
+            z = ::tools::is_zero_array<s>::value
+        };
+    public:
+        size_array() = delete;
+        enum { valid = 0 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 }; // fucking windows:  #define small char
+        enum { empty = 0 };
+        enum { zero  = z };
+        using type = view_t;
+        using arr  = type;
+        using ref  = type&;
+        using rval = type&&;
+    };
+    template<class s, size_t N> class size_array<s[N]>
+    {
+    public:
+        size_array() = delete;
+        enum { valid = 1        };
+        enum { value = N        };
+        enum { big   = N  > 255 };
+        enum { Small = N <= 255 };
+        enum { empty = 0        };
+        enum { zero  = N == 0   };
+        using type = s;
+        using arr  = type[value];
+        using ref  = type(&)[value];
+        using rval = type(&&)[value];
+    };
+    template<class s> class size_array<s[]>
+    {
+    public:
+        size_array() = delete;
+        enum { valid = 1 };
+        enum { value = 0 };
+        enum { big   = 0 };
+        enum { Small = 0 }; 
+        enum { empty = 1 };
+        enum { zero  = 0 };
+        using type = s;
+        using arr  = type[];
+        using ref  = type(&)[];
+        using rval = type(&&)[];
+    };
+
+    #define dfor_big_array(arr)         \
+        ::std::enable_if_t<             \
+            ::tools::size_array<        \
+                ::tools::degradate<arr> \
+            >::big                      \
+        >* = nullptr
+
+    #define dfor_small_array(arr)       \
+        ::std::enable_if_t<             \
+            ::tools::size_array<        \
+                ::tools::degradate<arr> \
+            >::Small                    \
+        >* = nullptr
+
+} // namespace tools 
+#endif // !dTOOLS_SIZE_ARRAY_USED_
+
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_COMMON_NEW_USED_
