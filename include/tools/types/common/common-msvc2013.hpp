@@ -2,7 +2,7 @@
 // [2021y-03m-17d][20:59:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 101
+#define dTOOLS_COMMON_NEW_USED_ 102
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 
@@ -49,6 +49,41 @@ namespace tools
 #endif // !dTOOLS_FIND_TYPE_USED_
 
 
+//==============================================================================
+//=== is_functor ===============================================================
+#ifndef dTOOLS_IS_FUNCTOR_USED_ 
+#define dTOOLS_IS_FUNCTOR_USED_ 100
+namespace tools
+{
+    namespace detail
+    {
+        template<class lambda> class is_functor
+        {
+            using x
+                = ::std::remove_reference_t<lambda>;
+
+            template<class u> static ::std::true_type
+                check(decltype(&u::operator())*);
+
+            template<class> static ::std::false_type
+                check(...);
+
+            using checked
+                = decltype(check<x>(nullptr));
+        public:
+            is_functor() = delete;
+            enum { value = checked::value };
+        };
+
+    } // namespace detail
+
+    template<class F> class is_functor
+        : public dDETAIL_CONSTANT(is_functor<F>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_FUNCTOR_USED_
+
 
 //==============================================================================
 //=== degradate ================================================================
@@ -89,7 +124,6 @@ namespace tools
 
 } // namespace tools
 #endif // !dTOOLS_FOR_LVALUE_USED_
-
 
 
 //==============================================================================

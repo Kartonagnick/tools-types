@@ -1,7 +1,7 @@
 // [2021y-03m-19d][19:47:19] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 101
+#define dTOOLS_COMMON_NEW_USED_ 102
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
@@ -17,6 +17,7 @@
 #define dVARIADIC_7 \
     class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
     class t5 = empty, class t6 = empty, class t7  = empty
+
 
 //==============================================================================
 //=== find_type ================================================================
@@ -102,8 +103,117 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_FIND_TYPE_USED_
 
+#if 0
+//=== working but outdated version =============================================
+//=== is_functor ===============================================================
+#ifndef dTOOLS_IS_FUNCTOR_USED_ 
+#define dTOOLS_IS_FUNCTOR_USED_ 100
+namespace tools
+{
+    namespace detail
+    {
+        struct oper { void operator()() const; };
+
+        template <class v, v> struct 
+            help {};
+
+        typedef char (&no )[1]; 
+        typedef char (&yes)[2];
+
+        template <class t, bool>
+        struct is_functor_
+        {
+            struct der : oper, t {};
+
+            template <class u> static
+                no check(help<void (u::*)(), &u::operator()>*);
+
+            template <typename> static
+                yes check(...);
+
+            enum { result = sizeof(check<der>(0)) };
+            enum { value = result != sizeof(no)   };
+        };
+
+        template <class t> 
+        struct is_functor_<t, false>
+        {
+            enum { value = false };
+        };
+
+        template <class t>
+        struct is_functor
+        {
+            typedef dMY::remove_reference<t>
+                noref;
+            typedef typename noref::type 
+                x;
+
+            enum { ok    = dMY::is_class<x>::value   };
+            enum { value = is_functor_<x, ok>::value };
+        };
+
+    } // namespace detail
+
+    template<class F> class is_functor
+        : public dDETAIL_CONSTANT(is_functor<F>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_FUNCTOR_USED_
+#endif
+
+//==============================================================================
+//=== is_functor ===============================================================
+#ifndef dTOOLS_IS_FUNCTOR_USED_ 
+#define dTOOLS_IS_FUNCTOR_USED_ 101
+namespace tools
+{
+    namespace detail
+    {
+        template<class F, bool> struct is_functor_
+        {
+            __if_exists(F::operator())
+            {
+                enum { value = true };
+            }
+
+            __if_not_exists(F::operator()) 
+            {
+                enum { value = false };
+            }
+        };
+
+        template <class t> 
+        struct is_functor_<t, false>
+        {
+            enum { value = false };
+        };
+
+        template <class t> struct is_functor
+        {
+            typedef dMY::remove_reference<t>
+                noref;
+            typedef typename noref::type 
+                x;
+
+            enum { ok = dMY::is_class<x>::value  };
+            enum { value = is_functor_<x, ok>::value };
+        };
+
+    } // namespace detail
+
+    template<class F> class is_functor
+        : public dDETAIL_CONSTANT(is_functor<F>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_FUNCTOR_USED_
 
 //==============================================================================
 //==============================================================================
 #undef dMY
 #endif // !dTOOLS_COMMON_NEW_USED_
+
+
+
