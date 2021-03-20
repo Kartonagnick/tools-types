@@ -24,12 +24,16 @@
     #define TEST_REMOVE_REFERENCE                           // ready!
     #define TEST_DECAY                                      // ready!
 
+    #define TEST_IS_CLASS                                   // in progress...
+
 //==============================================================================
 //===== tools/types/common =================================||==================
-    #define TEST_TOOLS_DEGRADATE                            // in progress...
-    #define TEST_TOOLS_FOR_LVALUE                           // in progress...
-    #define TEST_TOOLS_FOR_RVALUE                           // in progress...
-    #define TEST_TOOLS_FIND_TYPE                            // in progress...
+    #define TEST_TOOLS_DEGRADATE                            // ready!
+    #define TEST_TOOLS_FOR_LVALUE                           // ready!
+    #define TEST_TOOLS_FOR_RVALUE                           // ready!
+    #define TEST_TOOLS_FIND_TYPE                            // ready!
+
+    #define TEST_TOOLS_IS_FUNCTOR                           // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================

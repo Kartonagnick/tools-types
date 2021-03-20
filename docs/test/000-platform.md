@@ -1,6 +1,11 @@
 
 test-000-platform  
 ---
+  - [x] `макросы версии 112             [027 PRE]`  
+    - [x] dHAS_DECLTYPE  
+    - [x] dHAS_LAMBDA  
+  - [x] `макросы версии 111             [027 PRE]`  
+    - [x] dHAS_ABOMINABLE  
   - [x] `макросы версии 110             [025]`  
     - [x] dHAS_ZERO_SIZE_ARRAY  
   - [x] `макросы версии 109             [024]`  

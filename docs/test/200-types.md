@@ -1,7 +1,10 @@
 
 test-200-types
 ---
-
+  - [x] `common версии 102 [027 PRE]`  
+    - [x] is_functor 
+  - [x] `common версии 101 [027 PRE]`  
+    - [x] find_type 
   - [x] `common версии 100 [026]`  
     - [x] degradate 
     - [x] dfor_lvalue 
@@ -10,6 +13,10 @@ test-200-types
 <br />
 <br />
 
+  - [x] `traits версии 4 [027 PRE]`  
+    - [x] is_class  
+  - [x] `traits версии 3 [027 PRE]`  
+    - [x] integral_constant  
   - [x] `traits версии 2 [023]`  
     - [x] remove_reference  
     - [x] decay  

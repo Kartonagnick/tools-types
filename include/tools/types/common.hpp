@@ -3,7 +3,7 @@
 // [2021y-03m-19d][22:03:35] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 101
+#define dTOOLS_COMMON_USED_ 102
 
 #include <tools/features.hpp>
 #include <tools/pragma/pragma.hpp>

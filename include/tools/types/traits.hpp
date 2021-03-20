@@ -1,9 +1,35 @@
-// [2021y-03m-11d][01:46:56] Idrisov Denis R.
+// [2021y-03m-11d][01:46:56] Idrisov Denis R. 3
+// [2021y-03m-20d][02:38:01] Idrisov Denis R. 4 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 3
+#define dTOOLS_TRAITS_USED_ 4
 
 #include <tools/features.hpp>
+
+//==============================================================================
+//=== is_class =================================================================
+#ifndef dTOOLS_IS_CLASS_USED_ 
+#define dTOOLS_IS_CLASS_USED_ 1
+namespace tools
+{
+    template <class t> struct is_class 
+    {
+        typedef char (&no )[1]; 
+        typedef char (&yes)[2];
+
+        template <typename cl> static yes 
+            check (int cl::* p);
+
+        template <class> static no 
+            check (...);
+
+        enum { result = sizeof(check<t>(0))  };
+        enum { value = result == sizeof(yes) };
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_IS_CLASS_USED_
+
 
 //==============================================================================
 //=== integral_constant ========================================================

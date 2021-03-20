@@ -2,10 +2,11 @@
 // [2021y-03m-10d][23:23:35] Idrisov Denis R. 108
 // [2021y-03m-15d][18:28:44] Idrisov Denis R. 109
 // [2021y-03m-17d][23:19:45] Idrisov Denis R. 110
+// [2021y-03m-19d][16:14:09] Idrisov Denis R. 111
+// [2021y-03m-20d][02:13:22] Idrisov Denis R. 112
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 111
-
+#define dTOOLS_FEATURES_USED_ 112 PRE
 //==============================================================================
 //=== dMESSAGE =================================================================
 
@@ -25,7 +26,9 @@
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
     #define dHAS_TYPE_TRAITS 1
+    #define dHAS_DECLTYPE 1
     #define dHAS_NULLPTR 1
+    #define dHAS_LAMBDA 1
     #define dHAS_HASH 1
 #endif
 
