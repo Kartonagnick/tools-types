@@ -1,8 +1,8 @@
 // [2021y-03m-19d][19:47:19] Idrisov Denis R.
-// [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
+// [2021y-03m-20d][19:43:08] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103 PRE
+#define dTOOLS_COMMON_NEW_USED_ 103
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>

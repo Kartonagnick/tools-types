@@ -1,9 +1,9 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-17d][20:59:19] Idrisov Denis R.
-// [2021y-03m-20d][06:20:40] Idrisov Denis R. 103
+// [2021y-03m-20d][19:43:08] Idrisov Denis R. 103
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103 PRE
+#define dTOOLS_COMMON_NEW_USED_ 103
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 

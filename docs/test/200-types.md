@@ -1,6 +1,10 @@
 
 test-200-types
 ---
+  - [x] `common версии 103 [027 PRE]`  
+    - [x] is_zero_array 
+    - [x] size_array 
+    - [x] small_array 
   - [x] `common версии 102 [027 PRE]`  
     - [x] is_functor 
   - [x] `common версии 101 [027 PRE]`  

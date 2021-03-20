@@ -1,6 +1,8 @@
 
 test-000-platform  
 ---
+  - [x] `макросы версии 113             [027 PRE]`  
+    - [x] dTRAIT  
   - [x] `макросы версии 112             [027 PRE]`  
     - [x] dHAS_DECLTYPE  
     - [x] dHAS_LAMBDA  

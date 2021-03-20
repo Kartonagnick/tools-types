@@ -10,6 +10,7 @@
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
+#include <string>
 
 #ifdef dHAS_TYPE_TRAITS
     dMESSAGE("[test] tools: enabled -> dHAS_TYPE_TRAITS")
@@ -27,7 +28,19 @@ namespace
         dSTATIC_ASSERT(value, MUST_BE_ARRAY);
     #endif
 
-}//namespace
+} // namespace
+
+TEST_COMPONENT(000)
+{
+    const std::string v = dSSTRINGIZE(dTRAIT);
+    dprint(std::cout << "dTRAIT: " << v << '\n');
+
+    #ifdef dHAS_TYPE_TRAITS
+        ASSERT_TRUE(v == "std");
+    #else
+        ASSERT_TRUE(v == "tools");
+    #endif
+}
 
 //==============================================================================
 //==============================================================================

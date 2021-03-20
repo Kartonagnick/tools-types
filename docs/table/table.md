@@ -8,8 +8,24 @@
 [E]: ../icons/empty.png
 [N]: ../icons/na.png
 
-Tools`s version 0.2.4  
+Tools`s version 0.2.7  [![P]][M]
 ---
+
+Корреляции  
+---
+
+| **ID** | **элементы**    |      include guard      | где используется            | оригинальное расположение    |  
+|:------:|:---------------:|:-----------------------:|:---------------------------:|:----------------------------:|  
+|  0006  | [remove_cv][e0] | dTOOLS_REMOVE_CV_USED_  | [tools/types/fixed.hpp][u0] | [tools/types/traits.hpp][p0] |  
+|  0007  | [is_signed][e1] | dTOOLS_IS_SIGNED_USED_  | [tools/types/fixed.hpp][u0] | [tools/types/traits.hpp][p0] |  
+
+[p0]: ../../include/tools/types/traits.hpp   "расположение файла"  
+[u0]: ../../include/tools/types/fixed.hpp    "расположение копии"  
+
+[e0]: ../code/types/traits.md    "мета-функция: удаляет квалификаторы типов"  
+[e1]: ../code/types/traits.md    "мета-функция: определяет: является ли тип знаковым"  
+
+<br/>
 
 Разделы
 ---
@@ -18,6 +34,8 @@ Tools`s version 0.2.4
 |:------:|:---------------:|:---------:|:---------:|:-------------------:|:---------------------:|:---------------------------:|  
 |  0001  | [features][01]  | 0.0.1     | 1.0.9     |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
 |  0003  | [types][19]     | 0.1.8     | 1.0.0     |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
+
+<br/>
 
 Модули  
 ---
@@ -29,8 +47,7 @@ Tools`s version 0.2.4
 |  0007  | [dFUNCTION][07] | 0.0.6 | 1.0.0  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
 |  0019  | [types][19]     | 0.1.8 | 1.0.0  |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
 
-<br />
-<br />
+<br/>
 
 [M]: #table                   "проект tools"  
 [0]: #mingw-new.md            "поддержка компиляторов mingw"  
