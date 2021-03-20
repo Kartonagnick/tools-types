@@ -76,19 +76,11 @@ namespace
 //==============================================================================
 namespace
 {
-    #define dfor_big_(arr)                                \
-        typename STD::enable_if<                          \
-            me::size_array<                               \
-                typename STD::remove_reference<arr>::type \
-            >::big, bool                                  \
-        >::type
+    #define dfor_big_(arr) \
+        dif_big_array(arr, bool)
 
-    #define dfor_small_(arr)                              \
-        typename STD::enable_if<                          \
-            me::size_array<                               \
-                typename STD::remove_reference<arr>::type \
-            >::Small, bool                                \
-        >::type
+    #define dfor_small_(arr) \
+        dif_small_array(arr, bool)
 
     template<class s>
     inline dfor_small_(s) check(s&) dNOEXCEPT 
