@@ -6,7 +6,7 @@
 
 #pragma once
 #ifndef dTOOLS_PRAGMA_WARNING_USED_ 
-#define dTOOLS_PRAGMA_WARNING_USED_
+#define dTOOLS_PRAGMA_WARNING_USED_ 100
 
 #if 0
 
