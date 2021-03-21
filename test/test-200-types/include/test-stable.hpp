@@ -33,9 +33,11 @@
     #define TEST_TOOLS_FIND_TYPE                            // ready!
     #define TEST_TOOLS_IS_FUNCTOR                           // ready!
 
-    #define TEST_TOOLS_IS_ZERO_ARRAY                        // in progress...
-    #define TEST_TOOLS_SIZE_ARRAY                           // in progress...
-    #define TEST_TOOLS_SMALL_ARRAY                          // in progress...
+    #define TEST_TOOLS_IS_ZERO_ARRAY                        // ready!
+    #define TEST_TOOLS_SIZE_ARRAY                           // ready!
+    #define TEST_TOOLS_SMALL_ARRAY                          // ready!
+
+    #define TEST_TOOLS_IS_DEREFERENCABLE                    // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================

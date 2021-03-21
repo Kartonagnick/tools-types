@@ -1,9 +1,10 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-17d][20:59:19] Idrisov Denis R.
 // [2021y-03m-20d][19:43:08] Idrisov Denis R. 103
+// [2021y-03m-21d][03:58:16] Idrisov Denis R. 104 PRE
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103
+#define dTOOLS_COMMON_NEW_USED_ 104
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 
@@ -288,6 +289,48 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_SMALL_ARRAY_USED_
+
+
+//==============================================================================
+//=== is_dereferencable ========================================================
+#ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
+#define dTOOLS_IS_DEREFERENCABLE_USED_ 100
+namespace tools 
+{
+    namespace detail
+    {
+        template<class t> class is_dereferencable
+        {
+            using x = ::std::remove_reference_t<t>;
+
+            #define dCHECK_EXPRESSION(...) \
+                decltype(__VA_ARGS__, ::std::true_type{})
+
+            template<class u> static dCHECK_EXPRESSION( 
+                *::std::declval<u>()
+            ) check(u*);
+
+            #undef dCHECK_EXPRESSION
+
+            template<class> static ::std::false_type
+                check(...);
+
+            using checked     
+                = decltype(check<x>(nullptr));
+        public:
+            is_dereferencable() = delete;
+            enum { value = checked::value };
+        };
+
+    } // namespace detail
+
+    // if the syntax is valid: *obj ---> dereferencable 
+    template<class t> struct is_dereferencable
+        : dDETAIL_CONSTANT(is_dereferencable<t>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_DEREFERENCABLE_USED_
 
 //==============================================================================
 //==============================================================================
