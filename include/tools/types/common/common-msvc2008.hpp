@@ -1,8 +1,11 @@
 // [2021y-03m-19d][19:47:19] Idrisov Denis R.
 // [2021y-03m-20d][19:43:08] Idrisov Denis R. 103
+// [2021y-03m-21d][03:57:07] Idrisov Denis R. 104 PRE
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 103
+#define dTOOLS_COMMON_NEW_USED_ 104 PRE
+
+#include <cstddef>
 
 #ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
@@ -17,6 +20,37 @@
     class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
     class t5 = empty, class t6 = empty, class t7  = empty
 
+
+//==============================================================================
+//=== [sfinae/help] ============================================================
+#if 0
+#ifndef dTOOLS_SFINAE_USED_ 
+#define dTOOLS_SFINAE_USED_ 100
+namespace tools
+{
+    namespace detail
+    {
+        template <class v, v> struct 
+            help {};
+
+        template<size_t n> struct sfinae 
+            { char val[n]; };
+
+        struct no  { char val[1]; };
+        struct yes { char val[2]; };
+
+        template<class t>       t& operator, (      t&, no);
+        template<class t> const t& operator, (const t&, no);
+
+        template<class t> t val();
+        template<class t> yes confirm(t&);
+        template<class t> yes confirm(const t&);
+
+    } // namespace detail
+
+} // namespace tools 
+#endif // !dTOOLS_SFINAE_USED_
+#endif
 
 //==============================================================================
 //=== find_type ================================================================
@@ -101,6 +135,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_FIND_TYPE_USED_
+
 
 //=== working but outdated version =============================================
 //=== is_functor ===============================================================
@@ -365,7 +400,76 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_SMALL_ARRAY_USED_
 
+
+//==============================================================================
+//=== is_dereferencable ========================================================
+#ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
+#define dTOOLS_IS_DEREFERENCABLE_USED_ 101
+namespace tools 
+{
+    namespace detail
+    {
+        template<class F, bool> struct is_deref_
+        {
+            __if_exists(F::operator*)
+            {
+                enum { value = true };
+            }
+
+            __if_not_exists(F::operator*) 
+            {
+                enum { value = false };
+            }
+        };
+
+        template <class t> struct is_deref_<t, false>
+        {
+            enum { value = false };
+        };
+
+        template <class t> struct is_deref_<t*, false>
+        {
+            enum { value = true };
+        };
+        template <class t> struct is_deref_<t*const, false>
+        {
+            enum { value = true };
+        };
+        template <class t> struct is_deref_<t*volatile, false>
+        {
+            enum { value = true };
+        };
+        template <class t> struct is_deref_<t*volatile const, false>
+        {
+            enum { value = true };
+        };
+
+        template <class t, size_t n> struct is_deref_<t[n], false>
+        {
+            enum { value = true };
+        };
+
+        template <class t> struct is_dereferencable
+        {
+            typedef dTRAIT::remove_reference<t>
+                noref;
+            typedef typename noref::type 
+                x;
+
+            enum { ok = dTRAIT::is_class<x>::value };
+            enum { value = is_deref_<x, ok>::value };
+        };
+
+    } // namespace detail
+
+    // if the syntax is valid: *obj ---> dereferencable 
+    template<class t> struct is_dereferencable
+        : dDETAIL_CONSTANT(is_dereferencable<t>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_DEREFERENCABLE_USED_
+
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_COMMON_NEW_USED_
-
