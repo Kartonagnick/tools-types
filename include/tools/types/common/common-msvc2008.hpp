@@ -1,9 +1,9 @@
 // [2021y-03m-19d][19:47:19] Idrisov Denis R.
 // [2021y-03m-20d][19:43:08] Idrisov Denis R. 103
-// [2021y-03m-21d][03:57:07] Idrisov Denis R. 104 PRE
+// [2021y-03m-21d][17:51:39] Idrisov Denis R. 104
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 104 PRE
+#define dTOOLS_COMMON_NEW_USED_ 104
 
 #include <cstddef>
 
