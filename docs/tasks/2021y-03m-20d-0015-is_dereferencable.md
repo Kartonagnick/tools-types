@@ -1,12 +1,12 @@
 
 | дата начала         |   дата конца        | длительность    | исполнитель  |
 |:-------------------:|:-------------------:|:---------------:|:------------:|
-| 2020y-03m-20d 21:30 | 2020y-03m-20d 22:55 | 2 hours, 25 min | Kartonagnick |
+| 2020y-03m-20d 21:30 | 2020y-03m-21d 04:20 | 6 hours, 50 min | Kartonagnick |
 
 is_dereferencable
 ---
 
-- Модернизация: `tools/types/common.hpp`:
+- Модернизация: `tools/types/common.hpp`:  
   - `is_dereferencable`  
 
 Метафункция возвращает true, 
@@ -19,15 +19,15 @@ if(tools::is_dereferencable<decltype(obj)>::value)
 
 План:  
   - `Часть-1`  
-    - [ ] добавляем `tools/types/common.hpp`:  
-      - [ ] `is_dereferencable`  
+    - [x] добавляем `tools/types/common.hpp`:  
+      - [x] `is_dereferencable`  
   - `Часть-2`  
-    - [ ] добавляем тест: `test-200-types`
-      - [ ] `test-is_dereferencable.cpp`  
+    - [x] добавляем тест: `test-200-types`
+      - [x] `test-is_dereferencable.cpp`  
   - `Часть-3`  
-    - [ ] проверяем сборку на всех компиляторах  
-    - [ ] заполняем историю  
-    - [ ] обновляем таблицу  
+    - [x] проверяем сборку на всех компиляторах  
+    - [x] заполняем историю  
+    - [x] обновляем таблицу  
 
 
 
