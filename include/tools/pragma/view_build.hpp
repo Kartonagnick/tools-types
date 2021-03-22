@@ -1,8 +1,9 @@
 ﻿// [2021y-02m-16d][16:14:09] Idrisov Denis R.
 // [2021y-03m-19d][14:51:27] Idrisov Denis R.
+// [2021y-03m-22d][08:56:37] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_VIEW_BUILD_USED_
-#define dTOOLS_VIEW_BUILD_USED_ 100
+#define dTOOLS_VIEW_BUILD_USED_ 101
 //================================================================================
 //================================================================================
 
@@ -13,7 +14,7 @@
 
 #ifdef _MSC_VER
 
-    #define dVIEW_VERSION(x,n) __pragma(message(x ": " dFULL_VERSION(n)))
+    #define dVIEW_VERSION(x,n) __pragma(message(x ": " dFULL_ABOUT_ME(n)))
 
     #ifdef dPCH_USED
         #define dVIEW_PCH(x) __pragma(message(x ": enabled -> pch"))
