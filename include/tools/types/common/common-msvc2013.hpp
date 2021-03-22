@@ -4,7 +4,7 @@
 // [2021y-03m-21d][17:51:39] Idrisov Denis R. 104
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 104
+#define dTOOLS_COMMON_NEW_USED_ 104,2013
 
 // msvc2013 has bug: std::is_rvalue_reference is not worked
 
@@ -17,7 +17,7 @@
 //==============================================================================
 //=== find_type ================================================================
 #ifndef dTOOLS_FIND_TYPE_USED_ 
-#define dTOOLS_FIND_TYPE_USED_ 100
+#define dTOOLS_FIND_TYPE_USED_ 100,2013
 namespace tools
 {
     // if type 't' is in the list 'args' --> true
@@ -54,7 +54,7 @@ namespace tools
 //==============================================================================
 //=== is_functor ===============================================================
 #ifndef dTOOLS_IS_FUNCTOR_USED_ 
-#define dTOOLS_IS_FUNCTOR_USED_ 100
+#define dTOOLS_IS_FUNCTOR_USED_ 100,2013
 namespace tools
 {
     namespace detail
@@ -90,7 +90,7 @@ namespace tools
 //==============================================================================
 //=== degradate ================================================================
 #ifndef dTOOLS_DEGRADATE_USED_ 
-#define dTOOLS_DEGRADATE_USED_ 100
+#define dTOOLS_DEGRADATE_USED_ 100,2013
 namespace tools 
 {
     template<class t> 
@@ -105,7 +105,7 @@ namespace tools
 //==============================================================================
 //=== dfor_lvalue ==============================================================
 #ifndef dTOOLS_FOR_LVALUE_USED_ 
-#define dTOOLS_FOR_LVALUE_USED_ 100
+#define dTOOLS_FOR_LVALUE_USED_ 100,2013
 namespace tools
 {
     #define dfor_lvalue(t) ::tools::for_lvalue<t>* = nullptr
@@ -131,7 +131,7 @@ namespace tools
 //==============================================================================
 //=== is_zero_array ============================================================
 #ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
-#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100,2013
 namespace tools 
 {
     #ifdef dHAS_ZERO_SIZE_ARRAY
@@ -161,7 +161,7 @@ namespace tools
 //==============================================================================
 //=== size_array ===========================================(is_zero_array) ====
 #ifndef dTOOLS_SIZE_ARRAY_USED_ 
-#define dTOOLS_SIZE_ARRAY_USED_ 100
+#define dTOOLS_SIZE_ARRAY_USED_ 100,2013
 namespace tools
 {
     template<class s> class size_array
@@ -243,7 +243,7 @@ namespace tools
 //==============================================================================
 //=== small_array =================================(degradate)(size_array) =====
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 100
+#define dTOOLS_SMALL_ARRAY_USED_ 100,2013
 namespace tools 
 {
     template<class s1, class s2>
@@ -294,7 +294,7 @@ namespace tools
 //==============================================================================
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
-#define dTOOLS_IS_DEREFERENCABLE_USED_ 100
+#define dTOOLS_IS_DEREFERENCABLE_USED_ 100,2013
 namespace tools 
 {
     namespace detail
