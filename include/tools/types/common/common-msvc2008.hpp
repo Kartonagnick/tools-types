@@ -248,7 +248,7 @@ namespace tools
 //==============================================================================
 //=== is_zero_array ============================================================
 #ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
-#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100,2008
 namespace tools 
 {
     #ifdef dHAS_ZERO_SIZE_ARRAY
