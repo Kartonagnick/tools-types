@@ -1,7 +1,8 @@
 // [2021y-03m-19d][14:33:03] Idrisov Denis R. 100
+// [2021y-03m-22d][94:30:36] Idrisov Denis R. 100
 #pragma once
 #ifndef dTOOLS_CONFBUILD_USED_
-#define dTOOLS_CONFBUILD_USED_ 100
+#define dTOOLS_CONFBUILD_USED_ 101
 //==============================================================================
 //==============================================================================
 
@@ -54,16 +55,16 @@
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
 
-#define dVERSION_NUM(MAJOR, MINOR, PATCH)   MAJOR * 100 + MINOR * 10 + PATCH
-#define dVERSION_STR(MAJOR, MINOR, PATCH)   dSSTRINGIZE(MAJOR.MINOR.PATCH)
+#define dBASIC_VERSION_NUM(MAJOR, MINOR, PATCH)   MAJOR * 100 + MINOR * 10 + PATCH
+#define dBASIC_VERSION_STR(MAJOR, MINOR, PATCH)   dSSTRINGIZE(MAJOR.MINOR.PATCH)
 
-#define dGET_VERSION(NAME) \
-    dVERSION_STR(NAME##_MAJOR, NAME##_MINOR, NAME##_PATCH)   
+#define dGET_BASIC_VERSION(NAME) \
+    dBASIC_VERSION_STR(NAME##_MAJOR, NAME##_MINOR, NAME##_PATCH)   
 
 #define dABOUT_ME \
     dTXT_AMODEL "-" dTXT_CONFIG "-" dCRT ", " dTXT_STABLE 
 
-#define dFULL_VERSION(NAME) dGET_VERSION(NAME) ", " dABOUT_ME
+#define dFULL_ABOUT_ME(NAME) dGET_BASIC_VERSION(NAME) ", " dABOUT_ME
 
 //==============================================================================
 //==============================================================================
@@ -71,6 +72,6 @@
 
 
 // example extract: 
-// #define dGET_MAJOR(value) value / 100
+// #define dGET_MAJOR(value)  value / 100
 // #define dGET_MINOR(value) (value % 100)/10
-// #define dGET_PATHS(value) value % 10
+// #define dGET_PATHS(value)  value % 10
