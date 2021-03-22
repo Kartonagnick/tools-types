@@ -4,7 +4,7 @@
 // [2021y-03m-21d][17:51:39] Idrisov Denis R. 104
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 104 PRE
+#define dTOOLS_COMMON_NEW_USED_ 104,2015
 
 #include <type_traits>
 
@@ -13,9 +13,77 @@
 
 
 //==============================================================================
+//=== degradate ================================================================
+#ifndef dTOOLS_DEGRADATE_USED_ 
+#define dTOOLS_DEGRADATE_USED_ 100,2013
+namespace tools 
+{
+    template<class t> 
+    using degradate = ::std::remove_cv_t<
+        ::std::remove_reference_t<t> 
+    >;
+
+} // namespace tools 
+#endif // !dTOOLS_DEGRADATE_USED_
+
+
+//==============================================================================
+//=== dfor_lvalue ==============================================================
+#ifndef dTOOLS_FOR_LVALUE_USED_ 
+#define dTOOLS_FOR_LVALUE_USED_ 100,2013
+namespace tools
+{
+    #define dfor_lvalue(t) ::tools::for_lvalue<t>* = nullptr
+    template<class t, class ret = void> 
+        using for_lvalue
+            = ::std::enable_if_t<
+                ::std::is_lvalue_reference<t>::value,
+                ret
+            >;
+
+    #define dfor_not_lvalue(t) ::tools::for_not_lvalue<t>* = nullptr
+    template<class t, class ret = void> 
+        using for_not_lvalue
+            = ::std::enable_if_t<
+                ! ::std::is_lvalue_reference<t>::value,
+                ret
+            >;
+
+} // namespace tools
+#endif // !dTOOLS_FOR_LVALUE_USED_
+
+
+//==============================================================================
+//=== dfor_rvalue ==============================================================
+#ifndef dTOOLS_FOR_RVALUE_USED_ 
+#define dTOOLS_FOR_RVALUE_USED_ 100,2015
+namespace tools
+{
+
+    #define dfor_rvalue(t) ::tools::for_rvalue<t>* = nullptr
+    template<class t, class ret = void> 
+        using for_rvalue
+            = ::std::enable_if_t<
+                ::std::is_rvalue_reference<t>::value,
+                ret
+            >;
+
+    #define dfor_not_rvalue(t) ::tools::for_not_rvalue<t>* = nullptr
+    template<class t, class ret = void> 
+        using for_not_rvalue
+            = ::std::enable_if_t<
+                ! ::std::is_rvalue_reference<t>::value,
+                ret
+            >;
+
+} // namespace tools
+#endif // !dTOOLS_FOR_RVALUE_USED_
+
+
+//==============================================================================
 //=== find_type ================================================================
 #ifndef dTOOLS_FIND_TYPE_USED_ 
-#define dTOOLS_FIND_TYPE_USED_ 100
+#define dTOOLS_FIND_TYPE_USED_ 100,2013
 namespace tools
 {
     // if type 't' is in the list 'args' --> true
@@ -52,7 +120,7 @@ namespace tools
 //==============================================================================
 //=== is_functor ===============================================================
 #ifndef dTOOLS_IS_FUNCTOR_USED_ 
-#define dTOOLS_IS_FUNCTOR_USED_ 100
+#define dTOOLS_IS_FUNCTOR_USED_ 100,2013
 namespace tools
 {
     namespace detail
@@ -86,77 +154,9 @@ namespace tools
 
 
 //==============================================================================
-//=== degradate ================================================================
-#ifndef dTOOLS_DEGRADATE_USED_ 
-#define dTOOLS_DEGRADATE_USED_ 100
-namespace tools 
-{
-    template<class t> 
-    using degradate = ::std::remove_cv_t<
-        ::std::remove_reference_t<t> 
-    >;
-
-} // namespace tools 
-#endif // !dTOOLS_DEGRADATE_USED_
-
-
-//==============================================================================
-//=== dfor_lvalue ==============================================================
-#ifndef dTOOLS_FOR_LVALUE_USED_ 
-#define dTOOLS_FOR_LVALUE_USED_ 100
-namespace tools
-{
-    #define dfor_lvalue(t) ::tools::for_lvalue<t>* = nullptr
-    template<class t, class ret = void> 
-        using for_lvalue
-            = ::std::enable_if_t<
-                ::std::is_lvalue_reference<t>::value,
-                ret
-            >;
-
-    #define dfor_not_lvalue(t) ::tools::for_not_lvalue<t>* = nullptr
-    template<class t, class ret = void> 
-        using for_not_lvalue
-            = ::std::enable_if_t<
-                ! ::std::is_lvalue_reference<t>::value,
-                ret
-            >;
-
-} // namespace tools
-#endif // !dTOOLS_FOR_LVALUE_USED_
-
-
-//==============================================================================
-//=== dfor_rvalue ==============================================================
-#ifndef dTOOLS_FOR_RVALUE_USED_ 
-#define dTOOLS_FOR_RVALUE_USED_ 100
-namespace tools
-{
-
-    #define dfor_rvalue(t) ::tools::for_rvalue<t>* = nullptr
-    template<class t, class ret = void> 
-        using for_rvalue
-            = ::std::enable_if_t<
-                ::std::is_rvalue_reference<t>::value,
-                ret
-            >;
-
-    #define dfor_not_rvalue(t) ::tools::for_not_rvalue<t>* = nullptr
-    template<class t, class ret = void> 
-        using for_not_rvalue
-            = ::std::enable_if_t<
-                ! ::std::is_rvalue_reference<t>::value,
-                ret
-            >;
-
-} // namespace tools
-#endif // !dTOOLS_FOR_RVALUE_USED_
-
-
-//==============================================================================
 //=== is_zero_array ============================================================
 #ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
-#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100,2013
 namespace tools 
 {
     #ifdef dHAS_ZERO_SIZE_ARRAY
@@ -186,7 +186,7 @@ namespace tools
 //==============================================================================
 //=== size_array ===========================================(is_zero_array) ====
 #ifndef dTOOLS_SIZE_ARRAY_USED_ 
-#define dTOOLS_SIZE_ARRAY_USED_ 100
+#define dTOOLS_SIZE_ARRAY_USED_ 100,2013
 namespace tools
 {
     template<class s> class size_array
@@ -268,7 +268,7 @@ namespace tools
 //==============================================================================
 //=== small_array =================================(degradate)(size_array) =====
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 100
+#define dTOOLS_SMALL_ARRAY_USED_ 100,2013
 namespace tools 
 {
     template<class s1, class s2>
@@ -319,7 +319,7 @@ namespace tools
 //==============================================================================
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
-#define dTOOLS_IS_DEREFERENCABLE_USED_ 100
+#define dTOOLS_IS_DEREFERENCABLE_USED_ 100,2013
 namespace tools 
 {
     namespace detail
@@ -357,6 +357,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_DEREFERENCABLE_USED_
+
 
 //==============================================================================
 //==============================================================================

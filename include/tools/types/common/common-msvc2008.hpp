@@ -3,7 +3,7 @@
 // [2021y-03m-21d][17:51:39] Idrisov Denis R. 104
 #pragma once
 #ifndef dTOOLS_COMMON_NEW_USED_ 
-#define dTOOLS_COMMON_NEW_USED_ 104
+#define dTOOLS_COMMON_NEW_USED_ 104,2008
 
 #include <cstddef>
 
@@ -55,7 +55,7 @@ namespace tools
 //==============================================================================
 //=== find_type ================================================================
 #ifndef dTOOLS_FIND_TYPE_USED_ 
-#define dTOOLS_FIND_TYPE_USED_ 100
+#define dTOOLS_FIND_TYPE_USED_ 100,2008
 namespace tools
 {
     struct empty;
@@ -141,7 +141,7 @@ namespace tools
 //=== is_functor ===============================================================
 #if 0
 #ifndef dTOOLS_IS_FUNCTOR_USED_ 
-#define dTOOLS_IS_FUNCTOR_USED_ 100
+#define dTOOLS_IS_FUNCTOR_USED_ 100,2008
 namespace tools
 {
     namespace detail
@@ -200,7 +200,7 @@ namespace tools
 //==============================================================================
 //=== is_functor ===============================================================
 #ifndef dTOOLS_IS_FUNCTOR_USED_ 
-#define dTOOLS_IS_FUNCTOR_USED_ 101
+#define dTOOLS_IS_FUNCTOR_USED_ 101,2008
 namespace tools
 {
     namespace detail
@@ -248,7 +248,7 @@ namespace tools
 //==============================================================================
 //=== is_zero_array ============================================================
 #ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
-#define dTOOLS_IS_ZERO_ARRAY_USED_ 100
+#define dTOOLS_IS_ZERO_ARRAY_USED_ 100,2008
 namespace tools 
 {
     #ifdef dHAS_ZERO_SIZE_ARRAY
@@ -278,7 +278,7 @@ namespace tools
 //==============================================================================
 //=== size_array ===========================================(is_zero_array) ====
 #ifndef dTOOLS_SIZE_ARRAY_USED_ 
-#define dTOOLS_SIZE_ARRAY_USED_ 100
+#define dTOOLS_SIZE_ARRAY_USED_ 100,2008
 namespace tools
 {
     template<class s> class size_array
@@ -367,7 +367,7 @@ namespace tools
 //==============================================================================
 //=== small_array =================================(degradate)(size_array) =====
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 100
+#define dTOOLS_SMALL_ARRAY_USED_ 100,2008
 namespace tools 
 {
     template<class s1, class s2>
@@ -404,7 +404,7 @@ namespace tools
 //==============================================================================
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
-#define dTOOLS_IS_DEREFERENCABLE_USED_ 101
+#define dTOOLS_IS_DEREFERENCABLE_USED_ 100,2008
 namespace tools 
 {
     namespace detail
