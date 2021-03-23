@@ -117,35 +117,6 @@ namespace tools
 
 
 //==============================================================================
-//=== decay ====================================================================
-#ifndef dTOOLS_DECAY_USED_ 
-#define dTOOLS_DECAY_USED_ 1
-namespace tools
-{
-    template<class t> struct decay
-    {
-        typedef t type;
-    };
-    template<class t, size_t n> struct decay<t[n]>
-    {
-        typedef t* type;
-    };
-    template<class t, size_t n> struct decay<t(&)[n]>
-    {
-        typedef t* type;
-    };
-    #ifdef dHAS_RVALUE_REFERENCES
-    template<class t, size_t n> struct decay<t(&&)[n]>
-    {
-        typedef t* type;
-    };
-    #endif
-
-} // namespace tools 
-#endif // !dTOOLS_DECAY_USED_
-
-
-//==============================================================================
 //=== is_same ==================================================================
 #ifndef dTOOLS_IS_SAME_USED_ 
 #define dTOOLS_IS_SAME_USED_ 1
@@ -329,6 +300,35 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_INTEGRAL_USED_
+
+
+//==============================================================================
+//=== decay ====================================================================
+#ifndef dTOOLS_DECAY_USED_ 
+#define dTOOLS_DECAY_USED_ 1
+namespace tools
+{
+    template<class t> struct decay
+    {
+        typedef t type;
+    };
+    template<class t, size_t n> struct decay<t[n]>
+    {
+        typedef t* type;
+    };
+    template<class t, size_t n> struct decay<t(&)[n]>
+    {
+        typedef t* type;
+    };
+    #ifdef dHAS_RVALUE_REFERENCES
+    template<class t, size_t n> struct decay<t(&&)[n]>
+    {
+        typedef t* type;
+    };
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_DECAY_USED_
 
 
 //==============================================================================

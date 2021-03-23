@@ -232,7 +232,7 @@ namespace tools
             typedef typename noref::type 
                 x;
 
-            enum { ok = dTRAIT::is_class<x>::value  };
+            enum { ok = dTRAIT::is_class<x>::value   };
             enum { value = is_functor_<x, ok>::value };
         };
 
@@ -483,12 +483,12 @@ namespace tools
         template<class t> class is_volatile_data
         {
             typedef dTRAIT::remove_reference<t> 
-                noref;
-            typedef typename noref::type 
+                no_ref;
+            typedef typename no_ref::type 
                 x;
             typedef dTRAIT::remove_pointer<x> 
-                noptr;
-            typedef typename noptr::type 
+                no_ptr;
+            typedef typename no_ptr::type 
                 z;
         public:
             enum { value = dTRAIT::is_volatile<z>::value };

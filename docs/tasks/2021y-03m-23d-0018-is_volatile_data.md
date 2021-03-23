@@ -36,7 +36,7 @@ namespace tools
 #endif // !dTOOLS_IS_VOLATILE_DATA_USED_
 ```
 
-Метафункция вернет true, если аргумент ссылается на `volatile` данные.
+Метафункция вернет true, если аргумент представляет на `volatile` данные.
 
 План:  
   - [ ] добавляем `is_volatile_data` во все версии common
