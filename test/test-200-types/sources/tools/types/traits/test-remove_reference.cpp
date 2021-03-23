@@ -62,9 +62,31 @@ TEST_COMPONENT(000)
     dCHECK(volatile int*&       , volatile int*);
     dCHECK(volatile const int*& , volatile const int*);
 }
+TEST_COMPONENT(001)
+{
+    dCHECK(int[1]                , int[1]);
+    dCHECK(const int[1]          , const int[1]);
+    dCHECK(volatile int[1]       , volatile int[1]);
+    dCHECK(volatile const int[1] , volatile const int[1]);
+
+    dCHECK(int(*)[1]                , int(*)[1]);
+    dCHECK(const int(*)[1]          , const int(*)[1]);
+    dCHECK(volatile int(*)[1]       , volatile int(*)[1]);
+    dCHECK(volatile const int(*)[1] , volatile const int(*)[1]);
+
+    dCHECK(int(&)[1]                , int[1]);
+    dCHECK(const int(&)[1]          , const int[1]);
+    dCHECK(volatile int(&)[1]       , volatile int[1]);
+    dCHECK(volatile const int(&)[1] , volatile const int[1]);
+
+    dCHECK(int(*&)[1]                , int(*)[1]);
+    dCHECK(const int(*&)[1]          , const int(*)[1]);
+    dCHECK(volatile int(*&)[1]       , volatile int(*)[1]);
+    dCHECK(volatile const int(*&)[1] , volatile const int(*)[1]);
+}
 
 #ifdef dHAS_RVALUE_REFERENCES
-TEST_COMPONENT(001)
+TEST_COMPONENT(002)
 {
     dCHECK(int&&                , int);
     dCHECK(const int&&          , const int);
