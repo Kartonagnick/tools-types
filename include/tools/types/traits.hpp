@@ -1,35 +1,11 @@
 // [2021y-03m-11d][01:46:56] Idrisov Denis R. 3
 // [2021y-03m-20d][02:38:01] Idrisov Denis R. 4
+// [2021y-03m-23d][22:29:28] Idrisov Denis R. 5 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 4
+#define dTOOLS_TRAITS_USED_ 5 PRE
 
 #include <tools/features.hpp>
-
-//==============================================================================
-//=== is_class =================================================================
-#ifndef dTOOLS_IS_CLASS_USED_ 
-#define dTOOLS_IS_CLASS_USED_ 1
-namespace tools
-{
-    template <class t> struct is_class 
-    {
-        typedef char (&no )[1]; 
-        typedef char (&yes)[2];
-
-        template <typename cl> static yes 
-            check (int cl::* p);
-
-        template <class> static no 
-            check (...);
-
-        enum { result = sizeof(check<t>(0))  };
-        enum { value = result == sizeof(yes) };
-    };
-
-} // namespace tools 
-#endif // !dTOOLS_IS_CLASS_USED_
-
 
 //==============================================================================
 //=== integral_constant ========================================================
@@ -64,6 +40,82 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
 
+
+//==============================================================================
+//=== is_class =================================================================
+#ifndef dTOOLS_IS_CLASS_USED_ 
+#define dTOOLS_IS_CLASS_USED_ 1
+namespace tools
+{
+    template <class t> struct is_class 
+    {
+        typedef char (&no )[1]; 
+        typedef char (&yes)[2];
+
+        template <typename cl> static yes 
+            check (int cl::* p);
+
+        template <class> static no 
+            check (...);
+
+        enum { result = sizeof(check<t>(0))  };
+        enum { value = result == sizeof(yes) };
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_IS_CLASS_USED_
+
+
+//==============================================================================
+//=== is_const =================================================================
+#ifndef dTOOLS_IS_CONST_USED_ 
+#define dTOOLS_IS_CONST_USED_ 1
+namespace tools
+{
+    template <class t> struct is_const
+    {
+        enum { value = false };
+    };
+
+    template <class t> struct is_const<const t>
+    {
+        enum { value = true };
+    };
+
+    template <class t, size_t n> struct is_const<const t[n]>
+    {
+        enum { value = true };
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_IS_CONST_USED_
+
+
+//==============================================================================
+//=== is_volatile ==============================================================
+#ifndef dTOOLS_IS_VOLATILE_USED_ 
+#define dTOOLS_IS_VOLATILE_USED_ 1
+namespace tools
+{
+    template <class t> struct is_volatile
+    {
+        enum { value = false };
+    };
+
+    template <class t> struct is_volatile<volatile t>
+    {
+        enum { value = true };
+    };
+
+    template <class t, size_t n> struct is_volatile<volatile t[n]>
+    {
+        enum { value = true };
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_IS_VOLATILE_USED_
+
+
 //==============================================================================
 //=== decay ====================================================================
 #ifndef dTOOLS_DECAY_USED_ 
@@ -92,6 +144,7 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_DECAY_USED_
 
+
 //==============================================================================
 //=== is_same ==================================================================
 #ifndef dTOOLS_IS_SAME_USED_ 
@@ -106,6 +159,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_SAME_USED_
+
 
 //==============================================================================
 //=== remove_cv ================================================================
@@ -128,6 +182,7 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_REMOVE_CV_USED_
 
+
 //==============================================================================
 //=== remove_reference =========================================================
 #ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
@@ -140,13 +195,46 @@ namespace tools
     template<class t> struct remove_reference <t&>           
         { typedef t type; };
 
+    template<class t, size_t n> struct remove_reference <t(&)[n]>           
+        { typedef t type[n]; };
+
     #ifdef dHAS_RVALUE_REFERENCES
     template<class t> struct remove_reference <t&&>        
         { typedef t type; };
+
+    template<class t, size_t n> struct remove_reference <t(&&)[n]>           
+        { typedef t type[n]; };
     #endif
 
 } // namespace tools 
 #endif // !dTOOLS_REMOVE_REFERENCE_USED_
+
+
+//==============================================================================
+//=== remove_pointer ===========================================================
+#ifndef dTOOLS_REMOVE_POINTER_USED_ 
+#define dTOOLS_REMOVE_POINTER_USED_ 1
+namespace tools
+{
+    template <class t> struct remove_pointer 
+        { typedef t type; };
+
+    template <class t> struct remove_pointer<t*> 
+        { typedef t type; };
+
+    template <class t> struct remove_pointer<t* const> 
+        { typedef t type; };
+
+    template <class t> struct remove_pointer<t* volatile>
+        { typedef t type; };
+
+    template <class t> struct remove_pointer<t* const volatile> 
+        { typedef t type; };
+
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_POINTER_USED_
+
+
 //==============================================================================
 //=== is_signed ================================================================
 #ifndef dTOOLS_IS_SIGNED_USED_ 
@@ -166,6 +254,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_SIGNED_USED_
+
 
 //==============================================================================
 //=== is_floating ==============================================================
@@ -191,6 +280,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_FLOATING_USED_
+
 
 //==============================================================================
 //=== is_integral ==============================================================
@@ -240,6 +330,7 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_IS_INTEGRAL_USED_
 
+
 //==============================================================================
 //=== conditional ==============================================================
 #ifndef dTOOLS_CONDITIONAL_USED_ 
@@ -257,6 +348,7 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_SELECT_USED_
 
+
 //==============================================================================
 //=== enable_if ================================================================
 #ifndef dTOOLS_ENABLE_IF_USED_ 
@@ -271,6 +363,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_SELECT_USED_
+
 
 //================================================================================
 //=== type_of_enum ===============================================================
@@ -299,6 +392,7 @@ namespace tools
 } // tools
 #endif // !dTOOLS_ENUM_TYPE_USED_
 #endif // !dHAS_ENUM_CLASS
+
 
 //==============================================================================
 //==============================================================================
