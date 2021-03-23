@@ -24,6 +24,9 @@
     #define TEST_DECAY                                      // ready!
     #define TEST_IS_CLASS                                   // ready!
 
+    #define TEST_IS_CONST                                   // in progress...
+    #define TEST_IS_VOLATILE                                // in progress...
+
 //==============================================================================
 //===== tools/types/common =================================||==================
     #define TEST_TOOLS_DEGRADATE                            // ready!
@@ -35,6 +38,8 @@
     #define TEST_TOOLS_SIZE_ARRAY                           // ready!
     #define TEST_TOOLS_SMALL_ARRAY                          // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
+
+    #define TEST_TOOLS_IS_VOLATILE_DATA                     // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================
