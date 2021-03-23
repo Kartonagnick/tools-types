@@ -6,7 +6,7 @@
 [E]: ../../icons/empty.png
 [N]: ../../icons/na.png
 
-version 1.0.4
+version 1.0.5
 ---
 
 

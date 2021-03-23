@@ -1,22 +1,30 @@
 
 test-200-types
 ---
+  - [x] `common версии 105 [027 PRE]`  
+    - [x] is_volatile_data  
+  - [x] `common версии 104 [027 PRE]`  
+    - [x] is_dereferencable  
   - [x] `common версии 103 [027 PRE]`  
-    - [x] is_zero_array 
-    - [x] size_array 
-    - [x] small_array 
+    - [x] is_zero_array  
+    - [x] size_array  
+    - [x] small_array  
   - [x] `common версии 102 [027 PRE]`  
-    - [x] is_functor 
+    - [x] is_functor  
   - [x] `common версии 101 [027 PRE]`  
-    - [x] find_type 
+    - [x] find_type  
   - [x] `common версии 100 [026]`  
-    - [x] degradate 
-    - [x] dfor_lvalue 
+    - [x] degradate  
+    - [x] dfor_lvalue  
     - [x] dfor_rvalue  
 
 <br />
 <br />
 
+  - [x] `traits версии 5 [027 PRE]`  
+    - [x] remove_pointer  
+    - [x] is_volatile  
+    - [x] is_const  
   - [x] `traits версии 4 [027 PRE]`  
     - [x] is_class  
   - [x] `traits версии 3 [027 PRE]`  
