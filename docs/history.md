@@ -8,6 +8,26 @@
 **История изменений**  
 
 
+**Версия 1.0.8 (предварительная)**  
+----------------------------------
+[2021y-03m-22d][11:07:57] #19_is_volatile_data
+1) обновлен: version                    108 PRE
+2) обновлен: types                      108 PRE
+4) обновлен: common                     104
+     - common-msvc2008.hpp
+       - is_volatile_data   100,2008
+     - common-msvc2013.hpp  100,2013
+       - is_volatile_data   100,2008
+     - common-msvc2015.hpp  100,2015
+       - is_volatile_data   100,2008
+
+5) обновлен: traits                     005 PRE
+     - is_const              001
+     - is_volatile           001
+
+6) исправление бага:
+     - traits/remove_reference   002
+
 **Версия 1.0.7 (предварительная)**  
 ----------------------------------
 [2021y-03m-22d][11:07:57] #17_version

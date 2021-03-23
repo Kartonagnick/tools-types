@@ -186,7 +186,7 @@ namespace tools
 //==============================================================================
 //=== remove_reference =========================================================
 #ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
-#define dTOOLS_REMOVE_REFERENCE_USED_ 1
+#define dTOOLS_REMOVE_REFERENCE_USED_ 2
 namespace tools
 {
     template<class t> struct remove_reference
