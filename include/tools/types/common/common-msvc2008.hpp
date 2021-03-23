@@ -14,7 +14,7 @@
 #endif
 
 #define dDETAIL_CONSTANT(...) \
-    dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
+    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 
 #define dVARIADIC_7 \
     class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
@@ -238,7 +238,7 @@ namespace tools
     } // namespace detail
 
     template<class F> class is_functor
-        : public dDETAIL_CONSTANT(is_functor<F>)
+        : dDETAIL_CONSTANT(is_functor<F>)
     {};
 
 } // namespace tools 
@@ -470,6 +470,37 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_IS_DEREFERENCABLE_USED_
 
+
+//==============================================================================
+//=== is_volatile_data =========================================================
+#ifndef dTOOLS_IS_VOLATILE_DATA_USED_ 
+#define dTOOLS_IS_VOLATILE_DATA_USED_ 100,2008
+namespace tools
+{
+    namespace detail
+    {
+        template<class t> class is_volatile_data
+        {
+            typedef dTRAIT::remove_reference<t> 
+                noref;
+            typedef typename noref::type 
+                x;
+            typedef dTRAIT::remove_pointer<x> 
+                noptr;
+            typedef typename noptr::type 
+                z;
+        public:
+            enum { value = dTRAIT::is_volatile<z>::value };
+        };
+
+    } // namespace detail
+
+    template<class t> struct is_volatile_data
+        : dDETAIL_CONSTANT(is_volatile_data<t>)
+    {};
+
+} // namespace tools
+#endif // !dTOOLS_IS_VOLATILE_DATA_USED_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_COMMON_NEW_USED_
