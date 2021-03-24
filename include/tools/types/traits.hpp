@@ -1,9 +1,10 @@
 // [2021y-03m-11d][01:46:56] Idrisov Denis R. 3
 // [2021y-03m-20d][02:38:01] Idrisov Denis R. 4
 // [2021y-03m-23d][23:55:08] Idrisov Denis R. 5
+// [2021y-03m-24d][20:31:03] Idrisov Denis R. 6 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 5
+#define dTOOLS_TRAITS_USED_ 5 PRE
 
 #include <tools/features.hpp>
 
@@ -39,6 +40,68 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
+
+
+//==============================================================================
+//=== is_pointer ===============================================================
+#ifndef dTOOLS_IS_POINTER_USED_ 
+#define dTOOLS_IS_POINTER_USED_ 1
+namespace tools
+{
+    template <class t> struct is_pointer 
+    {
+        enum { value = false };
+    };
+
+    template <class t> struct is_pointer <t*>
+    {
+        enum { value = true };
+    };
+
+    template <class t> struct is_pointer <t* const>
+    {
+        enum { value = true };
+    };
+
+    template <class t> struct is_pointer <t* volatile>
+    {
+        enum { value = true };
+    };
+
+    template <class t> struct is_pointer <t* volatile const>
+    {
+        enum { value = true };
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_IS_POINTER_USED_
+
+
+//==============================================================================
+//=== is_reference =============================================================
+#ifndef dTOOLS_IS_REFERENCE_USED_ 
+#define dTOOLS_IS_REFERENCE_USED_ 1
+namespace tools
+{
+    template <class t> struct is_reference
+    {
+        enum { value = false };
+    };
+
+    template <class t> struct is_reference <t&>
+    {
+        enum { value = true };
+    };
+
+    #ifdef dHAS_RVALUE_REFERENCES
+    template <class t> struct is_reference <t&&>
+    {
+        enum { value = true };
+    };
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_IS_REFERENCE_USED_
 
 
 //==============================================================================
