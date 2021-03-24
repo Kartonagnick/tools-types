@@ -4,7 +4,7 @@
 // [2021y-03m-24d][20:31:03] Idrisov Denis R. 6 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 5 PRE
+#define dTOOLS_TRAITS_USED_ 6 PRE
 
 #include <tools/features.hpp>
 
