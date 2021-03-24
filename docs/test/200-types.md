@@ -21,6 +21,9 @@ test-200-types
 <br />
 <br />
 
+  - [x] `traits версии 6 [027 PRE]`  
+    - [x] is_reference  
+    - [x] is_pointer  
   - [x] `traits версии 5 [027 PRE]`  
     - [x] remove_pointer  
     - [x] is_volatile  
