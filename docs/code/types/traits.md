@@ -24,9 +24,9 @@ version 0.0.6 [![P]][M]
 |  0011  | [is_class][11]          | 0.2.7 [![P]][M] | 0.0.4  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
 |  0012  | [is_const][12]          | 0.2.7 [![P]][M] | 0.0.5  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
 |  0013  | [is_volatile][13]       | 0.2.7 [![P]][M] | 0.0.5  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
-|  0014  | [remove_pointer][14]    | 0.2.3           | 0.0.5  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
-|  0015  | [is_pointer][15]        | 0.2.3           | 0.0.6  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
-|  0016  | [is_reference][16]      | 0.2.3           | 0.0.6  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
+|  0014  | [remove_pointer][14]    | 0.2.7 [![P]][M] | 0.0.5  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
+|  0015  | [is_pointer][15]        | 0.2.7 [![P]][M] | 0.0.6  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
+|  0016  | [is_reference][16]      | 0.2.7 [![P]][M] | 0.0.6  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
 
 [M]:       #traits          "метафункции для обработки типов"  
 [MINGW]:   #mingw-new       "поддержка компиляторов mingw"  
