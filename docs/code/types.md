@@ -6,7 +6,7 @@
 [E]: ../icons/empty.png
 [N]: ../icons/na.png
 
-version 1.0.9 PRE
+version 1.0.9
 ---
 
 | **ID** | элемент      | tools | версия | mingw 830, 720 710 | msvc 2019, 2017, 2015 | msvc 2013, 2012, 2010, 2008             |  
