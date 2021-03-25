@@ -44,6 +44,8 @@
 
     #define TEST_TOOLS_IS_VOLATILE_DATA                     // in progress...
 
+    #define TEST_TOOLS_VARIADIC                             // in progress...
+
 //==============================================================================
 //===== tools/types ========================================||==================
     #define TEST_FIXED                                      // ready!
