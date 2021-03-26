@@ -9,16 +9,16 @@
 
 **Версия 1.1.1 (предварительная)**  
 ----------------------------------
-[2021y-03m-26d][05:32:25] #25_traits
-1) обновлен: version                    111 PRE
-2) обновлен: types                      111 PRE
+[2021y-03m-26d][08:26:36] #25_traits
+1) обновлен: version                    111
+2) обновлен: types                      111
 3) обновлен: variadic                   002
      - поддержка всех компиляторов
      - dTEMPLATE_CONSTRUCT
      - dTEMPLATE_CONSTRUCT_IMPL
      - dTEMPLATE_CONSTRUCT_ARG
 
-4) обновлен: traits                     007 PRE
+4) обновлен: traits                     007
      - исправлен: decay             002
      - добавлен: is_function        001
      - добавлен: is_array           001
