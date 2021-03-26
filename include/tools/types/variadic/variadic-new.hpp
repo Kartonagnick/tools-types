@@ -8,8 +8,9 @@
 
 #include <type_traits>
 
+
 #define dDETAIL_CONSTANT(...) \
-    public ::std::integral_constant<bool, detail::__VA_ARGS__::value>
+    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 
 //==============================================================================
 //=== is_heir ==================================================================
@@ -17,6 +18,8 @@
 #define dTOOLS_IS_HEIR_USED_ 1,2010
 namespace tools
 {
+    struct dummy {};
+
     namespace detail
     {
         template <class... args>
@@ -51,10 +54,19 @@ namespace tools
 //==============================================================================
 //==============================================================================
 
-#define dTEMPLATE_CONSTRUCT(type, args)      \
-    typename t = ::std::enable_if_t<         \
-        !::tools::is_heir<type, args>::value \
+#define dTEMPLATE_CONSTRUCT(type, args)       \
+    typename t = ::std::enable_if_t<          \
+        !::tools::is_heir<type, args>::value  \
     >
+
+#define dTEMPLATE_CONSTRUCT_IMPL(type, args)  \
+    ::std::enable_if_t<                       \
+        !::tools::is_heir<type, args>::value, \
+         ::tools::dummy                       \
+    >
+
+#define dTEMPLATE_CONSTRUCT_ARG(type, args)   \
+    dTEMPLATE_CONSTRUCT_IMPL(type, args) = ::tools::dummy()
 
 //==============================================================================
 //==============================================================================

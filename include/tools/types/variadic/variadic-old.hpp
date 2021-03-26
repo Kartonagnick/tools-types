@@ -14,22 +14,27 @@
 #define dTOOLS_IS_HEIR_USED_ 1, 2008
 namespace tools
 {
+    struct dummy {};
+
     namespace detail
     {
         template <class b, class d>
-        struct is_heir<b, d>
+        struct is_heir
         {
-            typedef dTRAIT::decay<b> bb;
-            typedef dTRAIT::decay<d> dd;
-            using xx = dTRAIT::is_base_of<bb, dd>;
+            typedef typename dTRAIT::decay<b>::type 
+                bb;
+            typedef typename dTRAIT::decay<d>::type
+                dd;
+            typedef dTRAIT::is_base_of<bb, dd> 
+                xx;
             enum { value = xx::value };
         };
 
     } // namespace detail
 
-    template<class... args>
+    template<class b, class d>
     struct is_heir
-        : dDETAIL_CONSTANT(is_heir<args...>)
+        : dDETAIL_CONSTANT(is_heir<b, d>)
     {};
 
 } // namespace tools
@@ -38,10 +43,16 @@ namespace tools
 //==============================================================================
 //==============================================================================
 
-#define dTEMPLATE_CONSTRUCT(type, arg)      \
-    typename t = ::std::enable_if_t<        \
-        !::tools::is_heir<type, arg>::value \
-    >
+#define dTEMPLATE_CONSTRUCT_IMPL(base, arg)  \
+    typename dTRAIT::enable_if<              \
+        ! tools::detail::is_heir<base, arg>::value,   \
+         const tools::dummy&                 \
+    >::type
+
+
+#define dTEMPLATE_CONSTRUCT_ARG(base, arg)  \
+    dTEMPLATE_CONSTRUCT_IMPL(base, arg) \
+        = tools::dummy()
 
 //==============================================================================
 //==============================================================================
