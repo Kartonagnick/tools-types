@@ -9,9 +9,10 @@
 // [2021y-03m-23d][23:55:08] Idrisov Denis R. 108
 // [2021y-03m-24d][21:32:12] Idrisov Denis R. 109
 // [2021y-03m-24d][23:57:55] Idrisov Denis R. 110
+// [2021y-03m-26d][04:39:36] Idrisov Denis R. 111 PRE
 #pragma once
 #ifndef dTOOLS_TYPES_USED_ 
-#define dTOOLS_TYPES_USED_ 110
+#define dTOOLS_TYPES_USED_ 111 PRE
 
 #include <tools/features.hpp>
 #include <tools/types/fixed.hpp>
