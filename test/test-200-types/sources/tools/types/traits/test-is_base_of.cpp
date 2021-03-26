@@ -25,10 +25,13 @@ namespace
                 "must be '" #expected "'"                       \
             )
     #else
-        #define dCHECK(B, D, expected)                     \
-            dSTATIC_ASSERT(                                \
-                me::is_base_of<B,D>::value == expected,    \
-                ERROR_MUST_BE_##expected                   \
+        #define dEXPRESSION(B, D, expected) \
+            me::is_base_of<B,D>::value == expected
+
+        #define dCHECK(B, D, expected)      \
+            dSTATIC_ASSERT(                 \
+                dEXPRESSION(B,D, expected), \
+                ERROR_MUST_BE_##expected    \
             )
     #endif
 

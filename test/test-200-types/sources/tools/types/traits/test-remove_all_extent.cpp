@@ -4,7 +4,7 @@
 #ifdef TEST_REMOVE_ALL_EXTENSION
 
 #define dTEST_COMPONENT tools, types, traits
-#define dTEST_METHOD remove_extent
+#define dTEST_METHOD remove_all_extent
 #define dTEST_TAG tdd
 
 #include <tools/types/traits.hpp>

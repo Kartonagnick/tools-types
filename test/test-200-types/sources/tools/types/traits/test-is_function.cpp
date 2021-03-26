@@ -45,9 +45,12 @@ TEST_COMPONENT(000)
     dCHECK(int(&)()  , false);
     dCHECK(int(*)()  , false);
 
-    dCHECK(int()          , true );
-    dCHECK(int(int)       , true );
-    dCHECK(int(int)const  , true );
+    dCHECK(int()     , true );
+    dCHECK(int(int)  , true );
+
+    #ifdef dHAS_ABOMINABLE
+    dCHECK(int(int)const, true);
+    #endif
 }
 
 #ifdef dHAS_RVALUE_REFERENCE

@@ -9,8 +9,8 @@
 
 #include <tools/features.hpp>
 
-#define dTOOLS_INTEGRAL_CONSTANT(...) \
-    public ::tools::integral_constant<bool, detail::__VA_ARGS__::value>
+#define dDETAIL_CONSTANT(...) \
+    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 
 //==============================================================================
 //=== remove_cv ================================================================
@@ -471,6 +471,9 @@ namespace tools
         #pragma warning(push)
         // warning C4180: qualifier applied to function type has no meaning; ignored
         #pragma warning(disable : 4180)
+
+        // warning C4181: qualifier applied to reference type; ignored
+        #pragma warning(disable : 4181)
     #endif
 
     // only function types and reference types can't be const qualified
@@ -591,7 +594,7 @@ namespace tools
 
     template <class b, class d>
     struct is_base_of
-        : dTOOLS_INTEGRAL_CONSTANT(is_base_of<b, d>)
+        : dDETAIL_CONSTANT(is_base_of<b, d>)
     {};
 
 } // namespace tools 

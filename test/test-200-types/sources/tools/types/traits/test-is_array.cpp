@@ -47,7 +47,10 @@ TEST_COMPONENT(000)
 
     dCHECK(int()          , false );
     dCHECK(int(int)       , false );
-    dCHECK(int(int)const  , false );
+
+    #ifdef dHAS_ABOMINABLE
+    dCHECK(int(int)const, false);
+    #endif
 
     dCHECK(int[1]         , true );
     dCHECK(int[1][2]      , true );
