@@ -8,7 +8,6 @@
 
 #include <type_traits>
 
-
 #define dDETAIL_CONSTANT(...) \
     public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 

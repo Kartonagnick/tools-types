@@ -18,7 +18,7 @@
      - dTEMPLATE_CONSTRUCT_IMPL
      - dTEMPLATE_CONSTRUCT_ARG
 
-3) обновлен: traits                     007 PRE
+4) обновлен: traits                     007 PRE
      - исправлен: decay             002
      - добавлен: is_function        001
      - добавлен: is_array           001
