@@ -6,6 +6,27 @@
 [E]: ../../icons/empty.png
 [N]: ../../icons/na.png
 
+variadic-new.hpp
+---
+
+| **ID** | элементы                 | tools           | версия | mingw 830, 720 710 | msvc 2019, 2017, 2015 | msvc 2013, 2012, 2010, 2008 |  
+|:------:|:------------------------:|:---------------:|:------:|:------------------:|:---------------------:|:---------------------------:|  
+|  0000  | is_heir                  | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+|  0001  | dTEMPLATE_CONSTRUCT      | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+|  0002  | dTEMPLATE_CONSTRUCT_IMPL | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+|  0003  | dTEMPLATE_CONSTRUCT_ARG  | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+
+variadic-old.hpp
+---
+
+| **ID** | элементы                 | tools           | версия | mingw 830, 720 710 | msvc 2019, 2017, 2015 | msvc 2013, 2012, 2010, 2008 |  
+|:------:|:------------------------:|:---------------:|:------:|:------------------:|:---------------------:|:---------------------------:|  
+|  0000  | is_heir                  | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+|  0001  | dTEMPLATE_CONSTRUCT      | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+|  0002  | dTEMPLATE_CONSTRUCT_IMPL | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+|  0003  | dTEMPLATE_CONSTRUCT_ARG  | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]              |  
+
+
 variadic
 ---
 

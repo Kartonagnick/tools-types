@@ -14,6 +14,10 @@
 2) обновлен: types                      111 PRE
 3) обновлен: variadic                   002
      - поддержка всех компиляторов
+     - dTEMPLATE_CONSTRUCT
+     - dTEMPLATE_CONSTRUCT_IMPL
+     - dTEMPLATE_CONSTRUCT_ARG
+
 3) обновлен: traits                     007 PRE
      - исправлен: decay             002
      - добавлен: is_function        001
