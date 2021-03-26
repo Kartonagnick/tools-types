@@ -43,38 +43,38 @@ namespace
 TEST_COMPONENT(000)
 {
     dCHECK(int                , int);
-    dCHECK(const int          , const int);
-    dCHECK(volatile int       , volatile int);
-    dCHECK(volatile const int , volatile const int);
+    dCHECK(const int          , int);
+    dCHECK(volatile int       , int);
+    dCHECK(volatile const int , int);
 
     dCHECK(int*                , int*);
     dCHECK(const int*          , const int*);
     dCHECK(volatile int*       , volatile int*);
     dCHECK(volatile const int* , volatile const int*);
 
-    dCHECK(int&                , int&);
-    dCHECK(const int&          , const int&);
-    dCHECK(volatile int&       , volatile int&);
-    dCHECK(volatile const int& , volatile const int&);
+    dCHECK(int&                , int);
+    dCHECK(const int&          , int);
+    dCHECK(volatile int&       , int);
+    dCHECK(volatile const int& , int);
 
-    dCHECK(int*&                , int*&);
-    dCHECK(const int*&          , const int*&);
-    dCHECK(volatile int*&       , volatile int*&);
-    dCHECK(volatile const int*& , volatile const int*&);
+    dCHECK(int*&                , int*);
+    dCHECK(const int*&          , const int*);
+    dCHECK(volatile int*&       , volatile int*);
+    dCHECK(volatile const int*& , volatile const int*);
 }
 
 #ifdef dHAS_RVALUE_REFERENCES
 TEST_COMPONENT(001)
 {
-    dCHECK(int&&                , int&&);
-    dCHECK(const int&&          , const int&&);
-    dCHECK(volatile int&&       , volatile int&&);
-    dCHECK(volatile const int&& , volatile const int&&);
+    dCHECK(int&&                , int);
+    dCHECK(const int&&          , int);
+    dCHECK(volatile int&&       , int);
+    dCHECK(volatile const int&& , int);
 
-    dCHECK(int*&&                , int*&&);
-    dCHECK(const int*&&          , const int*&&);
-    dCHECK(volatile int*&&       , volatile int*&&);
-    dCHECK(volatile const int*&& , volatile const int*&&);
+    dCHECK(int*&&                , int*);
+    dCHECK(const int*&&          , const int*);
+    dCHECK(volatile int*&&       , volatile int*);
+    dCHECK(volatile const int*&& , volatile const int*);
 }
 #endif
 
@@ -102,6 +102,12 @@ TEST_COMPONENT(004)
     dCHECK(volatile const int(&&)[1] , volatile const int*);
 }
 #endif
+
+TEST_COMPONENT(005)
+{
+    dCHECK(int()    , int(*)()   );
+    dCHECK(int(int) , int(*)(int));
+}
 
 //==============================================================================
 //==============================================================================
