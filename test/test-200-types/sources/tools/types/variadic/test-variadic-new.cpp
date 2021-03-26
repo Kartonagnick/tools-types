@@ -73,7 +73,7 @@ namespace
 
     struct der: example
     {
-        der():example(){}
+        der(): example(){}
         der(const int a): example(a){}
         der(const int a, const int b): example(a, b){}
         der(const der& a, const int b): example(a, b){}
@@ -82,7 +82,7 @@ namespace
         der(der&& rhs): example(::std::move(rhs)){}
 
         template<typename... Args, dTEMPLATE_CONSTRUCT(der, Args...)>
-        explicit der(Args&&...args)
+        der(Args&&...args)
             : example( ::std::forward<Args>(args)... )
         {}
     };
@@ -111,7 +111,7 @@ namespace
 
     template<typename... Args, typename>
     der2::der2(Args&&...args)
-        :example(::std::forward<Args>(args)...)
+        : example(::std::forward<Args>(args)...)
     {}
 
     der2 rvalue2() 
@@ -122,7 +122,8 @@ namespace
         return ::std::move(d);
     }
 
-}//namespace
+} // namespace
+
 //==============================================================================
 //==============================================================================
 
@@ -136,7 +137,7 @@ TEST_COMPONENT(000)
                              
     der d2(10);              
     ASSERT_TRUE(d2.m_ctor == eTEMPLATE);
-                             
+
     der d3(d1); 
     ASSERT_TRUE(d3.m_ctor == eCOPY);
                              
@@ -185,6 +186,17 @@ TEST_COMPONENT(005)
     ASSERT_TRUE(d1.m_ctor == eVARIADIC);
 }
 
+TEST_COMPONENT(006)
+{
+    example e;
+    ASSERT_TRUE(e.m_ctor == eDEFAULT);
+
+    der d(e);
+    ASSERT_TRUE(d.m_ctor == eCOPY);
+}
+
+//==============================================================================
+//==============================================================================
 #endif // !dHAS_VARIADIC_TEMPLATE
 #endif // !TEST_TOOLS_VARIADIC
 
