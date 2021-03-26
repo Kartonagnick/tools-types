@@ -1,63 +1,64 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
+// [2020y-03m-26d][01:24:02] Idrisov Denis R.
 //==============================================================================
 #pragma once
-#ifndef dTOOLS_VARIADIC_USED_ 
-#define dTOOLS_VARIADIC_USED_ 1
+#ifndef dTOOLS_VARIADIC_NEW_USED_ 
+#define dTOOLS_VARIADIC_NEW_USED_ 1
 
 #include <type_traits>
 
+#define dDETAIL_CONSTANT(...) \
+    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
+
 //==============================================================================
-//==============================================================================
+//=== is_heir ==================================================================
+#ifndef dTOOLS_IS_HEIR_USED_ 
+#define dTOOLS_IS_HEIR_USED_ 1
 namespace tools
 {
-    namespace detail 
+    namespace detail
     {
-        template <class... Args> 
-            struct template_check;
+        template <class... args>
+            struct is_heir;
 
-        template <class Arg> struct template_check<Arg>
+        template <class a> struct is_heir<a>
         {
-            enum { value = false }; 
+            enum { value = false };
         };
 
-        template <class Base, class Derrived>
-        struct template_check<Base, Derrived>
+        template <class b, class d, class... args>
+        struct is_heir<b, d, args...>
         {
-            using base     
-                = typename ::std::decay<Base>::type;
-
-            using derrived
-                = typename ::std::decay<Derrived>::type;
-
-            using x = ::std::is_base_of<base, derrived>;
-
-            enum { value = x::value };
+            using bb  = ::std::decay_t<b>;
+            using dd  = ::std::decay_t<d>;
+            using xx  = ::std::is_base_of<bb,dd>;
+            enum { v1 = sizeof...(args) == 0 };
+            enum { v2 = xx::value   };
+            enum { value = v1 && v2 };
         };
 
-        template <class A, class B, class... Args>
-        struct template_check<A, B, Args...>
-        {
-            enum { value = true };
-        };
+    } // namespace detail
 
-    } // namespace detail 
+    template<class... args>
+    struct is_heir
+        : dDETAIL_CONSTANT(is_heir<args...>)
+    {};
 
 } // namespace tools
+#endif //!dTOOLS_IS_HEIR_USED_
 
 //==============================================================================
 //==============================================================================
 
-#define dTEMPLATE_CONSTRUCT(type, arg)    \
-    typename = ::std::enable_if_t<        \
-        !::tools::detail::template_check< \
-            type, arg                     \
-        >::value                          \
-    >*
+#define dTEMPLATE_CONSTRUCT(type, args)        \
+    typename t = ::std::enable_if_t<           \
+        !::tools::is_heir< type, args >::value \
+    >
 
 //==============================================================================
 //==============================================================================
-#endif //!dTOOLS_VARIADIC_USED_
+#endif //!dTOOLS_VARIADIC_NEW_USED_
 
 
 #if 0

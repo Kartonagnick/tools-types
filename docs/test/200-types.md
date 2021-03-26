@@ -48,6 +48,11 @@ test-200-types
 <br />
 <br />
 
+  - [x] `variadic версии 001 [027 PRE]`  
+
+<br />
+<br />
+
   - [x] `fixed версии 100 [018]`  
 
 
