@@ -12,7 +12,7 @@
 namespace me = ::tools;
 
 #ifndef _MSC_VER
-    //#pragma GCC diagnostic ignored "-Wignored-qualifiers"
+    #pragma GCC diagnostic ignored "-Wignored-qualifiers"
 #endif
 
 //==============================================================================
