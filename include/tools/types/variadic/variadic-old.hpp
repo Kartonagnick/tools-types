@@ -45,13 +45,12 @@ namespace tools
 
 #define dTEMPLATE_CONSTRUCT_IMPL(base, arg)  \
     typename dTRAIT::enable_if<              \
-        ! tools::detail::is_heir<base, arg>::value,   \
+        ! tools::is_heir<base, arg>::value,  \
          const tools::dummy&                 \
     >::type
 
-
-#define dTEMPLATE_CONSTRUCT_ARG(base, arg)  \
-    dTEMPLATE_CONSTRUCT_IMPL(base, arg) \
+#define dTEMPLATE_CONSTRUCT_ARG(base, arg)   \
+    dTEMPLATE_CONSTRUCT_IMPL(base, arg)      \
         = tools::dummy()
 
 //==============================================================================

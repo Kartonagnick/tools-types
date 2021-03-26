@@ -66,7 +66,8 @@ namespace tools
     >
 
 #define dTEMPLATE_CONSTRUCT_ARG(type, args)   \
-    dTEMPLATE_CONSTRUCT_IMPL(type, args) = ::tools::dummy()
+    dTEMPLATE_CONSTRUCT_IMPL(type, args)      \
+      = ::tools::dummy()
 
 //==============================================================================
 //==============================================================================
