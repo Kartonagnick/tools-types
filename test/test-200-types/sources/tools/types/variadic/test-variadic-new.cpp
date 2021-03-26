@@ -1,12 +1,16 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-25d][23:23:05] Idrisov Denis R.
-#include <mygtest/test-list.hpp>
+#include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_VARIADIC
 
 #include <tools/features.hpp>
 #ifdef dHAS_VARIADIC_TEMPLATE
+
+#define dTEST_COMPONENT tools, types
+#define dTEST_METHOD variadic
+#define dTEST_TAG new
 
 #include <tools/types/variadic.hpp>
 #include <utility>
