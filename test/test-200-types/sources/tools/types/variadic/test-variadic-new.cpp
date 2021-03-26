@@ -1,12 +1,16 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-25d][23:23:05] Idrisov Denis R.
-#include <mygtest/test-list.hpp>
+#include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_VARIADIC
 
 #include <tools/features.hpp>
 #ifdef dHAS_VARIADIC_TEMPLATE
+
+#define dTEST_COMPONENT tools, types
+#define dTEST_METHOD variadic
+#define dTEST_TAG new
 
 #include <tools/types/variadic.hpp>
 #include <utility>
@@ -73,7 +77,7 @@ namespace
 
     struct der: example
     {
-        der():example(){}
+        der(): example(){}
         der(const int a): example(a){}
         der(const int a, const int b): example(a, b){}
         der(const der& a, const int b): example(a, b){}
@@ -82,7 +86,7 @@ namespace
         der(der&& rhs): example(::std::move(rhs)){}
 
         template<typename... Args, dTEMPLATE_CONSTRUCT(der, Args...)>
-        explicit der(Args&&...args)
+        der(Args&&...args)
             : example( ::std::forward<Args>(args)... )
         {}
     };
@@ -111,7 +115,7 @@ namespace
 
     template<typename... Args, typename>
     der2::der2(Args&&...args)
-        :example(::std::forward<Args>(args)...)
+        : example(::std::forward<Args>(args)...)
     {}
 
     der2 rvalue2() 
@@ -122,7 +126,8 @@ namespace
         return ::std::move(d);
     }
 
-}//namespace
+} // namespace
+
 //==============================================================================
 //==============================================================================
 
@@ -136,7 +141,7 @@ TEST_COMPONENT(000)
                              
     der d2(10);              
     ASSERT_TRUE(d2.m_ctor == eTEMPLATE);
-                             
+
     der d3(d1); 
     ASSERT_TRUE(d3.m_ctor == eCOPY);
                              
@@ -185,6 +190,17 @@ TEST_COMPONENT(005)
     ASSERT_TRUE(d1.m_ctor == eVARIADIC);
 }
 
+TEST_COMPONENT(006)
+{
+    example e;
+    ASSERT_TRUE(e.m_ctor == eDEFAULT);
+
+    der d(e);
+    ASSERT_TRUE(d.m_ctor == eCOPY);
+}
+
+//==============================================================================
+//==============================================================================
 #endif // !dHAS_VARIADIC_TEMPLATE
 #endif // !TEST_TOOLS_VARIADIC
 
