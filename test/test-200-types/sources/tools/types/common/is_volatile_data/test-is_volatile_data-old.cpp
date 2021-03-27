@@ -4,7 +4,7 @@
 
 #ifdef TEST_TOOLS_IS_VOLATILE_DATA
 
-#define dTEST_COMPONENT tools, types
+#define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD is_volatile_data
 #define dTEST_TAG old
 

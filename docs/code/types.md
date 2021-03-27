@@ -6,7 +6,7 @@
 [E]: ../icons/empty.png
 [N]: ../icons/na.png
 
-version 1.1.1
+version 1.1.2 [![P]][M]
 ---
 
 | **ID** | элемент        | tools           | версия | mingw 830, 720 710 | msvc 2019, 2017, 2015 | msvc 2013, 2012, 2010, 2008             |  
@@ -15,6 +15,7 @@ version 1.1.1
 |  0001  | [traits][02]   | 0.1.9           | 0.0.7  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][0] [![D]][0] [![D]][0] [![D]][0] |  
 |  0002  | [common][03]   | 0.2.6           | 1.0.5  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![D]][0] [![N]][0] [![N]][0] [![N]][0] |  
 |  0003  | [variadic][04] | 0.2.7 [![P]][M] | 0.0.2  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][0] [![V]][0] [![V]][0] [![D]][1] |  
+|  0004  | [demangle][05] | 0.2.7 [![P]][M] | 0.0.1  |   [![V]][MINGW]    |  [![V]][VS-NEW]       | [![V]][VS-OLD]                          |  
 
 [M]:  #types  "обработака типов"  
 [MINGW]:   #mingw-new   "поддержка компиляторов mingw"  
@@ -27,3 +28,4 @@ version 1.1.1
 [02]: types/traits.md    "набор метафункций"  
 [03]: types/common.md    "набор метафункций"  
 [04]: types/variadic.md  "макрос dTEMPLATE_CONSTRUCT"  
+[05]: types/demangle.md  "человеко-читабельное название типа"  
