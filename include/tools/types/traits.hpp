@@ -2,10 +2,10 @@
 // [2021y-03m-20d][02:38:01] Idrisov Denis R. 4
 // [2021y-03m-23d][23:55:08] Idrisov Denis R. 5
 // [2021y-03m-24d][21:32:12] Idrisov Denis R. 6
-// [2021y-03m-26d][04:39:36] Idrisov Denis R. 7
+// [2021y-03m-26d][08:26:36] Idrisov Denis R. 7
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 7 PRE
+#define dTOOLS_TRAITS_USED_ 7
 
 #include <tools/features.hpp>
 
