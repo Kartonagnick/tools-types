@@ -29,14 +29,12 @@
     #define TEST_IS_POINTER                                 // ready!
     #define TEST_IS_REFERENCE                               // ready!
     #define TEST_REMOVE_POINTER                             // ready!
-
-    #define TEST_IS_FUNCTION                                // in progress...
-    #define TEST_IS_ARRAY                                   // in progress...
-    #define TEST_IS_BASE_OF                                 // in progress...
-
-    #define TEST_REMOVE_EXTENSION                           // in progress...
-    #define TEST_REMOVE_ALL_EXTENSION                       // in progress...
-    #define TEST_ADD_POINTER                                // in progress...
+    #define TEST_IS_FUNCTION                                // ready!
+    #define TEST_IS_ARRAY                                   // ready!
+    #define TEST_IS_BASE_OF                                 // ready!
+    #define TEST_REMOVE_EXTENSION                           // ready!
+    #define TEST_REMOVE_ALL_EXTENSION                       // ready!
+    #define TEST_ADD_POINTER                                // ready!
 
 //==============================================================================
 //===== tools/types/common =================================||==================
@@ -49,14 +47,15 @@
     #define TEST_TOOLS_SIZE_ARRAY                           // ready!
     #define TEST_TOOLS_SMALL_ARRAY                          // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
+    #define TEST_TOOLS_VARIADIC                             // ready!
 
     #define TEST_TOOLS_IS_VOLATILE_DATA                     // in progress...
-    #define TEST_TOOLS_VARIADIC                             // in progress...
+    #define TEST_TOOLS_ADD_CONST_DATA                       // in progress...
 
 //==============================================================================
 //===== tools/types ========================================||==================
     #define TEST_TOOLS_FIXED                                // ready!
-    #define TEST_TOOLS_DEMANGLE                             // in progress...
+    #define TEST_TOOLS_DEMANGLE                             // ready!
 
 //==============================================================================
 //==============================================================================
