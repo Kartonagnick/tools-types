@@ -7,9 +7,23 @@
 
 **История изменений**  
 
+**Версия 1.1.3 (предварительная)**  
+----------------------------------
+[2021y-03m-27d][23:59:59] #29_add_const_data
+1) обновлен: version                    113 PRE
+2) обновлен: types                      113 PRE
+4) обновлен: common                     106 PRE
+     - common-msvc2008.hpp  100,2008
+       - add_const_data     100,2008
+     - common-msvc2013.hpp  100,2013
+       - add_const_data     100,2013
+     - common-msvc2015.hpp  100,2015
+       - add_const_data     100,2013
+
+
 **Версия 1.1.2 (предварительная)**  
 ----------------------------------
-[2021y-03m-27d][23:59:59] #25_demangle
+[2021y-03m-27d][23:59:59] #27_demangle
 1) обновлен: version                    112
 2) обновлен: types                      112
 3) добавлен: damangle                   001
@@ -61,7 +75,7 @@
 [2021y-03m-23d][23:55:08] #19_is_volatile_data
 1) обновлен: version                    108
 2) обновлен: types                      108
-4) обновлен: common                     104
+4) обновлен: common                     105
      - common-msvc2008.hpp
        - is_volatile_data   100,2008
      - common-msvc2013.hpp  100,2013
