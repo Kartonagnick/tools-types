@@ -318,6 +318,70 @@ namespace tools
 
 
 //==============================================================================
+//=== add_const_data ===========================================================
+#ifndef dTOOLS_ADD_CONST_DATA_USED_ 
+#define dTOOLS_ADD_CONST_DATA_USED_ 100,2013
+namespace tools
+{
+    dPRAGMA_PUSH_WARNING_QUALIFIER_RETURN_TYPE
+
+    template<class t> struct add_const_data
+        { using type = const t; };
+
+    template<class t> struct add_const_data<t&>
+        { using type = typename add_const_data<t>::type&; };
+
+    template<class t> struct add_const_data<t&&>
+        { using type = typename add_const_data<t>::type&&; };
+
+    template<class t> struct add_const_data<t[]>
+        { using type = typename add_const_data<t>::type[]; };
+
+    template<class t, size_t n> struct add_const_data<t[n]>
+        { using type = typename add_const_data<t>::type[n]; };
+
+    #ifdef dHAS_ZERO_SIZE_ARRAY
+    dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
+    template<class t> struct add_const_data<t[0]>
+        { using type = typename add_const_data<t>::type[0]; };
+    dPRAGMA_POP
+    #endif // !dHAS_ZERO_SIZE_ARRAY
+
+    template<class t> struct add_const_data<t*>
+        { using type = typename add_const_data<t>::type*; };
+
+    template<class t> struct add_const_data<t* const>
+        { using type = typename add_const_data<t>::type*const; };
+
+    template<class t> struct add_const_data<t* volatile>
+        { using type = typename add_const_data<t>::type*volatile; };
+
+    template<class t> struct add_const_data<t* volatile const>
+        { using type = typename add_const_data<t>::type*volatile const; };
+
+    template<class m, class cl> struct add_const_data<m cl::*>
+        { using type = const m cl::*; };
+
+    template<class m, class cl> struct add_const_data<m cl::*const>
+        { using type = const m cl::*const; };
+
+    template<class m, class cl> struct add_const_data<m cl::*volatile>
+        { using type = const m cl::*volatile; };
+
+    template<class m, class cl> struct add_const_data<m cl::*volatile const>
+        { using type = const m cl::*volatile const; };
+
+    template<class t> 
+    using add_const_data_t
+        = typename add_const_data<t>::type;
+
+    dPRAGMA_POP
+
+} // namespace tools
+#endif // !dTOOLS_ADD_CONST_DATA_USED_
+
+
+//==============================================================================
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
 #define dTOOLS_IS_DEREFERENCABLE_USED_ 100,2013
