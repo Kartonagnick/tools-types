@@ -19,7 +19,6 @@ namespace
     #define dexpression(type, expected) \
         me::is_volatile_data<type>::value == expected
 
-
     #ifdef dHAS_STATIC_ASSERT
         #define make_test(type, expected)                     \
             static_assert(                                    \
@@ -30,8 +29,8 @@ namespace
     #else
         #define make_test(type, expected)    \
             dSTATIC_ASSERT(                  \
-                dexpression(type, expected), \
-                ERROR_INTERNAL               \
+                ERROR_INTERNAL,              \
+                dexpression(type, expected)  \
             )
     #endif
     

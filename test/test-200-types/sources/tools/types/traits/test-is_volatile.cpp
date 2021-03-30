@@ -24,8 +24,8 @@ namespace
     #else
         #define dCHECK(type, expected)                     \
             dSTATIC_ASSERT(                                \
-                ERROR_MUST_BE_ ## expected,                  \
-                me::is_volatile<type>::value == expected
+                ERROR_MUST_BE_##expected,                  \
+                me::is_volatile<type>::value == expected   \
             )
     #endif
 

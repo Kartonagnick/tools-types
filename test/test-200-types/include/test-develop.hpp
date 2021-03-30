@@ -47,7 +47,6 @@
     #define TEST_TOOLS_SMALL_ARRAY                          // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
     #define TEST_TOOLS_VARIADIC                             // ready!
-
     #define TEST_TOOLS_IS_VOLATILE_DATA                     // in progress...
     #define TEST_TOOLS_ADD_CONST_DATA                       // in progress...
 

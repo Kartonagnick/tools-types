@@ -40,19 +40,19 @@ TEST_COMPONENT(001)
 {
     dSTATIC_ASSERT(
         ERROR_INVALID_SIZE_MUST_BE_8BIT,
-        sizeof(me::int8_t) == 1,
+        sizeof(me::int8_t) == 1
     );
     dSTATIC_ASSERT(
         ERROR_INVALID_SIZE_MUST_BE_16BIT,
-        sizeof(me::int16_t) == 2,
+        sizeof(me::int16_t) == 2
     );
     dSTATIC_ASSERT(
         ERROR_INVALID_SIZE_MUST_BE_32BIT,
-        sizeof(me::int32_t) == 4,
+        sizeof(me::int32_t) == 4
     );
     dSTATIC_ASSERT(
         ERROR_INVALID_SIZE_MUST_BE_64BIT,
-        sizeof(me::int64_t) == 8,
+        sizeof(me::int64_t) == 8
     );
 }
 
@@ -66,7 +66,7 @@ TEST_COMPONENT(002)
 
     dSTATIC_ASSERT(
         ERROR_INVALID_SIZE_MUST_BE_8BIT,
-        sizeof(type) == 1,
+        sizeof(type) == 1
     );
 }
 TEST_COMPONENT(003)
@@ -76,7 +76,7 @@ TEST_COMPONENT(003)
 
     dSTATIC_ASSERT(
         ERROR_INVALID_SIZE_MUST_BE_16BIT,
-        sizeof(type) == 2,
+        sizeof(type) == 2
     );
 }
 TEST_COMPONENT(004)
@@ -85,8 +85,8 @@ TEST_COMPONENT(004)
         type;
 
     dSTATIC_ASSERT(
-        sizeof(type) == 4,
-        ERROR_INVALID_SIZE_MUST_BE_32BIT
+        ERROR_INVALID_SIZE_MUST_BE_32BIT,
+        sizeof(type) == 4
     );
 }
 TEST_COMPONENT(005)
@@ -95,8 +95,8 @@ TEST_COMPONENT(005)
         type;
 
     dSTATIC_ASSERT(
-        sizeof(type) == 8,
-        ERROR_INVALID_SIZE_MUST_BE_64BIT
+        ERROR_INVALID_SIZE_MUST_BE_64BIT,
+        sizeof(type) == 8
     );
 }
 
@@ -109,8 +109,8 @@ TEST_COMPONENT(006)
         type;
 
     dSTATIC_ASSERT(
-        sizeof(type) == 1,
-        ERROR_INVALID_SIZE_MUST_BE_8BIT
+        ERROR_INVALID_SIZE_MUST_BE_8BIT,
+        sizeof(type) == 1
     );
 }
 TEST_COMPONENT(007)
@@ -119,8 +119,8 @@ TEST_COMPONENT(007)
         type;
 
     dSTATIC_ASSERT(
-        sizeof(type) == 2,
-        ERROR_INVALID_SIZE_MUST_BE_16BIT
+        ERROR_INVALID_SIZE_MUST_BE_16BIT,
+        sizeof(type) == 2
     );
 }
 TEST_COMPONENT(008)
@@ -129,8 +129,8 @@ TEST_COMPONENT(008)
         type;
 
     dSTATIC_ASSERT(
-        sizeof(type) == 4,
-        ERROR_INVALID_SIZE_MUST_BE_32BIT
+        ERROR_INVALID_SIZE_MUST_BE_32BIT,
+        sizeof(type) == 4
     );
 }
 TEST_COMPONENT(009)
@@ -139,8 +139,8 @@ TEST_COMPONENT(009)
         type;
 
     dSTATIC_ASSERT(
-        sizeof(type) == 8,
-        ERROR_INVALID_SIZE_MUST_BE_64BIT
+        ERROR_INVALID_SIZE_MUST_BE_64BIT,
+        sizeof(type) == 8
     );
 }
 
@@ -161,23 +161,14 @@ TEST_COMPONENT(010)
     me::int64_t min64 = INT64_MIN;
     me::int64_t max64 = INT64_MAX;
 
-    dSTATIC_ASSERT(me::map_signed<1>::min_value == INT8_MIN, 
-        ERROR_INT8_MIN );
-    dSTATIC_ASSERT(me::map_signed<2>::min_value == INT16_MIN, 
-        ERROR_INT16_MIN);    
-    dSTATIC_ASSERT(me::map_signed<4>::min_value == INT32_MIN, 
-        ERROR_INT32_MIN);
-    dSTATIC_ASSERT(me::map_signed<8>::min_value == INT64_MIN,
-        ERROR_INT64_MIN);
-
-    dSTATIC_ASSERT(me::map_signed<1>::max_value == INT8_MAX, 
-        ERROR_INT8_MAX );
-    dSTATIC_ASSERT(me::map_signed<2>::max_value == INT16_MAX, 
-        ERROR_INT16_MAX);    
-    dSTATIC_ASSERT(me::map_signed<4>::max_value == INT32_MAX, 
-        ERROR_INT32_MAX);
-    dSTATIC_ASSERT(me::map_signed<8>::min_value == INT64_MIN,
-        ERROR_INT64_MAX);
+    dSTATIC_ASSERT(ERROR_INT8_MIN , me::map_signed<1>::min_value == INT8_MIN );
+    dSTATIC_ASSERT(ERROR_INT16_MIN, me::map_signed<2>::min_value == INT16_MIN);    
+    dSTATIC_ASSERT(ERROR_INT32_MIN, me::map_signed<4>::min_value == INT32_MIN);
+    dSTATIC_ASSERT(ERROR_INT64_MIN, me::map_signed<8>::min_value == INT64_MIN);
+    dSTATIC_ASSERT(ERROR_INT8_MAX , me::map_signed<1>::max_value == INT8_MAX );
+    dSTATIC_ASSERT(ERROR_INT16_MAX, me::map_signed<2>::max_value == INT16_MAX);    
+    dSTATIC_ASSERT(ERROR_INT32_MAX, me::map_signed<4>::max_value == INT32_MAX);
+    dSTATIC_ASSERT(ERROR_INT64_MAX, me::map_signed<8>::min_value == INT64_MIN);
 
     ASSERT_TRUE(min8  == me::map_signed<1>::min_value);
     ASSERT_TRUE(min16 == me::map_signed<2>::min_value);
@@ -204,23 +195,15 @@ TEST_COMPONENT(011)
     me::uint64_t min64 = 0;
     me::uint64_t max64 = UINT64_MAX;
 
-    dSTATIC_ASSERT(me::map_unsigned<1>::min_value == 0, 
-        ERROR_UINT8_MIN );
-    dSTATIC_ASSERT(me::map_unsigned<2>::min_value == 0, 
-        ERROR_UINT16_MIN);    
-    dSTATIC_ASSERT(me::map_unsigned<4>::min_value == 0, 
-        ERROR_UINT32_MIN);
-    dSTATIC_ASSERT(me::map_unsigned<8>::min_value == 0, 
-        ERROR_UINT64_MIN);
+    dSTATIC_ASSERT(ERROR_UINT8_MIN , me::map_unsigned<1>::min_value == 0);
+    dSTATIC_ASSERT(ERROR_UINT16_MIN, me::map_unsigned<2>::min_value == 0);    
+    dSTATIC_ASSERT(ERROR_UINT32_MIN, me::map_unsigned<4>::min_value == 0);
+    dSTATIC_ASSERT(ERROR_UINT64_MIN, me::map_unsigned<8>::min_value == 0);
 
-    dSTATIC_ASSERT(me::map_unsigned<1>::max_value == UINT8_MAX,
-        ERROR_UINT8_MAX );
-    dSTATIC_ASSERT(me::map_unsigned<2>::max_value == UINT16_MAX, 
-        ERROR_UINT16_MAX);    
-    dSTATIC_ASSERT(me::map_unsigned<4>::max_value == UINT32_MAX,
-        ERROR_UINT32_MAX);
-    dSTATIC_ASSERT(me::map_unsigned<8>::max_value == UINT64_MAX,
-        ERROR_UINT64_MAX);
+    dSTATIC_ASSERT(ERROR_UINT8_MAX , me::map_unsigned<1>::max_value == UINT8_MAX );
+    dSTATIC_ASSERT(ERROR_UINT16_MAX, me::map_unsigned<2>::max_value == UINT16_MAX);    
+    dSTATIC_ASSERT(ERROR_UINT32_MAX, me::map_unsigned<4>::max_value == UINT32_MAX);
+    dSTATIC_ASSERT(ERROR_UINT64_MAX, me::map_unsigned<8>::max_value == UINT64_MAX);
 
     ASSERT_TRUE(min8  == me::map_unsigned<1>::min_value);
     ASSERT_TRUE(min16 == me::map_unsigned<2>::min_value);

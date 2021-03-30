@@ -39,40 +39,40 @@ namespace tools
         static inline void static_assert_check_signed_fixed_()
         {
             dSTATIC_ASSERT(
-                sizeof(::tools::int8_t) == 1,
-                ERROR_INVALID_SIZE_MUST_BE_8BIT
+                ERROR_INVALID_SIZE_MUST_BE_8BIT,
+                sizeof(::tools::int8_t) == 1
             );
             dSTATIC_ASSERT(
-                sizeof(::tools::int16_t) == 2,
-                ERROR_INVALID_SIZE_MUST_BE_16BIT
+                ERROR_INVALID_SIZE_MUST_BE_16BIT,
+                sizeof(::tools::int16_t) == 2
             );
             dSTATIC_ASSERT(
-                sizeof(::tools::int32_t) == 4,
-                ERROR_INVALID_SIZE_MUST_BE_32BIT
+                ERROR_INVALID_SIZE_MUST_BE_32BIT,
+                sizeof(::tools::int32_t) == 4
             );
             dSTATIC_ASSERT(
-                sizeof(::tools::int64_t) == 8,
-                ERROR_INVALID_SIZE_MUST_BE_64BIT
+                ERROR_INVALID_SIZE_MUST_BE_64BIT,
+                sizeof(::tools::int64_t) == 8
             );
         }
 
         static inline void static_assert_check_unsigned_fixed_()
         {
             dSTATIC_ASSERT(
-                sizeof(::tools::uint8_t) == 1,
-                ERROR_INVALID_SIZE_MUST_BE_8BIT
+                ERROR_INVALID_SIZE_MUST_BE_8BIT,
+                sizeof(::tools::uint8_t) == 1
             );
             dSTATIC_ASSERT(
-                sizeof(::tools::uint16_t) == 2,
-                ERROR_INVALID_SIZE_MUST_BE_16BIT
+                ERROR_INVALID_SIZE_MUST_BE_16BIT,
+                sizeof(::tools::uint16_t) == 2
             );
             dSTATIC_ASSERT(
-                sizeof(::tools::uint32_t) == 4,
-                ERROR_INVALID_SIZE_MUST_BE_32BIT
+                ERROR_INVALID_SIZE_MUST_BE_32BIT,
+                sizeof(::tools::uint32_t) == 4
             );
             dSTATIC_ASSERT(
-                sizeof(::tools::uint64_t) == 8,
-                ERROR_INVALID_SIZE_MUST_BE_64BIT
+                ERROR_INVALID_SIZE_MUST_BE_64BIT,
+                sizeof(::tools::uint64_t) == 8
             );
         }
 

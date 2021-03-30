@@ -22,7 +22,6 @@ namespace
     };
 
     #ifdef dHAS_STATIC_ASSERT
-
         #define dCHECK(type, expected)                    \
             static_assert(                                \
                 me::is_functor<type>::value == expected,  \
@@ -33,8 +32,8 @@ namespace
     #else
         #define dCHECK(type, expected)                \
         dSTATIC_ASSERT(                               \
-            me::is_functor<type>::value == expected,  \
-            ERROR_INTERNAL \
+            ERROR_INTERNAL,                           \
+            me::is_functor<type>::value == expected   \
         )
     #endif
 

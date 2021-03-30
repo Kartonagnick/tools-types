@@ -6,10 +6,10 @@
 // [2021y-03m-20d][02:13:22] Idrisov Denis R. 112
 // [2021y-03m-20d][19:41:07] Idrisov Denis R. 113
 // [2021y-03m-30d][03:40:56] Idrisov Denis R. 114
-// [2021y-03m-30d][21:58:26] Idrisov Denis R. 115 PRE
+// [2021y-03m-31d][01:56:33] Idrisov Denis R. 115
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 115 PRE
+#define dTOOLS_FEATURES_USED_ 115
 //==============================================================================
 //=== dMESSAGE =================================================================
 
@@ -54,15 +54,19 @@
     #define dSTATIC_ASSERT(msg, ...) \
         static_assert((__VA_ARGS__), #msg)
 #else
-    
-    template<bool> struct static_assert_;
-    template<> struct static_assert_<true> {};
 
-    #define dSTATIC_ASSERT(msg, ...)         \
-    {                                        \
-        ::static_assert_<(__VA_ARGS__)> msg; \
-        (void) msg;                          \
-    } void()
+    #define dSTATIC_ASSERT_3(msg, ...) \
+        struct msg { int static_assert_ : !!(__VA_ARGS__); }
+
+    #define dSTATIC_ASSERT_2(msg, L, C, ...)  \
+        dSTATIC_ASSERT_3(msg##_##L##_##C , __VA_ARGS__)
+
+    #define dSTATIC_ASSERT_1(msg, L, C, ...) \
+        dSTATIC_ASSERT_2(msg, L, C, __VA_ARGS__)
+
+    #define dSTATIC_ASSERT(msg, ...) \
+        dSTATIC_ASSERT_1(msg, __LINE__, __COUNTER__, __VA_ARGS__)
+
 #endif
 
 //==============================================================================

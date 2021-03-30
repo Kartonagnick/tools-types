@@ -32,7 +32,7 @@ namespace
             typedef me::add_const_data<a>::type x;  \
             typedef dTRAIT::is_same<x, b> y;        \
             dSTATIC_ASSERT(                         \
-                y::value, ERROR_MUST_BE_##expected  \
+                ERROR_MUST_BE_##expected, y::value  \
             );                                      \
         } void()
     #endif

@@ -1,6 +1,8 @@
 
 test-000-platform  
 ---
+  - [x] `макросы версии 115             [027 PRE]`  
+    - [x] dSTATIC_ASSERT (updated) 
   - [x] `макросы версии 114             [027 PRE]`  
     - [x] dTRAIT (updated) 
   - [x] `макросы версии 113             [027 PRE]`  

@@ -25,40 +25,40 @@ namespace
             typename me::size_array<x>::type, etalon \
         >::value
 
-    #define dCHECK_TYPE(ty, etalon)           \
+    #define dCHECK_TYPE(ty, etalon)            \
         dSTATIC_ASSERT(                        \
             ERROR_INTERNAL, dEXPR(ty, etalon)  \
         )
 
     #define dCHECK_VALID(type, etalon)             \
         dSTATIC_ASSERT(                            \
-            me::size_array<type>::valid == etalon, \
-            ERROR_INTERNAL                         \
+            ERROR_INTERNAL,                        \
+            me::size_array<type>::valid == etalon  \
         )
     #define dCHECK_VALUE(type, etalon)             \
         dSTATIC_ASSERT(                            \
-            me::size_array<type>::value == etalon, \
-            ERROR_INTERNAL                         \
+            ERROR_INTERNAL,                        \
+            me::size_array<type>::value == etalon  \
         )
     #define dCHECK_BIG(type, etalon)               \
         dSTATIC_ASSERT(                            \
-            me::size_array<type>::big == etalon,   \
-            ERROR_INTERNAL                         \
+            ERROR_INTERNAL,                        \
+            me::size_array<type>::big == etalon    \
         )
     #define dCHECK_SMALL(type, etalon)             \
         dSTATIC_ASSERT(                            \
-            me::size_array<type>::Small == etalon, \
-            ERROR_INTERNAL                         \
+            ERROR_INTERNAL,                        \
+            me::size_array<type>::Small == etalon  \
         )
     #define dCHECK_EMPTY(type, etalon)             \
         dSTATIC_ASSERT(                            \
-            me::size_array<type>::empty == etalon, \
-            ERROR_INTERNAL                         \
+            ERROR_INTERNAL,                        \
+            me::size_array<type>::empty == etalon \
         )
     #define dCHECK_ZERO(type, etalon)              \
         dSTATIC_ASSERT(                            \
-            me::size_array<type>::zero == etalon,  \
-            ERROR_INTERNAL                         \
+            ERROR_INTERNAL,                        \
+            me::size_array<type>::zero == etalon   \
         )
 
     #define dCHECK(type, based, valid, value, big, Small, empty, zero) \

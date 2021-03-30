@@ -66,44 +66,44 @@ namespace
 TEST_COMPONENT(000)
 {
     typedef me::find_type<int, int> x;
-    dSTATIC_ASSERT(x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, x::value);
 }
 TEST_COMPONENT(001)
 {
     typedef me::find_type<int, bool, char, int, double, float, wchar_t> x;
-    dSTATIC_ASSERT(x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, x::value);
 }
 TEST_COMPONENT(002)
 {
     typedef me::find_type<void(), bool, char, void(), double> x;
-    dSTATIC_ASSERT(x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, x::value);
 }
 TEST_COMPONENT(003)
 {
     typedef me::find_type<int*, bool, char, int, double> x;
-    dSTATIC_ASSERT(!x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, !x::value);
 }
 TEST_COMPONENT(004)
 {
     typedef me::find_type<int*, bool, int , int, double> x;
-    dSTATIC_ASSERT(!x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, !x::value);
 }
 TEST_COMPONENT(005)
 {
     typedef me::find_type<int&, bool, char, int, double> x;
-    dSTATIC_ASSERT(!x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, !x::value);
 }
 TEST_COMPONENT(006)
 {
     typedef me::find_type<const int, bool, char, int, double> x;
-    dSTATIC_ASSERT(!x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, !x::value);
 }
 
 #ifdef dHAS_ABOMINABLE
 TEST_COMPONENT(007)
 {
     typedef me::find_type<void(), bool , char, void() const, double> x;
-    dSTATIC_ASSERT(!x::value, INTERNAL_ERROR);
+    dSTATIC_ASSERT(INTERNAL_ERROR, !x::value);
 }
 #endif // !dHAS_ABOMINABLE
 
