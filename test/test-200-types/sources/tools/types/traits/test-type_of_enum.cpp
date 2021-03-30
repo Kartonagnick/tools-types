@@ -41,8 +41,8 @@ namespace
         {                                  \
             typedef me::is_same<a,b> y;    \
             dSTATIC_ASSERT(                \
-                y::value == v,             \
-                ERROR_MUST_BE_##expected   \
+                ERROR_MUST_BE_##expected,  \
+                y::value == v              \
             );                             \
         } void()
 
