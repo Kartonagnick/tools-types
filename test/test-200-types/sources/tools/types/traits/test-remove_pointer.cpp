@@ -128,6 +128,13 @@ TEST_COMPONENT(003)
 }
 #endif
 
+TEST_COMPONENT(004)
+{
+    dCHECK(int(*const)()          , int() );
+    dCHECK(int(*volatile)()       , int() );
+    dCHECK(int(*volatile const)() , int() );
+}
+
 //==============================================================================
 //==============================================================================
 #endif // !TEST_REMOVE_POINTER

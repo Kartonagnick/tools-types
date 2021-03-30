@@ -3,14 +3,31 @@
 // [2021y-03m-23d][23:55:08] Idrisov Denis R. 5
 // [2021y-03m-24d][21:32:12] Idrisov Denis R. 6
 // [2021y-03m-26d][08:26:36] Idrisov Denis R. 7
+// [2021y-03m-30d][01:14:57] Idrisov Denis R. 8
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 7
+#define dTOOLS_TRAITS_USED_ 8
 
 #include <tools/features.hpp>
 
 #define dDETAIL_CONSTANT(...) \
     public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
+
+#define dCLASS_A1 class a1
+#define dCLASS_A2 dCLASS_A1, class a2
+#define dCLASS_A3 dCLASS_A2, class a3
+#define dCLASS_A4 dCLASS_A3, class a4
+#define dCLASS_A5 dCLASS_A4, class a5
+#define dCLASS_A6 dCLASS_A5, class a6
+#define dCLASS_A7 dCLASS_A6, class a7
+
+#define dARGS_A1 a1
+#define dARGS_A2 dARGS_A1, a2
+#define dARGS_A3 dARGS_A2, a3
+#define dARGS_A4 dARGS_A3, a4
+#define dARGS_A5 dARGS_A4, a5
+#define dARGS_A6 dARGS_A5, a6
+#define dARGS_A7 dARGS_A6, a7
 
 //==============================================================================
 //=== remove_cv ================================================================
@@ -64,7 +81,7 @@ namespace tools
 //==============================================================================
 //=== remove_pointer ===========================================================
 #ifndef dTOOLS_REMOVE_POINTER_USED_ 
-#define dTOOLS_REMOVE_POINTER_USED_ 1
+#define dTOOLS_REMOVE_POINTER_USED_ 2
 namespace tools
 {
     template <class t> struct remove_pointer 
@@ -81,6 +98,151 @@ namespace tools
 
     template <class t> struct remove_pointer<t* const volatile> 
         { typedef t type; };
+
+//--------------
+    template <class r> struct remove_pointer<r(*)()>
+        { typedef r type(); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*)(dARGS_A1)>
+        { typedef r type(dARGS_A1); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*)(dARGS_A2)>
+        { typedef r type(dARGS_A2); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*)(dARGS_A3)>
+        { typedef r type(dARGS_A3); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*)(dARGS_A4)>
+        { typedef r type(dARGS_A4); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*)(dARGS_A5)>
+        { typedef r type(dARGS_A5); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*)(dARGS_A6)>
+        { typedef r type(dARGS_A6); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*)(dARGS_A7)>
+        { typedef r type(dARGS_A7); };
+
+//--------------
+    template <class r> struct remove_pointer<r(*const)()>
+        { typedef r type(); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*const)(dARGS_A1)>
+        { typedef r type(dARGS_A1); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*const)(dARGS_A2)>
+        { typedef r type(dARGS_A2); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*const)(dARGS_A3)>
+        { typedef r type(dARGS_A3); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*const)(dARGS_A4)>
+        { typedef r type(dARGS_A4); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*const)(dARGS_A5)>
+        { typedef r type(dARGS_A5); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*const)(dARGS_A6)>
+        { typedef r type(dARGS_A6); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*const)(dARGS_A7)>
+        { typedef r type(dARGS_A7); };
+
+//--------------
+    template <class r> struct remove_pointer<r(*volatile)()>
+        { typedef r type(); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile)(dARGS_A1)>
+        { typedef r type(dARGS_A1); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile)(dARGS_A2)>
+        { typedef r type(dARGS_A2); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile)(dARGS_A3)>
+        { typedef r type(dARGS_A3); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile)(dARGS_A4)>
+        { typedef r type(dARGS_A4); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile)(dARGS_A5)>
+        { typedef r type(dARGS_A5); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile)(dARGS_A6)>
+        { typedef r type(dARGS_A6); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile)(dARGS_A7)>
+        { typedef r type(dARGS_A7); };
+
+//--------------
+    template <class r> struct remove_pointer<r(*volatile const)()>
+        { typedef r type(); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile const)(dARGS_A1)>
+        { typedef r type(dARGS_A1); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile const)(dARGS_A2)>
+        { typedef r type(dARGS_A2); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile const)(dARGS_A3)>
+        { typedef r type(dARGS_A3); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile const)(dARGS_A4)>
+        { typedef r type(dARGS_A4); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile const)(dARGS_A5)>
+        { typedef r type(dARGS_A5); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile const)(dARGS_A6)>
+        { typedef r type(dARGS_A6); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile const)(dARGS_A7)>
+        { typedef r type(dARGS_A7); };
+
+//--------------
+//--------------
+    template <class r> struct remove_pointer<r(*)(...)>
+        { typedef r type(); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*)(dARGS_A1, ...)>
+        { typedef r type(dARGS_A1); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*)(dARGS_A2, ...)>
+        { typedef r type(dARGS_A2); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*)(dARGS_A3, ...)>
+        { typedef r type(dARGS_A3); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*)(dARGS_A4, ...)>
+        { typedef r type(dARGS_A4); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*)(dARGS_A5, ...)>
+        { typedef r type(dARGS_A5); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*)(dARGS_A6, ...)>
+        { typedef r type(dARGS_A6); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*)(dARGS_A7, ...)>
+        { typedef r type(dARGS_A7); };
+
+//--------------
+    template <class r> struct remove_pointer<r(*const)(...)>
+        { typedef r type(...); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*const)(dARGS_A1, ...)>
+        { typedef r type(dARGS_A1, ...); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*const)(dARGS_A2, ...)>
+        { typedef r type(dARGS_A2, ...); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*const)(dARGS_A3, ...)>
+        { typedef r type(dARGS_A3, ...); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*const)(dARGS_A4, ...)>
+        { typedef r type(dARGS_A4, ...); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*const)(dARGS_A5, ...)>
+        { typedef r type(dARGS_A5, ...); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*const)(dARGS_A6, ...)>
+        { typedef r type(dARGS_A6, ...); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*const)(dARGS_A7, ...)>
+        { typedef r type(dARGS_A7, ...); };
+
+//--------------
+    template <class r> struct remove_pointer<r(*volatile)(...)>
+        { typedef r type(...); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile)(dARGS_A1, ...)>
+        { typedef r type(dARGS_A1, ...); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile)(dARGS_A2, ...)>
+        { typedef r type(dARGS_A2, ...); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile)(dARGS_A3, ...)>
+        { typedef r type(dARGS_A3, ...); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile)(dARGS_A4, ...)>
+        { typedef r type(dARGS_A4, ...); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile)(dARGS_A5, ...)>
+        { typedef r type(dARGS_A5, ...); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile)(dARGS_A6, ...)>
+        { typedef r type(dARGS_A6, ...); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile)(dARGS_A7, ...)>
+        { typedef r type(dARGS_A7, ...); };
+
+//--------------
+    template <class r> struct remove_pointer<r(*volatile const)(...)>
+        { typedef r type(...); };
+    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile const)(dARGS_A1, ...)>
+        { typedef r type(dARGS_A1, ...); };
+    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile const)(dARGS_A2, ...)>
+        { typedef r type(dARGS_A2, ...); };
+    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile const)(dARGS_A3, ...)>
+        { typedef r type(dARGS_A3, ...); };
+    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile const)(dARGS_A4, ...)>
+        { typedef r type(dARGS_A4, ...); };
+    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile const)(dARGS_A5, ...)>
+        { typedef r type(dARGS_A5, ...); };
+    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile const)(dARGS_A6, ...)>
+        { typedef r type(dARGS_A6, ...); };
+    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile const)(dARGS_A7, ...)>
+        { typedef r type(dARGS_A7, ...); };
 
 } // namespace tools 
 #endif // !dTOOLS_REMOVE_POINTER_USED_

@@ -26,6 +26,10 @@
         __pragma(warning(push)) \
         __pragma(warning(disable: 4180))
 
+    #define dPRAGMA_PUSH_WARNING_QUALIFIER_APPLIED_TO_REFERENCE_TYPE \
+        __pragma(warning(push)) \
+        __pragma(warning(disable: 4181))
+
 #else
     #define dPRAGMA_POP _Pragma("GCC diagnostic pop")
 
@@ -40,6 +44,11 @@
     #define dPRAGMA_PUSH_WARNING_QUALIFIER_RETURN_TYPE \
         _Pragma("GCC diagnostic push") \
         _Pragma("GCC diagnostic ignored \"-Wignored-qualifiers\"")
+
+    #define dPRAGMA_PUSH_WARNING_QUALIFIER_APPLIED_TO_REFERENCE_TYPE \
+        _Pragma("GCC diagnostic push") \
+        _Pragma("GCC diagnostic ignored \"-Wignored-qualifiers\"")
+
 
     #define dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY \
         _Pragma("GCC diagnostic push") \

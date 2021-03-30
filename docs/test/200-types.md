@@ -1,6 +1,8 @@
 
 test-200-types
 ---
+  - [x] `common версии 106 [027 PRE]`  
+    - [x] add_const_data  
   - [x] `common версии 105 [027 PRE]`  
     - [x] is_volatile_data  
   - [x] `common версии 104 [027 PRE]`  
@@ -21,6 +23,16 @@ test-200-types
 <br />
 <br />
 
+  - [x] `traits версии 8 [027 PRE]`  
+    - [x] bugfix: remove_pointer 002 
+  - [x] `traits версии 7 [027 PRE]`  
+     - [x] bugfix: decay      002
+     - [x] is_function        001
+     - [x] is_array           001
+     - [x] remove_extent      001
+     - [x] remove_all_extent  001
+     - [x] add_pointer        001
+     - [x] is_base_of         001
   - [x] `traits версии 6 [027 PRE]`  
     - [x] is_reference  
     - [x] is_pointer  

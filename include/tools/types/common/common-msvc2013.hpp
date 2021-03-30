@@ -301,55 +301,82 @@ namespace tools
 {
     dPRAGMA_PUSH_WARNING_QUALIFIER_RETURN_TYPE
 
-    template<class t> struct add_const_data
-        { using type = const t; };
-
-    template<class t> struct add_const_data<t&>
-        { using type = typename add_const_data<t>::type&; };
-
-    template<class t> struct add_const_data<t&&>
-        { using type = typename add_const_data<t>::type&&; };
-
-    template<class t> struct add_const_data<t[]>
-        { using type = typename add_const_data<t>::type[]; };
-
-    template<class t, size_t n> struct add_const_data<t[n]>
-        { using type = typename add_const_data<t>::type[n]; };
-
-    #ifdef dHAS_ZERO_SIZE_ARRAY
-    dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
-    template<class t> struct add_const_data<t[0]>
-        { using type = typename add_const_data<t>::type[0]; };
-    dPRAGMA_POP
-    #endif // !dHAS_ZERO_SIZE_ARRAY
-
-    template<class t> struct add_const_data<t*>
-        { using type = typename add_const_data<t>::type*; };
-
-    template<class t> struct add_const_data<t* const>
-        { using type = typename add_const_data<t>::type*const; };
-
-    template<class t> struct add_const_data<t* volatile>
-        { using type = typename add_const_data<t>::type*volatile; };
-
-    template<class t> struct add_const_data<t* volatile const>
-        { using type = typename add_const_data<t>::type*volatile const; };
-
-    template<class m, class cl> struct add_const_data<m cl::*>
-        { using type = const m cl::*; };
-
-    template<class m, class cl> struct add_const_data<m cl::*const>
-        { using type = const m cl::*const; };
-
-    template<class m, class cl> struct add_const_data<m cl::*volatile>
-        { using type = const m cl::*volatile; };
-
-    template<class m, class cl> struct add_const_data<m cl::*volatile const>
-        { using type = const m cl::*volatile const; };
+    template<class t> class add_const_data;
 
     template<class t> 
     using add_const_data_t
         = typename add_const_data<t>::type;
+
+    namespace detail
+    {
+        template<class t> struct add_const_data
+        {
+            using type = const t; 
+        };
+
+        template<class t> struct add_const_data<t&>
+        {
+            using x = ::tools::add_const_data_t<t>;
+            using type = x&; 
+        };
+
+        template<class t> struct add_const_data<t&&>
+        {
+            using x = ::tools::add_const_data_t<t>;
+            using type = x&&; 
+        };
+
+        template<class t> struct add_const_data<t[]>
+            { using type = typename add_const_data<t>::type[]; };
+
+        template<class t, size_t n> struct add_const_data<t[n]>
+            { using type = typename add_const_data<t>::type[n]; };
+
+        #ifdef dHAS_ZERO_SIZE_ARRAY
+        dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
+        template<class t> struct add_const_data<t[0]>
+            { using type = typename add_const_data<t>::type[0]; };
+        dPRAGMA_POP
+        #endif // !dHAS_ZERO_SIZE_ARRAY
+
+        template<class t> struct add_const_data<t*>
+            { using type = typename add_const_data<t>::type*; };
+
+        template<class t> struct add_const_data<t* const>
+            { using type = typename add_const_data<t>::type*const; };
+
+        template<class t> struct add_const_data<t* volatile>
+            { using type = typename add_const_data<t>::type*volatile; };
+
+        template<class t> struct add_const_data<t* volatile const>
+            { using type = typename add_const_data<t>::type*volatile const; };
+
+        template<class m, class cl> struct add_const_data<m cl::*>
+            { using type = const m cl::*; };
+
+        template<class m, class cl> struct add_const_data<m cl::*const>
+            { using type = const m cl::*const; };
+
+        template<class m, class cl> struct add_const_data<m cl::*volatile>
+            { using type = const m cl::*volatile; };
+
+        template<class m, class cl> struct add_const_data<m cl::*volatile const>
+            { using type = const m cl::*volatile const; };
+
+    } // namespace detail
+
+    template<class t> class add_const_data
+    {
+        enum { v1 = std::is_const<t>::value };
+        enum { v2 = std::is_volatile<t>::value };
+        using x = std::remove_cv_t<t>;
+
+        using r1 = typename detail::add_const_data<x>::type;
+        using r2 = std::conditional_t< v1, const r1, r1>;
+        using r3 = std::conditional_t< v2, volatile r2, r2>;
+    public:
+        using type = r3;
+    };
 
     dPRAGMA_POP
 

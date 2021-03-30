@@ -136,7 +136,7 @@ namespace
         der2(der2&& rhs):example(::std::move(rhs)){}
         #endif
 
-		#ifdef dHAS_DECLTYPE
+		#ifdef dHAS_RVALUE_REFERENCES
 			template<class A> 
 			der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
 
@@ -156,7 +156,7 @@ namespace
 
     };
 
-	#ifdef dHAS_DECLTYPE
+	#ifdef dHAS_RVALUE_REFERENCES
 		template<class A>
 		der2::der2(const A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
 			: example(a) 

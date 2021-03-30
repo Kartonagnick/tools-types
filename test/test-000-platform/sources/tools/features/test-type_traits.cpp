@@ -35,7 +35,7 @@ TEST_COMPONENT(000)
     const std::string v = dSSTRINGIZE(dTRAIT);
     dprint(std::cout << "dTRAIT: " << v << '\n');
 
-    #ifdef dHAS_TYPE_TRAITS
+    #if defined(dHAS_TYPE_TRAITS) && defined(dHAS_RVALUE_REFERENCES)
         ASSERT_TRUE(v == "std");
     #else
         ASSERT_TRUE(v == "tools");
