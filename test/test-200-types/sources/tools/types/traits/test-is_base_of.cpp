@@ -30,8 +30,8 @@ namespace
 
         #define dCHECK(B, D, expected)      \
             dSTATIC_ASSERT(                 \
-                dEXPRESSION(B,D, expected), \
-                ERROR_MUST_BE_##expected    \
+                ERROR_MUST_BE_##expected,   \
+                dEXPRESSION(B,D, expected)  \
             )
     #endif
 
