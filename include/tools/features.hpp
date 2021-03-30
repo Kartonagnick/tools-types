@@ -6,9 +6,10 @@
 // [2021y-03m-20d][02:13:22] Idrisov Denis R. 112
 // [2021y-03m-20d][19:41:07] Idrisov Denis R. 113
 // [2021y-03m-30d][03:40:56] Idrisov Denis R. 114
+// [2021y-03m-30d][21:58:26] Idrisov Denis R. 115 PRE
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 114
+#define dTOOLS_FEATURES_USED_ 115 PRE
 //==============================================================================
 //=== dMESSAGE =================================================================
 
@@ -48,23 +49,19 @@
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
     #define dHAS_CSTDINT 1
-
     #define dHAS_STATIC_ASSERT 1
 
-    #define dSTATIC_ASSERT(expr, msg) \
-        static_assert(expr, #msg)
+    #define dSTATIC_ASSERT(msg, ...) \
+        static_assert((__VA_ARGS__), #msg)
 #else
-    namespace static_
-    {
-        template<bool> struct assert_;
-        template<> struct assert_<true> {};
+    
+    template<bool> struct static_assert_;
+    template<> struct static_assert_<true> {};
 
-    } // namespace static_
-
-    #define dSTATIC_ASSERT(expr, msg)   \
-    {                                   \
-        ::static_::assert_<(expr)> msg; \
-        (void) msg;                     \
+    #define dSTATIC_ASSERT(msg, ...)         \
+    {                                        \
+        ::static_assert_<(__VA_ARGS__)> msg; \
+        (void) msg;                          \
     } void()
 #endif
 
