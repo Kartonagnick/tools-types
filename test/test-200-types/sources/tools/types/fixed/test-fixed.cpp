@@ -19,40 +19,40 @@ namespace me = ::tools;
 TEST_COMPONENT(000)
 {
     dSTATIC_ASSERT(
-        sizeof(me::uint8_t) == 1,
-        ERROR_INVALID_SIZE_MUST_BE_8BIT
+        ERROR_INVALID_SIZE_MUST_BE_8BIT,
+        sizeof(me::uint8_t) == 1
     );
     dSTATIC_ASSERT(
-        sizeof(me::uint16_t) == 2,
-        ERROR_INVALID_SIZE_MUST_BE_16BIT
+        ERROR_INVALID_SIZE_MUST_BE_16BIT,
+        sizeof(me::uint16_t) == 2
     );
     dSTATIC_ASSERT(
-        sizeof(::tools::uint32_t) == 4,
-        ERROR_INVALID_SIZE_MUST_BE_32BIT
+        ERROR_INVALID_SIZE_MUST_BE_32BIT,
+        sizeof(::tools::uint32_t) == 4
     );
     dSTATIC_ASSERT(
-        sizeof(me::int64_t) == 8,
-        ERROR_INVALID_SIZE_MUST_BE_64BIT
+        ERROR_INVALID_SIZE_MUST_BE_64BIT,
+        sizeof(me::int64_t) == 8
     );
 }
 
 TEST_COMPONENT(001)
 {
     dSTATIC_ASSERT(
+        ERROR_INVALID_SIZE_MUST_BE_8BIT,
         sizeof(me::int8_t) == 1,
-        ERROR_INVALID_SIZE_MUST_BE_8BIT
     );
     dSTATIC_ASSERT(
+        ERROR_INVALID_SIZE_MUST_BE_16BIT,
         sizeof(me::int16_t) == 2,
-        ERROR_INVALID_SIZE_MUST_BE_16BIT
     );
     dSTATIC_ASSERT(
+        ERROR_INVALID_SIZE_MUST_BE_32BIT,
         sizeof(me::int32_t) == 4,
-        ERROR_INVALID_SIZE_MUST_BE_32BIT
     );
     dSTATIC_ASSERT(
+        ERROR_INVALID_SIZE_MUST_BE_64BIT,
         sizeof(me::int64_t) == 8,
-        ERROR_INVALID_SIZE_MUST_BE_64BIT
     );
 }
 
@@ -65,8 +65,8 @@ TEST_COMPONENT(002)
         type;
 
     dSTATIC_ASSERT(
+        ERROR_INVALID_SIZE_MUST_BE_8BIT,
         sizeof(type) == 1,
-        ERROR_INVALID_SIZE_MUST_BE_8BIT
     );
 }
 TEST_COMPONENT(003)
@@ -75,8 +75,8 @@ TEST_COMPONENT(003)
         type;
 
     dSTATIC_ASSERT(
+        ERROR_INVALID_SIZE_MUST_BE_16BIT,
         sizeof(type) == 2,
-        ERROR_INVALID_SIZE_MUST_BE_16BIT
     );
 }
 TEST_COMPONENT(004)
