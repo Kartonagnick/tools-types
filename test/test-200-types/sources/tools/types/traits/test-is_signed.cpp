@@ -24,8 +24,8 @@ namespace
     #else
         #define dCHECK(type, expected)                     \
             dSTATIC_ASSERT(                                \
-                me::is_signed<type>::value == expected,    \
-                ERROR_MUST_BE_##expected                   \
+                ERROR_MUST_BE_##expected,                  \
+                me::is_signed<type>::value == expected     \
             )
     #endif
 
