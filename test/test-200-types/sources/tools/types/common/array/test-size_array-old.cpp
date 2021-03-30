@@ -26,8 +26,8 @@ namespace
         >::value
 
     #define dCHECK_TYPE(ty, etalon)           \
-        dSTATIC_ASSERT(                       \
-            dEXPR(ty, etalon), ERROR_INTERNAL \
+        dSTATIC_ASSERT(                        \
+            ERROR_INTERNAL, dEXPR(ty, etalon)  \
         )
 
     #define dCHECK_VALID(type, etalon)             \

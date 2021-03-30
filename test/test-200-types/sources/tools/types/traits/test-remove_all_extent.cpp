@@ -35,7 +35,7 @@ namespace
             typedef me::remove_all_extent<a>::type x; \
             typedef me::is_same<x, b> y;              \
             dSTATIC_ASSERT(                           \
-                y::value, ERROR_MUST_BE_##expected    \
+                ERROR_MUST_BE_##expected, y::value    \
             );                                        \
         } void()
 

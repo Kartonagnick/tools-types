@@ -25,7 +25,7 @@ namespace
 {
     #ifdef dHAS_TYPE_TRAITS
         enum { value = std::is_array<char[1]>::value };
-        dSTATIC_ASSERT(value, MUST_BE_ARRAY);
+        dSTATIC_ASSERT(MUST_BE_ARRAY, value);
     #endif
 
 } // namespace

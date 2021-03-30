@@ -30,7 +30,7 @@ namespace
             typedef me::conditional<v,a,b>::type x;  \
             typedef me::is_same<x,t> y;              \
             dSTATIC_ASSERT(                          \
-                y::value, ERROR_MUST_BE_##expected   \
+                ERROR_MUST_BE_##expected, y::value   \
             );                                       \
         } void()
 
