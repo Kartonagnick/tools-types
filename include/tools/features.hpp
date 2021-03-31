@@ -66,7 +66,6 @@
 
     #define dSTATIC_ASSERT(msg, ...) \
         dSTATIC_ASSERT_1(msg, __LINE__, __COUNTER__, __VA_ARGS__)
-
 #endif
 
 //==============================================================================
