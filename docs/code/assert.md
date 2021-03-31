@@ -6,7 +6,7 @@
 [E]: ../icons/empty.png
 [N]: ../icons/na.png
 
-version 1.0.0
+version 1.0.1 [![P]][0]
 ---
 
 | **ID** | 2019      | 20017     | 2015      | 2013      | 2012      | 2010      | 2008      |  
@@ -28,14 +28,20 @@ assert
 В дебаге макрос `dASSERT` вызывает `assert`  
 В релизе макрос `dASSERT` сворачивается в пустоту.  
 
+Использование:  
+
 ```
-dASSERT(expression);
+bool val = false;
+if (!val)
+    dASSERT(some<int, int>().compare(1, 1) && "trololo");
+
 ```
 
 Возможная реализация:  
+
 ```
 #ifdef NDEBUG
-    #define dASSERT(...)
+    #define dASSERT(...) void()
 #else
     #include <cassert>
     #define dASSERT(...) assert((__VA_ARGS__))
