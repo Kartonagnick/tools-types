@@ -7,9 +7,10 @@
 // [2021y-03m-20d][19:41:07] Idrisov Denis R. 113
 // [2021y-03m-30d][03:40:56] Idrisov Denis R. 114
 // [2021y-03m-31d][01:56:33] Idrisov Denis R. 115
+// [2021y-04m-01d][22:05:27] Idrisov Denis R. 116 PRE
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 115
+#define dTOOLS_FEATURES_USED_ 116 PRE
 //==============================================================================
 //=== dMESSAGE =================================================================
 
@@ -53,6 +54,10 @@
 
     #define dSTATIC_ASSERT(msg, ...) \
         static_assert((__VA_ARGS__), #msg)
+
+    #define dSTATIC_CHECK(msg, ...)  \
+        static_assert((__VA_ARGS__), #msg)
+
 #else
 
     #define dSTATIC_ASSERT_3(msg, ...) \
@@ -66,6 +71,17 @@
 
     #define dSTATIC_ASSERT(msg, ...) \
         dSTATIC_ASSERT_1(msg, __LINE__, __COUNTER__, __VA_ARGS__)
+
+    
+    template<bool> struct static_assert_;
+    template<> struct static_assert_<true> {};
+
+    #define dSTATIC_CHECK(msg, ...)          \
+    {                                        \
+        ::static_assert_<(__VA_ARGS__)> msg; \
+        (void) msg;                          \
+    } void()
+
 #endif
 
 //==============================================================================
@@ -74,6 +90,7 @@
 #if !defined(_MSC_VER) || _MSC_VER >= 1700
     // #pragma message("build for msvc2012 (or newer) or other compiler")
     #define dHAS_RVALUE_REFERENCES 1
+    #define dHAS_ARRAY_EMPTY_SIZE 1
     #define dHAS_ENUM_CLASS 1
     #define dHAS_EMPLACE 1    
     #define dHAS_CHRONO 1
