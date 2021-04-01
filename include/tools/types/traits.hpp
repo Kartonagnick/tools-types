@@ -4,9 +4,10 @@
 // [2021y-03m-24d][21:32:12] Idrisov Denis R. 6
 // [2021y-03m-26d][08:26:36] Idrisov Denis R. 7
 // [2021y-03m-30d][01:14:57] Idrisov Denis R. 8
+// [2021y-04m-02d][00:40:44] Idrisov Denis R. 9
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 8
+#define dTOOLS_TRAITS_USED_ 9
 
 #include <tools/features.hpp>
 
@@ -597,7 +598,7 @@ namespace tools
 //==============================================================================
 //=== is_array =================================================================
 #ifndef dTOOLS_IS_ARRAY_USED_ 
-#define dTOOLS_IS_ARRAY_USED_ 1
+#define dTOOLS_IS_ARRAY_USED_ 2
 namespace tools
 {
     template <class t> struct is_array
@@ -610,7 +611,7 @@ namespace tools
         enum { value = true };
     };
 
-    #ifdef dHAS_ZERO_SIZE_ARRAY
+    #ifdef dHAS_ARRAY_EMPTY_SIZE
 
     template <class t> struct is_array<t[]>
     {

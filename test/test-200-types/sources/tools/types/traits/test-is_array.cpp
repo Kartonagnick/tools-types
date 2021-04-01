@@ -1,5 +1,6 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-29d][22:26:12] Idrisov Denis R.
+// [2021y-04m-02d][00:01:30] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_IS_SAME
@@ -253,51 +254,51 @@ TEST_COMPONENT(004)
 #ifdef dHAS_ARRAY_EMPTY_SIZE
 TEST_COMPONENT(005)
 {
-    dCHECK(wchar_t[]                      , false);
-    dCHECK(char[]                         , false);
+    dCHECK(wchar_t[]                      , true );
+    dCHECK(char[]                         , true );
     dCHECK(char(&)[]                      , false);
     dRVAL_(char(&&)[]                     , false);
     dCHECK(char(*)[]                      , false);
     dCHECK(char(*&)[]                     , false);
 //------------------------------------------------------------------------------
-    dCHECK(const char[]                   , false);
+    dCHECK(const char[]                   , true );
     dCHECK(const char(&)[]                , false);
     dRVAL_(const char(&&)[]               , false);
     dCHECK(const char(*)[]                , false);
     dCHECK(const char(*&)[]               , false);
 //------------------------------------------------------------------------------
-    dCHECK(volatile char[]                , false);
+    dCHECK(volatile char[]                , true );
     dCHECK(volatile char(&)[]             , false);
     dRVAL_(volatile char(&&)[]            , false);
     dCHECK(volatile char(*)[]             , false);
     dCHECK(volatile char(*&)[]            , false);
 //------------------------------------------------------------------------------
-    dCHECK(volatile const char[]          , false);
+    dCHECK(volatile const char[]          , true );
     dCHECK(volatile const char(&)[]       , false);
     dRVAL_(volatile const char(&&)[]      , false);
     dCHECK(volatile const char(*)[]       , false);
     dCHECK(volatile const char(*&)[]      , false);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    dCHECK(char[][2][3]                   , false);
+    dCHECK(char[][2][3]                   , true );
     dCHECK(char(&)[][2][3]                , false);
     dRVAL_(char(&&)[][2][3]               , false);
     dCHECK(char(*)[][2][3]                , false);
     dCHECK(char(*&)[][2][3]               , false);
 //------------------------------------------------------------------------------
-    dCHECK(const char[][2][3]             , false);
+    dCHECK(const char[][2][3]             , true );
     dCHECK(const char(&)[][2][3]          , false);
     dRVAL_(const char(&&)[][2][3]         , false);
     dCHECK(const char(*)[][2][3]          , false);
     dCHECK(const char(*&)[][2][3]         , false);
 //------------------------------------------------------------------------------
-    dCHECK(volatile char[][2][3]          , false);
+    dCHECK(volatile char[][2][3]          , true );
     dCHECK(volatile char(&)[][2][3]       , false);
     dRVAL_(volatile char(&&)[][2][3]      , false);
     dCHECK(volatile char(*)[][2][3]       , false);
     dCHECK(volatile char(*&)[][2][3]      , false);
 //------------------------------------------------------------------------------
-    dCHECK(volatile const char[][2][3]    , false);
+    dCHECK(volatile const char[][2][3]    , true );
     dCHECK(volatile const char(&)[][2][3] , false);
     dRVAL_(volatile const char(&&)[][2][3], false);
     dCHECK(volatile const char(*)[][2][3] , false);
@@ -308,7 +309,7 @@ TEST_COMPONENT(005)
 // --- arrays stress
 TEST_COMPONENT(006)
 {
-    dCHECK(char*[1][2][3]                                       , true);
+    dCHECK(char*[1][2][3]                                       , true );
     dCHECK(char*(*)[1][2][3]                                    , false);
     dCHECK(char*(&)[1][2][3]                                    , false);
     dCHECK(char*(*&)[1][2][3]                                   , false);

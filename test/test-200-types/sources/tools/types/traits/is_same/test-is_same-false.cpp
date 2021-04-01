@@ -1,5 +1,4 @@
-// [2021y-02m-20d][18:40:18] Idrisov Denis R.
-// [2021y-03m-29d][22:26:12] Idrisov Denis R.
+// [2021y-04m-02d][00:01:30] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_IS_SAME

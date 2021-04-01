@@ -22,7 +22,8 @@ test-200-types
 
 <br />
 <br />
-
+  - [x] `traits версии 9 [027 PRE]`  
+    - [x] bugfix: is_array    002 
   - [x] `traits версии 8 [027 PRE]`  
     - [x] bugfix: remove_pointer 002 
   - [x] `traits версии 7 [027 PRE]`  
