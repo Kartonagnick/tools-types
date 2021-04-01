@@ -89,6 +89,14 @@ TEST_COMPONENT(005)
 }
 #endif
 
+TEST_COMPONENT(006)
+{
+    const int a = 1;
+    const int b = 2;
+    const int sum = (dASSERT(a > 0), a) + (dASSERT(b < 3), b);
+    ASSERT_TRUE(sum == 3);
+}
+
 //==============================================================================
 //==============================================================================
 #endif // !TEST_TOOLS_ASSERT

@@ -32,6 +32,14 @@ namespace
         value
     );
 
+    void check_zone() dNOEXCEPT
+    {
+        dSTATIC_CHECK(
+            STATIC_CHECK_NOT_WORKED, 
+            value
+        );
+    }
+
 }//namespace
 
 //==============================================================================
@@ -39,11 +47,25 @@ namespace
 
 TEST_COMPONENT(000)
 {
+    check_zone();
+}
+
+TEST_COMPONENT(001)
+{
     dSTATIC_ASSERT(
         STATIC_ASSERT_NOT_WORKED, 
         value
     );
 }
+
+TEST_COMPONENT(002)
+{
+    dSTATIC_CHECK(
+        STATIC_CHECK_NOT_WORKED, 
+        value
+    );
+}
+
 
 //==============================================================================
 //==============================================================================
