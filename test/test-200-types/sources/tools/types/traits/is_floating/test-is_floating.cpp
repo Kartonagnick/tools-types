@@ -4,11 +4,10 @@
 #ifdef TEST_IS_FLOATING
 
 #define dTEST_COMPONENT tools, types, traits
-#define dTEST_METHOD is_floating
+#define dTEST_METHOD is_floating_point
 #define dTEST_TAG tdd
 
 #include <tools/types/traits.hpp>
-#include <tools/features.hpp>
 namespace me = ::tools;
 //==============================================================================
 //=== TDD ======================================================================
