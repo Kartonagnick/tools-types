@@ -55,10 +55,10 @@ namespace
     #define dEXPRESSION(a) \
         !me::is_same<a, typename add_ptr_<a>::type >::value 
 
-    #define dTEST_FALSE(a)        \
-        dSTATIC_ASSERT(           \
-            ERROR_MUST_BE_SAMPLE, \
-            dEXPRESSION(a)        \
+    #define dTEST_FALSE(a)       \
+        dSTATIC_ASSERT(          \
+            ERROR_MUST_BE_FALSE, \
+            dEXPRESSION(a)       \
         )
 
     #ifdef dHAS_RVALUE_REFERENCE
