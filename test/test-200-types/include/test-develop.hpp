@@ -35,6 +35,8 @@
     #define TEST_REMOVE_ALL_EXTENSION                       // ready!
     #define TEST_ADD_POINTER                                // ready!
 
+    #define TEST_IS_UNSIGNED                                // in progress...
+
 //==============================================================================
 //===== tools/types/common =================================||==================
     #define TEST_TOOLS_DEGRADATE                            // ready!

@@ -22,6 +22,11 @@ test-200-types
 
 <br />
 <br />
+
+  - [x] `traits версии 10 [027 PRE]`  
+    - [x] bugfix: is_signed    002 
+    - [x] bugfix: is_integral  002 
+    - [x] is_unsigned          001 
   - [x] `traits версии 9 [027 PRE]`  
     - [x] bugfix: is_array    002 
   - [x] `traits версии 8 [027 PRE]`  

@@ -26,7 +26,7 @@ rem ============================================================================
     set "order=%VC19%"
     rem set "order=%MG%"
     set "order=%VC%; %MG%"
-    set "order=all"
+    ::set "order=all"
 
     rem for development
     rem (call :generate) && (goto :success) || (goto :failed)
