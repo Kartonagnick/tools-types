@@ -5,14 +5,17 @@
 // [2021y-03m-26d][08:26:36] Idrisov Denis R. 7
 // [2021y-03m-30d][01:14:57] Idrisov Denis R. 8
 // [2021y-04m-02d][00:40:44] Idrisov Denis R. 9
+// [2021y-04m-02d][01:26:33] Idrisov Denis R. 10 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 9
+#define dTOOLS_TRAITS_USED_ 10 PRE
 
 #include <tools/features.hpp>
 
-#define dDETAIL_CONSTANT(...) \
-    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
+#define dDETAIL_TRAITS(...)                  \
+    public ::tools::integral_constant<bool,  \
+        ::tools::detail::__VA_ARGS__::value  \
+    >
 
 #define dCLASS_A1 class a1
 #define dCLASS_A2 dCLASS_A1, class a2
@@ -31,22 +34,130 @@
 #define dARGS_A7 dARGS_A6, a7
 
 //==============================================================================
-//=== remove_cv ================================================================
-#ifndef dTOOLS_REMOVE_CV_USED_ 
-#define dTOOLS_REMOVE_CV_USED_ 1
+//=== integral_constant ========================================================
+#ifndef dTOOLS_INTEGRAL_CONSTANT_USED_ 
+#define dTOOLS_INTEGRAL_CONSTANT_USED_ 1
 namespace tools
 {
-    template<class t> struct remove_cv                     
+    template <class t, t val>
+    struct integral_constant 
+    {
+        enum { value = val };
+
+        typedef t value_type;
+
+        typedef integral_constant 
+            type;
+
+        dCONSTEXPR_CPP11
+        operator value_type() const dNOEXCEPT
+            { return value; }
+
+        dNODISCARD dCONSTEXPR_CPP11
+        value_type operator()() const dNOEXCEPT
+            { return value; }
+    };
+
+    typedef integral_constant<bool, true> 
+        true_type;
+
+    typedef integral_constant<bool, false>
+        false_type;
+
+} // namespace tools 
+#endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
+
+
+//==============================================================================
+//=== remove_extent ============================================================
+#ifndef dTOOLS_REMOVE_EXTENT_USED_ 
+#define dTOOLS_REMOVE_EXTENT_USED_ 1
+namespace tools
+{
+    template <class t> struct remove_extent 
         { typedef t type; };
 
-    template<class t> struct remove_cv <const t>           
+    template <class t, size_t n> struct remove_extent<t[n]>
         { typedef t type; };
 
-    template<class t> struct remove_cv <volatile t>        
+    template <class t> struct remove_extent<t[]>
         { typedef t type; };
 
-    template<class t> struct remove_cv <volatile  const t> 
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_EXTENT_USED_
+
+
+//==============================================================================
+//=== remove_all_extent ========================================================
+#ifndef dTOOLS_REMOVE_ALL_EXTENT_USED_ 
+#define dTOOLS_REMOVE_ALL_EXTENT_USED_ 1
+namespace tools
+{
+    template <class t> struct remove_all_extent 
         { typedef t type; };
+
+    template <class t, size_t n> struct remove_all_extent<t[n]>
+    {
+        typedef typename remove_all_extent<t>::type
+            type;
+    };
+
+    template <class t> struct remove_all_extent<t[]>
+    {
+        typedef typename remove_all_extent<t>::type
+            type;
+    };
+
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_ALL_EXTENT_USED_
+
+
+//==============================================================================
+//=== remove_cv ================================================================
+#ifndef dTOOLS_REMOVE_CV_USED_ 
+#define dTOOLS_REMOVE_CV_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        template<class t> struct remove_cv_
+            { typedef t type; };
+
+        template<class t> struct remove_cv_ <const t>           
+            { typedef t type; };
+
+        template<class t> struct remove_cv_ <volatile t>        
+            { typedef t type; };
+
+        template<class t> struct remove_cv_ <volatile  const t> 
+            { typedef t type; };
+
+        template<class t> struct remove_cv
+            : remove_cv_<t>
+        {};
+
+
+        #if (defined(_MSC_VER) && _MSC_VER <= 1800)
+        // msvc2008 - msvc20013
+        template<class t, size_t n> struct remove_cv<t[n]>
+        {
+            typedef typename remove_cv<t>::type
+                x;
+            typedef x type[n];
+        };
+        template<class t> struct remove_cv<t[]>
+        {
+            typedef typename remove_cv<t>::type
+                x;
+            typedef x type[];
+        };
+        #endif
+
+    } // namespace detail
+
+    template <class t> struct remove_cv
+        : ::tools::detail::remove_cv<t>
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_REMOVE_CV_USED_
@@ -250,49 +361,6 @@ namespace tools
 
 
 //==============================================================================
-//=== remove_extent ============================================================
-#ifndef dTOOLS_REMOVE_EXTENT_USED_ 
-#define dTOOLS_REMOVE_EXTENT_USED_ 1
-namespace tools
-{
-    template <class t> struct remove_extent 
-        { typedef t type; };
-
-    template <class t, size_t n> struct remove_extent<t[n]>
-        { typedef t type; };
-
-    template <class t> struct remove_extent<t[]>
-        { typedef t type; };
-
-} // namespace tools 
-#endif // !dTOOLS_REMOVE_EXTENT_USED_
-
-//==============================================================================
-//=== remove_all_extent ========================================================
-#ifndef dTOOLS_REMOVE_ALL_EXTENT_USED_ 
-#define dTOOLS_REMOVE_ALL_EXTENT_USED_ 1
-namespace tools
-{
-    template <class t> struct remove_all_extent 
-        { typedef t type; };
-
-    template <class t, size_t n> struct remove_all_extent<t[n]>
-    {
-        typedef typename remove_all_extent<t>::type
-            type;
-    };
-
-    template <class t> struct remove_all_extent<t[]>
-    {
-        typedef typename remove_all_extent<t>::type
-            type;
-    };
-
-} // namespace tools 
-#endif // !dTOOLS_REMOVE_ALL_EXTENT_USED_
-
-
-//==============================================================================
 //=== add_pointer ==============================================================
 #ifndef dTOOLS_ADD_POINTER_USED_ 
 #define dTOOLS_ADD_POINTER_USED_ 1
@@ -313,50 +381,24 @@ namespace tools
 
 
 //==============================================================================
-//=== integral_constant ========================================================
-#ifndef dTOOLS_INTEGRAL_CONSTANT_USED_ 
-#define dTOOLS_INTEGRAL_CONSTANT_USED_ 1
-namespace tools
-{
-    template <class t, t val>
-    struct integral_constant 
-    {
-        enum { value = val };
-
-        typedef t value_type;
-
-        typedef integral_constant 
-            type;
-
-        dCONSTEXPR_CPP11 operator value_type() const dNOEXCEPT
-            { return value; }
-
-        dNODISCARD dCONSTEXPR_CPP11
-        value_type operator()() const dNOEXCEPT
-            { return value; }
-    };
-
-    typedef integral_constant<bool, true> 
-        true_type;
-
-    typedef integral_constant<bool, false>
-        false_type;
-
-} // namespace tools 
-#endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
-
-
-//==============================================================================
-//=== is_same ==================================================================
+//=== is_same ========================================== (integral_constant) ===
 #ifndef dTOOLS_IS_SAME_USED_ 
-#define dTOOLS_IS_SAME_USED_ 1
+#define dTOOLS_IS_SAME_USED_ 2
 namespace tools
 {
-    template<class a, class b> struct is_same
-        { enum { value = 0 }; };
+    namespace detail
+    {
+        template<class a, class b> struct is_same
+            { enum { value = 0 }; };
 
-    template<class t> struct is_same<t, t>
-        { enum { value = 1 }; };
+        template<class t> struct is_same<t, t>
+            { enum { value = 1 }; };
+
+    } // namespace detail
+
+    template <class a, class b> struct is_same
+        : dDETAIL_TRAITS(is_same<a, b>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_SAME_USED_
@@ -500,46 +542,83 @@ namespace tools
 
 
 //==============================================================================
-//=== is_signed ================================================================
+//=== is_signed ================================================ (remove_cv) ===
 #ifndef dTOOLS_IS_SIGNED_USED_ 
-#define dTOOLS_IS_SIGNED_USED_ 1
+#define dTOOLS_IS_SIGNED_USED_ 2
 namespace tools
 {
-    template <class t> struct is_signed
+    namespace detail
     {
-        typedef typename remove_cv<t>::type x;
-        enum { value = static_cast<x>(-1) < static_cast<x>(0) };
-    };
+        template <class t, bool> struct is_signed_
+        {
+            typedef ::tools::remove_cv<t>
+                z;
+            typedef typename z::type x;
+            enum
+            {
+                value = static_cast<x>(-1) < static_cast<x>(0) 
+            };
+        };
+
+        template <class t> struct is_signed_<t, false>
+        {
+            enum { value = ::tools::is_floating_point<t>::value };
+        };
+
+        template <class t> struct is_signed
+        {
+            enum { ok = ::tools::is_integral<t>::value };
+            enum { value = is_signed_<t, ok>::value    };
+        };
+
+        template <class t> struct is_unsigned
+        {
+            enum { ok = ::tools::is_integral<t>::value     };
+            enum { value = ok && !is_signed_<t, ok>::value };
+        };
+
+    } // namespace detail
+
+    template <class t> struct is_signed
+        : dDETAIL_TRAITS(is_signed<t>)
+    {};
 
     template <class t> struct is_unsigned
-    {
-        enum { value = !is_signed<t>::value };
-    };
+        : dDETAIL_TRAITS(is_unsigned<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_SIGNED_USED_
 
 
 //==============================================================================
-//=== is_floating ==============================================================
+//=== is_floating_point ======================================== (remove_cv) ===
 #ifndef dTOOLS_IS_FLOATING_USED_ 
-#define dTOOLS_IS_FLOATING_USED_ 1
+#define dTOOLS_IS_FLOATING_USED_ 2
 namespace tools
 {
-    template <class t> struct is_floating_
-        { enum { value = 0 }; };
+    namespace detail 
+    {
+        template <class t> struct is_floating_
+            { enum { value = 0 }; };
 
-    template <> struct is_floating_<float>
-        { enum { value = 1 }; };
+        template <> struct is_floating_<float>
+            { enum { value = 1 }; };
 
-    template <> struct is_floating_<double>
-        { enum { value = 1 }; };
+        template <> struct is_floating_<double>
+            { enum { value = 1 }; };
 
-    template <> struct is_floating_<long double>
-        { enum { value = 1 }; };
+        template <> struct is_floating_<long double>
+            { enum { value = 1 }; };
+
+        template <class t> struct is_floating_point
+            : is_floating_<typename remove_cv<t>::type>
+        {};
+
+    } // namespace detail 
 
     template <class t> struct is_floating_point
-        : is_floating_<typename remove_cv<t>::type>
+        : dDETAIL_TRAITS(is_floating_point<t>)
     {};
 
 } // namespace tools 
@@ -547,48 +626,72 @@ namespace tools
 
 
 //==============================================================================
-//=== is_integral ==============================================================
+//=== is_integral =========================== (remove_cv)(integral_constant) ===
 #ifndef dTOOLS_IS_INTEGRAL_USED_ 
-#define dTOOLS_IS_INTEGRAL_USED_ 1
+#define dTOOLS_IS_INTEGRAL_USED_ 2
 namespace tools
 {
-    template <class t> struct is_integral_
-        { enum { value = 0 }; };
+    namespace detail 
+    {
+        template <class t> struct is_integral_
+            { enum { value = 0 }; };
 
-    #if !defined(_MSC_VER) || _MSC_VER >= 1900
-    template <> struct is_integral_<char16_t>
-        { enum { value = 1 }; };
+        #if !defined(_MSC_VER) || _MSC_VER >= 1900
+        template <> struct is_integral_<char16_t>
+            { enum { value = 1 }; };
 
-    template <> struct is_integral_<char32_t>
-        { enum { value = 1 }; };
-    #endif
+        template <> struct is_integral_<char32_t>
+            { enum { value = 1 }; };
+        #endif
 
-    template <> struct is_integral_<short>
-        { enum { value = 1 }; };
+        #ifdef __cpp_char8_t
+        template <> struct is_integral_<char8_t,>
+            { enum { value = 1 }; };
+        #endif // __cpp_char8_t
 
-    template <> struct is_integral_<unsigned short>
-        { enum { value = 1 }; };
+        template <> struct is_integral_<wchar_t>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<bool>
+            { enum { value = 1 }; };
 
-    template <> struct is_integral_<int>
-        { enum { value = 1 }; };
+        template <> struct is_integral_<char>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<signed char>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<unsigned char>
+            { enum { value = 1 }; };
 
-    template <> struct is_integral_<unsigned int>
-        { enum { value = 1 }; };
+        template <> struct is_integral_<short>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<int>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<long>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<long long>
+            { enum { value = 1 }; };
 
-    template <> struct is_integral_<long>
-        { enum { value = 1 }; };
+        template <> struct is_integral_<unsigned short>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<unsigned int>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<unsigned long>
+            { enum { value = 1 }; };
+        template <> struct is_integral_<unsigned long long>
+            { enum { value = 1 }; };
 
-    template <> struct is_integral_<unsigned long>
-        { enum { value = 1 }; };
+        template <class t> struct is_int_
+        {
+            typedef typename ::tools::remove_cv<t>::type
+                x;
+            typedef ::tools::detail::is_integral_<x> 
+                r;
+            enum { value = r::value }; 
+        };
 
-    template <> struct is_integral_<long long>
-        { enum { value = 1 }; };
-
-    template <> struct is_integral_<unsigned long long>
-        { enum { value = 1 }; };
+    } // namespace detail 
 
     template <class t> struct is_integral
-        : is_integral_<typename remove_cv<t>::type>
+        : dDETAIL_TRAITS(is_int_<t>)
     {};
 
 } // namespace tools 
@@ -596,29 +699,29 @@ namespace tools
 
 
 //==============================================================================
-//=== is_array =================================================================
+//=== is_array ========================================= (integral_constant) ===
 #ifndef dTOOLS_IS_ARRAY_USED_ 
 #define dTOOLS_IS_ARRAY_USED_ 2
 namespace tools
 {
+    namespace detail 
+    {
+        template <class t> struct is_array
+            { enum { value = false }; };
+
+        template <class t, size_t n> struct is_array<t[n]>
+            { enum { value = true }; };
+
+        #ifdef dHAS_ARRAY_EMPTY_SIZE
+        template <class t> struct is_array<t[]>
+            { enum { value = true }; };
+        #endif
+
+    } // namespace detail 
+
     template <class t> struct is_array
-    {
-        enum { value = false };
-    };
-
-    template <class t, size_t n> struct is_array<t[n]>
-    {
-        enum { value = true };
-    };
-
-    #ifdef dHAS_ARRAY_EMPTY_SIZE
-
-    template <class t> struct is_array<t[]>
-    {
-        enum { value = true };
-    };
-
-    #endif
+        : dDETAIL_TRAITS(is_array<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_ARRAY_USED_
@@ -730,7 +833,7 @@ namespace tools
 
 
 //==============================================================================
-//=== is_base_of ===============================================================
+//=== is_base_of ======================================= (integral_constant) ===
 #ifndef dTOOLS_IS_BASE_OF_USED_ 
 #define dTOOLS_IS_BASE_OF_USED_ 1
 namespace tools
@@ -757,7 +860,7 @@ namespace tools
 
     template <class b, class d>
     struct is_base_of
-        : dDETAIL_CONSTANT(is_base_of<b, d>)
+        : dDETAIL_TRAITS(is_base_of<b, d>)
     {};
 
 } // namespace tools 
