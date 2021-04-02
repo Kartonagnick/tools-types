@@ -64,6 +64,7 @@ TEST_COMPONENT(000)
 
 TEST_COMPONENT(001)
 {
+    dCHECK(const some, true);
     dCHECK(some  , true );
     dCHECK(some& , false);
     dCHECK(some* , false);
