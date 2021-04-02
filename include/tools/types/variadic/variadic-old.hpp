@@ -6,7 +6,16 @@
 #ifndef dTOOLS_VARIADIC_OLD_USED_ 
 #define dTOOLS_VARIADIC_OLD_USED_ 1
 
-#include <tools/types/traits.hpp>
+#if defined(dHAS_TYPE_TRAITS ) && defined(dHAS_RVALUE_REFERENCES)
+    #include <type_traits>
+#else
+    #include <tools/types/traits.hpp>
+#endif
+
+#define dDETAIL_CONSTANT(...)                \
+    public dTRAIT::integral_constant<bool,   \
+        ::tools::detail::__VA_ARGS__::value  \
+    >
 
 //==============================================================================
 //=== is_heir ==================================================================
