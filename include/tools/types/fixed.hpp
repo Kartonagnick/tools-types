@@ -1,7 +1,8 @@
 // [2021y-03m-10d][12:44:35] Idrisov Denis R.
+// [2021y-04m-02d][23:54:49] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FIXED_USED_
-#define dTOOLS_FIXED_USED_ 100
+#define dTOOLS_FIXED_USED_ 101 PRE
 //==============================================================================
 //==============================================================================
 
@@ -12,6 +13,14 @@
     #include <tools/types/fixed/fixed-cpp98.hpp>
 #endif
 
+#if defined(dHAS_TYPE_TRAITS ) && defined(dHAS_RVALUE_REFERENCES)
+    #include <type_traits>
+#else
+    #include <tools/types/traits.hpp>
+#endif
+
+
+#if 0
 //==============================================================================
 //=== remove_cv ================================================================
 #ifndef dTOOLS_REMOVE_CV_USED_ 
@@ -48,6 +57,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_IS_SIGNED_USED_
+#endif
 
 //==============================================================================
 //=== limit ====================================================================
