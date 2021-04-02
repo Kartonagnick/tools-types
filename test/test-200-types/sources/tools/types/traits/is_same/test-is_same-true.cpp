@@ -16,10 +16,10 @@ namespace
     #define dEXPRESSION(a) \
         me::is_same<a,a>::value 
 
-    #define dTEST_TRUE(a)         \
-        dSTATIC_ASSERT(           \
-            ERROR_MUST_BE_SAMPLE, \
-            dEXPRESSION(a)        \
+    #define dTEST_TRUE(a)       \
+        dSTATIC_ASSERT(         \
+            ERROR_MUST_BE_TRUE, \
+            dEXPRESSION(a)      \
         )
 
     #ifdef dHAS_RVALUE_REFERENCE

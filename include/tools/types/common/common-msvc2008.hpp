@@ -504,22 +504,41 @@ namespace tools
 		template<class t> struct add_const_data_help_<t, false>
             { typedef t type; };
 
+//--------
+        template<class r> struct add_const_data<r(*)()>
+            { typedef r (*type)(); };
+        template<class r> struct add_const_data<r(*const)()>
+            { typedef r (*const type)(); };
+        template<class r> struct add_const_data<r(*volatile)()>
+            { typedef r (*volatile type)(); };
+        template<class r> struct add_const_data<r(*volatile const)()>
+            { typedef r (*const volatile type)(); };
+
     } // namespace detail
 
     template<class t> class add_const_data
     {
-        enum { v1 = dTRAIT::is_const<t>::value };
+        typedef detail::add_const_data<t>
+            x;
+    public:
+        typedef typename x::type
+            type;
+
+#if 0
+        enum { v1 = dTRAIT::is_const<t>::value    };
         enum { v2 = dTRAIT::is_volatile<t>::value };
+
         typedef typename dTRAIT::remove_cv<t>::type
             x;
         typedef typename detail::add_const_data<x>::type 
             r1;
-        typedef typename dTRAIT::conditional< v1, const r1, r1>::type 
+        typedef typename dTRAIT::conditional<v1, const r1, r1>::type 
             r2;
-        typedef typename dTRAIT::conditional< v2, volatile r2, r2>::type
+        typedef typename dTRAIT::conditional<v2, volatile r2, r2>::type
             r3;
     public:
         typedef r3 type;
+#endif
 
 
 
