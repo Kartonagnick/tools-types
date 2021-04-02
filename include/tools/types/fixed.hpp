@@ -1,8 +1,9 @@
 // [2021y-03m-10d][12:44:35] Idrisov Denis R.
 // [2021y-04m-02d][23:54:49] Idrisov Denis R.
+// [2021y-04m-03d][00:15:30] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_FIXED_USED_
-#define dTOOLS_FIXED_USED_ 101 PRE
+#define dTOOLS_FIXED_USED_ 101
 //==============================================================================
 //==============================================================================
 
@@ -82,7 +83,7 @@ namespace tools
     {};
 
     template <class t> struct limit
-        : limit_<t, is_signed<t>::value>
+        : limit_<t, dTRAIT::is_signed<t>::value>
     {};
 
 } // namespace tools 

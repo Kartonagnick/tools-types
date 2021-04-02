@@ -5,10 +5,10 @@
 // [2021y-03m-26d][08:26:36] Idrisov Denis R. 7
 // [2021y-03m-30d][01:14:57] Idrisov Denis R. 8
 // [2021y-04m-02d][00:40:44] Idrisov Denis R. 9
-// [2021y-04m-02d][01:26:33] Idrisov Denis R. 10 PRE
+// [2021y-04m-03d][00:13:00] Idrisov Denis R. 10
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 10 PRE
+#define dTOOLS_TRAITS_USED_ 10
 
 #include <tools/features.hpp>
 
@@ -542,62 +542,12 @@ namespace tools
 
 
 //==============================================================================
-//=== is_signed ================================================ (remove_cv) ===
-#ifndef dTOOLS_IS_SIGNED_USED_ 
-#define dTOOLS_IS_SIGNED_USED_ 2
-namespace tools
-{
-    namespace detail
-    {
-        template <class t, bool> struct is_signed_
-        {
-            typedef ::tools::remove_cv<t>
-                z;
-            typedef typename z::type x;
-            enum
-            {
-                value = static_cast<x>(-1) < static_cast<x>(0) 
-            };
-        };
-
-        template <class t> struct is_signed_<t, false>
-        {
-            enum { value = ::tools::is_floating_point<t>::value };
-        };
-
-        template <class t> struct is_signed
-        {
-            enum { ok = ::tools::is_integral<t>::value };
-            enum { value = is_signed_<t, ok>::value    };
-        };
-
-        template <class t> struct is_unsigned
-        {
-            enum { ok = ::tools::is_integral<t>::value     };
-            enum { value = ok && !is_signed_<t, ok>::value };
-        };
-
-    } // namespace detail
-
-    template <class t> struct is_signed
-        : dDETAIL_TRAITS(is_signed<t>)
-    {};
-
-    template <class t> struct is_unsigned
-        : dDETAIL_TRAITS(is_unsigned<t>)
-    {};
-
-} // namespace tools 
-#endif // !dTOOLS_IS_SIGNED_USED_
-
-
-//==============================================================================
 //=== is_floating_point ======================================== (remove_cv) ===
-#ifndef dTOOLS_IS_FLOATING_USED_ 
+#ifndef dTOOLS_IS_FLOATING_USED_
 #define dTOOLS_IS_FLOATING_USED_ 2
 namespace tools
 {
-    namespace detail 
+    namespace detail
     {
         template <class t> struct is_floating_
             { enum { value = 0 }; };
@@ -615,23 +565,23 @@ namespace tools
             : is_floating_<typename remove_cv<t>::type>
         {};
 
-    } // namespace detail 
+    } // namespace detail
 
     template <class t> struct is_floating_point
         : dDETAIL_TRAITS(is_floating_point<t>)
     {};
 
-} // namespace tools 
+} // namespace tools
 #endif // !dTOOLS_IS_FLOATING_USED_
 
 
 //==============================================================================
 //=== is_integral =========================== (remove_cv)(integral_constant) ===
-#ifndef dTOOLS_IS_INTEGRAL_USED_ 
+#ifndef dTOOLS_IS_INTEGRAL_USED_
 #define dTOOLS_IS_INTEGRAL_USED_ 2
 namespace tools
 {
-    namespace detail 
+    namespace detail
     {
         template <class t> struct is_integral_
             { enum { value = 0 }; };
@@ -683,19 +633,70 @@ namespace tools
         {
             typedef typename ::tools::remove_cv<t>::type
                 x;
-            typedef ::tools::detail::is_integral_<x> 
+            typedef ::tools::detail::is_integral_<x>
                 r;
-            enum { value = r::value }; 
+            enum { value = r::value };
         };
 
-    } // namespace detail 
+    } // namespace detail
 
     template <class t> struct is_integral
         : dDETAIL_TRAITS(is_int_<t>)
     {};
 
-} // namespace tools 
+} // namespace tools
 #endif // !dTOOLS_IS_INTEGRAL_USED_
+
+
+//==============================================================================
+//=== is_signed ============================= (remove_cv)(is_floating_point) ===
+//=== is_signed ============================================== (is_integral) ===
+#ifndef dTOOLS_IS_SIGNED_USED_ 
+#define dTOOLS_IS_SIGNED_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        template <class t, bool> struct is_signed_
+        {
+            typedef ::tools::remove_cv<t>
+                z;
+            typedef typename z::type x;
+            enum
+            {
+                value = static_cast<x>(-1) < static_cast<x>(0) 
+            };
+        };
+
+        template <class t> struct is_signed_<t, false>
+        {
+            enum { value = ::tools::is_floating_point<t>::value };
+        };
+
+        template <class t> struct is_signed
+        {
+            enum { ok = ::tools::is_integral<t>::value };
+            enum { value = is_signed_<t, ok>::value    };
+        };
+
+        template <class t> struct is_unsigned
+        {
+            enum { ok = ::tools::is_integral<t>::value     };
+            enum { value = ok && !is_signed_<t, ok>::value };
+        };
+
+    } // namespace detail
+
+    template <class t> struct is_signed
+        : dDETAIL_TRAITS(is_signed<t>)
+    {};
+
+    template <class t> struct is_unsigned
+        : dDETAIL_TRAITS(is_unsigned<t>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_SIGNED_USED_
 
 
 //==============================================================================
