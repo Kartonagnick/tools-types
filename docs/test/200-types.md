@@ -23,6 +23,19 @@ test-200-types
 <br />
 <br />
 
+  - [x] `traits версии 11 [027 PRE]`  
+     - [x] bugfix: is_class
+     - [x] bugfix: is_pointer
+     - [x] bugfix: is_reference
+     - [x] bugfix: is_const
+     - [x] bugfix: is_volatile
+     - [x] bugfix: is_function
+     - [x] bugfix: remove_reference
+     - [x] bugfix: remove_pointer
+     - [x] bugfix: remove_extent
+     - [x] bugfix: remove_all_extent
+     - [x] bugfix: add_pointer
+     - [x] bugfix: decay
   - [x] `traits версии 10 [027 PRE]`  
     - [x] bugfix: is_signed    002 
     - [x] bugfix: is_integral  002 

@@ -2,10 +2,10 @@
 // [2021y-04m-04d][02:49:47] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_REMOVE_CV
+#ifdef TEST_REMOVE_EXTENSION
 
 #define dTEST_COMPONENT tools, types, traits
-#define dTEST_METHOD remove_cv
+#define dTEST_METHOD remove_extent
 #define dTEST_TAG all
 
 #include <tools/types/traits.hpp>
@@ -15,7 +15,7 @@ namespace me = ::tools;
 namespace
 {
     #define dVAL(a) \
-        typename me::remove_cv<a>::type
+        typename me::remove_extent<a>::type
 
     #define dEXPRESSION(a,b) \
         me::is_same<dVAL(a), b>::value 
@@ -42,8 +42,8 @@ namespace
 TEST_COMPONENT(000)
 {
     dTEST_TRUE(char           , char            );
-    dTEST_TRUE(const char     , char            );
-    dTEST_TRUE(volatile char  , char            );
+    dTEST_TRUE(const char     , const char      );
+    dTEST_TRUE(volatile char  , volatile char   );
 
     dTEST_TRUE(char&          , char&           );
     dTEST_TRUE(const char&    , const char&     );
@@ -62,20 +62,20 @@ TEST_COMPONENT(001)
     dTEST_TRUE(volatile char*                       , volatile char*      );
     dTEST_TRUE(volatile const char*                 , volatile const char*);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char* const                          , char*               );
-    dTEST_TRUE(const char* const                    , const char*         );
-    dTEST_TRUE(volatile char* const                 , volatile char*      );
-    dTEST_TRUE(volatile const char* const           , volatile const char*);
+    dTEST_TRUE(char* const                          , char* const               );
+    dTEST_TRUE(const char* const                    , const char* const         );
+    dTEST_TRUE(volatile char* const                 , volatile char* const      );
+    dTEST_TRUE(volatile const char* const           , volatile const char* const);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char* volatile                       , char*               );
-    dTEST_TRUE(const char* volatile                 , const char*         );
-    dTEST_TRUE(volatile char* volatile              , volatile char*      );
-    dTEST_TRUE(volatile const char* volatile        , volatile const char*);
+    dTEST_TRUE(char* volatile                       , char* volatile               );
+    dTEST_TRUE(const char* volatile                 , const char* volatile         );
+    dTEST_TRUE(volatile char* volatile              , volatile char* volatile      );
+    dTEST_TRUE(volatile const char* volatile        , volatile const char* volatile);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char* volatile const                 , char*               );
-    dTEST_TRUE(const char* volatile const           , const char*         );
-    dTEST_TRUE(volatile char* volatile const        , volatile char*      );
-    dTEST_TRUE(volatile const char* volatile const  , volatile const char*);
+    dTEST_TRUE(char* volatile const                 , char* volatile const               );
+    dTEST_TRUE(const char* volatile const           , const char* volatile const         );
+    dTEST_TRUE(volatile char* volatile const        , volatile char* volatile const      );
+    dTEST_TRUE(volatile const char* volatile const  , volatile const char* volatile const);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
     dTEST_TRUE(char*&                               , char*&                               );
@@ -128,20 +128,20 @@ TEST_COMPONENT(002)
     dTEST_TRUE(volatile char**                       , volatile char**       );
     dTEST_TRUE(volatile const char**                 , volatile const char** );
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char** const                          , char**                );
-    dTEST_TRUE(const char** const                    , const char**          );
-    dTEST_TRUE(volatile char** const                 , volatile char**       );
-    dTEST_TRUE(volatile const char** const           , volatile const char** );
+    dTEST_TRUE(char** const                          , char** const                );
+    dTEST_TRUE(const char** const                    , const char** const          );
+    dTEST_TRUE(volatile char** const                 , volatile char** const       );
+    dTEST_TRUE(volatile const char** const           , volatile const char** const );
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char** volatile                       , char**                );
-    dTEST_TRUE(const char** volatile                 , const char**          );
-    dTEST_TRUE(volatile char** volatile              , volatile char**       );
-    dTEST_TRUE(volatile const char** volatile        , volatile const char** );
+    dTEST_TRUE(char** volatile                       , char** volatile                );
+    dTEST_TRUE(const char** volatile                 , const char** volatile          );
+    dTEST_TRUE(volatile char** volatile              , volatile char** volatile       );
+    dTEST_TRUE(volatile const char** volatile        , volatile const char** volatile );
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char** volatile const                 , char**                );
-    dTEST_TRUE(const char** volatile const           , const char**          );
-    dTEST_TRUE(volatile char** volatile const        , volatile char**       );
-    dTEST_TRUE(volatile const char** volatile const  , volatile const char** );
+    dTEST_TRUE(char** volatile const                 , char** volatile const                );
+    dTEST_TRUE(const char** volatile const           , const char** volatile const          );
+    dTEST_TRUE(volatile char** volatile const        , volatile char** volatile const       );
+    dTEST_TRUE(volatile const char** volatile const  , volatile const char** volatile const );
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
     dTEST_TRUE(char**&                               , char**&                              );
@@ -189,9 +189,9 @@ TEST_COMPONENT(002)
 // --- pointers stress
 TEST_COMPONENT(003)
 {
-    dTEST_TRUE(char** const                     , char**       );
-    dTEST_TRUE(char* const* const               , char* const* );
-    dTEST_TRUE(char* const* const&              , char* const* const&);
+    dTEST_TRUE(char** const                     , char** const        );
+    dTEST_TRUE(char* const* const               , char* const* const  );
+    dTEST_TRUE(char* const* const&              , char* const* const& );
 
     dTEST_RVAL(char* const** const&&            , char* const** const&&            );
     dTEST_RVAL(char*** const* const** const&&   , char*** const* const** const&&   );
@@ -202,50 +202,50 @@ TEST_COMPONENT(003)
 // --- arrays[255]
 TEST_COMPONENT(004)
 {
-    dTEST_TRUE(char[255]                       , char[255]    );
+    dTEST_TRUE(char[255]                       , char         );
     dTEST_TRUE(char(&)[255]                    , char(&)[255] );
     dTEST_RVAL(char(&&)[255]                   , char(&&)[255]);
     dTEST_TRUE(char(*)[255]                    , char(*)[255] );
     dTEST_TRUE(char(*&)[255]                   , char(*&)[255]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(const char[255]                 , char[255]          );
+    dTEST_TRUE(const char[255]                 , const char         );
     dTEST_TRUE(const char(&)[255]              , const char(&)[255] );
     dTEST_RVAL(const char(&&)[255]             , const char(&&)[255]);
     dTEST_TRUE(const char(*)[255]              , const char(*)[255] );
     dTEST_TRUE(const char(*&)[255]             , const char(*&)[255]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile char[255]              , char[255]             );
+    dTEST_TRUE(volatile char[255]              , volatile char         );
     dTEST_TRUE(volatile char(&)[255]           , volatile char(&)[255] );
     dTEST_RVAL(volatile char(&&)[255]          , volatile char(&&)[255]);
     dTEST_TRUE(volatile char(*)[255]           , volatile char(*)[255] );
     dTEST_TRUE(volatile char(*&)[255]          , volatile char(*&)[255]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile const char[255]        , char[255]                   );
+    dTEST_TRUE(volatile const char[255]        , volatile const char         );
     dTEST_TRUE(volatile const char(&)[255]     , volatile const char(&)[255] );
     dTEST_RVAL(volatile const char(&&)[255]    , volatile const char(&&)[255]);
     dTEST_TRUE(volatile const char(*)[255]     , volatile const char(*)[255] );
     dTEST_TRUE(volatile const char(*&)[255]    , volatile const char(*&)[255]);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char[1][2][3]                   , char[1][2][3]    );
+    dTEST_TRUE(char[1][2][3]                   , char[2][3]       );
     dTEST_TRUE(char(&)[1][2][3]                , char(&)[1][2][3] );
     dTEST_RVAL(char(&&)[1][2][3]               , char(&&)[1][2][3]);
     dTEST_TRUE(char(*)[1][2][3]                , char(*)[1][2][3] );
     dTEST_TRUE(char(*&)[1][2][3]               , char(*&)[1][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(const char[1][2][3]             , char[1][2][3]          );
+    dTEST_TRUE(const char[1][2][3]             , const char[2][3]       );
     dTEST_TRUE(const char(&)[1][2][3]          , const char(&)[1][2][3] );
     dTEST_RVAL(const char(&&)[1][2][3]         , const char(&&)[1][2][3]);
     dTEST_TRUE(const char(*)[1][2][3]          , const char(*)[1][2][3] );
     dTEST_TRUE(const char(*&)[1][2][3]         , const char(*&)[1][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile char[1][2][3]          , char[1][2][3]             );
+    dTEST_TRUE(volatile char[1][2][3]          , volatile char[2][3]       );
     dTEST_TRUE(volatile char(&)[1][2][3]       , volatile char(&)[1][2][3] );
     dTEST_RVAL(volatile char(&&)[1][2][3]      , volatile char(&&)[1][2][3]);
     dTEST_TRUE(volatile char(*)[1][2][3]       , volatile char(*)[1][2][3] );
     dTEST_TRUE(volatile char(*&)[1][2][3]      , volatile char(*&)[1][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile const char[1][2][3]    , char[1][2][3]                   );
+    dTEST_TRUE(volatile const char[1][2][3]    , volatile const char[2][3]       );
     dTEST_TRUE(volatile const char(&)[1][2][3] , volatile const char(&)[1][2][3] );
     dTEST_RVAL(volatile const char(&&)[1][2][3], volatile const char(&&)[1][2][3]);
     dTEST_TRUE(volatile const char(*)[1][2][3] , volatile const char(*)[1][2][3] );
@@ -256,51 +256,51 @@ TEST_COMPONENT(004)
 #ifdef dHAS_ARRAY_EMPTY_SIZE
 TEST_COMPONENT(005)
 {
-    dTEST_TRUE(wchar_t[]                      , wchar_t[] );
-    dTEST_TRUE(char[]                         , char[]    );
+    dTEST_TRUE(wchar_t[]                      , wchar_t   );
+    dTEST_TRUE(char[]                         , char      );
     dTEST_TRUE(char(&)[]                      , char(&)[] );
     dTEST_RVAL(char(&&)[]                     , char(&&)[]);
     dTEST_TRUE(char(*)[]                      , char(*)[] );
     dTEST_TRUE(char(*&)[]                     , char(*&)[]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(const char[]                   , char[]    );
+    dTEST_TRUE(const char[]                   , const char      );
     dTEST_TRUE(const char(&)[]                , const char(&)[] );
     dTEST_RVAL(const char(&&)[]               , const char(&&)[]);
     dTEST_TRUE(const char(*)[]                , const char(*)[] );
     dTEST_TRUE(const char(*&)[]               , const char(*&)[]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile char[]                , char[]    );
+    dTEST_TRUE(volatile char[]                , volatile char      );
     dTEST_TRUE(volatile char(&)[]             , volatile char(&)[] );
     dTEST_RVAL(volatile char(&&)[]            , volatile char(&&)[]);
     dTEST_TRUE(volatile char(*)[]             , volatile char(*)[] );
     dTEST_TRUE(volatile char(*&)[]            , volatile char(*&)[]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile const char[]          , char[]    );
+    dTEST_TRUE(volatile const char[]          , volatile const char      );
     dTEST_TRUE(volatile const char(&)[]       , volatile const char(&)[] );
     dTEST_RVAL(volatile const char(&&)[]      , volatile const char(&&)[]);
     dTEST_TRUE(volatile const char(*)[]       , volatile const char(*)[] );
     dTEST_TRUE(volatile const char(*&)[]      , volatile const char(*&)[]);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char[][2][3]                   , char[][2][3]    );
+    dTEST_TRUE(char[][2][3]                   , char[2][3]      );
     dTEST_TRUE(char(&)[][2][3]                , char(&)[][2][3] );
     dTEST_RVAL(char(&&)[][2][3]               , char(&&)[][2][3]);
     dTEST_TRUE(char(*)[][2][3]                , char(*)[][2][3] );
     dTEST_TRUE(char(*&)[][2][3]               , char(*&)[][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(const char[][2][3]             , char[][2][3]    );
+    dTEST_TRUE(const char[][2][3]             , const char[2][3]      );
     dTEST_TRUE(const char(&)[][2][3]          , const char(&)[][2][3] );
     dTEST_RVAL(const char(&&)[][2][3]         , const char(&&)[][2][3]);
     dTEST_TRUE(const char(*)[][2][3]          , const char(*)[][2][3] );
     dTEST_TRUE(const char(*&)[][2][3]         , const char(*&)[][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile char[][2][3]          , char[][2][3]    );
+    dTEST_TRUE(volatile char[][2][3]          , volatile char[2][3]      );
     dTEST_TRUE(volatile char(&)[][2][3]       , volatile char(&)[][2][3] );
     dTEST_RVAL(volatile char(&&)[][2][3]      , volatile char(&&)[][2][3]);
     dTEST_TRUE(volatile char(*)[][2][3]       , volatile char(*)[][2][3] );
     dTEST_TRUE(volatile char(*&)[][2][3]      , volatile char(*&)[][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile const char[][2][3]    , char[][2][3]    );
+    dTEST_TRUE(volatile const char[][2][3]    , volatile const char[2][3]      );
     dTEST_TRUE(volatile const char(&)[][2][3] , volatile const char(&)[][2][3] );
     dTEST_RVAL(volatile const char(&&)[][2][3], volatile const char(&&)[][2][3]);
     dTEST_TRUE(volatile const char(*)[][2][3] , volatile const char(*)[][2][3] );
@@ -311,7 +311,7 @@ TEST_COMPONENT(005)
 // --- arrays stress
 TEST_COMPONENT(006)
 {
-    dTEST_TRUE(char*[1][2][3]     , char*[1][2][3]     );
+    dTEST_TRUE(char*[1][2][3]     , char*[2][3]        );
     dTEST_TRUE(char*(*)[1][2][3]  , char*(*)[1][2][3]  );
     dTEST_TRUE(char*(&)[1][2][3]  , char*(&)[1][2][3]  );
     dTEST_TRUE(char*(*&)[1][2][3] , char*(*&)[1][2][3] );
@@ -322,60 +322,60 @@ TEST_COMPONENT(006)
     dTEST_TRUE(const char* const(* volatile* const&)[1][2][3]       , const char* const(* volatile* const&)[1][2][3]       );
     dTEST_RVAL(volatile char* const(* volatile* volatile&&)[1][2][3], volatile char* const(* volatile* volatile&&)[1][2][3]);
 
-    dTEST_TRUE(const char* const(* const* const)[1][2][3]         , const char* const(* const*)[1][2][3]      );
-    dTEST_TRUE(const char* const(* volatile* const)[1][2][3]      , const char* const(* volatile*)[1][2][3]   );
-    dTEST_TRUE(volatile char* const(* volatile* volatile)[1][2][3], volatile char* const(* volatile*)[1][2][3]);
+    dTEST_TRUE(const char* const(* const* const)[1][2][3]         , const char* const(* const* const)[1][2][3]         );
+    dTEST_TRUE(const char* const(* volatile* const)[1][2][3]      , const char* const(* volatile* const)[1][2][3]      );
+    dTEST_TRUE(volatile char* const(* volatile* volatile)[1][2][3], volatile char* const(* volatile* volatile)[1][2][3]);
 }
 
 // --- arrays[0]
 #ifdef dHAS_ZERO_ARRAY
 TEST_COMPONENT(007)
 {
-    dTEST_TRUE(wchar_t[0]                      , wchar_t[0] );
-    dTEST_TRUE(char[0]                         , char[0]    );
+    dTEST_TRUE(wchar_t[0]                      , wchar_t );
+    dTEST_TRUE(char[0]                         , char    );
     dTEST_TRUE(char(&)[0]                      , char(&)[0] );
     dTEST_RVAL(char(&&)[0]                     , char(&&)[0]);
     dTEST_TRUE(char(*)[0]                      , char(*)[0] );
     dTEST_TRUE(char(*&)[0]                     , char(*&)[0]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(const char[0]                   , char[0]    );
+    dTEST_TRUE(const char[0]                   , char    );
     dTEST_TRUE(const char(&)[0]                , const char(&)[0] );
     dTEST_RVAL(const char(&&)[0]               , const char(&&)[0]);
     dTEST_TRUE(const char(*)[0]                , const char(*)[0] );
     dTEST_TRUE(const char(*&)[0]               , const char(*&)[0]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile char[0]                , char[0]    );
+    dTEST_TRUE(volatile char[0]                , char    );
     dTEST_TRUE(volatile char(&)[0]             , volatile char(&)[0] );
     dTEST_RVAL(volatile char(&&)[0]            , volatile char(&&)[0]);
     dTEST_TRUE(volatile char(*)[0]             , volatile char(*)[0] );
     dTEST_TRUE(volatile char(*&)[0]            , volatile char(*&)[0]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile const char[0]          , char[0]    );
+    dTEST_TRUE(volatile const char[0]          , char    );
     dTEST_TRUE(volatile const char(&)[0]       , volatile const char(&)[0] );
     dTEST_RVAL(volatile const char(&&)[0]      , volatile const char(&&)[0]);
     dTEST_TRUE(volatile const char(*)[0]       , volatile const char(*)[0] );
     dTEST_TRUE(volatile const char(*&)[0]      , volatile const char(*&)[0]);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    dTEST_TRUE(char[0][2][3]                   , char[0][2][3]    );
+    dTEST_TRUE(char[0][2][3]                   , char[2][3]    );
     dTEST_TRUE(char(&)[0][2][3]                , char(&)[0][2][3] );
     dTEST_RVAL(char(&&)[0][2][3]               , char(&&)[0][2][3]);
     dTEST_TRUE(char(*)[0][2][3]                , char(*)[0][2][3] );
     dTEST_TRUE(char(*&)[0][2][3]               , char(*&)[0][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(const char[0][2][3]             , char[0][2][3]    );
+    dTEST_TRUE(const char[0][2][3]             , char[2][3]    );
     dTEST_TRUE(const char(&)[0][2][3]          , const char(&)[0][2][3] );
     dTEST_RVAL(const char(&&)[0][2][3]         , const char(&&)[0][2][3]);
     dTEST_TRUE(const char(*)[0][2][3]          , const char(*)[0][2][3] );
     dTEST_TRUE(const char(*&)[0][2][3]         , const char(*&)[0][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile char[0][2][3]          , char[0][2][3]    );
+    dTEST_TRUE(volatile char[0][2][3]          , char[2][3]    );
     dTEST_TRUE(volatile char(&)[0][2][3]       , volatile char(&)[0][2][3] );
     dTEST_RVAL(volatile char(&&)[0][2][3]      , volatile char(&&)[0][2][3]);
     dTEST_TRUE(volatile char(*)[0][2][3]       , volatile char(*)[0][2][3] );
     dTEST_TRUE(volatile char(*&)[0][2][3]      , volatile char(*&)[0][2][3]);
 //------------------------------------------------------------------------------
-    dTEST_TRUE(volatile const char[0][2][3]    , const char[0][2][3]    );
+    dTEST_TRUE(volatile const char[0][2][3]    , const char[2][3]    );
     dTEST_TRUE(volatile const char(&)[0][2][3] , volatile const char(&)[0][2][3] );
     dTEST_RVAL(volatile const char(&&)[0][2][3], volatile const char(&&)[0][2][3]);
     dTEST_TRUE(volatile const char(*)[0][2][3] , volatile const char(*)[0][2][3] );
@@ -390,10 +390,10 @@ TEST_COMPONENT(008)
     dTEST_TRUE(int(&)()                 , int(&)()  );
     dTEST_RVAL(int(&&)()                , int(&&)() );
                                         
-    dTEST_TRUE(int(*)()                 , int(*)()  );
-    dTEST_TRUE(int(* const)()           , int(*)()  );
-    dTEST_TRUE(int(* volatile)()        , int(*)()  );
-    dTEST_TRUE(int(* volatile const)()  , int(*)()  );
+    dTEST_TRUE(int(*)()                 , int(*)()                );
+    dTEST_TRUE(int(* const)()           , int(* const)()          );
+    dTEST_TRUE(int(* volatile)()        , int(* volatile)()       );
+    dTEST_TRUE(int(* volatile const)()  , int(* volatile const)() );
                                         
     dTEST_TRUE(int(*&)()                , int(*&)()                );
     dTEST_TRUE(int(* const&)()          , int(* const&)()          );
@@ -445,9 +445,9 @@ TEST_COMPONENT(011)
     dTEST_TRUE(int(some::*&)()                , int(some::*&)()  );
     dTEST_RVAL(int(some::*&&)()               , int(some::*&&)() );
                                        
-    dTEST_TRUE(int(some::* const)()           , int(some::*)()   );
-    dTEST_TRUE(int(some::* volatile)()        , int(some::*)()   );
-    dTEST_TRUE(int(some::* volatile const)()  , int(some::*)()   );
+    dTEST_TRUE(int(some::* const)()           , int(some::* const)()           );
+    dTEST_TRUE(int(some::* volatile)()        , int(some::* volatile)()        );
+    dTEST_TRUE(int(some::* volatile const)()  , int(some::* volatile const)()  );
 
     dTEST_TRUE(int(some::* const&)()          , int(some::* const&)()          );
     dTEST_TRUE(int(some::* volatile&)()       , int(some::* volatile&)()       );
@@ -465,15 +465,15 @@ TEST_COMPONENT(012)
     dTEST_TRUE(int some::*&                               , int some::*&                );
     dTEST_RVAL(int some::*&&                              , int some::*&&               );
 
-    dTEST_TRUE(int some::* const                          , int some::*                 );
+    dTEST_TRUE(int some::* const                          , int some::* const           );
     dTEST_TRUE(int some::* const&                         , int some::* const&          );
     dTEST_RVAL(int some::* const&&                        , int some::* const&&         );
 
-    dTEST_TRUE(int some::* volatile                       , int some::*                 );
+    dTEST_TRUE(int some::* volatile                       , int some::* volatile        );
     dTEST_TRUE(int some::* volatile&                      , int some::* volatile&       );
     dTEST_RVAL(int some::* volatile&&                     , int some::* volatile&&      );
 
-    dTEST_TRUE(int some::* volatile const                 , int some::*                 );
+    dTEST_TRUE(int some::* volatile const                 , int some::* volatile const  );
     dTEST_TRUE(int some::* volatile const&                , int some::* volatile const& );
     dTEST_RVAL(int some::* volatile const&&               , int some::* volatile const&&);
 //------------------------------------------------------------------------------
@@ -481,15 +481,15 @@ TEST_COMPONENT(012)
     dTEST_TRUE(const int some::*&                         , const int some::*&                );
     dTEST_RVAL(const int some::*&&                        , const int some::*&&               );
 
-    dTEST_TRUE(const int some::* const                    , const int some::*                 );
+    dTEST_TRUE(const int some::* const                    , const int some::* const           );
     dTEST_TRUE(const int some::* const&                   , const int some::* const&          );
     dTEST_RVAL(const int some::* const&&                  , const int some::* const&&         );
 
-    dTEST_TRUE(const int some::* volatile                 , const int some::*                 );
+    dTEST_TRUE(const int some::* volatile                 , const int some::* volatile        );
     dTEST_TRUE(const int some::* volatile&                , const int some::* volatile&       );
     dTEST_RVAL(const int some::* volatile&&               , const int some::* volatile&&      );
 
-    dTEST_TRUE(const int some::* volatile const           , const int some::*                 );
+    dTEST_TRUE(const int some::* volatile const           , const int some::* volatile const  );
     dTEST_TRUE(const int some::* volatile const&          , const int some::* volatile const& );
     dTEST_RVAL(const int some::* volatile const&&         , const int some::* volatile const&&);
 //------------------------------------------------------------------------------
@@ -497,15 +497,15 @@ TEST_COMPONENT(012)
     dTEST_TRUE(volatile int some::*&                      , volatile int some::*&                );
     dTEST_RVAL(volatile int some::*&&                     , volatile int some::*&&               );
 
-    dTEST_TRUE(volatile int some::* const                 , volatile int some::*                 );
+    dTEST_TRUE(volatile int some::* const                 , volatile int some::* const           );
     dTEST_TRUE(volatile int some::* const&                , volatile int some::* const&          );
     dTEST_RVAL(volatile int some::* const&&               , volatile int some::* const&&         );
 
-    dTEST_TRUE(volatile int some::* volatile              , volatile int some::*                 );
+    dTEST_TRUE(volatile int some::* volatile              , volatile int some::* volatile        );
     dTEST_TRUE(volatile int some::* volatile&             , volatile int some::* volatile&       );
     dTEST_RVAL(volatile int some::* volatile&&            , volatile int some::* volatile&&      );
 
-    dTEST_TRUE(volatile int some::* volatile const        , volatile int some::*                 );
+    dTEST_TRUE(volatile int some::* volatile const        , volatile int some::* volatile const  );
     dTEST_TRUE(volatile int some::* volatile const&       , volatile int some::* volatile const& );
     dTEST_RVAL(volatile int some::* volatile const&&      , volatile int some::* volatile const&&);
 //------------------------------------------------------------------------------
@@ -513,15 +513,15 @@ TEST_COMPONENT(012)
     dTEST_TRUE(volatile const int some::*&                , volatile const int some::*&                );
     dTEST_RVAL(volatile const int some::*&&               , volatile const int some::*&&               );
 
-    dTEST_TRUE(volatile const int some::* const           , volatile const int some::*                 );
+    dTEST_TRUE(volatile const int some::* const           , volatile const int some::* const           );
     dTEST_TRUE(volatile const int some::* const&          , volatile const int some::* const&          );
     dTEST_RVAL(volatile const int some::* const&&         , volatile const int some::* const&&         );
 
-    dTEST_TRUE(volatile const int some::* volatile        , volatile const int some::*                 );
+    dTEST_TRUE(volatile const int some::* volatile        , volatile const int some::* volatile        );
     dTEST_TRUE(volatile const int some::* volatile&       , volatile const int some::* volatile&       );
     dTEST_RVAL(volatile const int some::* volatile&&      , volatile const int some::* volatile&&      );
 
-    dTEST_TRUE(volatile const int some::* volatile const  , volatile const int some::*                 );
+    dTEST_TRUE(volatile const int some::* volatile const  , volatile const int some::* volatile const  );
     dTEST_TRUE(volatile const int some::* volatile const& , volatile const int some::* volatile const& );
     dTEST_RVAL(volatile const int some::* volatile const&&, volatile const int some::* volatile const&&);
 }
@@ -552,5 +552,5 @@ TEST_COMPONENT(013)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_REMOVE_CV
+#endif // !TEST_REMOVE_EXTENSION
 

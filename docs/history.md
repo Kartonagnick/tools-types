@@ -7,24 +7,58 @@
 
 **История изменений**  
 
+**Версия 1.1.8 (предварительная)**  
+----------------------------------
+[2021y-04m-03d][01:03:49] #35_traits_4
+
+1) обновление features                  017 PRE
+     - добавлен: dDETAIL_CONSTANT_
+
+2) обновление types/traits              011 PRE
+     - улучшение: is_class             002
+     - улучшение: is_function          002
+     - улучшение: remove_reference     002
+     - фикс бага: remove_pointer       002
+     - фикс бага: add_pointer          002
+     - фикс бага: is_pointer           002
+     - фикс бага: is_reference         002
+     - фикс бага: is_const             002
+     - фикс бага: is_volatile          002
+                                      
+3) обновлены тесты: test-200-types
+     - тесты: is_class
+     - тесты: is_pointer
+     - тесты: is_reference
+     - тесты: is_const
+     - тесты: is_volatile
+     - тесты: is_function
+     - тесты: remove_reference
+     - тесты: remove_pointer
+     - тесты: remove_extent
+     - тесты: remove_all_extent
+     - тесты: add_pointer
+     - тесты: decay
 
 **Версия 1.1.7 (предварительная)**  
 ----------------------------------
 [2021y-04m-03d][00:12:30] #35_traits_3
 
-1) обновление types/traits              010
+1) обновлен: version                    117
+2) обновлен: types                      117
+
+3) обновление types/traits              010
      - фикс бага: is_integral         002
      - фикс бага: is_signed           002
      - фикс бага: remove_cv           002
      - улучшение: is_same             002
      - улучшение: is_floating_point   002
                                       
-2) обновлены тесты: test-200-types
-     - тесты is_foating
-     - тесты is_integral
-     - тесты is_unsigned
-     - тесты is_signed
-     - тесты remove_cv
+4) обновлены тесты: test-200-types
+     - тесты: is_foating
+     - тесты: is_integral
+     - тесты: is_unsigned
+     - тесты: is_signed
+     - тесты: remove_cv
 
 **Версия 1.1.6 (предварительная)**  
 ----------------------------------
@@ -41,12 +75,12 @@
      - исправление бага: is_array   002
 
 5) обновлены тесты: test-000-platform
-     - тесты array_empty_size
-     - тесты static_assert
+     - тесты: array_empty_size
+     - тесты: static_assert
 
 6) обновлены тесты: test-200-types
-     - тесты is_array
-     - тесты is_same
+     - тесты: is_array
+     - тесты: is_same
 
 **Версия 1.1.5 (предварительная)**  
 ----------------------------------
@@ -56,7 +90,7 @@
 4) исправлен баг:
      - assert.hpp                       101
 5) добавлен: test-600-others
-     - тесты tools/assert.hpp
+     - тесты: tools/assert.hpp
 
 **Версия 1.1.4 (предварительная)**  
 ----------------------------------

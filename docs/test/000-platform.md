@@ -1,6 +1,8 @@
 
 test-000-platform  
 ---
+  - [x] `макросы версии 117             [027 PRE]`  
+    - [x] dDETAIL_CONSTANT_ 
   - [x] `макросы версии 116             [027 PRE]`  
     - [x] dHAS_ARRAY_EMPTY_SIZE 
     - [x] dSTATIC_CHECK 

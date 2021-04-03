@@ -45,6 +45,11 @@ TEST_COMPONENT(000)
     dCHECK(float        , true );
     dCHECK(double       , true );
     dCHECK(long double  , true );
+
+    dCHECK(const float        , true );
+    dCHECK(const double       , true );
+    dCHECK(const long double  , true );
+
 }
 
 //==============================================================================

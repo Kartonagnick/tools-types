@@ -1,15 +1,14 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-26d][01:24:02] Idrisov Denis R.
+// [2021y-04m-03d][19:13:13] Idrisov Denis R. 2 PRE
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_VARIADIC_NEW_USED_ 
-#define dTOOLS_VARIADIC_NEW_USED_ 1
+#define dTOOLS_VARIADIC_NEW_USED_ 2
 
+#include <tools/features.hpp>
 #include <type_traits>
-
-#define dDETAIL_CONSTANT(...) \
-    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 
 //==============================================================================
 //=== is_heir ==================================================================
@@ -44,7 +43,7 @@ namespace tools
 
     template<class... args>
     struct is_heir
-        : dDETAIL_CONSTANT(is_heir<args...>)
+        : dDETAIL_CONSTANT_(is_heir<args...>)
     {};
 
 } // namespace tools

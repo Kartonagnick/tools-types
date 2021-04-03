@@ -1,7 +1,7 @@
 // [2021y-03m-14d][22:10:18] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_REMOVE_REFERENCE
+#ifdef TEST_DECAY
 
 #define dTEST_COMPONENT tools, types, traits
 #define dTEST_METHOD decay
@@ -111,5 +111,5 @@ TEST_COMPONENT(005)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_REMOVE_REFERENCE
+#endif // !TEST_DECAY
 
