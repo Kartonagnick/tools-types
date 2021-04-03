@@ -7,6 +7,7 @@
 #ifndef dTOOLS_COMMON_NEW_USED_ 
 #define dTOOLS_COMMON_NEW_USED_ 106,2008
 
+#include <tools/features.hpp>
 #include <cstddef>
 
 #if defined(dHAS_TYPE_TRAITS ) && defined(dHAS_RVALUE_REFERENCES)
@@ -14,9 +15,6 @@
 #else
     #include <tools/types/traits.hpp>
 #endif
-
-#define dDETAIL_CONSTANT(...) \
-    public dTRAIT::integral_constant<bool, detail::__VA_ARGS__::value>
 
 #define dVARIADIC_7 \
     class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
@@ -147,7 +145,7 @@ namespace tools
     // if type 't' is in the list 'args' --> true
     template<dVARIADIC_7>
     struct find_type
-        : dDETAIL_CONSTANT(find_type<t1, t2, t3, t4, t5, t6, t7>)
+        : dDETAIL_CONSTANT_(find_type<t1, t2, t3, t4, t5, t6, t7>)
     {};
 
 } // namespace tools 
@@ -207,7 +205,7 @@ namespace tools
     } // namespace detail
 
     template<class F> class is_functor
-        : public dDETAIL_CONSTANT(is_functor<F>)
+        : public dDETAIL_CONSTANT_(is_functor<F>)
     {};
 
 } // namespace tools 
@@ -255,7 +253,7 @@ namespace tools
     } // namespace detail
 
     template<class F> class is_functor
-        : dDETAIL_CONSTANT(is_functor<F>)
+        : dDETAIL_CONSTANT_(is_functor<F>)
     {};
 
 } // namespace tools 
@@ -635,7 +633,7 @@ namespace tools
 
     // if the syntax is valid: *obj ---> dereferencable 
     template<class t> struct is_dereferencable
-        : dDETAIL_CONSTANT(is_dereferencable<t>)
+        : dDETAIL_CONSTANT_(is_dereferencable<t>)
     {};
 
 } // namespace tools 
@@ -667,7 +665,7 @@ namespace tools
     } // namespace detail
 
     template<class t> struct is_volatile_data
-        : dDETAIL_CONSTANT(is_volatile_data<t>)
+        : dDETAIL_CONSTANT_(is_volatile_data<t>)
     {};
 
 } // namespace tools

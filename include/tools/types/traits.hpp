@@ -6,35 +6,15 @@
 // [2021y-03m-30d][01:14:57] Idrisov Denis R. 8
 // [2021y-04m-02d][00:40:44] Idrisov Denis R. 9
 // [2021y-04m-03d][00:13:00] Idrisov Denis R. 10
+// [2021y-04m-03d][05:40:04] Idrisov Denis R. 11
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 10
+#define dTOOLS_TRAITS_USED_ 11
 
 #include <tools/features.hpp>
 
-#define dDETAIL_TRAITS(...)                  \
-    public ::tools::integral_constant<bool,  \
-        ::tools::detail::__VA_ARGS__::value  \
-    >
-
-#define dCLASS_A1 class a1
-#define dCLASS_A2 dCLASS_A1, class a2
-#define dCLASS_A3 dCLASS_A2, class a3
-#define dCLASS_A4 dCLASS_A3, class a4
-#define dCLASS_A5 dCLASS_A4, class a5
-#define dCLASS_A6 dCLASS_A5, class a6
-#define dCLASS_A7 dCLASS_A6, class a7
-
-#define dARGS_A1 a1
-#define dARGS_A2 dARGS_A1, a2
-#define dARGS_A3 dARGS_A2, a3
-#define dARGS_A4 dARGS_A3, a4
-#define dARGS_A5 dARGS_A4, a5
-#define dARGS_A6 dARGS_A5, a6
-#define dARGS_A7 dARGS_A6, a7
-
 //==============================================================================
-//=== integral_constant ========================================================
+//=== integral_constant ========================================= (features) ===
 #ifndef dTOOLS_INTEGRAL_CONSTANT_USED_ 
 #define dTOOLS_INTEGRAL_CONSTANT_USED_ 1
 namespace tools
@@ -64,8 +44,34 @@ namespace tools
     typedef integral_constant<bool, false>
         false_type;
 
+    #define dDETAIL_TRAITS(...)                  \
+        public ::tools::integral_constant<bool,  \
+            ::tools::detail::__VA_ARGS__::value  \
+        >
+
 } // namespace tools 
 #endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
+
+
+//==============================================================================
+//=== remove_reference ======================= (features)(integral_constant) ===
+#ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
+#define dTOOLS_REMOVE_REFERENCE_USED_ 2
+namespace tools
+{
+    template<class t> struct remove_reference
+        { typedef t type; };
+
+    template<class t> struct remove_reference <t&>           
+        { typedef t type; };
+
+    #ifdef dHAS_RVALUE_REFERENCES
+    template<class t> struct remove_reference <t&&>        
+        { typedef t type; };
+    #endif
+
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_REFERENCE_USED_
 
 
 //==============================================================================
@@ -118,266 +124,37 @@ namespace tools
 #define dTOOLS_REMOVE_CV_USED_ 2
 namespace tools
 {
-    namespace detail
+    template<class t> struct remove_cv
+        { typedef t type; };
+
+    template<class t> struct remove_cv <const t>           
+        { typedef t type; };
+
+    template<class t> struct remove_cv <volatile t>        
+        { typedef t type; };
+
+    template<class t> struct remove_cv <volatile  const t> 
+        { typedef t type; };
+
+    #if (defined(_MSC_VER) && _MSC_VER <= 1800)
+    // msvc2008 - msvc20013
+    template<class t, size_t n> struct remove_cv<t[n]>
     {
-        template<class t> struct remove_cv_
-            { typedef t type; };
+        typedef typename ::tools::remove_cv<t>::type
+            no_cv;
+        typedef no_cv type[n];
+    };
 
-        template<class t> struct remove_cv_ <const t>           
-            { typedef t type; };
-
-        template<class t> struct remove_cv_ <volatile t>        
-            { typedef t type; };
-
-        template<class t> struct remove_cv_ <volatile  const t> 
-            { typedef t type; };
-
-        template<class t> struct remove_cv
-            : remove_cv_<t>
-        {};
-
-
-        #if (defined(_MSC_VER) && _MSC_VER <= 1800)
-        // msvc2008 - msvc20013
-        template<class t, size_t n> struct remove_cv<t[n]>
-        {
-            typedef typename remove_cv<t>::type
-                x;
-            typedef x type[n];
-        };
-        template<class t> struct remove_cv<t[]>
-        {
-            typedef typename remove_cv<t>::type
-                x;
-            typedef x type[];
-        };
-        #endif
-
-    } // namespace detail
-
-    template <class t> struct remove_cv
-        : ::tools::detail::remove_cv<t>
-    {};
-
-} // namespace tools 
-#endif // !dTOOLS_REMOVE_CV_USED_
-
-
-//==============================================================================
-//=== remove_reference =========================================================
-#ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
-#define dTOOLS_REMOVE_REFERENCE_USED_ 2
-namespace tools
-{
-    template<class t> struct remove_reference
-        { typedef t type; };
-
-    template<class t> struct remove_reference <t&>           
-        { typedef t type; };
-
-    template<class t, size_t n> struct remove_reference <t(&)[n]>           
-        { typedef t type[n]; };
-
-    #ifdef dHAS_RVALUE_REFERENCES
-    template<class t> struct remove_reference <t&&>        
-        { typedef t type; };
-
-    template<class t, size_t n> struct remove_reference <t(&&)[n]>           
-        { typedef t type[n]; };
+    template<class t> struct remove_cv<t[]>
+    {
+        typedef typename ::tools::remove_cv<t>::type
+            no_cv;
+        typedef no_cv type[];
+    };
     #endif
 
 } // namespace tools 
-#endif // !dTOOLS_REMOVE_REFERENCE_USED_
-
-
-//==============================================================================
-//=== remove_pointer ===========================================================
-#ifndef dTOOLS_REMOVE_POINTER_USED_ 
-#define dTOOLS_REMOVE_POINTER_USED_ 2
-namespace tools
-{
-    template <class t> struct remove_pointer 
-        { typedef t type; };
-
-    template <class t> struct remove_pointer<t*> 
-        { typedef t type; };
-
-    template <class t> struct remove_pointer<t* const> 
-        { typedef t type; };
-
-    template <class t> struct remove_pointer<t* volatile>
-        { typedef t type; };
-
-    template <class t> struct remove_pointer<t* const volatile> 
-        { typedef t type; };
-
-//--------------
-    template <class r> struct remove_pointer<r(*)()>
-        { typedef r type(); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*)(dARGS_A1)>
-        { typedef r type(dARGS_A1); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*)(dARGS_A2)>
-        { typedef r type(dARGS_A2); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*)(dARGS_A3)>
-        { typedef r type(dARGS_A3); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*)(dARGS_A4)>
-        { typedef r type(dARGS_A4); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*)(dARGS_A5)>
-        { typedef r type(dARGS_A5); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*)(dARGS_A6)>
-        { typedef r type(dARGS_A6); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*)(dARGS_A7)>
-        { typedef r type(dARGS_A7); };
-
-//--------------
-    template <class r> struct remove_pointer<r(*const)()>
-        { typedef r type(); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*const)(dARGS_A1)>
-        { typedef r type(dARGS_A1); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*const)(dARGS_A2)>
-        { typedef r type(dARGS_A2); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*const)(dARGS_A3)>
-        { typedef r type(dARGS_A3); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*const)(dARGS_A4)>
-        { typedef r type(dARGS_A4); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*const)(dARGS_A5)>
-        { typedef r type(dARGS_A5); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*const)(dARGS_A6)>
-        { typedef r type(dARGS_A6); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*const)(dARGS_A7)>
-        { typedef r type(dARGS_A7); };
-
-//--------------
-    template <class r> struct remove_pointer<r(*volatile)()>
-        { typedef r type(); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile)(dARGS_A1)>
-        { typedef r type(dARGS_A1); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile)(dARGS_A2)>
-        { typedef r type(dARGS_A2); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile)(dARGS_A3)>
-        { typedef r type(dARGS_A3); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile)(dARGS_A4)>
-        { typedef r type(dARGS_A4); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile)(dARGS_A5)>
-        { typedef r type(dARGS_A5); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile)(dARGS_A6)>
-        { typedef r type(dARGS_A6); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile)(dARGS_A7)>
-        { typedef r type(dARGS_A7); };
-
-//--------------
-    template <class r> struct remove_pointer<r(*volatile const)()>
-        { typedef r type(); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile const)(dARGS_A1)>
-        { typedef r type(dARGS_A1); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile const)(dARGS_A2)>
-        { typedef r type(dARGS_A2); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile const)(dARGS_A3)>
-        { typedef r type(dARGS_A3); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile const)(dARGS_A4)>
-        { typedef r type(dARGS_A4); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile const)(dARGS_A5)>
-        { typedef r type(dARGS_A5); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile const)(dARGS_A6)>
-        { typedef r type(dARGS_A6); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile const)(dARGS_A7)>
-        { typedef r type(dARGS_A7); };
-
-//--------------
-//--------------
-    template <class r> struct remove_pointer<r(*)(...)>
-        { typedef r type(); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*)(dARGS_A1, ...)>
-        { typedef r type(dARGS_A1); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*)(dARGS_A2, ...)>
-        { typedef r type(dARGS_A2); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*)(dARGS_A3, ...)>
-        { typedef r type(dARGS_A3); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*)(dARGS_A4, ...)>
-        { typedef r type(dARGS_A4); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*)(dARGS_A5, ...)>
-        { typedef r type(dARGS_A5); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*)(dARGS_A6, ...)>
-        { typedef r type(dARGS_A6); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*)(dARGS_A7, ...)>
-        { typedef r type(dARGS_A7); };
-
-//--------------
-    template <class r> struct remove_pointer<r(*const)(...)>
-        { typedef r type(...); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*const)(dARGS_A1, ...)>
-        { typedef r type(dARGS_A1, ...); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*const)(dARGS_A2, ...)>
-        { typedef r type(dARGS_A2, ...); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*const)(dARGS_A3, ...)>
-        { typedef r type(dARGS_A3, ...); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*const)(dARGS_A4, ...)>
-        { typedef r type(dARGS_A4, ...); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*const)(dARGS_A5, ...)>
-        { typedef r type(dARGS_A5, ...); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*const)(dARGS_A6, ...)>
-        { typedef r type(dARGS_A6, ...); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*const)(dARGS_A7, ...)>
-        { typedef r type(dARGS_A7, ...); };
-
-//--------------
-    template <class r> struct remove_pointer<r(*volatile)(...)>
-        { typedef r type(...); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile)(dARGS_A1, ...)>
-        { typedef r type(dARGS_A1, ...); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile)(dARGS_A2, ...)>
-        { typedef r type(dARGS_A2, ...); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile)(dARGS_A3, ...)>
-        { typedef r type(dARGS_A3, ...); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile)(dARGS_A4, ...)>
-        { typedef r type(dARGS_A4, ...); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile)(dARGS_A5, ...)>
-        { typedef r type(dARGS_A5, ...); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile)(dARGS_A6, ...)>
-        { typedef r type(dARGS_A6, ...); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile)(dARGS_A7, ...)>
-        { typedef r type(dARGS_A7, ...); };
-
-//--------------
-    template <class r> struct remove_pointer<r(*volatile const)(...)>
-        { typedef r type(...); };
-    template <class r, dCLASS_A1> struct remove_pointer<r(*volatile const)(dARGS_A1, ...)>
-        { typedef r type(dARGS_A1, ...); };
-    template <class r, dCLASS_A2> struct remove_pointer<r(*volatile const)(dARGS_A2, ...)>
-        { typedef r type(dARGS_A2, ...); };
-    template <class r, dCLASS_A3> struct remove_pointer<r(*volatile const)(dARGS_A3, ...)>
-        { typedef r type(dARGS_A3, ...); };
-    template <class r, dCLASS_A4> struct remove_pointer<r(*volatile const)(dARGS_A4, ...)>
-        { typedef r type(dARGS_A4, ...); };
-    template <class r, dCLASS_A5> struct remove_pointer<r(*volatile const)(dARGS_A5, ...)>
-        { typedef r type(dARGS_A5, ...); };
-    template <class r, dCLASS_A6> struct remove_pointer<r(*volatile const)(dARGS_A6, ...)>
-        { typedef r type(dARGS_A6, ...); };
-    template <class r, dCLASS_A7> struct remove_pointer<r(*volatile const)(dARGS_A7, ...)>
-        { typedef r type(dARGS_A7, ...); };
-
-} // namespace tools 
-#endif // !dTOOLS_REMOVE_POINTER_USED_
-
-
-//==============================================================================
-//=== add_pointer ==============================================================
-#ifndef dTOOLS_ADD_POINTER_USED_ 
-#define dTOOLS_ADD_POINTER_USED_ 1
-namespace tools
-{
-    template <class t> struct add_pointer 
-    {
-        typedef remove_reference<t> 
-            no_ref;
-        typedef typename no_ref::type
-            x;
-
-        typedef x* type; 
-    };
-
-} // namespace tools 
-#endif // !dTOOLS_ADD_POINTER_USED_
+#endif // !dTOOLS_REMOVE_CV_USED_
 
 
 //==============================================================================
@@ -388,16 +165,16 @@ namespace tools
 {
     namespace detail
     {
-        template<class a, class b> struct is_same
+        template<class a, class b> struct is_same_
             { enum { value = 0 }; };
 
-        template<class t> struct is_same<t, t>
+        template<class t> struct is_same_<t, t>
             { enum { value = 1 }; };
 
     } // namespace detail
 
     template <class a, class b> struct is_same
-        : dDETAIL_TRAITS(is_same<a, b>)
+        : dDETAIL_TRAITS(is_same_<a, b>)
     {};
 
 } // namespace tools 
@@ -405,144 +182,327 @@ namespace tools
 
 
 //==============================================================================
-//=== is_pointer ===============================================================
-#ifndef dTOOLS_IS_POINTER_USED_ 
-#define dTOOLS_IS_POINTER_USED_ 1
-namespace tools
-{
-    template <class t> struct is_pointer 
-    {
-        enum { value = false };
-    };
-
-    template <class t> struct is_pointer <t*>
-    {
-        enum { value = true };
-    };
-
-    template <class t> struct is_pointer <t* const>
-    {
-        enum { value = true };
-    };
-
-    template <class t> struct is_pointer <t* volatile>
-    {
-        enum { value = true };
-    };
-
-    template <class t> struct is_pointer <t* volatile const>
-    {
-        enum { value = true };
-    };
-
-} // namespace tools 
-#endif // !dTOOLS_IS_POINTER_USED_
-
-
-//==============================================================================
-//=== is_reference =============================================================
+//=== is_reference ===================================== (integral_constant) ===
 #ifndef dTOOLS_IS_REFERENCE_USED_ 
-#define dTOOLS_IS_REFERENCE_USED_ 1
+#define dTOOLS_IS_REFERENCE_USED_ 2
 namespace tools
 {
+    namespace detail
+    {
+        template <class t> struct is_reference_
+            { enum { value = false }; };
+
+        template <class t> struct is_reference_ <t&>
+            { enum { value = true }; };
+
+        #ifdef dHAS_RVALUE_REFERENCES
+        template <class t> struct is_reference_ <t&&>
+            { enum { value = true }; };
+        #endif
+
+    } // namespace detail
+
     template <class t> struct is_reference
-    {
-        enum { value = false };
-    };
-
-    template <class t> struct is_reference <t&>
-    {
-        enum { value = true };
-    };
-
-    #ifdef dHAS_RVALUE_REFERENCES
-    template <class t> struct is_reference <t&&>
-    {
-        enum { value = true };
-    };
-    #endif
+        : dDETAIL_TRAITS(is_reference_<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_REFERENCE_USED_
 
 
 //==============================================================================
-//=== is_class =================================================================
-#ifndef dTOOLS_IS_CLASS_USED_ 
-#define dTOOLS_IS_CLASS_USED_ 1
+//=== is_pointer ============================ (remove_cv)(integral_constant) ===
+#ifndef dTOOLS_IS_POINTER_USED_ 
+#define dTOOLS_IS_POINTER_USED_ 2
 namespace tools
 {
-    template <class t> struct is_class 
+    namespace detail
     {
-        typedef char (&no )[1]; 
-        typedef char (&yes)[2];
+        template <class t> struct is_pointer_impl_
+            { enum { value = false }; };
 
-        template <typename cl> static yes 
-            check (int cl::* p);
+        template <class t> struct is_pointer_impl_ <t*>
+            { enum { value = true }; };
 
-        template <class> static no 
-            check (...);
+        template <class t> struct is_pointer_impl_ <t* const>
+            { enum { value = true }; };
 
-        enum { result = sizeof(check<t>(0))  };
-        enum { value = result == sizeof(yes) };
-    };
+        template <class t> struct is_pointer_impl_ <t* volatile>
+            { enum { value = true }; };
+
+        template <class t> struct is_pointer_impl_ <t* volatile const>
+            { enum { value = true }; };
+
+        #if (defined(_MSC_VER) && _MSC_VER <= 1800)
+            // old: msvc2013 or older
+            template <class t> struct is_pointer_
+            {
+                typedef typename ::tools::remove_cv<t>::type 
+                    x;
+                typedef ::tools::detail::is_pointer_impl_<x> 
+                    v;
+                enum { value = v::value };
+            };
+        #else
+            // new: msvc2015 or newest
+            template <class t> struct is_pointer_
+                : ::tools::detail::is_pointer_impl_<t>
+            {};
+        #endif
+
+    } // namespace detail
+
+    template <class t> struct is_pointer
+        : dDETAIL_TRAITS(is_pointer_<t>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_POINTER_USED_
+
+
+//==============================================================================
+//=== remove_pointer ========================================== (is_pointer) ===
+#ifndef dTOOLS_REMOVE_POINTER_USED_ 
+#define dTOOLS_REMOVE_POINTER_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        template <class t> struct remove_pointer_impl_ 
+            { typedef t type; };
+
+        template <class t> struct remove_pointer_impl_<t*> 
+            { typedef t type; };
+
+        template <class t> struct remove_pointer_impl_<t* const> 
+            { typedef t type; };
+
+        template <class t> struct remove_pointer_impl_<t* volatile>
+            { typedef t type; };
+
+        template <class t> struct remove_pointer_impl_<t* const volatile> 
+            { typedef t type; };
+
+
+        #if (defined(_MSC_VER) && _MSC_VER <= 1800)
+            // old: msvc2013 or older
+            template <class t, bool> struct remove_ptr_
+            {
+                typedef typename ::tools::remove_cv<t>::type 
+                    x;
+                typedef ::tools::detail::remove_pointer_impl_<x>
+                    result;
+                typedef typename result::type type;
+            };
+
+            template <class t> struct remove_ptr_<t, false>
+                { typedef t type; };
+
+            template <class t> class remove_pointer_
+            {
+                typedef ::tools::is_pointer<t> v;
+                typedef remove_ptr_<t, v ::value> x;
+            public:
+                typedef typename x::type type;
+            };
+        #else
+            // new: msvc2015 or newest
+            template <class t> struct remove_pointer_
+                : remove_pointer_impl_<t>
+            {};
+        #endif
+
+    } // namespace detail
+
+    template <class t> struct remove_pointer
+        : ::tools::detail::remove_pointer_<t>
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_REMOVE_POINTER_USED_
+
+
+//================================================================= (sfinae) ===
+//=== add_pointer ======================================= (remove_reference) ===
+#ifndef dTOOLS_ADD_POINTER_USED_ 
+#define dTOOLS_ADD_POINTER_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        typedef char(&no )[1];
+        typedef char(&yes)[2];
+
+        template <class t> struct can_add_pointer_
+        {
+            template <typename u> static 
+                yes check(u* p);
+
+            template <class> static
+                no check(...);
+
+            enum { result = sizeof(check<t>(0)) };
+            enum { value = result == sizeof(yes) };
+        };
+
+        template <class t, bool> struct add_pointer_impl_ 
+        {
+            typedef ::tools::remove_reference<t> 
+                no_ref;
+            typedef typename no_ref::type
+                x;
+            typedef x* type; 
+        };
+
+        template <class t> struct add_pointer_impl_ <t, false>
+            { typedef t type; };
+
+        template <class t> class add_pointer_
+        {
+            typedef ::tools::remove_reference<t> 
+                no_ref;
+            typedef typename no_ref::type
+                x;
+            typedef ::tools::detail::can_add_pointer_<x>
+                can;
+            typedef ::tools::detail::add_pointer_impl_<t, can::value> 
+                result;
+        public:
+            typedef typename result::type 
+                type;
+        };
+
+    } // namespace detail
+
+    template <class t> struct add_pointer
+        : ::tools::detail::add_pointer_<t>
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_ADD_POINTER_USED_
+
+
+//================================================================= (sfinae) ===
+//=== is_class ========================================= (integral_constant) ===
+#ifndef dTOOLS_IS_CLASS_USED_ 
+#define dTOOLS_IS_CLASS_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        typedef char(&no )[1];
+        typedef char(&yes)[2];
+
+        template <class t> struct is_class_
+        {
+            template <typename cl> static 
+                yes check(int cl::* p);
+
+            template <class> static 
+                no check(...);
+
+            enum { result = sizeof(check<t>(0)) };
+            enum { value = result == sizeof(yes) };
+        };
+
+    } // namespace detail
+
+    template <class t> struct is_class
+        : dDETAIL_TRAITS(is_class_<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_CLASS_USED_
 
 
 //==============================================================================
-//=== is_const =================================================================
+//=== is_const ========================================= (remove_all_extent) ===
 #ifndef dTOOLS_IS_CONST_USED_ 
-#define dTOOLS_IS_CONST_USED_ 1
+#define dTOOLS_IS_CONST_USED_ 2
 namespace tools
 {
+    namespace detail
+    {
+        template <class t> struct is_const_impl_
+            { enum { value = false }; };
+
+        template <class t> struct is_const_impl_<const t>
+            { enum { value = true }; };
+
+
+        #if defined(_MSC_VER) && _MSC_VER <= 1800
+            // old: msvc2013 or older
+            template <class t> struct is_const_
+            {
+                typedef ::tools::remove_all_extent<t> 
+                    no_ext;
+                typedef typename no_ext::type x;
+                typedef ::tools::detail::is_const_impl_<x> 
+                    v;
+                enum { value = v::value };
+            };
+        #else
+            // new: msvc2015 or newest
+            template <class t> struct is_const_
+                : ::tools::detail::is_const_impl_<t>
+            {};
+        #endif
+
+    } // namespace detail
+
     template <class t> struct is_const
-    {
-        enum { value = false };
-    };
-
-    template <class t> struct is_const<const t>
-    {
-        enum { value = true };
-    };
-
-    template <class t, size_t n> struct is_const<const t[n]>
-    {
-        enum { value = true };
-    };
+        : dDETAIL_TRAITS(is_const_<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_CONST_USED_
 
 
 //==============================================================================
-//=== is_volatile ==============================================================
+//=== is_volatile ===================================== (remove_all_extent) ===
 #ifndef dTOOLS_IS_VOLATILE_USED_ 
-#define dTOOLS_IS_VOLATILE_USED_ 1
+#define dTOOLS_IS_VOLATILE_USED_ 2
 namespace tools
 {
+    namespace detail
+    {
+        template <class t> struct is_volatile_impl_
+            { enum { value = false }; };
+
+        template <class t> struct is_volatile_impl_<volatile t>
+            { enum { value = true }; };
+
+
+        #if defined(_MSC_VER) && _MSC_VER <= 1800
+            // old: msvc2013 or older
+            template <class t> struct is_volatile_
+            {
+                typedef ::tools::remove_all_extent<t> 
+                    no_ext;
+                typedef typename no_ext::type x;
+                typedef ::tools::detail::is_volatile_impl_<x>
+                    v;
+                enum { value = v::value };
+            };
+        #else
+            // new: msvc2015 or newest
+            template <class t> struct is_volatile_
+                : is_volatile_impl_<t>
+            {};
+        #endif
+
+    } // namespace detail
+
     template <class t> struct is_volatile
-    {
-        enum { value = false };
-    };
-
-    template <class t> struct is_volatile<volatile t>
-    {
-        enum { value = true };
-    };
-
-    template <class t, size_t n> struct is_volatile<volatile t[n]>
-    {
-        enum { value = true };
-    };
+        : dDETAIL_TRAITS(is_volatile_<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_VOLATILE_USED_
 
 
 //==============================================================================
-//=== is_floating_point ======================================== (remove_cv) ===
+//=== is_floating_point ===================== (remove_cv)(integral_constant) ===
 #ifndef dTOOLS_IS_FLOATING_USED_
 #define dTOOLS_IS_FLOATING_USED_ 2
 namespace tools
@@ -561,14 +521,14 @@ namespace tools
         template <> struct is_floating_<long double>
             { enum { value = 1 }; };
 
-        template <class t> struct is_floating_point
-            : is_floating_<typename remove_cv<t>::type>
+        template <class t> struct is_floating_point_
+            : is_floating_<typename ::tools::remove_cv<t>::type>
         {};
 
     } // namespace detail
 
     template <class t> struct is_floating_point
-        : dDETAIL_TRAITS(is_floating_point<t>)
+        : dDETAIL_TRAITS(is_floating_point_<t>)
     {};
 
 } // namespace tools
@@ -583,65 +543,65 @@ namespace tools
 {
     namespace detail
     {
-        template <class t> struct is_integral_
+        template <class t> struct is_integral_impl_
             { enum { value = 0 }; };
 
         #if !defined(_MSC_VER) || _MSC_VER >= 1900
-        template <> struct is_integral_<char16_t>
+        template <> struct is_integral_impl_<char16_t>
             { enum { value = 1 }; };
 
-        template <> struct is_integral_<char32_t>
+        template <> struct is_integral_impl_<char32_t>
             { enum { value = 1 }; };
         #endif
 
         #ifdef __cpp_char8_t
-        template <> struct is_integral_<char8_t,>
+        template <> struct is_integral_impl_<char8_t,>
             { enum { value = 1 }; };
         #endif // __cpp_char8_t
 
-        template <> struct is_integral_<wchar_t>
+        template <> struct is_integral_impl_<wchar_t>
             { enum { value = 1 }; };
-        template <> struct is_integral_<bool>
-            { enum { value = 1 }; };
-
-        template <> struct is_integral_<char>
-            { enum { value = 1 }; };
-        template <> struct is_integral_<signed char>
-            { enum { value = 1 }; };
-        template <> struct is_integral_<unsigned char>
+        template <> struct is_integral_impl_<bool>
             { enum { value = 1 }; };
 
-        template <> struct is_integral_<short>
+        template <> struct is_integral_impl_<char>
             { enum { value = 1 }; };
-        template <> struct is_integral_<int>
+        template <> struct is_integral_impl_<signed char>
             { enum { value = 1 }; };
-        template <> struct is_integral_<long>
-            { enum { value = 1 }; };
-        template <> struct is_integral_<long long>
+        template <> struct is_integral_impl_<unsigned char>
             { enum { value = 1 }; };
 
-        template <> struct is_integral_<unsigned short>
+        template <> struct is_integral_impl_<short>
             { enum { value = 1 }; };
-        template <> struct is_integral_<unsigned int>
+        template <> struct is_integral_impl_<int>
             { enum { value = 1 }; };
-        template <> struct is_integral_<unsigned long>
+        template <> struct is_integral_impl_<long>
             { enum { value = 1 }; };
-        template <> struct is_integral_<unsigned long long>
+        template <> struct is_integral_impl_<long long>
             { enum { value = 1 }; };
 
-        template <class t> struct is_int_
+        template <> struct is_integral_impl_<unsigned short>
+            { enum { value = 1 }; };
+        template <> struct is_integral_impl_<unsigned int>
+            { enum { value = 1 }; };
+        template <> struct is_integral_impl_<unsigned long>
+            { enum { value = 1 }; };
+        template <> struct is_integral_impl_<unsigned long long>
+            { enum { value = 1 }; };
+
+        template <class t> struct is_integral_
         {
             typedef typename ::tools::remove_cv<t>::type
                 x;
-            typedef ::tools::detail::is_integral_<x>
-                r;
-            enum { value = r::value };
+            typedef ::tools::detail::is_integral_impl_<x>
+                result;
+            enum { value = result::value };
         };
 
     } // namespace detail
 
     template <class t> struct is_integral
-        : dDETAIL_TRAITS(is_int_<t>)
+        : dDETAIL_TRAITS(is_integral_<t>)
     {};
 
 } // namespace tools
@@ -657,42 +617,46 @@ namespace tools
 {
     namespace detail
     {
-        template <class t, bool> struct is_signed_
+        template <class t, bool> struct is_signed_impl_
         {
             typedef ::tools::remove_cv<t>
-                z;
-            typedef typename z::type x;
+                no_cv;
+            typedef typename no_cv::type x;
             enum
             {
                 value = static_cast<x>(-1) < static_cast<x>(0) 
             };
         };
 
-        template <class t> struct is_signed_<t, false>
+        template <class t> struct is_signed_impl_<t, false>
         {
             enum { value = ::tools::is_floating_point<t>::value };
         };
 
-        template <class t> struct is_signed
+        template <class t> struct is_signed_
         {
             enum { ok = ::tools::is_integral<t>::value };
-            enum { value = is_signed_<t, ok>::value    };
+            typedef ::tools::detail::is_signed_impl_<t, ok>
+                impl;
+            enum { value = impl::value };
         };
 
-        template <class t> struct is_unsigned
+        template <class t> struct is_unsigned_
         {
-            enum { ok = ::tools::is_integral<t>::value     };
-            enum { value = ok && !is_signed_<t, ok>::value };
+            enum { ok = ::tools::is_integral<t>::value };
+            typedef ::tools::detail::is_signed_impl_<t, ok>
+                impl;
+            enum { value = ok && !impl::value };
         };
 
     } // namespace detail
 
     template <class t> struct is_signed
-        : dDETAIL_TRAITS(is_signed<t>)
+        : dDETAIL_TRAITS(is_signed_<t>)
     {};
 
     template <class t> struct is_unsigned
-        : dDETAIL_TRAITS(is_unsigned<t>)
+        : dDETAIL_TRAITS(is_unsigned_<t>)
     {};
 
 } // namespace tools 
@@ -707,21 +671,21 @@ namespace tools
 {
     namespace detail 
     {
-        template <class t> struct is_array
+        template <class t> struct is_array_
             { enum { value = false }; };
 
-        template <class t, size_t n> struct is_array<t[n]>
+        template <class t, size_t n> struct is_array_<t[n]>
             { enum { value = true }; };
 
         #ifdef dHAS_ARRAY_EMPTY_SIZE
-        template <class t> struct is_array<t[]>
+        template <class t> struct is_array_<t[]>
             { enum { value = true }; };
         #endif
 
     } // namespace detail 
 
     template <class t> struct is_array
-        : dDETAIL_TRAITS(is_array<t>)
+        : dDETAIL_TRAITS(is_array_<t>)
     {};
 
 } // namespace tools 
@@ -729,34 +693,74 @@ namespace tools
 
 
 //==============================================================================
-//=== is_function ==============================================================
+//=== is_function ================================= (is_const)(is_reference) ===
 #ifndef dTOOLS_IS_FUNCTION_USED_ 
-#define dTOOLS_IS_FUNCTION_USED_ 1
+#define dTOOLS_IS_FUNCTION_USED_ 2
 namespace tools
 {
-    #ifdef _MSC_VER
-        #pragma warning(push)
-        // warning C4180: qualifier applied to function type has no meaning; ignored
-        #pragma warning(disable : 4180)
-
-        // warning C4181: qualifier applied to reference type; ignored
-        #pragma warning(disable : 4181)
-    #endif
-
-    // only function types and reference types can't be const qualified
-    template <class t> struct is_function
+    namespace detail 
     {
-        enum { v1 = is_const<const t>::value };
-        enum { v2 = is_reference<t>::value   };
-        enum { value = !v1 && !v2 };
-    };
+        #ifdef _MSC_VER
+            #pragma warning(push)
+            // warning C4180: qualifier applied to function type has no meaning; ignored
+            #pragma warning(disable : 4180)
 
-    #ifdef _MSC_VER
-        #pragma warning(pop)
-    #endif
+            // warning C4181: qualifier applied to reference type; ignored
+            #pragma warning(disable : 4181)
+        #endif
+
+        // only function types and reference types can't be const qualified
+        template <class t> struct is_function_
+        {
+            enum { v1 = ::tools::is_const<const t>::value };
+            enum { v2 = ::tools::is_reference<t>::value   };
+            enum { value = !v1 && !v2 };
+        };
+
+        #ifdef _MSC_VER
+            #pragma warning(pop)
+        #endif
+
+    } // namespace detail 
+
+    template <class t> struct is_function
+        : dDETAIL_TRAITS(is_function_<t>)
+    {};
 
 } // namespace tools 
 #endif // !dTOOLS_IS_FUNCTION_USED_
+
+
+//================================================================= (sfinae) ===
+//=== is_base_of ======================================= (integral_constant) ===
+#ifndef dTOOLS_IS_BASE_OF_USED_ 
+#define dTOOLS_IS_BASE_OF_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        typedef char(&no )[1];
+        typedef char(&yes)[2];
+
+        template <class b, class d>
+        struct is_base_of_
+        {
+            template <class u> static  yes check(u*);
+            template <typename> static no check(...);
+            enum { result = sizeof(check<b>(static_cast<d*>(0))) };
+            enum { value = result != sizeof(no)  };
+        };
+
+    } // namespace detail
+
+    template <class b, class d>
+    struct is_base_of
+        : dDETAIL_TRAITS(is_base_of_<b, d>)
+    {};
+
+} // namespace tools 
+
+#endif // !dTOOLS_IS_BASE_OF_USED_
 
 
 //==============================================================================
@@ -778,11 +782,17 @@ namespace tools
 
 
 //==============================================================================
-//=== decay ====================================================================
+//=== decay =================================== (is_array)(remove_reference) ===
+//=== decay =================================== (add_pointer)(remove_extent) ===
+//=== decay ===================================== (conditional)(is_function) ===
+//=== decay ==================================================== (remove_cv) ===
 #ifndef dTOOLS_DECAY_USED_ 
 #define dTOOLS_DECAY_USED_ 2
 namespace tools
 {
+    // function ---> pointer-to-function
+    // array ------> pointer-to-first-element (remove one extent)
+    // other ------> remove-reference and remove-cv
     template <class t> class decay 
     { 
         typedef ::tools::remove_reference<t>
@@ -833,44 +843,8 @@ namespace tools
 #endif // !dTOOLS_SELECT_USED_
 
 
-//==============================================================================
-//=== is_base_of ======================================= (integral_constant) ===
-#ifndef dTOOLS_IS_BASE_OF_USED_ 
-#define dTOOLS_IS_BASE_OF_USED_ 1
-namespace tools
-{
-    namespace detail
-    {
-        typedef char no[1];
-        typedef char yes[2];
-
-        template <class b, class d>
-        struct is_base_of
-        {
-            template <class u> static
-                yes& check(u*);
-
-            template <typename> static
-                no& check(...);
-
-            enum { result = sizeof(check<b>(static_cast<d*>(0))) };
-            enum { value = result != sizeof(no)  };
-        };
-
-    } // namespace detail
-
-    template <class b, class d>
-    struct is_base_of
-        : dDETAIL_TRAITS(is_base_of<b, d>)
-    {};
-
-} // namespace tools 
-
-#endif // !dTOOLS_IS_BASE_OF_USED_
-
-
 //================================================================================
-//=== type_of_enum ===============================================================
+//=== type_of_enum ============================================= (type_traits) ===
 #ifdef dHAS_ENUM_CLASS
 #ifndef dTOOLS_ENUM_TYPE_USED_ 
 #define dTOOLS_ENUM_TYPE_USED_ 1
@@ -883,8 +857,7 @@ namespace tools
             type;
     };
 
-    template<class t> 
-    struct type_of_enum<t, false>
+    template<class t> struct type_of_enum<t, false>
         { typedef t type; };
 
     #ifdef dHAS_USING_ALIAS
