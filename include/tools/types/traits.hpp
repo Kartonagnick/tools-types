@@ -7,9 +7,11 @@
 // [2021y-04m-02d][00:40:44] Idrisov Denis R. 9
 // [2021y-04m-03d][00:13:00] Idrisov Denis R. 10
 // [2021y-04m-03d][23:11:10] Idrisov Denis R. 11
+
+// [2021y-04m-04d][01:36:02] Idrisov Denis R. 12
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 11
+#define dTOOLS_TRAITS_USED_ 12
 
 #include <tools/features.hpp>
 
@@ -841,34 +843,6 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_SELECT_USED_
-
-
-//================================================================================
-//=== type_of_enum ============================================= (type_traits) ===
-#ifdef dHAS_ENUM_CLASS
-#ifndef dTOOLS_ENUM_TYPE_USED_ 
-#define dTOOLS_ENUM_TYPE_USED_ 1
-namespace tools
-{
-    template<class t, bool = ::std::is_enum<t>::value>
-    struct type_of_enum
-    {
-        typedef typename ::std::underlying_type<t>::type
-            type;
-    };
-
-    template<class t> struct type_of_enum<t, false>
-        { typedef t type; };
-
-    #ifdef dHAS_USING_ALIAS
-    template<class t> 
-    using type_of_enum_t
-        = typename ::tools::type_of_enum<t>::type;
-    #endif
-
-} // tools
-#endif // !dTOOLS_ENUM_TYPE_USED_
-#endif // !dHAS_ENUM_CLASS
 
 
 //==============================================================================

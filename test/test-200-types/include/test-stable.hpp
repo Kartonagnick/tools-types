@@ -20,7 +20,6 @@
     #define TEST_CONDITIONAL                                // ready!
     #define TEST_IS_SAME                                    // ready!
     #define TEST_ENABLE_IF                                  // ready!
-    #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_REMOVE_REFERENCE                           // ready!
     #define TEST_DECAY                                      // ready!
     #define TEST_IS_CLASS                                   // ready!
@@ -35,8 +34,7 @@
     #define TEST_REMOVE_EXTENSION                           // ready!
     #define TEST_REMOVE_ALL_EXTENSION                       // ready!
     #define TEST_ADD_POINTER                                // ready!
-
-    #define TEST_IS_UNSIGNED                                // in progress...
+    #define TEST_IS_UNSIGNED                                // ready!
 
 //==============================================================================
 //===== tools/types/common =================================||==================
@@ -49,8 +47,8 @@
     #define TEST_TOOLS_SIZE_ARRAY                           // ready!
     #define TEST_TOOLS_SMALL_ARRAY                          // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
+    #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_TOOLS_VARIADIC                             // ready!
-
     #define TEST_TOOLS_IS_VOLATILE_DATA                     // in progress...
     #define TEST_TOOLS_ADD_CONST_DATA                       // in progress...
 

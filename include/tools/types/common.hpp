@@ -5,9 +5,11 @@
 // [2021y-03m-21d][04:01:28] Idrisov Denis R. 104
 // [2021y-03m-23d][23:55:08] Idrisov Denis R. 105
 // [2021y-03m-30d][03:40:56] Idrisov Denis R. 106
+
+// [2021y-04m-04d][01:37:19] Idrisov Denis R. 107 PRE
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 106
+#define dTOOLS_COMMON_USED_ 107 PRE
 
 #include <tools/features.hpp>
 #include <tools/pragma/pragma.hpp>
@@ -25,6 +27,34 @@
     // dMESSAGE("[old][types/common]")
     #include <tools/types/common/common-msvc2008.hpp>
 #endif
+
+
+//================================================================================
+//=== type_of_enum ============================================= (type_traits) ===
+#ifdef dHAS_ENUM_CLASS
+#ifndef dTOOLS_ENUM_TYPE_USED_ 
+#define dTOOLS_ENUM_TYPE_USED_ 100
+namespace tools
+{
+    template<class t, bool = ::std::is_enum<t>::value>
+    struct type_of_enum
+    {
+        typedef typename ::std::underlying_type<t>::type
+            type;
+    };
+
+    template<class t> struct type_of_enum<t, false>
+        { typedef t type; };
+
+    #ifdef dHAS_USING_ALIAS
+    template<class t> 
+    using type_of_enum_t
+        = typename ::tools::type_of_enum<t>::type;
+    #endif
+
+} // tools
+#endif // !dTOOLS_ENUM_TYPE_USED_
+#endif // !dHAS_ENUM_CLASS
 
 //==============================================================================
 //==============================================================================
