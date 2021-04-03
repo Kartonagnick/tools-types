@@ -8,7 +8,6 @@
 #define dTEST_TAG tdd
 
 #include <tools/types/traits.hpp>
-#include <tools/features.hpp>
 namespace me = ::tools;
 //==============================================================================
 //=== TDD ======================================================================
