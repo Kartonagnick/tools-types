@@ -40,7 +40,7 @@ namespace tools
 
     template<class b, class d>
     struct is_heir
-        : dDETAIL_CONSTANT_(is_heir<b, d>)
+        : dDETAIL_CONSTANT(is_heir<b, d>)
     {};
 
 } // namespace tools

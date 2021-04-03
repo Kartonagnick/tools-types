@@ -8,10 +8,10 @@
 // [2021y-03m-30d][03:40:56] Idrisov Denis R. 114
 // [2021y-03m-31d][01:56:33] Idrisov Denis R. 115
 // [2021y-04m-02d][00:39:44] Idrisov Denis R. 116
-// [2021y-04m-03d][19:10:03] Idrisov Denis R. 117 PRE
+// [2021y-04m-03d][22:59:27] Idrisov Denis R. 117
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 117 PRE
+#define dTOOLS_FEATURES_USED_ 117
 //==============================================================================
 //=== dMESSAGE =================================================================
 
@@ -107,9 +107,9 @@
     #define dTRAIT tools
 #endif
 
-#define dDETAIL_CONSTANT_(...)                \
-    public dTRAIT::integral_constant<bool,   \
-        ::tools::detail::__VA_ARGS__::value  \
+#define dDETAIL_CONSTANT(...)              \
+    public dTRAIT::integral_constant<bool, \
+        detail::__VA_ARGS__::value         \
     >
 
 //==============================================================================

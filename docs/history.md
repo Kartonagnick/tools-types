@@ -9,12 +9,15 @@
 
 **Версия 1.1.8 (предварительная)**  
 ----------------------------------
-[2021y-04m-03d][01:03:49] #35_traits_4
+[2021y-04m-03d][23:09:37] #35_traits_4
 
-1) обновление features                  017 PRE
-     - добавлен: dDETAIL_CONSTANT_
+1) обновлен: version                    118
+2) обновлен: types                      118
 
-2) обновление types/traits              011 PRE
+3) обновление features                  017
+     - добавлен: dDETAIL_CONSTANT
+
+4) обновление types/traits              011
      - улучшение: is_class             002
      - улучшение: is_function          002
      - улучшение: remove_reference     002
@@ -25,7 +28,7 @@
      - фикс бага: is_const             002
      - фикс бага: is_volatile          002
                                       
-3) обновлены тесты: test-200-types
+5) обновлены тесты: test-200-types
      - тесты: is_class
      - тесты: is_pointer
      - тесты: is_reference

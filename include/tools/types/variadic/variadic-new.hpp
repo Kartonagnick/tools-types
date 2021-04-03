@@ -43,7 +43,7 @@ namespace tools
 
     template<class... args>
     struct is_heir
-        : dDETAIL_CONSTANT_(is_heir<args...>)
+        : dDETAIL_CONSTANT(is_heir<args...>)
     {};
 
 } // namespace tools

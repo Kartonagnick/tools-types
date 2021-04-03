@@ -145,7 +145,7 @@ namespace tools
     // if type 't' is in the list 'args' --> true
     template<dVARIADIC_7>
     struct find_type
-        : dDETAIL_CONSTANT_(find_type<t1, t2, t3, t4, t5, t6, t7>)
+        : dDETAIL_CONSTANT(find_type<t1, t2, t3, t4, t5, t6, t7>)
     {};
 
 } // namespace tools 
@@ -205,7 +205,7 @@ namespace tools
     } // namespace detail
 
     template<class F> class is_functor
-        : public dDETAIL_CONSTANT_(is_functor<F>)
+        : public dDETAIL_CONSTANT(is_functor<F>)
     {};
 
 } // namespace tools 
@@ -253,7 +253,7 @@ namespace tools
     } // namespace detail
 
     template<class F> class is_functor
-        : dDETAIL_CONSTANT_(is_functor<F>)
+        : dDETAIL_CONSTANT(is_functor<F>)
     {};
 
 } // namespace tools 
@@ -633,7 +633,7 @@ namespace tools
 
     // if the syntax is valid: *obj ---> dereferencable 
     template<class t> struct is_dereferencable
-        : dDETAIL_CONSTANT_(is_dereferencable<t>)
+        : dDETAIL_CONSTANT(is_dereferencable<t>)
     {};
 
 } // namespace tools 
@@ -665,7 +665,7 @@ namespace tools
     } // namespace detail
 
     template<class t> struct is_volatile_data
-        : dDETAIL_CONSTANT_(is_volatile_data<t>)
+        : dDETAIL_CONSTANT(is_volatile_data<t>)
     {};
 
 } // namespace tools
