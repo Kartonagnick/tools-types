@@ -1,8 +1,10 @@
 
 test-000-platform  
 ---
+  - [x] `макросы версии 118             [027 PRE]`  
+    - [x] исправление: dTRAIT 
   - [x] `макросы версии 117             [027 PRE]`  
-    - [x] dDETAIL_CONSTANT_ 
+    - [x] dDETAIL_CONSTANT 
   - [x] `макросы версии 116             [027 PRE]`  
     - [x] dHAS_ARRAY_EMPTY_SIZE 
     - [x] dSTATIC_CHECK 

@@ -86,7 +86,6 @@
 #define dMAKE_STR_VERSION(...) \
     dMACRO_CHOOSER_5(dMAKE_STR_VERSION, __VA_ARGS__)(__VA_ARGS__)
 
-
 #define dMAKE_NUM_VERSION_0()       make_num_version_0
 #define dMAKE_NUM_VERSION_1(a1)     dVERSION_COMPACT_NUM(a1##_VERSION)
 #define dMAKE_NUM_VERSION_2(a1, a2) dVERSION_##a1##_NUM(a2##_VERSION)

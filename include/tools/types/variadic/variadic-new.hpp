@@ -7,8 +7,12 @@
 #ifndef dTOOLS_VARIADIC_NEW_USED_ 
 #define dTOOLS_VARIADIC_NEW_USED_ 2
 
-#include <tools/features.hpp>
 #include <type_traits>
+
+#define dDETAIL_CONSTANT(...)              \
+    public dTRAIT::integral_constant<bool, \
+        detail::__VA_ARGS__::value         \
+    >
 
 //==============================================================================
 //=== is_heir ==================================================================

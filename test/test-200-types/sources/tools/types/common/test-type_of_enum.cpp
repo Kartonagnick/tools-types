@@ -3,18 +3,22 @@
 
 #ifdef TEST_TYPE_OF_ENUM
 
-#define dTEST_COMPONENT tools, types, traits
+#define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD type_of_enum
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
 
-#ifndef dHAS_ENUM_CLASS
-    dMESSAGE("[test] tools: disabled -> dHAS_ENUM_CLASS")
+#ifdef dHAS_ENUM_CLASS
+    dMESSAGE("[test] tools: enabled -> dHAS_ENUM_CLASS")
 #else
+    dMESSAGE("[test] tools: disabled -> dHAS_ENUM_CLASS")
+#endif
 
-dMESSAGE("[test] tools: enabled -> dHAS_ENUM_CLASS")
+#ifdef dHAS_ENUM_CLASS
+
 #include <tools/types/traits.hpp>
+#include <tools/types/common.hpp>
 
 namespace me = ::tools;
 //==============================================================================

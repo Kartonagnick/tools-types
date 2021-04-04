@@ -574,15 +574,6 @@ TEST_COMPONENT(012)
 // --- member int stress
 TEST_COMPONENT(013)
 {
-    /*
-    using arr    = int[3];
-    using foo    = int(bool);
-    using pfoo   = int(*)(bool);
-    using arrfoo = pfoo[3];
-
-    using method1 = char (some::*)(float);
-    */
-
     typedef int arr[3];
     typedef int foo(bool);
     typedef int(*pfoo)(bool);
@@ -590,12 +581,11 @@ TEST_COMPONENT(013)
 
     typedef char (some::*method1)(float);
 
-
     //    |    before      |   after                            |
     dCHECK(arr some::*     , const int(some::*)[3]              );
     dCHECK(foo some::*     , int(some::*)(bool)                 );
     dCHECK(arrfoo some::*  , int(*const (some::*)[3])(bool)     );
-    dCHECK(pfoo some::*    , int(* const some::*)(bool)         );
+    dCHECK(pfoo some::*    , int(*const some::*)(bool)          );
     dCHECK(method1 some::* , char(some::* const some::*)(float) );
 }
 
