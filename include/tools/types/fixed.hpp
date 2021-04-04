@@ -1,9 +1,11 @@
 // [2021y-03m-10d][12:44:35] Idrisov Denis R.
 // [2021y-04m-02d][23:54:49] Idrisov Denis R.
 // [2021y-04m-03d][23:13:40] Idrisov Denis R. 101
+
+// [2021y-04m-04d][06:19:49] Idrisov Denis R. 102 PRE
 #pragma once
 #ifndef dTOOLS_FIXED_USED_
-#define dTOOLS_FIXED_USED_ 101
+#define dTOOLS_FIXED_USED_ 102 PRE
 //==============================================================================
 //==============================================================================
 
@@ -14,56 +16,12 @@
     #include <tools/types/fixed/fixed-cpp98.hpp>
 #endif
 
-#ifdef dHAS_TYPE_TRAITS
-    #include <type_traits>
-#else
-    #include <tools/types/traits.hpp>
-#endif
-
-
-#if 0
-//==============================================================================
-//=== remove_cv ================================================================
-#ifndef dTOOLS_REMOVE_CV_USED_ 
-#define dTOOLS_REMOVE_CV_USED_ 1
-namespace tools
-{
-    template<class t> struct remove_cv                     
-        { typedef t type; };
-    template<class t> struct remove_cv <const t>           
-        { typedef t type; };
-    template<class t> struct remove_cv <volatile t>        
-        { typedef t type; };
-    template<class t> struct remove_cv <volatile  const t> 
-        { typedef t type; };
-
-} // namespace tools 
-#endif // !dTOOLS_REMOVE_CV_USED_
-
-//==============================================================================
-//=== is_signed ================================================================
-#ifndef dTOOLS_IS_SIGNED_USED_ 
-#define dTOOLS_IS_SIGNED_USED_ 1
-namespace tools
-{
-    template <class t> struct is_signed
-    {
-        typedef typename remove_cv<t>::type x;
-        enum { value = static_cast<x>(-1) < static_cast<x>(0) };
-    };
-    template <class t> struct is_unsigned
-    {
-        enum { value = !is_signed<t>::value };
-    };
-
-} // namespace tools 
-#endif // !dTOOLS_IS_SIGNED_USED_
-#endif
+#include <tools/type_traits.hpp>
 
 //==============================================================================
 //=== limit ====================================================================
 #ifndef dTOOLS_LIMIT_USED_ 
-#define dTOOLS_LIMIT_USED_ 1
+#define dTOOLS_LIMIT_USED_ 101
 namespace tools
 {
     template<class t> struct limit_unsigned
@@ -74,16 +32,34 @@ namespace tools
         : map_signed<sizeof(t)>
     {};
 
-    template <class t, bool> struct limit_
-        : limit_signed<t>
-    {};
+    namespace detail
+    {
+        template <class t, bool, bool> 
+            struct limit_impl_;
 
-    template <class t> struct limit_<t, false>
-        : limit_unsigned<t>
-    {};
+        template <class t> struct limit_impl_<t, true, true>
+            : limit_signed<t>
+        {};
+
+        template <class t> struct limit_impl_<t, true, false>
+            : limit_unsigned<t>
+        {};
+
+        template <class t> struct limit_
+        {
+            enum { v1 = dTRAIT::is_signed<t>::value         };
+            enum { v2 = dTRAIT::is_integral<t>::value       };
+            enum { v3 = dTRAIT::is_floating_point<t>::value };
+            enum { v4 = v2 || v3 };
+            dSTATIC_ASSERT(ERROR_MUST_BE_ARTITHMETIC, v4);
+            typedef ::tools::detail::limit_impl_<t, v4, v1> 
+                type;
+        };
+
+    } // namespace detail
 
     template <class t> struct limit
-        : limit_<t, dTRAIT::is_signed<t>::value>
+        : ::tools::detail::limit_<t>::type
     {};
 
 } // namespace tools 
