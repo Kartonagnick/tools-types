@@ -9,10 +9,10 @@
 // [2021y-03m-31d][01:56:33] Idrisov Denis R. 115
 // [2021y-04m-02d][00:39:44] Idrisov Denis R. 116
 // [2021y-04m-03d][22:59:27] Idrisov Denis R. 117
-// [2021y-04m-04d][04:51:23] Idrisov Denis R. 118 PRE
+// [2021y-04m-04d][07:05:55] Idrisov Denis R. 118
 #pragma once
 #ifndef dTOOLS_FEATURES_USED_
-#define dTOOLS_FEATURES_USED_ 118 PRE
+#define dTOOLS_FEATURES_USED_ 118
 //==============================================================================
 //=== dMESSAGE =================================================================
 

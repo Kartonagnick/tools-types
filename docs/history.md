@@ -10,24 +10,24 @@
 
 **Версия 1.1.9 (предварительная)**  
 ----------------------------------
-[2021y-04m-03d][23:09:37] #41_stage
+[2021y-04m-04d][07:05:55] #41_stage
 
 1) обновлен: version                    119
 2) обновлен: types                      119
 
-3) добавлен tools/type_traits.hpp       012 PRE
+3) добавлен tools/type_traits.hpp       100
 
 4) type_of_enum                         100
      - переехал из traits в common
 
-5) улучшение common                     107 PRE
+5) улучшение common                     107
      - фикс бага: add_const_data        101
 
-6) исправление features:                118 PRE
+6) исправление features:                118
      - фикс бага: dHAS_TYPE_TRAITS
      - фикс бага: dTRAIT
 
-7) исправление fixed:                   102 PRE
+7) исправление fixed:                   102
      - фикс бага: limit                 002
 
 

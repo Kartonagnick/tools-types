@@ -3,7 +3,7 @@
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_TYPE_TRAITS_USED_ 
-#define dTOOLS_TYPE_TRAITS_USED_ 100 PRE
+#define dTOOLS_TYPE_TRAITS_USED_ 100
 
 #include <tools/features.hpp>
 
