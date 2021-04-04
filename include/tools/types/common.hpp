@@ -187,12 +187,25 @@ namespace tools
             : add_const_data_impl_<t>
         {};
 
+        #if !defined(_MSC_VER) || _MSC_VER <= 1600
+        // msvc2010 has bug 
+        template<class t> struct no_ref_      { typedef t type; };
+        template<class t> struct no_ref_ <t&> { typedef t type; };
+        #endif
+
     } // namespace detail
 
     template<class t> class add_const_data
     {
-        typedef dTRAIT::remove_reference<t>
+        #if !defined(_MSC_VER) || _MSC_VER <= 1600
+        // msvc2010 has bug 
+        typedef ::tools::detail::no_ref_<t>
             no_ref;
+        #else
+        typedef dTRAIT::remove_reference<t&>
+            no_ref;
+        #endif
+
         typedef typename no_ref::type
             x;
         typedef dTRAIT::remove_cv<x>  // bug in msvc20013

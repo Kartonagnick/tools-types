@@ -8,7 +8,8 @@
 #define dTOOLS_VARIADIC_OLD_USED_ 2
 
 #include <tools/features.hpp>
-#if defined(dHAS_TYPE_TRAITS ) && defined(dHAS_RVALUE_REFERENCES)
+
+#ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
 #else
     #include <tools/types/traits.hpp>
@@ -49,15 +50,15 @@ namespace tools
 //==============================================================================
 //==============================================================================
 
-#define dTEMPLATE_CONSTRUCT_IMPL(base, arg)  \
-    typename dTRAIT::enable_if<              \
-        ! tools::is_heir<base, arg>::value,  \
-         const tools::dummy&                 \
+#define dTEMPLATE_CONSTRUCT_IMPL(base, arg)   \
+    typename dTRAIT::enable_if<               \
+        ! ::tools::is_heir<base, arg>::value, \
+         const ::tools::dummy&                \
     >::type
 
-#define dTEMPLATE_CONSTRUCT_ARG(base, arg)   \
-    dTEMPLATE_CONSTRUCT_IMPL(base, arg)      \
-        = tools::dummy()
+#define dTEMPLATE_CONSTRUCT_ARG(base, arg)    \
+    dTEMPLATE_CONSTRUCT_IMPL(base, arg)       \
+        = ::tools::dummy()
 
 //==============================================================================
 //==============================================================================

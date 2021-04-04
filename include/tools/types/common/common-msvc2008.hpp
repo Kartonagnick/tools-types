@@ -11,7 +11,7 @@
 #include <tools/features.hpp>
 #include <cstddef>
 
-#if defined(dHAS_TYPE_TRAITS ) && defined(dHAS_RVALUE_REFERENCES)
+#ifdef dHAS_TYPE_TRAITS
     #include <type_traits>
 #else
     #include <tools/types/traits.hpp>
