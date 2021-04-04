@@ -7,6 +7,7 @@
 #ifndef dTOOLS_COMMON_NEW_USED_ 
 #define dTOOLS_COMMON_NEW_USED_ 106,2008
 
+#include <tools/pragma/pragma.hpp>
 #include <tools/features.hpp>
 #include <cstddef>
 
@@ -19,22 +20,6 @@
 #define dVARIADIC_7 \
     class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
     class t5 = empty, class t6 = empty, class t7  = empty
-
-#define dCLASS_A1 class a1
-#define dCLASS_A2 dCLASS_A1, class a2
-#define dCLASS_A3 dCLASS_A2, class a3
-#define dCLASS_A4 dCLASS_A3, class a4
-#define dCLASS_A5 dCLASS_A4, class a5
-#define dCLASS_A6 dCLASS_A5, class a6
-#define dCLASS_A7 dCLASS_A6, class a7
-
-#define dARGS_A1 a1
-#define dARGS_A2 dARGS_A1, a2
-#define dARGS_A3 dARGS_A2, a3
-#define dARGS_A4 dARGS_A3, a4
-#define dARGS_A5 dARGS_A4, a5
-#define dARGS_A6 dARGS_A5, a6
-#define dARGS_A7 dARGS_A6, a7
 
 //==============================================================================
 //=== [sfinae/help] ============================================================
@@ -81,51 +66,51 @@ namespace tools
         template<class t1, class t2, class t3, class t4, class t5, class t6, class t7> 
         struct find_type
         {
-            enum { r1 = dTRAIT::is_same<t1, t2>::value };
-            enum { r2 = dTRAIT::is_same<t1, t3>::value };
-            enum { r3 = dTRAIT::is_same<t1, t4>::value };
-            enum { r4 = dTRAIT::is_same<t1, t5>::value };
-            enum { r5 = dTRAIT::is_same<t1, t6>::value };
-            enum { r6 = dTRAIT::is_same<t1, t7>::value };
-            enum { value = r1 || r2 || r3 || r4 || r5 || r6 };
+            enum { r2 = dTRAIT::is_same<t1, t2>::value };
+            enum { r3 = dTRAIT::is_same<t1, t3>::value };
+            enum { r4 = dTRAIT::is_same<t1, t4>::value };
+            enum { r5 = dTRAIT::is_same<t1, t5>::value };
+            enum { r6 = dTRAIT::is_same<t1, t6>::value };
+            enum { r7 = dTRAIT::is_same<t1, t7>::value };
+            enum { value = r2 || r3 || r4 || r5 || r6 || r7 };
         };
 
         template<class t1, class t2, class t3, class t4, class t5, class t6> 
         struct find_type<t1, t2, t3, t4, t5, t6, empty>
         {
-            enum { r1 = dTRAIT::is_same<t1, t2>::value };
-            enum { r2 = dTRAIT::is_same<t1, t3>::value };
-            enum { r3 = dTRAIT::is_same<t1, t4>::value };
-            enum { r4 = dTRAIT::is_same<t1, t5>::value };
-            enum { r5 = dTRAIT::is_same<t1, t6>::value };
-            enum { value = r1 || r2 || r3 || r4 || r5 };
+            enum { r2 = dTRAIT::is_same<t1, t2>::value };
+            enum { r3 = dTRAIT::is_same<t1, t3>::value };
+            enum { r4 = dTRAIT::is_same<t1, t4>::value };
+            enum { r5 = dTRAIT::is_same<t1, t5>::value };
+            enum { r6 = dTRAIT::is_same<t1, t6>::value };
+            enum { value = r2 || r3 || r4 || r5 || r6 };
         };
 
         template<class t1, class t2, class t3, class t4, class t5> 
         struct find_type<t1, t2, t3, t4, t5, empty, empty>
         {
-            enum { r1 = dTRAIT::is_same<t1, t2>::value };
-            enum { r2 = dTRAIT::is_same<t1, t3>::value };
-            enum { r3 = dTRAIT::is_same<t1, t4>::value };
-            enum { r4 = dTRAIT::is_same<t1, t5>::value };
-            enum { value = r1 || r2 || r3 || r4 };
+            enum { r2 = dTRAIT::is_same<t1, t2>::value };
+            enum { r3 = dTRAIT::is_same<t1, t3>::value };
+            enum { r4 = dTRAIT::is_same<t1, t4>::value };
+            enum { r5 = dTRAIT::is_same<t1, t5>::value };
+            enum { value = r2 || r3 || r4 || r5 };
         };
 
         template<class t1, class t2, class t3, class t4> 
         struct find_type<t1, t2, t3, t4, empty, empty, empty>
         {
-            enum { r1 = dTRAIT::is_same<t1, t2>::value };
-            enum { r2 = dTRAIT::is_same<t1, t3>::value };
-            enum { r3 = dTRAIT::is_same<t1, t4>::value };
-            enum { value = r1 || r2 || r3 };
+            enum { r2 = dTRAIT::is_same<t1, t2>::value };
+            enum { r3 = dTRAIT::is_same<t1, t3>::value };
+            enum { r4 = dTRAIT::is_same<t1, t4>::value };
+            enum { value = r2 || r3 || r4 };
         };
 
         template<class t1, class t2, class t3> 
         struct find_type<t1, t2, t3, empty, empty, empty, empty>
         {
-            enum { r1 = dTRAIT::is_same<t1, t2>::value };
-            enum { r2 = dTRAIT::is_same<t1, t3>::value };
-            enum { value = r1 || r2 };
+            enum { r2 = dTRAIT::is_same<t1, t2>::value };
+            enum { r3 = dTRAIT::is_same<t1, t3>::value };
+            enum { value = r2 || r3 };
         };
 
         template<class t1, class t2> 
@@ -233,8 +218,7 @@ namespace tools
             }
         };
 
-        template <class t> 
-        struct is_functor_<t, false>
+        template <class t> struct is_functor_<t, false>
         {
             enum { value = false };
         };
@@ -242,12 +226,13 @@ namespace tools
         template <class t> struct is_functor
         {
             typedef dTRAIT::remove_reference<t>
-                noref;
-            typedef typename noref::type 
+                no_ref;
+            typedef typename no_ref::type 
                 x;
-
-            enum { ok = dTRAIT::is_class<x>::value   };
-            enum { value = is_functor_<x, ok>::value };
+            enum { ok = dTRAIT::is_class<x>::value };
+            typedef ::tools::detail::is_functor_<x, ok> 
+                v;
+            enum { value = v::value };
         };
 
     } // namespace detail
@@ -414,161 +399,6 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_SMALL_ARRAY_USED_
-
-
-//==============================================================================
-//=== add_const_data ===========================================================
-#ifndef dTOOLS_ADD_CONST_DATA_USED_ 
-#define dTOOLS_ADD_CONST_DATA_USED_ 100,2008
-namespace tools
-{
-    dPRAGMA_PUSH_WARNING_QUALIFIER_APPLIED_TO_REFERENCE_TYPE
-    dPRAGMA_PUSH_WARNING_QUALIFIER_RETURN_TYPE
-
-    template<class t> class add_const_data;
-
-    namespace detail
-    {
-        template<class t> struct add_const_data
-        {
-            typedef const t type; 
-        };
-
-        template<class t> struct add_const_data<t&>
-        {
-            typedef typename ::tools::add_const_data<t>::type
-				x;
-            typedef x& type; 
-        };
-
-		#ifdef dHAS_RVALUE_REFERENCES
-        template<class t> struct add_const_data<t&&>
-        {
-            typedef typename ::tools::add_const_data<t>::type
-				x;
-            typedef x&& type; 
-        };
-		#endif
-
-        template<class t> struct add_const_data<t[]>
-		{
-			typedef typename add_const_data<t>::type 
-				type[]; 
-		};
-
-        template<class t, size_t n> struct add_const_data<t[n]>
-        { 
-			typedef typename add_const_data<t>::type 
-				type[n];
-		};
-
-        #ifdef dHAS_ZERO_SIZE_ARRAY
-        dPRAGMA_PUSH_WARNING_ZERO_SIZE_ARRAY
-        template<class t> struct add_const_data<t[0]>
-        {
-			typedef typename add_const_data<t>::type 
-				type[0]; 
-		};
-        dPRAGMA_POP
-        #endif // !dHAS_ZERO_SIZE_ARRAY
-
-        template<class t> struct add_const_data<t*>
-            { typedef typename add_const_data<t>::type* type; };
-
-        template<class t> struct add_const_data<t* const>
-            { typedef typename add_const_data<t>::type*const type; };
-
-        template<class t> struct add_const_data<t* volatile>
-            { typedef typename add_const_data<t>::type*volatile type; };
-
-        template<class t> struct add_const_data<t* volatile const>
-            { typedef typename add_const_data<t>::type*volatile const type; };
-
-        template<class m, class cl> struct add_const_data<m cl::*>
-            { typedef const m cl::*type; };
-
-        template<class m, class cl> struct add_const_data<m cl::*const>
-            { typedef const m cl::*const type; };
-
-        template<class m, class cl> struct add_const_data<m cl::*volatile>
-            { typedef const m cl::*volatile type; };
-
-        template<class m, class cl> struct add_const_data<m cl::*volatile const>
-            { typedef const m cl::*volatile const type; };
-
-		template<class t, bool> struct add_const_data_help_
-            { typedef t& type; };
-
-		template<class t> struct add_const_data_help_<t, false>
-            { typedef t type; };
-
-//--------
-        template<class r> struct add_const_data<r(*)()>
-            { typedef r (*type)(); };
-        template<class r> struct add_const_data<r(*const)()>
-            { typedef r (*const type)(); };
-        template<class r> struct add_const_data<r(*volatile)()>
-            { typedef r (*volatile type)(); };
-        template<class r> struct add_const_data<r(*volatile const)()>
-            { typedef r (*const volatile type)(); };
-
-    } // namespace detail
-
-    template<class t> class add_const_data
-    {
-        typedef detail::add_const_data<t>
-            x;
-    public:
-        typedef typename x::type
-            type;
-
-#if 0
-        enum { v1 = dTRAIT::is_const<t>::value    };
-        enum { v2 = dTRAIT::is_volatile<t>::value };
-
-        typedef typename dTRAIT::remove_cv<t>::type
-            x;
-        typedef typename detail::add_const_data<x>::type 
-            r1;
-        typedef typename dTRAIT::conditional<v1, const r1, r1>::type 
-            r2;
-        typedef typename dTRAIT::conditional<v2, volatile r2, r2>::type
-            r3;
-    public:
-        typedef r3 type;
-#endif
-
-
-
-#if 0
-		enum { v1 = dTRAIT::is_reference<t>::value };
-        typedef typename dTRAIT::remove_reference<t>::type
-            x;
-        enum { v2 = !v1 && dTRAIT::is_const<x>::value    };
-        enum { v3 = !v1 && dTRAIT::is_volatile<x>::value };
-
-        typedef typename dTRAIT::remove_cv<t>::type
-            z;
-        typedef typename detail::add_const_data<z>::type 
-            r1;
-
-        typedef typename dTRAIT::conditional<v2, const r1, r1>::type 
-            r2;
-        typedef typename dTRAIT::conditional<v3, volatile r2, r2>::type 
-            r3;
-        typedef typename detail::add_const_data_help_<r3, v1>::type
-            r4;
-    public:
-        typedef r4 type;
-#endif
-    };
-
-    dPRAGMA_POP
-    dPRAGMA_POP
-
-} // namespace tools
-#endif // !dTOOLS_ADD_CONST_DATA_USED_
-
 
 //==============================================================================
 //=== is_dereferencable ========================================================

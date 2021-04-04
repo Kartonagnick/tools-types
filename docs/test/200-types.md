@@ -3,6 +3,7 @@ test-200-types
 ---
   - [x] `common версии 107 [027 PRE]`  
     - [x] type_of_enum (msvc2012)  
+    - [x] bugfix: add_const_data  
   - [x] `common версии 106 [027 PRE]`  
     - [x] add_const_data  
   - [x] `common версии 105 [027 PRE]`  
