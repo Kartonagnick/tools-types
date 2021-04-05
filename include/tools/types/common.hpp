@@ -6,11 +6,10 @@
 // [2021y-03m-23d][23:55:08] Idrisov Denis R. 105
 // [2021y-03m-30d][03:40:56] Idrisov Denis R. 106
 // [2021y-04m-04d][07:05:55] Idrisov Denis R. 107
-
-// [2021y-04m-05d][04:32:42] Idrisov Denis R. 108 PRE
+// [2021y-04m-05d][04:43:12] Idrisov Denis R. 108
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 108 PRE
+#define dTOOLS_COMMON_USED_ 108
 
 #include <tools/features.hpp>
 #include <tools/pragma/pragma.hpp>
