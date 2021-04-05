@@ -31,7 +31,12 @@
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1600
     // #pragma message("build for msvc2010 (or newer)")
+
+    // [WARNING] msvc2010 has bug with reference
+    // bug: can be "std::tr1::_Remove_reference<_Ty&&>"
+    // bug: or "std::tr1::_Remove_reference<_Ty&>"
     #define dHAS_TYPE_TRAITS 1
+
     #define dHAS_DECLTYPE 1
     #define dHAS_NULLPTR 1
     #define dHAS_LAMBDA 1
@@ -91,7 +96,11 @@
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1700
     // #pragma message("build for msvc2012 (or newer) or other compiler")
+
+    // [WARNING] msvc2010 has bug with rvalue
+    // (example eror: from "const char [4]" to "std::string &&")
     #define dHAS_RVALUE_REFERENCES 1
+
     #define dHAS_ARRAY_EMPTY_SIZE 1
     #define dHAS_ENUM_CLASS 1
     #define dHAS_EMPLACE 1    

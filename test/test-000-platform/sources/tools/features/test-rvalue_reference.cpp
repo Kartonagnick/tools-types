@@ -11,14 +11,14 @@
 
 #include <tools/features.hpp>
 
-#ifndef dHAS_RVALUE_REFERENCES
-    dMESSAGE("[test] tools: disabled -> dHAS_RVALUE_REFERENCES")
+#ifdef dHAS_RVALUE_REFERENCES
+    dMESSAGE("[test] tools: enabled -> dHAS_RVALUE_REFERENCES")
 #else
+    dMESSAGE("[test] tools: disabled -> dHAS_RVALUE_REFERENCES")
+#endif
 
-#include <tools/features.hpp>
+#ifdef dHAS_RVALUE_REFERENCES
 #include <string>
-
-dMESSAGE("[test] tools: enabled -> dHAS_RVALUE_REFERENCES")
 
 //==============================================================================
 //==============================================================================
@@ -39,6 +39,17 @@ TEST_COMPONENT(000)
     foo("111", "111");
 }
 
+TEST_COMPONENT(001)
+{
+    int v = 0;
+    int&& rv = std::move(v);
+    ASSERT_TRUE(rv == 0);
+}
+
 #endif // !dHAS_RVALUE_REFERENCES
+
+//==============================================================================
+//==============================================================================
+
 #endif // !TEST_TOOLS_FEATURE_RVALUE_REFERENCE
 
