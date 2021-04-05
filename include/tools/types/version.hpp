@@ -16,13 +16,15 @@
 // [2021y-04m-03d][00:13:46] Idrisov Denis R. 117
 // [2021y-04m-03d][23:10:33] Idrisov Denis R. 118
 // [2021y-04m-04d][07:05:55] Idrisov Denis R. 119
+
+// [2021y-04m-05d][04:26:19] Idrisov Denis R. 120 PRE
 #pragma once
 #ifndef dTOOLS_TYPES_VERSION_USED_ 
-#define dTOOLS_TYPES_VERSION_USED_ 119
+#define dTOOLS_TYPES_VERSION_USED_ 120 PRE
 
 #define dTYPES_MAJOR 1
-#define dTYPES_MINOR 1
-#define dTYPES_PATCH 9
+#define dTYPES_MINOR 2
+#define dTYPES_PATCH 0
 
 //==============================================================================
 //==============================================================================
