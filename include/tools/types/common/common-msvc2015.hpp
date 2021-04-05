@@ -151,7 +151,7 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_IS_FUNCTOR_USED_
 
-
+#if 0
 //==============================================================================
 //=== is_zero_array ============================================================
 #ifndef dTOOLS_IS_ZERO_ARRAY_USED_ 
@@ -313,7 +313,7 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_SMALL_ARRAY_USED_
-
+#endif
 
 //==============================================================================
 //=== is_dereferencable ========================================================
