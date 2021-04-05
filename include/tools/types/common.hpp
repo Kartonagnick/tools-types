@@ -27,6 +27,7 @@
     #include <tools/types/common/common-msvc2008.hpp>
 #endif
 
+#include <tools/types/common/array.hpp>
 
 //================================================================================
 //=== type_of_enum ============================================= (type_traits) ===
