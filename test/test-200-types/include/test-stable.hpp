@@ -42,15 +42,15 @@
     #define TEST_TOOLS_FOR_LVALUE                           // ready!
     #define TEST_TOOLS_FOR_RVALUE                           // ready!
     #define TEST_TOOLS_FIND_TYPE                            // ready!
-    #define TEST_TOOLS_IS_FUNCTOR                           // ready!
+    #define TEST_TOOLS_IS_LAMBDA                            // ready!
     #define TEST_TOOLS_IS_ZERO_ARRAY                        // ready!
     #define TEST_TOOLS_SIZE_ARRAY                           // ready!
     #define TEST_TOOLS_SMALL_ARRAY                          // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
     #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_TOOLS_VARIADIC                             // ready!
-    #define TEST_TOOLS_IS_VOLATILE_DATA                     // in progress...
-    #define TEST_TOOLS_ADD_CONST_DATA                       // in progress...
+    #define TEST_TOOLS_IS_VOLATILE_DATA                     // ready!
+    #define TEST_TOOLS_ADD_CONST_DATA                       // ready!
 
 //==============================================================================
 //===== tools/types ========================================||==================

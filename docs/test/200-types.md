@@ -1,6 +1,31 @@
 
 test-200-types
 ---
+  - [x] `common версии 109 [027 PRE]`  
+    - [x] `tools/types/common/2013/degradate-2013.hpp`  
+    - [x] `tools/types/common/2013/lvalue-2013.hpp`  
+    - [x] `tools/types/common/2013/rvalue-2013.hpp`  
+    - [x] `tools/types/common/array.hpp`  
+      - [x] `array-2008.hpp`  
+      - [x] `array-2012.hpp`  
+      - [x] `array-2013.hpp`  
+    - [x] `tools/types/common/find_types.hpp`  
+      - [x] `find_types-2008.hpp`  
+      - [x] `find_types-2013.hpp`  
+    - [x] `tools/types/common/is_lambda.hpp`  
+      - [x] `is_lambda-2008.hpp`  
+      - [x] `is_lambda-2013.hpp`  
+    - [x] `tools/types/common/add_const_data.hpp`  
+    - [x] `tools/types/common/type_of_enum.hpp`  
+      - [x] `type_of_enum-2012.hpp`  
+      - [x] `type_of_enum-2013.hpp`  
+    - [x] `tools/types/common/is_volatile_data.hpp`  
+      - [x] `is_volatile_data-2008.hpp`  
+      - [x] `is_volatile_data-2012.hpp`  
+      - [x] `is_volatile_data-2013.hpp`  
+    - [x] `tools/types/common/is_dereferencable.hpp`  
+      - [x] `is_dereferencable-2008.hpp`  
+      - [x] `is_dereferencable-2013.hpp`  
   - [x] `common версии 107 [027 PRE]`  
     - [x] type_of_enum (msvc2012)  
     - [x] bugfix: add_const_data  

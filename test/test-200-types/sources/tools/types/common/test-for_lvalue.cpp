@@ -17,37 +17,33 @@
 
 namespace me = ::tools;
 //==============================================================================
+
 namespace
 {
-    #ifdef dHAS_CONSTEXPR_CPP11
-        template<class t, dfor_lvalue(t&&)>
-        constexpr bool is_lvalue_argument(t&&) noexcept { return true; }
+    template<class t, dfor_lvalue(t&&)>
+    dCONSTEXPR_CPP11 bool is_lvalue_argument(t&&) dNOEXCEPT { return true; }
 
-        template<class t, dfor_not_lvalue(t&&)>
-        constexpr bool is_lvalue_argument(t&&) noexcept { return false; }
+    template<class t, dfor_not_lvalue(t&&)>
+    dCONSTEXPR_CPP11 bool is_lvalue_argument(t&&) dNOEXCEPT { return false; }
 
-        constexpr int val = 1;
+    #ifdef dHAS_CPP11
 
-        static_assert(
-            !is_lvalue_argument(1),
-            "numeric costant is not lvalue"
-        );
+    constexpr int val = 1;
 
-        static_assert(
-            is_lvalue_argument(val),
-            "global variable is lvalue"
-        );
-    #else
-        template<class t>
-        inline me::for_lvalue<t, bool>
-        is_lvalue_argument(t&&) dNOEXCEPT { return true; }
+    static_assert(
+        !is_lvalue_argument(1),
+        "numeric costant is rvalue"
+    );
 
-        template<class t>
-        inline me::for_not_lvalue<t, bool>
-        is_lvalue_argument(t&&) dNOEXCEPT { return false; }
-    #endif // !dHAS_CONSTEXPR_CPP11
+    static_assert(
+        is_lvalue_argument(val),
+        "global variable is not rvalue"
+    );
+    #endif
 
-}//namespace
+} // namespace
+
+
 //==============================================================================
 //=== typical ==================================================================
 TEST_COMPONENT(000)
