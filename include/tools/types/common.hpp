@@ -25,12 +25,11 @@
 //==============================================================================
 
 #include <tools/types/common/array.hpp>
-#include <tools/types/common/find_types.hpp>
 #include <tools/types/common/is_lambda.hpp>
-#include <tools/types/common/add_const_data.hpp>
+#include <tools/types/common/find_types.hpp>
 #include <tools/types/common/type_of_enum.hpp>
+#include <tools/types/common/add_const_data.hpp>
 #include <tools/types/common/is_volatile_data.hpp>
-
 #include <tools/types/common/is_dereferencable.hpp>
 
 //==============================================================================
