@@ -5,8 +5,9 @@
 #ifdef TEST_TOOLS_FOR_RVALUE
 
 #include <tools/features.hpp>
-#ifdef dHAS_CPP11
-// #pragma message("build for msvc2015 (or newer) or other compiler")
+
+#ifdef dHAS_USING_ALIAS
+// msvc2013 or newer
 
 #define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD for_rvalue
@@ -20,10 +21,12 @@ namespace me = ::tools;
 namespace
 {
     template<class t, dfor_rvalue(t&&)>
-    constexpr bool is_rvalue_argument(t&&) noexcept { return true; }
+    dCONSTEXPR_CPP11 bool is_rvalue_argument(t&&) dNOEXCEPT { return true; }
 
     template<class t, dfor_not_rvalue(t&&)>
-    constexpr bool is_rvalue_argument(t&&) noexcept { return false; }
+    dCONSTEXPR_CPP11 bool is_rvalue_argument(t&&) dNOEXCEPT { return false; }
+
+    #ifdef dHAS_CPP11
 
     constexpr int val = 1;
 
@@ -36,8 +39,9 @@ namespace
         !is_rvalue_argument(val),
         "global variable is not rvalue"
     );
+    #endif
 
-}//namespace
+} // namespace
 
 //==============================================================================
 //=== typical ==================================================================
@@ -66,7 +70,7 @@ TEST_COMPONENT(003)
 
 //==============================================================================
 //==============================================================================
-#endif // !dHAS_CPP11
+#endif // !dHAS_USING_ALIAS
 #endif // !TEST_TOOLS_FOR_RVALUE
 
 

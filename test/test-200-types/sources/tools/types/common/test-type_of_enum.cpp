@@ -17,7 +17,6 @@
 
 #ifdef dHAS_ENUM_CLASS
 
-#include <tools/types/traits.hpp>
 #include <tools/types/common.hpp>
 
 namespace me = ::tools;
@@ -36,8 +35,8 @@ namespace
     #ifdef dHAS_STATIC_ASSERT
         #define dCHECK(a, b, v)                          \
             static_assert(                               \
-                me::is_same<dVAL(a),b>::value == v,      \
-                "'tools::type_of_enum_t<" #a ">::type' " \
+                ::std::is_same<dVAL(a),b>::value == v,   \
+                "'tools::type_of_enum<" #a ">::type' "   \
                 "must be '" #v "'"                       \
             )
     #else
