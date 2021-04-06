@@ -6,7 +6,7 @@
 [E]: ../../icons/empty.png
 [N]: ../../icons/na.png
 
-version 1.0.8
+version 1.0.9 [![P]][M]
 ---
 
 common.hpp
