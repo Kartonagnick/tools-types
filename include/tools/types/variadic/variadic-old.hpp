@@ -1,19 +1,13 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-26d][01:24:02] Idrisov Denis R.
-// [2021y-04m-03d][19:36:45] Idrisov Denis R. 2 PRE
+// [2021y-04m-03d][19:36:45] Idrisov Denis R. 2
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_VARIADIC_OLD_USED_ 
 #define dTOOLS_VARIADIC_OLD_USED_ 2
 
-#include <tools/features.hpp>
-
-#ifdef dHAS_TYPE_TRAITS
-    #include <type_traits>
-#else
-    #include <tools/types/traits.hpp>
-#endif
+#include <tools/type_traits.hpp>
 
 //==============================================================================
 //=== is_heir ==================================================================
@@ -21,7 +15,7 @@
 #define dTOOLS_IS_HEIR_USED_ 1, 2008
 namespace tools
 {
-    struct dummy {};
+    struct dummy;
 
     namespace detail
     {
@@ -53,12 +47,11 @@ namespace tools
 #define dTEMPLATE_CONSTRUCT_IMPL(base, arg)   \
     typename dTRAIT::enable_if<               \
         ! ::tools::is_heir<base, arg>::value, \
-         const ::tools::dummy&                \
+          ::tools::dummy*                     \
     >::type
 
 #define dTEMPLATE_CONSTRUCT_ARG(base, arg)    \
-    dTEMPLATE_CONSTRUCT_IMPL(base, arg)       \
-        = ::tools::dummy()
+    dTEMPLATE_CONSTRUCT_IMPL(base, arg) = 0
 
 //==============================================================================
 //==============================================================================

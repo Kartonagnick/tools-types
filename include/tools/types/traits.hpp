@@ -7,7 +7,6 @@
 // [2021y-04m-02d][00:40:44] Idrisov Denis R. 9
 // [2021y-04m-03d][00:13:00] Idrisov Denis R. 10
 // [2021y-04m-03d][23:11:10] Idrisov Denis R. 11
-
 // [2021y-04m-04d][01:36:02] Idrisov Denis R. 12
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 

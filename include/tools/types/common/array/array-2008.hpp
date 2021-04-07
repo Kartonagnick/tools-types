@@ -1,5 +1,4 @@
 // [2021y-04m-05d][03:01:01] Idrisov Denis R. 100
-
 #pragma once
 #ifndef dTOOLS_ARRAY_2008_USED_ 
 #define dTOOLS_ARRAY_2008_USED_ 100,2008

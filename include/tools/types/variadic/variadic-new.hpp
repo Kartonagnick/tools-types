@@ -1,7 +1,7 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-26d][01:24:02] Idrisov Denis R.
-// [2021y-04m-03d][19:13:13] Idrisov Denis R. 2 PRE
+// [2021y-04m-03d][19:13:13] Idrisov Denis R. 2
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_VARIADIC_NEW_USED_ 
@@ -20,7 +20,7 @@
 #define dTOOLS_IS_HEIR_USED_ 1,2010
 namespace tools
 {
-    struct dummy {};
+    struct dummy;
 
     namespace detail
     {
@@ -28,9 +28,7 @@ namespace tools
             struct is_heir;
 
         template <class a> struct is_heir<a>
-        {
-            enum { value = false };
-        };
+            { enum { value = false }; };
 
         template <class b, class d, class... args>
         struct is_heir<b, d, args...>
@@ -64,12 +62,12 @@ namespace tools
 #define dTEMPLATE_CONSTRUCT_IMPL(type, args)  \
     ::std::enable_if_t<                       \
         !::tools::is_heir<type, args>::value, \
-         ::tools::dummy                       \
+         ::tools::dummy*                      \
     >
 
 #define dTEMPLATE_CONSTRUCT_ARG(type, args)   \
     dTEMPLATE_CONSTRUCT_IMPL(type, args)      \
-      = ::tools::dummy()
+      = nullptr
 
 //==============================================================================
 //==============================================================================

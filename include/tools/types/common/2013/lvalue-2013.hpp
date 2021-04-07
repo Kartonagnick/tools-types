@@ -1,7 +1,7 @@
 // [2021y-04m-06d][16:29:40] Idrisov Denis R. 100
 #pragma once
 #ifndef dTOOLS_FOR_LVALUE_USED_ 
-#define dTOOLS_FOR_LVALUE_USED_ 100, 2013
+#define dTOOLS_FOR_LVALUE_USED_ 100,2013
 
 #include <type_traits>
 

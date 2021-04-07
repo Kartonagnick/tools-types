@@ -105,7 +105,6 @@ namespace tools
         #endif
     };
 
-
     #define dif_big_array(arr, ret)                         \
         typename ::std::enable_if<                          \
             ::tools::size_array<                            \

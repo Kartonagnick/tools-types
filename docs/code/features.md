@@ -6,7 +6,7 @@
 [E]: ../icons/empty.png
 [N]: ../icons/na.png
 
-version 1.1.7 
+version 1.1.8
 ---
 
 | **ID** | элемент                                    | tools           | версия |  статус   |  
