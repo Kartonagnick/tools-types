@@ -1,4 +1,5 @@
 // [2021y-04m-06d][21:36:00] Idrisov Denis R.
+// [2021y-04m-08d][01:38:17] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_IS_DEREFERENCABLE_2008_USED_ 
 #define dTOOLS_IS_DEREFERENCABLE_2008_USED_ 101,2008

@@ -94,7 +94,7 @@ namespace tools
     #endif // !dHAS_CSTDINT
 
     #ifdef _MSC_VER
-        #pragma warning( push )
+        #pragma warning(push)
         // warning C4480: nonstandard extension used: specifying underlying type for enum
         #pragma warning(disable : 4480)
     #endif

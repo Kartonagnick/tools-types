@@ -32,7 +32,7 @@ namespace tools
             typedef ::tools::detail::add_const_data_impl_<t> 
                 add_const_t;
             typedef typename add_const_t::type
-				x;
+                x;
             typedef x& type; 
         };
 
@@ -42,26 +42,25 @@ namespace tools
             typedef ::tools::detail::add_const_data_impl_<t> 
                 add_const_t;
             typedef typename add_const_t::type
-				x;
+                x;
             typedef x&& type; 
         };
         #endif
 
         template<class t> struct add_const_data_impl_<t[]>
-		{
+        {
             typedef ::tools::detail::add_const_data_impl_<t> 
                 add_const_t;
-			typedef typename add_const_t::type 
-				type[]; 
-		};
+            typedef typename add_const_t::type 
+                type[]; 
+        };
         template<class t, size_t n> struct add_const_data_impl_<t[n]>
         { 
             typedef ::tools::detail::add_const_data_impl_<t> 
                 add_const_t;
-			typedef typename add_const_t::type 
-				type[n]; 
-		};
-
+            typedef typename add_const_t::type 
+                type[n]; 
+        };
         template<class t> struct add_const_data_impl_<t*>
         {
             typedef ::tools::detail::add_const_data_impl_<t> 
