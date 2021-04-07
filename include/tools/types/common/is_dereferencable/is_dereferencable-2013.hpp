@@ -1,7 +1,7 @@
 // [2021y-04m-06d][21:36:00] Idrisov Denis R.
 #pragma once
 #ifndef dTOOLS_IS_DEREFERENCABLE_2013_USED_ 
-#define dTOOLS_IS_DEREFERENCABLE_2013_USED_ 100,2013
+#define dTOOLS_IS_DEREFERENCABLE_2013_USED_ 101,2013
 
 #include <tools/features.hpp>
 #include <type_traits>
@@ -12,7 +12,7 @@ namespace tools
 {
     namespace detail
     {
-        template<class t> class is_dereferencable_
+        template<class t, bool> class is_deref_
         {
             using x = ::std::remove_reference_t<t>;
 
@@ -28,11 +28,31 @@ namespace tools
             template<class> static ::std::false_type
                 check(...);
 
-            using checked     
+            using checked 
                 = decltype(check<x>(nullptr));
         public:
-            is_dereferencable_() = delete;
+            is_deref_() = delete;
             enum { value = checked::value };
+        };
+
+        template<class t> class is_deref_<t, false>
+        {
+            enum { v1 = ::std::is_pointer<t>::value };  
+            enum { v2 = ::std::is_array<t>::value   };  
+        public:
+            is_deref_() = delete;
+            enum { value = v1 || v2 };  
+        };
+
+        template <class t> class is_dereferencable_
+        {
+            using no_ref = ::std::remove_reference<t>;
+            using x = typename no_ref::type;
+            enum { ok = ::std::is_class<x>::value };
+            using v = ::tools::detail::is_deref_<x, ok>;
+        public:
+            is_dereferencable_() = delete;
+            enum { value = v::value };
         };
 
     } // namespace detail
