@@ -52,15 +52,44 @@ namespace
 
     struct foo
     {
-        int operator*() const { return 0; }
+        int operator*() const;
     };
 
     struct bar
     {
-        int operator*() { return 0; }
+        int operator*();
     };
 
     struct baz{};
+
+    struct voidd
+    {
+        void operator*();
+        void foo();
+    };
+    typedef void(voidd::*method)();
+
+    class privat
+    {
+        void operator*();
+    public:
+        privat();
+    };
+
+    class two
+    {
+        int operator*();
+        int operator*(int);
+    public:
+        two();
+    };
+
+    class multi
+    {
+        int operator*(int);
+    public:
+        multi();
+    };
 
 } // namespace
 
@@ -71,31 +100,64 @@ TEST_COMPONENT(000)
 {
     //       |   type         | expected |
     make_test(bool            ,   false  );
+
     #ifdef dHAS_NULLPTR
     make_test(std::nullptr_t  ,   false  );
     #endif
+
     make_test(std::string     ,   false  );
     make_test(char[2]         ,   true   );
     make_test(char*           ,   true   );
     make_test(iter            ,   true   );
+
     #ifdef dHAS_NULLPTR
     make_test(shared          ,   true   );
     make_test(shared&         ,   true   );
     #endif
+
     make_test(foo             ,   true   );
     make_test(foo&            ,   true   );
     make_test(const foo       ,   true   );
     make_test(const foo&      ,   true   );
     make_test(bar             ,   true   );
     make_test(bar&            ,   true   );
-#ifdef dHAS_VARIADIC_TEMPLATE
-    make_test(const bar       ,   false  );
-    make_test(const bar&      ,   false  );
-#endif
+
+    #ifdef dHAS_VARIADIC_TEMPLATE
+        // msvc2013
+        make_test(const bar   ,   false  );
+        make_test(const bar&  ,   false  );
+    #else
+        //bug: vc2008 - vc2013  ignore 'qualifier'
+        make_test(const bar   ,   true   );
+        make_test(const bar&  ,   true   );
+    #endif
+
     make_test(baz             ,   false  );
     make_test(baz&            ,   false  );
     make_test(const baz       ,   false  );
     make_test(const baz&      ,   false  );
+    make_test(voidd           ,   true   );
+    make_test(method          ,   false  );
+
+    #ifdef dHAS_CPP11
+        make_test(two         ,   false  );
+        make_test(privat      ,   false  );
+        make_test(multi       ,   false  );
+    #else
+        //bug: vc2008 - vc2013  ignore 'private' acccess
+        make_test(two         ,   true   );
+        make_test(privat      ,   true   );
+
+        #ifdef dHAS_USING_ALIAS
+            // msvc2013
+            make_test(multi   ,   false  );
+        #else
+            // bug: vc2008 - vc2012 
+            // does not distinguish between multiplication and dereferencing operator
+            make_test(multi   ,   true   );
+
+        #endif
+    #endif
 }
 
 //==============================================================================
