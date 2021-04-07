@@ -42,15 +42,44 @@ namespace
 
     struct foo
     {
-        int operator*() const { return 0; }
+        int operator*() const;
     };
 
     struct bar
     {
-        int operator*() { return 0; }
+        int operator*();
     };
 
     struct baz{};
+
+    struct voidd
+    {
+        void operator*();
+        void foo();
+    };
+    typedef void(voidd::*method)();
+
+    class privat
+    {
+        void operator*();
+    public:
+        privat();
+    };
+
+    class two
+    {
+        int operator*();
+        int operator*(int);
+    public:
+        two();
+    };
+
+    class multi
+    {
+        int operator*(int);
+    public:
+        multi();
+    };
 
     //       |   type         | expected |
     make_test(bool            ,   false  );
@@ -73,6 +102,12 @@ namespace
     make_test(baz&            ,   false  );
     make_test(const baz       ,   false  );
     make_test(const baz&      ,   false  );
+
+    make_test(voidd           ,   true   );
+    make_test(method          ,   false  );
+    make_test(two             ,   false  );
+    make_test(privat          ,   false  );
+    make_test(multi           ,   false  );
 
 }//namespace
 
