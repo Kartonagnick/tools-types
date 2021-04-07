@@ -190,7 +190,7 @@ if mingw || msvc2013 или более новые
 
 [7]: #-ограничения-is_volatile_data  "ограничения is_volatile_data"
 
-[![D]][M] ограничения is_volatile_data
+[![V]][M] ограничения is_volatile_data
 -------------------------------
 
 ```

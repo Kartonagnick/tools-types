@@ -11,6 +11,10 @@
 Tools`s version 0.2.7  [![P]][M]
 ---
 
+Tools`s types version 1.2.2  [![P]][M]
+---
+
+
 Корреляции  
 ---
 
