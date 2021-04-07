@@ -1,0 +1,60 @@
+
+test-200-types
+---
+  - [x] `traits версии 12 [027 PRE]`  
+    - [x] removed: type_of_enum (msvc2012)  
+  - [x] `traits версии 11 [027 PRE]`  
+     - [x] bugfix: is_class
+     - [x] bugfix: is_pointer
+     - [x] bugfix: is_reference
+     - [x] bugfix: is_const
+     - [x] bugfix: is_volatile
+     - [x] bugfix: is_function
+     - [x] bugfix: remove_reference
+     - [x] bugfix: remove_pointer
+     - [x] bugfix: remove_extent
+     - [x] bugfix: remove_all_extent
+     - [x] bugfix: add_pointer
+     - [x] bugfix: decay
+  - [x] `traits версии 10 [027 PRE]`  
+    - [x] bugfix: is_signed    002 
+    - [x] bugfix: is_integral  002 
+    - [x] is_unsigned          001 
+  - [x] `traits версии 9 [027 PRE]`  
+    - [x] bugfix: is_array    002 
+  - [x] `traits версии 8 [027 PRE]`  
+    - [x] bugfix: remove_pointer 002 
+  - [x] `traits версии 7 [027 PRE]`  
+     - [x] bugfix: decay      002
+     - [x] is_function        001
+     - [x] is_array           001
+     - [x] remove_extent      001
+     - [x] remove_all_extent  001
+     - [x] add_pointer        001
+     - [x] is_base_of         001
+  - [x] `traits версии 6 [027 PRE]`  
+    - [x] is_reference  
+    - [x] is_pointer  
+  - [x] `traits версии 5 [027 PRE]`  
+    - [x] remove_pointer  
+    - [x] is_volatile  
+    - [x] is_const  
+  - [x] `traits версии 4 [027 PRE]`  
+    - [x] is_class  
+  - [x] `traits версии 3 [027 PRE]`  
+    - [x] integral_constant  
+  - [x] `traits версии 2 [023]`  
+    - [x] remove_reference  
+    - [x] decay  
+  - [x] `traits версии 1 [019]`  
+    - [x] is_same  
+    - [x] remove_cv  
+    - [x] is_signed  
+    - [x] is_floating_point  
+    - [x] is_integral  
+    - [x] conditional  
+    - [x] enable_if  
+    - [x] type_of_enum (msvc2012)  
+
+<br />
+<br />
