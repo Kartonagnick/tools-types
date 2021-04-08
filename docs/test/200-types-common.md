@@ -1,9 +1,13 @@
 
 test-200-types
 ---
+  - [x] `types\common версии 111 [027 PRE]`  
+    - [x] `tools/types/common/is_const_data/is_const_data-2008.hpp`  
+    - [x] `tools/types/common/is_const_data/is_const_data-2012.hpp`  
+    - [x] `tools/types/common/is_const_data/is_const_data-2013.hpp`  
   - [x] `types\common версии 110 [027 PRE]`  
     - [x] `tools/types/common/is_dereferencable/is_dereferencable-2008.hpp`  
-    - [x] `tools/types/common/is_dereferencable/is_dereferencable-2008.hpp`  
+    - [x] `tools/types/common/is_dereferencable/is_dereferencable-2013.hpp`  
   - [x] `common версии 109 [027 PRE]`  
     - [x] `tools/types/common/2013/degradate-2013.hpp`  
     - [x] `tools/types/common/2013/lvalue-2013.hpp`  
