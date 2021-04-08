@@ -9,9 +9,11 @@
 // [2021y-04m-05d][04:43:12] Idrisov Denis R. 108
 // [2021y-04m-07d][00:13:42] Idrisov Denis R. 109 
 // [2021y-04m-08d][01:36:55] Idrisov Denis R. 110
+
+// [2021y-04m-08d][19:34:35] Idrisov Denis R. 111
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 110
+#define dTOOLS_COMMON_USED_ 111 PRE
 
 #include <tools/features.hpp>
 
@@ -25,12 +27,13 @@
 //==============================================================================
 
 #include <tools/types/common/array.hpp>
-#include <tools/types/common/is_lambda.hpp>
 #include <tools/types/common/find_types.hpp>
 #include <tools/types/common/type_of_enum.hpp>
 #include <tools/types/common/add_const_data.hpp>
-#include <tools/types/common/is_volatile_data.hpp>
 #include <tools/types/common/is_dereferencable.hpp>
+#include <tools/types/common/is_volatile_data.hpp>
+#include <tools/types/common/is_const_data.hpp>
+#include <tools/types/common/is_lambda.hpp>
 
 //==============================================================================
 //==============================================================================
