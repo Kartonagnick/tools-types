@@ -33,8 +33,17 @@ namespace
                 dexpression(type, expected)  \
             )
     #endif
+
+    template<class s>
+    dif_volatile_data(s, bool)
+        old_consept(s&) { return true; }
+
+    template<class s>
+    dif_not_volatile_data(s, bool)
+        old_consept(s&) { return false; }
+
     
-}//namespace
+} // namespace
 
 //==============================================================================
 //=== false ====================================================================
@@ -130,6 +139,27 @@ TEST_COMPONENT(001)
     make_test(volatile const char* volatile&&       ,   true   );
     make_test(volatile const char* volatile const&& ,   true   );
     #endif
+}
+
+//==============================================================================
+//==============================================================================
+TEST_COMPONENT(002)
+{
+    //       |   type        | expected |
+    make_test(volatile char* ,  true    );
+    make_test(char* volatile ,  false   );
+}
+
+//==============================================================================
+//==============================================================================
+TEST_COMPONENT(003)
+{
+    char arr[] = "";
+    volatile char carr[] = "";
+    volatile bool re1 = old_consept(arr);
+    volatile bool re2 = old_consept(carr);
+    ASSERT_TRUE(!re1);
+    ASSERT_TRUE( re2);
 }
 
 //==============================================================================
