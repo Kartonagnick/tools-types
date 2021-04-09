@@ -1,4 +1,6 @@
 // [2021y-04m-06d][19:15:34] Idrisov Denis R. 100
+// [2021y-04m-06d][23:09:28] Idrisov Denis R. 100
+// [2021y-04m-08d][03:06:44] Idrisov Denis R. 100
 #pragma once
 #ifndef dTOOLS_ADD_CONST_DATA_USED_ 
 #define dTOOLS_ADD_CONST_DATA_USED_ 100
