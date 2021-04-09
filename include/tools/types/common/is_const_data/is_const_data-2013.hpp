@@ -17,9 +17,9 @@ namespace tools
         private:
             using y = decltype(*::std::declval<t>());
             using x = ::std::remove_reference_t<y>;
-            using z = ::std::remove_pointer_t<x>;
+            //using z = ::std::remove_pointer_t<x>;
         public:
-            enum { value = ::std::is_const<z>::value };
+            enum { value = ::std::is_const<x>::value };
         };
 
         template<class t> 

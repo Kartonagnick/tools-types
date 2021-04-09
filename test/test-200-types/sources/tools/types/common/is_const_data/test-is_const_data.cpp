@@ -35,13 +35,10 @@ namespace
     using shared
         = ::std::shared_ptr<int>;
 
-    using const_shared 
-        = const ::std::shared_ptr<int>;
-
     // --- ignore top-level const
-    struct bar    { int operator*();        };
-    struct sample { int operator*();        };
-    struct foo    { const int& operator*(); };
+    struct bar    { int operator*();         };
+    struct sample { int* const& operator*(); };
+    struct foo    { const int& operator*();  };
 
     bar b;
 
@@ -62,11 +59,11 @@ namespace
     make_test(decltype(val.cbegin()) ,   true   );
     make_test(decltype(val.begin())  ,   false  );
                                                 
-    make_test(const_shared           ,   false  );
+    make_test(const shared           ,   false  );
     make_test(shared                 ,   false  );
 
     make_test(const sample           ,   true   );
-    make_test(sample                 ,   false  );
+    make_test(sample                 ,   true   );
 
     make_test(foo                    ,   true   );
     make_test(const foo              ,   true   );
@@ -75,18 +72,22 @@ namespace
     make_test(decltype(*b)           ,   false  );
 
     template<class s, dfor_const_data(s)>
-    constexpr bool new_consept(s&&) noexcept { return true; }
+    constexpr bool new_consept(s&&) noexcept
+        { return true; }
 
     template<class s, dfor_not_const_data(s)>
-    constexpr bool new_consept(s&&) noexcept { return false; }
+    constexpr bool new_consept(s&&) noexcept
+        { return false; }
 
     template<class s>
     constexpr dif_const_data(s, bool)
-    old_consept(s&&) noexcept { return true; }
+    old_consept(s&&) noexcept 
+        { return true; }
 
     template<class s>
     constexpr dif_not_const_data(s, bool)
-    old_consept(s&&) noexcept { return false; }
+    old_consept(s&&) noexcept
+        { return false; }
 
     char arr[] = "";
     const char carr[] = "";
@@ -102,20 +103,19 @@ namespace
 
 TEST_COMPONENT(000)
 {
-    const_shared sh(new int(1));
-    int& ref = *sh; // <--- non-const
+    const shared sh(new int(1));
+    int& ref = *sh; // <--- result is non-const-data
     ASSERT_TRUE(ref == 1);
 }
 
 namespace
 {
-    // warning C4822: local class member function does not have a body
-
-    struct some { int operator*(); };
+    struct some  { int operator*(); };
     struct csome { int* const& operator*(); };
     struct bsome { const int*  operator*(); };
     struct dsome { const int&  operator*(); };
     struct fsome { const some  operator*(); };
+    struct gsome { const some& operator*(); };
     struct dummy;
 
 } // namespace
@@ -126,10 +126,11 @@ TEST_COMPONENT(001)
     make_test(const char* ,  true    );
     make_test(char* const ,  false   );
     make_test(const some  ,  true    );  // <--- can not dereferencable, but it is const
-    make_test(csome       ,  false   );
-    make_test(bsome       ,  true    );
+    make_test(csome       ,  true    );
+    make_test(bsome       ,  false   );
     make_test(dsome       ,  true    );
     make_test(fsome       ,  true    );
+    make_test(gsome       ,  true    );
     make_test(dummy       ,  false   );
     make_test(const dummy ,  true    );
     make_test(const int   ,  true    );
