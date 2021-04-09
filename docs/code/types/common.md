@@ -6,7 +6,7 @@
 [E]: ../../icons/empty.png
 [N]: ../../icons/na.png
 
-version 1.1.1  
+version 1.1.2  
 ---
 
 common.hpp
@@ -194,6 +194,16 @@ if mingw || msvc2013 или более новые
 -------------------------------
 
 ```
+макро-функции:
+    dif_not_volatile_data 
+    dif_volatile_data     
+доступны всем компиляторам:
+
+макро-функции:
+    dfor_not_volatile_data 
+    dfor_volatile_data     
+доступны компиляторам начиная с msvc2013 или mingw
+
 is_volatile_data-2008: 
   совместима со всеми компиляторами.
   использует старый синтаксис.

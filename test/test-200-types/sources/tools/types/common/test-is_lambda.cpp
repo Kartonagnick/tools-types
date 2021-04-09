@@ -17,12 +17,6 @@ namespace me = ::tools;
 //=== TDD ======================================================================
 namespace
 {
-    struct some
-    {
-        bool operator()() const dNOEXCEPT 
-            { return false; }
-    };
-
     #ifdef dHAS_STATIC_ASSERT
         #define dCHECK(type, expected)                    \
             static_assert(                                \
@@ -38,7 +32,10 @@ namespace
         )
     #endif
 
-}//namespace
+    struct some   { bool operator()()  const; };
+    struct foo    { bool& operator()() const; };
+
+} // namespace
 
 //==============================================================================
 //==============================================================================
@@ -50,9 +47,16 @@ TEST_COMPONENT(000)
     dCHECK(const some  , true );
     dCHECK(const some& , true );
 
+    dCHECK(const foo&  , true );
+    dCHECK(foo&        , true );
+    dCHECK(foo         , true );
+
     #ifdef dHAS_RVALUE_REFERENCE
-        dCHECK(some&&, true);
+        dCHECK(some&&      , true);
         dCHECK(const some&&, true);
+
+        dCHECK(foo&&       , true);
+        dCHECK(const foo&& , true);
     #endif
 }
 

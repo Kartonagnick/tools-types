@@ -11,9 +11,9 @@
 ----------------------------------
 [2021y-04m-09d][23:32:25] #51_is_volatile_data
 
-1) обновлен: version                    124 PRE
-2) обновлен: types                      124 PRE
-3) обновлен: common                     112 PRE
+1) обновлен: version                    124
+2) обновлен: types                      124
+3) обновлен: common                     112
   3.1) добавлен: is_volatile_data     100
        - is_volatile_data-2008      100
        - is_volatile_data-2012      100

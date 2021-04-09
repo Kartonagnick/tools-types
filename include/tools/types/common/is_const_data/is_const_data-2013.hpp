@@ -12,35 +12,49 @@ namespace tools
 {
     namespace detail
     {
-        template<class t, bool> struct is_const_data_impl_
+        template<class t, bool> class is_const_smart_
         {
-        private:
             using y = decltype(*::std::declval<t>());
             using x = ::std::remove_reference_t<y>;
-            //using z = ::std::remove_pointer_t<x>;
+            using c = ::std::is_const<x>;
         public:
-            enum { value = ::std::is_const<x>::value };
+            enum { value = c::value };
         };
 
-        template<class t> 
-        struct is_const_data_impl_<t, false>
-            { enum { value = false }; };
+        template<class t> class is_const_smart_<t, false>
+        {
+            using c = ::std::is_const<t>;
+        public:
+            enum { value = c::value };
+        };
 
-        template<class t> class is_const_data_
+        template<class t, bool> class is_const_data_impl_
+        {
+            using d = ::tools::is_dereferencable<t>;
+            enum { ok = d::value };
+            using result
+                = ::tools::detail::is_const_smart_<t, ok>;
+        public:
+            enum { value = result::value };
+        };
+
+        template<class t> class is_const_data_impl_<t, false>
         {
             using x = ::std::remove_reference_t<t>;
             using z = ::std::remove_pointer_t<x>;
-            using d = ::tools::is_dereferencable<x>;
             using c = ::std::is_const<z>;
-            
-            enum { ok = d::value };
-            using h
-                = ::tools::detail::is_const_data_impl_<x, ok>;
-
-            enum { top = !ok && c::value };
-            enum { dwn =  ok && h::value };
         public:
-            enum { value = top || dwn };
+            enum { value = c::value };  
+        };
+
+        template <class t> class is_const_data_
+        {
+            using x = ::std::remove_reference_t<t>;
+            enum { ok = ::std::is_class<x>::value };
+            using result 
+                = ::tools::detail::is_const_data_impl_<x, ok>;
+        public:
+            enum { value = result::value };
         };
 
     } // namespace detail
@@ -51,11 +65,15 @@ namespace tools
 
     template<class t, class v = void> 
     using for_const_data 
-        = ::std::enable_if_t< ::tools::is_const_data<t>::value, v>;
+        = ::std::enable_if_t< 
+            ::tools::is_const_data<t>::value, v
+        >;
 
     template<class t, class v = void> 
     using for_not_const_data 
-        = ::std::enable_if_t< !::tools::is_const_data<t>::value, v>;
+        = ::std::enable_if_t< 
+            !::tools::is_const_data<t>::value, v
+        >;
 
     #define dif_const_data(s, r) \
         ::tools::for_const_data<s, r>

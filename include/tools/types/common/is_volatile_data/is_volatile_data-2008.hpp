@@ -33,6 +33,16 @@ namespace tools
         : dDETAIL_CONSTANT(is_volatile_data_<t>)
     {};
 
+    #define dif_volatile_data(t, r)                 \
+        typename dTRAIT::enable_if<                 \
+            ::tools::is_volatile_data<t>::value, r  \
+        >::type
+
+    #define dif_not_volatile_data(t, r)             \
+        typename dTRAIT::enable_if<                 \
+            !::tools::is_volatile_data<t>::value, r \
+        >::type
+
 } // namespace tools
 
 //==============================================================================
