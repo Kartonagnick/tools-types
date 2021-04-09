@@ -11,9 +11,9 @@
 ----------------------------------
 [2021y-04m-08d][20:32:25] #49_is_const_data
 
-1) обновлен: version                    123 PRE
-2) обновлен: types                      123 PRE
-3) обновлен: common                     111 PRE
+1) обновлен: version                    123
+2) обновлен: types                      123
+3) обновлен: common                     111
   3.1) добавлен: is_const_data     100
        - is_const_data-2008      100
        - is_const_data-2012      100
