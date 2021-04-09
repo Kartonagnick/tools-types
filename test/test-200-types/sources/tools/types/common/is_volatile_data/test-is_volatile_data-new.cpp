@@ -28,8 +28,31 @@ namespace
             "tools::is_volatile_data<" #type ">::value "  \
             "must be '" #expected "'"                     \
         )
+
+    template<class s, dfor_volatile_data(s)>
+    constexpr bool new_consept(s&&) noexcept { return true; }
+
+    template<class s, dfor_not_volatile_data(s)>
+    constexpr bool new_consept(s&&) noexcept { return false; }
+
+    template<class s>
+    constexpr dif_volatile_data(s, bool)
+    old_consept(s&&) noexcept { return true; }
+
+    template<class s>
+    constexpr dif_not_volatile_data(s, bool)
+    old_consept(s&&) noexcept { return false; }
+
+    char arr[] = "";
+    volatile char carr[] = "";
+
+    static_assert(!new_consept(arr), "bug");
+    static_assert(new_consept(carr), "bug");
+
+    static_assert(!old_consept(arr), "bug");
+    static_assert(old_consept(carr), "bug");
     
-}//namespace
+} // namespace
 
 //==============================================================================
 //=== false ====================================================================
@@ -123,7 +146,7 @@ namespace
     make_test(volatile const char* volatile&&       ,   true   );
     make_test(volatile const char* volatile const&& ,   true   );
     
-}//namespace
+} // namespace
 //==============================================================================
 
 TEST_COMPONENT(000){}
