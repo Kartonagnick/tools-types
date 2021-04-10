@@ -44,6 +44,10 @@
      - is_const_data-2012           101 PRE
      - is_const_data-2013           101 PRE
 
+10) обновлен: is_volatile_data        101 PRE
+     - is_volatile_data-2008        101 PRE
+     - is_volatile_data-2012        101 PRE
+     - is_volatile_data-2013        101 PRE
 
 
 **Версия 1.2.4 (предварительная)**  
