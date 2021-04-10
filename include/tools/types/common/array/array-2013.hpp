@@ -1,7 +1,8 @@
 // [2021y-04m-05d][03:01:01] Idrisov Denis R. 100 PRE
+// [2021y-04m-10d][03:34:51] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_ARRAY_2013_USED_ 
-#define dTOOLS_ARRAY_2013_USED_ 100,2013
+#define dTOOLS_ARRAY_2013_USED_ 101,2013
 
 #include <tools/pragma/pragma.hpp>
 #include <tools/features.hpp>
@@ -89,18 +90,18 @@ namespace tools
         using rval = type(&&)[];
     };
 
-    #define dif_big_array(arr, ret)     \
-        ::std::enable_if_t<             \
-            ::tools::size_array<        \
-                ::tools::degradate<arr> \
-            >::big, ret                 \
+    #define dif_big_array(arr, ret)       \
+        ::std::enable_if_t<               \
+            ::tools::size_array<          \
+                ::tools::degradate_t<arr> \
+            >::big, ret                   \
         >
 
-    #define dif_small_array(arr, ret)   \
-        ::std::enable_if_t<             \
-            ::tools::size_array<        \
-                ::tools::degradate<arr> \
-            >::Small, ret               \
+    #define dif_small_array(arr, ret)     \
+        ::std::enable_if_t<               \
+            ::tools::size_array<          \
+                ::tools::degradate_t<arr> \
+            >::Small, ret                 \
         >
 
     #define dfor_big_array(arr)         \
@@ -134,30 +135,30 @@ namespace tools
     };
 
     template<class arr1, class arr2, class ret = void>
-    using for_big_arrays 
+    using for_big_arrays_t 
         = ::std::enable_if_t< 
             !::tools::small_array_selector<arr1, arr2>::value,
             ret
         >;
 
     template<class arr1, class arr2, class ret = void>
-    using for_small_arrays 
+    using for_small_arrays_t 
         = ::std::enable_if_t<
             ::tools::small_array_selector<arr1, arr2>::value, 
             ret
         >;
 
     #define dif_big_arrays(arr1, arr2, ret) \
-        ::tools::for_big_arrays<arr1, arr2, ret>
+        ::tools::for_big_arrays_t<arr1, arr2, ret>
 
     #define dif_small_arrays(arr1, arr2, ret) \
-        ::tools::for_small_arrays<arr1, arr2, ret>
+        ::tools::for_small_arrays_t<arr1, arr2, ret>
 
     #define dfor_big_arrays(arr1, arr2) \
-        ::tools::for_big_arrays<arr1, arr2>* = nullptr
+        ::tools::for_big_arrays_t<arr1, arr2>* = nullptr
 
     #define dfor_small_arrays(arr1, arr2) \
-        ::tools::for_small_arrays<arr1, arr2>* = nullptr
+        ::tools::for_small_arrays_t<arr1, arr2>* = nullptr
 
 } // namespace tools 
 #endif // !dTOOLS_SMALL_ARRAY_USED_
