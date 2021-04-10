@@ -18,14 +18,13 @@ Tools`s types version 1.2.4
 Корреляции  
 ---
 
-| **ID** | **элементы**  |     include guard    | где используется       | оригинальное расположение |  
-|:------:|:-------------:|:--------------------:|:----------------------:|:-------------------------:|  
-|  0000  | [example][e0] | dTOOLS_EXAMPLE_USED_ | [tools/custom.hpp][u0] | [tools/example][p0]       |  
+| **ID** | **элементы**    |     include guard      | где используется          | оригинальное расположение |  
+|:------:|:---------------:|:----------------------:|:-------------------------:|:-------------------------:|  
+|  0000  | [degradate][e0] | dTOOLS_DEGRADATE_USED_ | [enable_for-2013.hpp][u0] | [degradate-2013.hpp][p0]  |  
 
-[p0]: ../../include/tools/types/traits.hpp   "расположение файла"  
-[u0]: ../../include/tools/types/fixed.hpp    "расположение копии"  
-
-[e0]: ../code/example.md    "образец: заполнения данной таблицы"  
+[p0]: ../../include/tools/types/common/2013/degradate-2013.hpp           "расположение файла"  
+[u0]: ../../include/tools/types/common/enable_for/enable_for-2013.hpp    "расположение копии"  
+[e0]: ../code/degradate.md                                               "метафункция: тип аргумента"  
 
 <br/>
 
