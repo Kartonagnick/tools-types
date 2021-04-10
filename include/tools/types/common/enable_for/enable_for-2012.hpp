@@ -8,6 +8,7 @@
 #define dTOOLS_ENABLE_FOR_2012_USED_ 100,2012
 
 #include <tools/types/common/find_type.hpp>
+#include <tools/types/common/degradate.hpp>
 
 //==============================================================================
 //=== enable_if_find/disable_if_find =============== (degradate)(find_type) ====
@@ -17,9 +18,7 @@ namespace tools
     #define dif_enabled(ret, t, ...)                          \
         typename ::std::enable_if<                            \
             ::tools::find_type<                               \
-                typename ::std::remove_cv<                    \
-                    typename ::std::remove_reference<t>::type \
-                >::type,                                      \
+                typename ::tools::degradate<t>::type,         \
                 __VA_ARGS__                                   \
             >::value, ret                                     \
         >::type
@@ -28,9 +27,7 @@ namespace tools
     #define dif_disabled(ret, t, ...)                         \
         typename ::std::enable_if<                            \
             ! ::tools::find_type<                             \
-                typename ::std::remove_cv<                    \
-                    typename ::std::remove_reference<t>::type \
-                >::type,                                      \
+                typename ::tools::degradate<t>::type,         \
                 __VA_ARGS__                                   \
             >::value, ret                                     \
         >::type
