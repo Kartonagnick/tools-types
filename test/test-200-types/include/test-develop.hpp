@@ -52,6 +52,8 @@
     #define TEST_TOOLS_IS_CONST_DATA                        // ready!
     #define TEST_TOOLS_ADD_CONST_DATA                       // ready!
 
+    #define TEST_TOOLS_ENABLE_FOR                           // in progress...
+
 //==============================================================================
 //===== tools/types ========================================||==================
     #define TEST_TOOLS_FIXED                                // ready!
