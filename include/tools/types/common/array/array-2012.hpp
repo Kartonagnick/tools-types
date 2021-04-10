@@ -120,12 +120,6 @@ namespace tools
             >::Small, ret                                   \
         >::type
 
-    #define dfor_big_array(arr)         \
-        dif_big_array(arr, void) * = nullptr
-
-    #define dfor_small_array(arr)        \
-        dif_small_array(arr, void) * = nullptr
-
 } // namespace tools 
 #endif // !dTOOLS_SIZE_ARRAY_USED_
 
