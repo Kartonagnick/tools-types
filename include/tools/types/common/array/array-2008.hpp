@@ -1,5 +1,5 @@
 // [2021y-04m-05d][03:01:01] Idrisov Denis R. 100
-// [2021y-04m-10d][03:34:51] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:18:56] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_ARRAY_2008_USED_ 
 #define dTOOLS_ARRAY_2008_USED_ 101,2008

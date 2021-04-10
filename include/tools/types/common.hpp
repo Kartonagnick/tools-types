@@ -11,34 +11,28 @@
 // [2021y-04m-08d][01:36:55] Idrisov Denis R. 110
 // [2021y-04m-09d][23:13:29] Idrisov Denis R. 111
 // [2021y-04m-09d][23:48:34] Idrisov Denis R. 112
-
-// [2021y-04m-10d][01:48:01] Idrisov Denis R. 113 PRE
+// [2021y-04m-10d][07:15:57] Idrisov Denis R. 113
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 113 PRE
+#define dTOOLS_COMMON_USED_ 113
 
 #include <tools/features.hpp>
-
-#ifdef dHAS_USING_ALIAS
-    #include <tools/types/common/2013/lvalue-2013.hpp>
-    #include <tools/types/common/2013/rvalue-2013.hpp>
-#endif
 
 //==============================================================================
 //==============================================================================
 
 #include <tools/types/common/degradate.hpp>
-#include <tools/types/common/array.hpp>
-
+#include <tools/types/common/for_lvalue.hpp>
+#include <tools/types/common/for_rvalue.hpp>
 #include <tools/types/common/find_type.hpp>
 #include <tools/types/common/enable_for.hpp>
-
 #include <tools/types/common/type_of_enum.hpp>
 #include <tools/types/common/add_const_data.hpp>
 #include <tools/types/common/is_dereferencable.hpp>
 #include <tools/types/common/is_volatile_data.hpp>
 #include <tools/types/common/is_const_data.hpp>
 #include <tools/types/common/is_lambda.hpp>
+#include <tools/types/common/array.hpp>
 
 //==============================================================================
 //==============================================================================

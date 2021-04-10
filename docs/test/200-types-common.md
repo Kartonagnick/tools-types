@@ -2,11 +2,15 @@
 test-200-types
 ---
   - [x] `types\common версии 113 [027 PRE]`  
-    - [x] update: `tools/types/common/common.hpp`  
+    - [x] update all: `tools/types/common/common.hpp`  
     - [x] add: `tools/types/common/enable_for.hpp`  
       - [x] add: `tools/types/common/enable_for/enable_for-2008.hpp`  
       - [x] add: `tools/types/common/enable_for/enable_for-2012.hpp`  
       - [x] add: `tools/types/common/enable_for/enable_for-2013.hpp`  
+    - [x] add: `tools/types/common/degradate.hpp`  
+      - [x] add: `tools/types/common/degradate/degradate-2008.hpp`  
+      - [x] add: `tools/types/common/degradate/degradate-2012.hpp`  
+      - [x] add: `tools/types/common/degradate/degradate-2013.hpp`  
 
   - [x] `types\common версии 112 [027 PRE]`  
     - [x] update: `tools/types/common/is_volatile_data/is_volatile_data-2008.hpp`  

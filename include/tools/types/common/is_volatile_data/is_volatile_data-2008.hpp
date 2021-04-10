@@ -1,5 +1,5 @@
 // [2021y-04m-06d][20:55:40] Idrisov Denis R.
-// [2021y-04m-10d][04:42:17] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:21:56] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_IS_VOLATILE_DATA_2008_USED_ 
 #define dTOOLS_IS_VOLATILE_DATA_2008_USED_ 101,2008

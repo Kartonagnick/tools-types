@@ -1,6 +1,6 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2021y-04m-08d][03:04:34] Idrisov Denis R.
-// [2021y-04m-10d][04:39:15] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:21:07] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_IS_CONST_DATA_2013_USED_ 
 #define dTOOLS_IS_CONST_DATA_2013_USED_ 101,2013

@@ -1,8 +1,8 @@
 // [2021y-04m-06d][15:43:33] Idrisov Denis R. 100
-// [2021y-04m-10d][02:48:58] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:17:01] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_FIND_TYPES_USED_ 
-#define dTOOLS_FIND_TYPES_USED_ 101 PRE
+#define dTOOLS_FIND_TYPES_USED_ 101
 
 #include <tools/features.hpp>
 

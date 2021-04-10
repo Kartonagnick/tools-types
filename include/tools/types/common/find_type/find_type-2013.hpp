@@ -1,5 +1,5 @@
 // [2021y-03m-29d][23:43:28] Idrisov Denis R. 100
-// [2021y-04m-10d][02:49:51] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:17:01] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_FIND_TYPES_2013_USED_ 
 #define dTOOLS_FIND_TYPES_2013_USED_ 101,2013

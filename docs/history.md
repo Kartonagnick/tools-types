@@ -9,45 +9,45 @@
 
 **Версия 1.2.5 (предварительная)**  
 ----------------------------------
-[2021y-04m-09d][23:32:25] #53_enable_for
+[2021y-04m-10d][07:23:33] #53_enable_for
 
-1) обновлен: version                    125 PRE
-2) обновлен: types                      125 PRE
-3) обновлен: common                     113 PRE
+1) обновлен: version                    125
+2) обновлен: types                      125
+3) обновлен: common                     113
   3.1) добавлен: enable_for           100
        - enable_for-2008            100
        - enable_for-2012            100
        - enable_for-2013            100
 
-4) обновлен: find_type                101 PRE
-     - find_type-2008               101 PRE
-     - find_type-2013               101 PRE
+4) обновлен: find_type                101
+     - find_type-2008               101
+     - find_type-2013               101
 
-5) обновлен: degradate                101 PRE
-     - degradate-2008               101 PRE
-     - degradate-2012               101 PRE
-     - degradate-2013               101 PRE
+5) обновлен: degradate                101
+     - degradate-2008               101
+     - degradate-2012               101
+     - degradate-2013               101
 
-6) обновлен: array                    101 PRE
-     - array-2008                   101 PRE
-     - array-2012                   101 PRE
-     - array-2013                   101 PRE
+6) обновлен: array                    101
+     - array-2008                   101
+     - array-2012                   101
+     - array-2013                   101
 
-7) обновлен: lvalue                   101 PRE
-     - lvalue-2013                  101 PRE
+7) обновлен: for_lvalue               101
+     - for_lvalue-2013              101
 
-8) обновлен: rvalue                   101 PRE
-     - rvalue-2013                  101 PRE
+8) обновлен: for_rvalue               101
+     - for_rvalue-2013              101
 
-9) обновлен: is_const_data            101 PRE
-     - is_const_data-2008           101 PRE
-     - is_const_data-2012           101 PRE
-     - is_const_data-2013           101 PRE
+9) обновлен: is_const_data            101
+     - is_const_data-2008           101
+     - is_const_data-2012           101
+     - is_const_data-2013           101
 
-10) обновлен: is_volatile_data        101 PRE
-     - is_volatile_data-2008        101 PRE
-     - is_volatile_data-2012        101 PRE
-     - is_volatile_data-2013        101 PRE
+10) обновлен: is_volatile_data        101
+     - is_volatile_data-2008        101
+     - is_volatile_data-2012        101
+     - is_volatile_data-2013        101
 
 
 **Версия 1.2.4 (предварительная)**  
@@ -95,6 +95,10 @@
 1) обновлен: version                    121
 2) обновлен: types                      121
 3) рефактор: common                     109
+3.1) rename: is_functor -> is_lambda    100
+     - is_lambda-2008        100
+     - is_lambda-2013        100
+
 
 
 **Версия 1.2.0 (предварительная)**  
@@ -405,7 +409,7 @@
 
 **Версия 1.0.1 (предварительная)**  
 ----------------------------------
-[2021-03m-18d][23:45:05] #5_reorganozation
+[2021y-03m-18d][23:45:05] #5_reorganozation
 1) обновлен: features 110
     - добавлен: dHAS_NULLPTR
     - добавлен: dHAS_TYPE_TRAITS
@@ -432,27 +436,27 @@
 4) добавлен: pragma                    100
 5) добавлен: types                     101
     - добавлен: traits                 002
-      - добавлен: decay                1
-      - добавлен: is_same              1
-      - добавлен: remove_cv            1
-      - добавлен: remove_reference     1
-      - добавлен: is_signed            1
-      - добавлен: is_floating          1
-      - добавлен: is_integral          1
-      - добавлен: conditional          1 
-      - добавлен: enable_if            1
-      - добавлен: type_of_enum         1
+      - добавлен: decay                 001
+      - добавлен: is_same               001
+      - добавлен: remove_cv             001
+      - добавлен: remove_reference      001
+      - добавлен: is_signed             001
+      - добавлен: is_floating           001
+      - добавлен: is_integral           001
+      - добавлен: conditional           001 
+      - добавлен: enable_if             001
+      - добавлен: type_of_enum          001
     - добавлен: common                 100
-      - добавлен: common-msvc2013      100
-        - добавлен: degradate          100
-        - добавлен: dfor_lvalue        100
-      - добавлен: common-msvc2015      100
-        - добавлен: degradate          100
-        - добавлен: dfor_lvalue        100
-        - добавлен: dfor_rvalue        100
+      - добавлен: common-msvc2013       100
+        - добавлен: degradate            100
+        - добавлен: dfor_lvalue          100
+      - добавлен: common-msvc2015       100
+        - добавлен: degradate            100
+        - добавлен: dfor_lvalue          100
+        - добавлен: dfor_rvalue          100
     - добавлен: fixed                  100
-      - добавлен: fixed-cpp98          100
-      - добавлен: fixed-cpp11          100
+      - добавлен: fixed-cpp98           100
+      - добавлен: fixed-cpp11           100
 
 
 **Версия 0.0.1 (предварительная)**  

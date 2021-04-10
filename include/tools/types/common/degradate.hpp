@@ -1,8 +1,8 @@
 // [2021y-04m-10d][03:07:35] Idrisov Denis R. 100
-// [2021y-04m-10d][04:34:49] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:18:11] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_DEGRADATE_USED_ 
-#define dTOOLS_DEGRADATE_USED_ 101 PRE
+#define dTOOLS_DEGRADATE_USED_ 101
 
 #include <tools/features.hpp>
 

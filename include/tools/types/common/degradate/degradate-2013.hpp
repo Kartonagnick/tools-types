@@ -1,5 +1,5 @@
 // [2021y-04m-06d][16:24:22] Idrisov Denis R. 100
-// [2021y-04m-10d][02:53:29] Idrisov Denis R. 101 PRE
+// [2021y-04m-10d][07:18:11] Idrisov Denis R. 101
 #pragma once
 #ifndef dTOOLS_DEGRADATE_2013_USED_ 
 #define dTOOLS_DEGRADATE_2013_USED_ 101,2013
@@ -20,8 +20,7 @@ namespace tools
         ::std::remove_reference_t<t> 
     >;
 
-    #define ddegradate(t) \
-        typename ::tools::degradate<t>::type
+    #define ddegradate(...) degradate_t<__VA_ARGS__>
 
 } // namespace tools 
 
