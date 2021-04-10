@@ -1,8 +1,9 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2021y-04m-08d][03:04:34] Idrisov Denis R.
+// [2021y-04m-10d][04:39:15] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_IS_CONST_DATA_2013_USED_ 
-#define dTOOLS_IS_CONST_DATA_2013_USED_ 100,2013
+#define dTOOLS_IS_CONST_DATA_2013_USED_ 101,2013
 
 #include <tools/types/common/is_dereferencable.hpp>
 
@@ -64,22 +65,22 @@ namespace tools
     {};
 
     template<class t, class v = void> 
-    using for_const_data 
+    using for_const_data_t 
         = ::std::enable_if_t< 
             ::tools::is_const_data<t>::value, v
         >;
 
     template<class t, class v = void> 
-    using for_not_const_data 
+    using for_not_const_data_t 
         = ::std::enable_if_t< 
             !::tools::is_const_data<t>::value, v
         >;
 
     #define dif_const_data(s, r) \
-        ::tools::for_const_data<s, r>
+        ::tools::for_const_data_t<s, r>
 
     #define dif_not_const_data(s, r) \
-        ::tools::for_not_const_data<s, r>
+        ::tools::for_not_const_data_t<s, r>
 
     #define dfor_const_data(s) \
         dif_const_data(s, void)* = nullptr

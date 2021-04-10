@@ -11,21 +11,20 @@
 Tools`s version 0.2.7  [![P]][M]
 ---
 
-Tools`s types version 1.2.4
+Tools`s types version 1.2.5  [![P]][M]
 ---
 
 
 Корреляции  
 ---
 
-| **ID** | **элементы**  |     include guard    | где используется       | оригинальное расположение |  
-|:------:|:-------------:|:--------------------:|:----------------------:|:-------------------------:|  
-|  0000  | [example][e0] | dTOOLS_EXAMPLE_USED_ | [tools/custom.hpp][u0] | [tools/example][p0]       |  
+| **ID** | **элементы**    |     include guard      | где используется          | оригинальное расположение |  
+|:------:|:---------------:|:----------------------:|:-------------------------:|:-------------------------:|  
+|  0000  | [degradate][e0] | dTOOLS_DEGRADATE_USED_ | [enable_for-2013.hpp][u0] | [degradate-2013.hpp][p0]  |  
 
-[p0]: ../../include/tools/types/traits.hpp   "расположение файла"  
-[u0]: ../../include/tools/types/fixed.hpp    "расположение копии"  
-
-[e0]: ../code/example.md    "образец: заполнения данной таблицы"  
+[p0]: ../../include/tools/types/common/2013/degradate-2013.hpp           "расположение файла"  
+[u0]: ../../include/tools/types/common/enable_for/enable_for-2013.hpp    "расположение копии"  
+[e0]: ../code/degradate.md                                               "метафункция: тип аргумента"  
 
 <br/>
 
@@ -36,7 +35,7 @@ Tools`s types version 1.2.4
 |:------:|:--------------:|:------:|:---------------:|:-------------------:|:---------------------:|:---------------------------:|  
 |  0001  | [features][01] | 0.0.1  | 1.1.8           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
 |  0018  | [macro][18]    | 0.1.7  | 1.0.0           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
-|  0019  | [types][19]    | 0.1.8  | 1.2.4           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
+|  0019  | [types][19]    | 0.1.8  | 1.2.5 [![P]][M] |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
 
 <br/>
 
@@ -49,7 +48,7 @@ Tools`s types version 1.2.4
 |  0001  | [features][01]    | 0.0.1           | 1.1.8           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
 |  0007  | [dFUNCTION][07]   | 0.0.6           | 1.0.0           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
 |  0018  | [macro][18]       | 0.1.7           | 1.0.0           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![V]][VS-OLD]              |  
-|  0019  | [types][19]       | 0.1.8           | 1.2.4           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
+|  0019  | [types][19]       | 0.1.8           | 1.2.5 [![P]][M] |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
 |  0020  | [type_traits][20] | 0.2.7 [![P]][M] | 1.0.0           |    [![V]][MINGW]    |    [![V]][VS-NEW]     | [![D]][VS-OLD]              |  
 
 <br/>

@@ -1,7 +1,8 @@
 // [2021y-04m-05d][03:01:01] Idrisov Denis R. 100 PRE
+// [2021y-04m-10d][03:34:51] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_ARRAY_2012_USED_ 
-#define dTOOLS_ARRAY_2012_USED_ 100,2012
+#define dTOOLS_ARRAY_2012_USED_ 101,2012
 
 #include <tools/pragma/pragma.hpp>
 #include <tools/features.hpp>

@@ -7,6 +7,49 @@
 
 **История изменений**  
 
+**Версия 1.2.5 (предварительная)**  
+----------------------------------
+[2021y-04m-09d][23:32:25] #53_enable_for
+
+1) обновлен: version                    125 PRE
+2) обновлен: types                      125 PRE
+3) обновлен: common                     113 PRE
+  3.1) добавлен: enable_for           100
+       - enable_for-2008            100
+       - enable_for-2012            100
+       - enable_for-2013            100
+
+4) обновлен: find_type                101 PRE
+     - find_type-2008               101 PRE
+     - find_type-2013               101 PRE
+
+5) обновлен: degradate                101 PRE
+     - degradate-2008               101 PRE
+     - degradate-2012               101 PRE
+     - degradate-2013               101 PRE
+
+6) обновлен: array                    101 PRE
+     - array-2008                   101 PRE
+     - array-2012                   101 PRE
+     - array-2013                   101 PRE
+
+7) обновлен: lvalue                   101 PRE
+     - lvalue-2013                  101 PRE
+
+8) обновлен: rvalue                   101 PRE
+     - rvalue-2013                  101 PRE
+
+9) обновлен: is_const_data            101 PRE
+     - is_const_data-2008           101 PRE
+     - is_const_data-2012           101 PRE
+     - is_const_data-2013           101 PRE
+
+10) обновлен: is_volatile_data        101 PRE
+     - is_volatile_data-2008        101 PRE
+     - is_volatile_data-2012        101 PRE
+     - is_volatile_data-2013        101 PRE
+
+
 **Версия 1.2.4 (предварительная)**  
 ----------------------------------
 [2021y-04m-09d][23:32:25] #51_is_volatile_data

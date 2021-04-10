@@ -10,7 +10,7 @@
 
 #define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD degradate
-#define dTEST_TAG tdd
+#define dTEST_TAG new
 
 #include <tools/types/common.hpp>
 #include <string>
@@ -22,11 +22,11 @@ namespace
     #define make_test(type, etalon)                         \
         static_assert(                                      \
             ::std::is_same<                                 \
-                ::tools::degradate<type>,                   \
+                ::tools::degradate_t<type>,                 \
                 etalon                                      \
             >::value,                                       \
             "tools::degradate<" #type "> -> '" #etalon "'"  \
-        )                                                  \
+        )                                                   \
 
     make_test(int       , int);
     make_test(const int , int);

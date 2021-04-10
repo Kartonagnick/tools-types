@@ -1,7 +1,8 @@
 // [2021y-04m-08d][03:04:34] Idrisov Denis R.
+// [2021y-04m-10d][04:39:15] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_IS_CONST_DATA_2012_USED_ 
-#define dTOOLS_IS_CONST_DATA_2012_USED_ 100,2012
+#define dTOOLS_IS_CONST_DATA_2012_USED_ 101,2012
 
 #include <tools/features.hpp>
 #include <type_traits>

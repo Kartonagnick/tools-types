@@ -1,10 +1,10 @@
 // [2021y-04m-06d][20:56:12] Idrisov Denis R.
+// [2021y-04m-10d][04:42:17] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_IS_VOLATILE_DATA_2015_USED_ 
-#define dTOOLS_IS_VOLATILE_DATA_2015_USED_ 100,2013
+#define dTOOLS_IS_VOLATILE_DATA_2015_USED_ 101,2013
 
-#include <tools/features.hpp>
-#include <type_traits>
+#include <tools/types/common/is_dereferencable.hpp>
 
 //==============================================================================
 //=== is_volatile_data =========================================================
@@ -64,22 +64,22 @@ namespace tools
     {};
 
     template<class t, class v = void> 
-    using for_volatile_data 
+    using for_volatile_data_t 
         = ::std::enable_if_t<
             ::tools::is_volatile_data<t>::value, v
         >;
 
     template<class t, class v = void> 
-    using for_not_volatile_data 
+    using for_not_volatile_data_t
         = ::std::enable_if_t< 
             !::tools::is_volatile_data<t>::value, v
         >;
 
     #define dif_volatile_data(s, r) \
-        ::tools::for_volatile_data<s, r>
+        ::tools::for_volatile_data_t<s, r>
 
     #define dif_not_volatile_data(s, r) \
-        ::tools::for_not_volatile_data<s, r>
+        ::tools::for_not_volatile_data_t<s, r>
 
     #define dfor_volatile_data(s) \
         dif_volatile_data(s, void)* = nullptr
