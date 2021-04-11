@@ -65,7 +65,7 @@ Tools`s types version 1.2.5  [![P]][M]
 [07]: ../code/dfunction.md    "макрос раскрывается в текстовое имя функции"  
 [18]: ../code/macro.md        "магия препроцессора (макросы с переменным количеством аргументом)"  
 [19]: ../code/types.md        "tools/types метафункции, и обработка типов"  
-[20]: #table                  "tools/type_traits.hpp для новых компиляторов использует std, для старых - свой велосипед"  
+[20]: ../code/types/traits.md "новые компиляторы используют <type_traits>, а старые <tools/type_traits.hpp>"  
 
 1) [История](../history.md)  
 
