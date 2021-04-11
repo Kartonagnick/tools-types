@@ -330,8 +330,9 @@
        - is_volatile_data   100,2008
 
 5) обновлен: traits                     005
-     - is_const              001
-     - is_volatile           001
+     - add: is_const              001
+     - add: is_volatile           001
+     - add: remove_pointer        001
 
 6) исправление бага:
      - traits/remove_reference   002
