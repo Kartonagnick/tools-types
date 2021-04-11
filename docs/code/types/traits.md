@@ -46,7 +46,7 @@ traits
 |  0010  | [intergal_constant][10]      |  0.0.3  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 |  0009  | [remove_reference][09]       |  0.0.2  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 |  0008  | [decay][08]                  |  0.0.2  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0007  | [![.]][1] [type_of_enum][07] |  0.0.1  | 0.0.1  |   [![R]][1]       |  [![R]][1]          | [![R]][1]                |  
+|  0007  | [![.]][1] [type_of_enum][07] |  0.0.1  | 0.0.1  |   [![R]][REMOVED] |  [![R]][REMOVED]    | [![R]][REMOVED]          |  
 |  0006  | [enable_if][06]              |  0.0.1  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 |  0005  | [conditional][05]            |  0.0.1  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 |  0004  | [is_integral][04]            |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
@@ -55,12 +55,13 @@ traits
 |  0001  | [remove_cv][01]              |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 |  0000  | [is_same][00]                |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 
-[M]:       #traits             "мета-функции для обработки типов"  
-[MINGW]:   #mingw-new          "поддержка компиляторов mingw"  
-[VS-NEW]:  #msvc-new           "поддержка новых компиляторов msvc"  
-[VS-OLD]:  #msvc-old           "поддержка старых компиляторов msvc"  
-[0]:       #msvc-old           "поддержка старых компиляторов msvc"  
-[1]:       #traits             "переехал в common"
+[M]:        #traits                   "мета-функции для обработки типов"  
+[MINGW]:    #mingw-new                "поддержка компиляторов mingw"  
+[VS-NEW]:   #msvc-new                 "поддержка новых компиляторов msvc"  
+[VS-OLD]:   #msvc-old                 "поддержка старых компиляторов msvc"  
+[0]:        #msvc-old                 "поддержка старых компиляторов msvc"  
+[1]:        common/type_of_enum.md    "переехал в common"
+[REMOVED]:  common/type_of_enum.md    "переехал в common"
                                
 [00]: traits/is_same.md        "мета-функция: true, если типы идентичны"  
 [01]: traits/remove_cv.md      "мета-функция: удаляет квалификаторы"  
@@ -69,7 +70,7 @@ traits
 [04]: traits/is_integral.md    "мета-функция: true, если тип - интегральное число"  
 [05]: traits/conditional.md    "мета-функция: выбор одного из двух типов по условию"  
 [06]: traits/enable_if.md      "мета-функция: если первый аргумент - false, шаблон не скомпилируется"  
-[07]: #type_of_enum            "мета-функция: возвращает underlying_type"  
+[07]: common/type_of_enum.md   "мета-функция: возвращает underlying_type"  
 [08]: #decay                   "мета-функция: разложение типа до осново-образующего"  
 [09]: #remove_reference        "мета-функция: удаляет ссылочную семантику"  
 [10]: #intergal_constant       "констатное тип-значение"  
