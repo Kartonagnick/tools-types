@@ -6,7 +6,7 @@
 [E]: ../../../icons/empty.png
 [N]: ../../../icons/na.png
 
-is_signed
+is_floating
 ---
 
 | **ID** | tools           | types | traits | версия |     дата      |  время   |  
@@ -21,16 +21,16 @@ is_signed
 |:-----------------:|:-------------------:|:------------------------:|  
 |   [![V]][MINGW]   |   [![V]][VS-NEW]    |         [![V]][M]        |  
 
-[M]:       #is_signed     "мета-функция: вернет true, если тип - знаковый"  
+[M]:       #is_floating   "мета-функция: вернет true, если тип - дробное число"  
 [MINGW]:   #mingw-new     "поддержка компиляторов mingw"  
 [VS-NEW]:  #msvc-new      "поддержка новых компиляторов msvc"  
 [VS-OLD]:  #msvc-old      "поддержка старых компиляторов msvc"  
 
 описание
 --------
-Мета-функция: вернет true, если тип - знаковый.  
+Мета-функция: вернет true, если тип - дробное число.  
 
 ```
-const bool v = tools::is_signed<int>::value;
+const bool v = tools::is_floating_point<int>::value;
 ```
 
