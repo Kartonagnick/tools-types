@@ -6,7 +6,7 @@
 [E]: ../../../icons/empty.png
 [N]: ../../../icons/na.png
 
-remove_cv
+is_signed
 ---
 
 | **ID** | tools           | types | traits | версия |     дата      |  время   |  
@@ -21,17 +21,16 @@ remove_cv
 |:-----------------:|:-------------------:|:------------------------:|  
 |   [![V]][MINGW]   |   [![V]][VS-NEW]    |         [![V]][M]        |  
 
-[M]:       #remove_cv     "мета-функция: удаляет квалификаторы const/volatile"  
+[M]:       #is_signed     "мета-функция: вернет true, если тип - знаковый"  
 [MINGW]:   #mingw-new     "поддержка компиляторов mingw"  
 [VS-NEW]:  #msvc-new      "поддержка новых компиляторов msvc"  
 [VS-OLD]:  #msvc-old      "поддержка старых компиляторов msvc"  
 
 описание
 --------
-Мета-функция: удаляет квалификаторы `const/volatile`  
+Мета-функция: вернет true, если тип - знаковый  
 
 ```
-using no_cv = tools::remove_cv<const int>;
-using result = typename no_cv::type; // int
+const bool v = tools::is_signed<int>::value;
 ```
 
