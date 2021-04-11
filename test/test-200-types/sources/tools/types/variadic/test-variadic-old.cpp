@@ -108,16 +108,16 @@ namespace
     };
 
     #ifdef dHAS_RVALUE_REFERENCES
-		der rvalue() 
-		{ 
-			// moving a local object in a return statement prevents copy elision
-			// #pragma GCC diagnostic ignored "-Wpessimizing-move"
-			der d;
-			return ::std::move(d);
-		}
+        der rvalue() 
+        { 
+            // moving a local object in a return statement prevents copy elision
+            // #pragma GCC diagnostic ignored "-Wpessimizing-move"
+            der d;
+            return ::std::move(d);
+        }
     #endif
 
-	
+    
     struct der2: example
     {
         der2():example(){}
@@ -136,46 +136,46 @@ namespace
         der2(der2&& rhs):example(::std::move(rhs)){}
         #endif
 
-		#ifdef dHAS_RVALUE_REFERENCES
-			template<class A> 
-			der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
+        #ifdef dHAS_RVALUE_REFERENCES
+            template<class A> 
+            der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
 
-			template<class A> 
-			der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
-		#else
-			template<class A> 
-			der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A))
-				: example(a) 
-			{}
+            template<class A> 
+            der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
+        #else
+            template<class A> 
+            der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A))
+                : example(a) 
+            {}
 
-			template<class A> 
-			der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A))
-				: example(a) 
-			{}
-		#endif
+            template<class A> 
+            der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A))
+                : example(a) 
+            {}
+        #endif
 
     };
 
-	#ifdef dHAS_RVALUE_REFERENCES
-		template<class A>
-		der2::der2(const A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
-			: example(a) 
-		{}
+    #ifdef dHAS_RVALUE_REFERENCES
+        template<class A>
+        der2::der2(const A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
+            : example(a) 
+        {}
 
-		template<class A>
-		der2::der2(A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
-			: example(a) 
-		{}
-	#endif
+        template<class A>
+        der2::der2(A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
+            : example(a) 
+        {}
+    #endif
 
     #ifdef dHAS_RVALUE_REFERENCES
-		der2 rvalue2() 
-		{ 
-			// moving a local object in a return statement prevents copy elision
-			// #pragma GCC diagnostic ignored "-Wpessimizing-move"
-			der2 d;
-			return ::std::move(d);
-		}
+        der2 rvalue2() 
+        { 
+            // moving a local object in a return statement prevents copy elision
+            // #pragma GCC diagnostic ignored "-Wpessimizing-move"
+            der2 d;
+            return ::std::move(d);
+        }
     #endif
 
 } // namespace
