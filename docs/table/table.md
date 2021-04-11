@@ -22,9 +22,9 @@ Tools`s types version 1.2.5  [![P]][M]
 |:------:|:---------------:|:----------------------:|:-------------------------:|:-------------------------:|  
 |  0000  | [degradate][e0] | dTOOLS_DEGRADATE_USED_ | [enable_for-2013.hpp][u0] | [degradate-2013.hpp][p0]  |  
 
-[p0]: ../../include/tools/types/common/2013/degradate-2013.hpp           "расположение файла"  
-[u0]: ../../include/tools/types/common/enable_for/enable_for-2013.hpp    "расположение копии"  
-[e0]: ../code/degradate.md                                               "метафункция: тип аргумента"  
+[p0]: ../../include/tools/types/common/degradate/degradate-2013.hpp      "расположение оригинального файла"  
+[u0]: ../../include/tools/types/common/enable_for/enable_for-2013.hpp          "расположение копии"  
+[e0]: ../code/types/common/degradate.md    "мета-функция преобразует lvalue-to-rvalue, и удаляет cv-qualifiers"  
 
 <br/>
 

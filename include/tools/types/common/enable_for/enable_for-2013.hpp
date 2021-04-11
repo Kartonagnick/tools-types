@@ -12,13 +12,21 @@
 //==============================================================================
 //=== degradate-2013 ===========================================================
 #ifndef dTOOLS_DEGRADATE_USED_ 
-#define dTOOLS_DEGRADATE_USED_ 100,2013
 namespace tools 
 {
+    template<class t> class degradate
+    {
+        using x = ::std::remove_reference_t<t>;
+    public:
+        using type = ::std::remove_cv_t<x>;
+    };
+
     template<class t> 
     using degradate_t = ::std::remove_cv_t<
         ::std::remove_reference_t<t> 
     >;
+
+    #define ddegradate(...) degradate_t<__VA_ARGS__>
 
 } // namespace tools 
 #endif // !dTOOLS_DEGRADATE_USED_

@@ -29,31 +29,31 @@ current version 0.1.2
 traits
 ---
 
-| **ID** | элементы                     | traits  | версия | mingw 830,720,710 | msvc 2019,2017,2015 | msvc 2013,2012,2010,2008 |  
-|:------:|:----------------------------:|:-------:|:------:|:-----------------:|:-------------------:|:------------------------:|  
-|  0022  | [is_base_of][22]             |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0021  | [add_pointer][21]            |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0020  | [remove_all_extent][20]      |  0.0.7  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0019  | [remove_extent][19]          |  0.0.7  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0018  | [is_array][18]               |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0017  | [is_function][17]            |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0016  | [is_reference][16]           |  0.0.6  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0015  | [is_pointer][15]             |  0.0.6  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0014  | [remove_pointer][14]         |  0.0.5  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0013  | [is_volatile][13]            |  0.0.5  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0012  | [is_const][12]               |  0.0.5  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0011  | [is_class][11]               |  0.0.4  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0010  | [intergal_constant][10]      |  0.0.3  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0009  | [remove_reference][09]       |  0.0.2  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0008  | [decay][08]                  |  0.0.2  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0007  | [![.]][1] [type_of_enum][07] |  0.0.1  | 0.0.1  |   [![R]][REMOVED] |  [![R]][REMOVED]    | [![R]][REMOVED]          |  
-|  0006  | [enable_if][06]              |  0.0.1  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0005  | [conditional][05]            |  0.0.1  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0004  | [is_integral][04]            |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0003  | [is_floating][03]            |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0002  | [is_signed][02]              |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0001  | [remove_cv][01]              |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
-|  0000  | [is_same][00]                |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+| **ID** | элементы                | traits  | версия | mingw 830,720,710 | msvc 2019,2017,2015 | msvc 2013,2012,2010,2008 |  
+|:------:|:-----------------------:|:-------:|:------:|:-----------------:|:-------------------:|:------------------------:|  
+|  0022  | [is_base_of][22]        |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0021  | [add_pointer][21]       |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0020  | [remove_all_extent][20] |  0.0.7  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0019  | [remove_extent][19]     |  0.0.7  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0018  | [is_array][18]          |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0017  | [is_function][17]       |  0.0.7  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0016  | [is_reference][16]      |  0.0.6  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0015  | [is_pointer][15]        |  0.0.6  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0014  | [remove_pointer][14]    |  0.0.5  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0013  | [is_volatile][13]       |  0.0.5  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0012  | [is_const][12]          |  0.0.5  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0011  | [is_class][11]          |  0.0.4  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0010  | [intergal_constant][10] |  0.0.3  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0009  | [remove_reference][09]  |  0.0.2  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0008  | [decay][08]             |  0.0.2  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0007  | [~~type_of_enum~~][07]  |  0.0.1  | 0.0.1  |   [![R]][REMOVED] |  [![R]][REMOVED]    | [![R]][REMOVED]          |  
+|  0006  | [enable_if][06]         |  0.0.1  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0005  | [conditional][05]       |  0.0.1  | 0.0.1  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0004  | [is_integral][04]       |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0003  | [is_floating][03]       |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0002  | [is_signed][02]         |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0001  | [remove_cv][01]         |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
+|  0000  | [is_same][00]           |  0.0.1  | 0.0.2  |   [![V]][MINGW]   |  [![V]][VS-NEW]     | [![V]][VS-OLD]           |  
 
 [M]:        #traits                   "мета-функции для обработки типов"  
 [MINGW]:    #mingw-new                "поддержка компиляторов mingw"  
