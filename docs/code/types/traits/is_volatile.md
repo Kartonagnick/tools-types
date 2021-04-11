@@ -6,7 +6,7 @@
 [E]: ../../../icons/empty.png
 [N]: ../../../icons/na.png
 
-is_const
+is_volatile
 ---
 
 | **ID** | tools           | types | traits | версия |     дата      |  время   |  
@@ -21,19 +21,19 @@ is_const
 |:-----------------:|:-------------------:|:------------------------:|  
 |   [![V]][MINGW]   |   [![V]][VS-NEW]    |         [![V]][M]        |  
 
-[M]:       #is_class      "мета-функция: true, если тип - констатный" 
+[M]:       #is_class      "мета-функция: true, если тип - волатильный" 
 [MINGW]:   #mingw-new     "поддержка компиляторов mingw"  
 [VS-NEW]:  #msvc-new      "поддержка новых компиляторов msvc"  
 [VS-OLD]:  #msvc-old      "поддержка старых компиляторов msvc"  
 
 описание
 --------
-Мета-функция: true, если тип - констатный.  
+Мета-функция: true, если тип - волатильный.  
 
 ```
-tools::is_const<const int>::value;  // true
-tools::is_const<int* const>::value; // false
-tools::is_const<const int*>::value; // false
+tools::is_volatile<volatile int>::value;  // true
+tools::is_volatile<int* volatile>::value; // true
+tools::is_volatile<volatile int*>::value; // false
 ```
 
 
