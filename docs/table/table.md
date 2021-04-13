@@ -14,6 +14,39 @@ Tools`s version 0.2.7  [![P]][M]
 Tools`s types version 1.2.5  [![P]][M]
 ---
 
+Компиляторо-проблемы  
+---
+```
+if msvc <= 2012
+    problems with `SFINAE` as a result of bugs in compilers
+    sfinae: check expression: *obj not worked
+
+if msvc < 2012
+    problems with `SFINAE` as a result of bugs in compilers
+    problem with `std::declval`: некорректно работает
+    problems with `SFINAE`: игнорирует private/protected доступ
+    problems with `SFINAE`: не различает префикс и постфикс
+    problems with `SFINAE`: не различает разыменовывание и умножение
+    problems with `SFINAE`: не учитываются qualifiers функции-члена const/volatile
+    problems with `SFINAE`: не учитываются ref-qualified функции-члена && или &
+```
+
+```
+if msvc2013
+    problems with `std::void_t`: не работает по причине бага в компиляторе
+```
+
+```
+if msvc2012 || msvc2013
+    problems with `SFINAE` as a result of bugs in compilers
+    problem with `std::declval`: некорректно работает
+    problems with a SFINAE: игнорирует private/protected доступ
+    problems with `SFINAE`: не различает префикс и постфикс
+      - путает postfix с prefix, но не наоборот 
+        (prefix с postfix не путает)
+
+    problems with `SFINAE`: не различает разыменовывание и умножение
+```
 
 Корреляции  
 ---

@@ -49,6 +49,7 @@ const bool v = tools::is_dereferencable<int*>::value;
 для  `msvc2008 - msvc2012` не удалось реализовать sfinae.  
 вместо этого используется расширение от компилятора `__if_exists`  
 по этой причине, логика работы метафункции имеет отличие.  
+
 ```
 if msvc2012 or older
     метафункция вернет true для классов,
@@ -59,4 +60,7 @@ if msvc2012 or older
     - не учитываются qualifiers функции-члена const/volatile
     - не учитываются ref-qualified функции-члена && или &
     - не различается умножение и разыменовывание
+
+if msvc2013 or older
+    - не учитываются модификаторы доступа private/protected
 ```

@@ -7,11 +7,91 @@
 
 **История изменений**  
 
+**Версия 1.2.6 (предварительная)**  
+----------------------------------
+[2021y-04m-13d][13:54:55] #61_is_iterable
+
+1) обновлен: version                    126 PRE
+2) обновлен: types                      126 PRE
+3) обновлен: common                     114 PRE
+
+  3.1) добавлен: is_incrementable     100 PRE
+       - is_incrementable-2008.hpp  100 PRE
+       - is_incrementable-2012.hpp  100 PRE
+       - is_incrementable-2013.hpp  100 PRE
+
+  3.1.1) добавлен: is_prefix_incrementable
+  3.1.2) добавлен: is_postfix_incrementable 
+  3.1.3) добавлен: is_incrementable
+
+  3.2) добавлен: is_decrementable     100 PRE
+       - is_decrementable-2008.hpp  100 PRE
+       - is_decrementable-2012.hpp  100 PRE
+       - is_decrementable-2013.hpp  100 PRE
+
+  3.2.1) добавлен: is_prefix_decrementable
+  3.2.2) добавлен: is_postfix_decrementable 
+  3.2.3) добавлен: is_decrementable
+
+  3.3) обновлен: is_dereferencable    100 PRE
+
+  3.4) добавлен: is_iterator          100 PRE
+       - is_iterator-2008.hpp       100 PRE
+       - is_iterator-2012.hpp       100 PRE
+       - is_iterator-2013.hpp       100 PRE
+       - is_iterator-2015.hpp       100 PRE
+
+  3.5)  добавлен: is_iterable         100 PRE
+  3.6)  добавлен: has_value_type      100 PRE
+  3.7)  добавлен: has_mapped_type     100 PRE
+  3.8)  добавлен: has_operator_access 100 PRE
+  3.9)  добавлен: has_begin           100 PRE
+  3.10) добавлен: has_end             100 PRE
+
+  ~~is_container~~
+  ~~is_linear_containr~~
+  ~~is_mapped_container~~
+  ~~is_realloc_containr~~
+
+~~4) добавлен: types/void_t.hpp 100 PRE~~
+
+5) добавлен: test-200-types/types/common/is_incrementable
+     - добавлен: test-is_postfix_incrementable
+     - добавлен: test-is_prefix_incrementable
+     - добавлен: test-is_incrementable
+6) добавлен: test-200-types/types/common/is_decrementable
+     - добавлен: test-is_postfix_decrementable
+     - добавлен: test-is_prefix_decrementable
+     - добавлен: test-is_decrementable
+
+7) добавлены тесты:
+     - добавлен: test-is_iterator
+     - добавлен: test-is_iterable
+     - добавлен: test-has_value_type
+     - добавлен: test-has_mapped_type
+     - добавлен: test-has_operator_access
+     - добавлен: test-has_begin
+     - добавлен: test-has_end
+
+~~9) добавлен: test-200-types/types/void_t~~
+~~   - добавлен: test-void_t-new~~
+~~   - добавлен: test-void_t-old~~
+
 **Версия 1.2.5 (предварительная)**  
 ----------------------------------
-[2021y-04m-11d][15:24:53] #57_docs_types
+[2021y-04m-12d][01:39:34] #59_docs_types
 1) рефактор документации:
-     - `docs/code/types/fixed.md`
+     - `docs/code/types/traits.md`
+
+
+**Версия 1.2.5 (предварительная)**  
+----------------------------------
+[2021y-04m-11d][23:55:11] #57_docs_types
+1) рефактор документации:
+     - `docs/code/types/traits.md`
+     - `docs/code/demangle.md`
+     - `docs/code/variadic.md`
+     - `docs/code/fixed.md`
 
 
 **Версия 1.2.5 (предварительная)**  

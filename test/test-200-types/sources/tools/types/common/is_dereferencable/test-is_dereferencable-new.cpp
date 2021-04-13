@@ -5,7 +5,7 @@
 #ifdef TEST_TOOLS_IS_DEREFERENCABLE
 
 #include <tools/features.hpp>
-#ifdef dHAS_CPP11
+#ifdef dHAS_USING_ALIAS
 
 #define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD is_dereferencable
@@ -105,11 +105,18 @@ namespace
 
     make_test(voidd           ,   true   );
     make_test(method          ,   false  );
-    make_test(two             ,   false  );
-    make_test(privat          ,   false  );
+
     make_test(multi           ,   false  );
 
-}//namespace
+    #if defined(_MSC_VER) && _MSC_VER <= 1800
+    // bug: msvc2013 or older ignore private access
+    make_test(two             ,   true   );
+    make_test(privat          ,   true   );
+    #else
+    make_test(two             ,   false  );
+    make_test(privat          ,   false  );
+    #endif
+} // namespace
 
 //==============================================================================
 //==============================================================================
@@ -120,6 +127,6 @@ TEST_COMPONENT(000){}
 //==============================================================================
 
 
-#endif // !dHAS_CPP11
+#endif // !dHAS_USING_ALIAS
 #endif // !TEST_TOOLS_IS_DEREFERENCABLE
 
