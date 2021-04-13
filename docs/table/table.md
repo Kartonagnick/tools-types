@@ -32,6 +32,11 @@ if msvc < 2012
 ```
 
 ```
+if msvc2013
+    problems with `std::void_t`: не работает по причине бага в компиляторе
+```
+
+```
 if msvc2012 || msvc2013
     problems with `SFINAE` as a result of bugs in compilers
     problem with `std::declval`: некорректно работает
