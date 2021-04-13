@@ -12,9 +12,11 @@
 // [2021y-04m-09d][23:13:29] Idrisov Denis R. 111
 // [2021y-04m-09d][23:48:34] Idrisov Denis R. 112
 // [2021y-04m-10d][07:15:57] Idrisov Denis R. 113
+
+// [2021y-04m-12d][02:34:32] Idrisov Denis R. 114 PRE
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 113
+#define dTOOLS_COMMON_USED_ 114 PRE
 
 #include <tools/features.hpp>
 
@@ -33,6 +35,9 @@
 #include <tools/types/common/is_const_data.hpp>
 #include <tools/types/common/is_lambda.hpp>
 #include <tools/types/common/array.hpp>
+
+#include <tools/types/common/is_incrementable.hpp>
+#include <tools/types/common/is_decrementable.hpp>
 
 //==============================================================================
 //==============================================================================
