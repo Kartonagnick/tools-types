@@ -7,7 +7,7 @@
 #include <tools/features.hpp>
 #ifdef dHAS_CPP11
 
-#define dTEST_COMPONENT tools, types, , common
+#define dTEST_COMPONENT tools, types, common
 #define dTEST_METHOD is_volatile_data
 #define dTEST_TAG new
 
