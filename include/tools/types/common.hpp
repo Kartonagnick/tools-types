@@ -38,6 +38,7 @@
 
 #include <tools/types/common/is_incrementable.hpp>
 #include <tools/types/common/is_decrementable.hpp>
+#include <tools/types/common/is_iterator.hpp>
 
 //==============================================================================
 //==============================================================================
