@@ -1,0 +1,42 @@
+﻿[![logo](logo.png)](../README.md "for users")  
+
+[P]: icons/progress.png
+[V]: icons/success.png
+[X]: icons/failed.png
+[D]: icons/danger.png
+[E]: icons/empty.png
+[N]: icons/na.png
+
+[M]: #main "проект tools-types"  
+[MINGW]:  #mingw-new.md "поддержка компиляторов mingw"  
+[VS-NEW]: #msvc-new.md  "поддержка новых компиляторов msvc"  
+[VS-OLD]: #msvc-old.md  "поддержка старых компиляторов msvc"  
+
+
+Текущая версия types 1.2.6  
+------
+1. [assert][01]  
+2. dFUNCTION  
+3. features  
+4. type_traits  
+5. types  
+    5.1. types.hpp  
+    5.2. version.hpp  
+    5.3. traits.hpp  
+    5.4. [common.hpp][51] [![V]][51] [![V]][51] [![D]][51]  
+    5.6. variadic.hpp  
+    5.7. void_t.hpp  
+    5.8. fixed.hpp  
+    5.9. demangle.hpp  
+6. macro  
+    6.1. overload-5.hpp  
+    6.2. make_version.hpp  
+7. pragma  
+    7.1. pragma.hpp  
+    7.2. confbuild.hpp  
+    7.3. view_build.hpp  
+    7.4. warning.hpp  
+
+
+[01]: code/assert.md         "улучшенный assert"  
+[51]: code/types/common.md   "сборник мета-алгоритмов общего назначения"  

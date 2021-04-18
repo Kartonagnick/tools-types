@@ -17,7 +17,7 @@ namespace tools
                 = ::std::remove_reference_t<lambda>;
 
             template<class u> static ::std::true_type
-                check(decltype(&u::operator())*);
+                check(decltype(&u::operator()));
 
             template<class> static ::std::false_type
                 check(...);

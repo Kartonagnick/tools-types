@@ -1,5 +1,5 @@
 ﻿
-[S]: ../../../icons/star-down.png
+[S]: ../../../icons/point-red.png
 [P]: ../../../icons/progress.png
 [V]: ../../../icons/success.png
 [X]: ../../../icons/failed.png

@@ -1,4 +1,5 @@
 // [2021y-04m-12d][17:40:05] Idrisov Denis R. 10
+// [2021y-04m-14d][01:40:54] Idrisov Denis R. 100
 #pragma once
 #ifndef dTOOLS_IS_DECREMENTABLE_2008_USED_ 
 #define dTOOLS_IS_DECREMENTABLE_2008_USED_ 100,2008

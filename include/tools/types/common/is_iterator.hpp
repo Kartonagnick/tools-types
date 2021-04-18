@@ -1,4 +1,5 @@
 // [2021y-04m-12d][14:52:02] Idrisov Denis R. 100
+// [2021y-04m-14d][01:44:38] Idrisov Denis R. 100
 //==============================================================================
 //==============================================================================
 #pragma once
@@ -21,11 +22,3 @@
 //==============================================================================
 #endif // !dTOOLS_IS_ITERATOR_USED_
 
-#if 0
-
-    // must be dereferencable and incrementable
-    template<class t> class is_iterable
-        : dDETAIL_CONSTANT(is_iterable_<t>)
-    {};
-
-#endif

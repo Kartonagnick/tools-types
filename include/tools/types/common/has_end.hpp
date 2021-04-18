@@ -1,20 +1,19 @@
-// [2021y-024-04d][05:07:24] Idrisov Denis R. 100
+// [2021y-04m-13d][01:52:22] Idrisov Denis R. 100
 //==============================================================================
 //==============================================================================
 #pragma once
-#ifndef dTOOLS_TYPE_TRAITS_USED_ 
-#define dTOOLS_TYPE_TRAITS_USED_ 101 PRE
+#ifndef dTOOLS_HAS_END_USED_ 
+#define dTOOLS_HAS_END_USED_ 100
 
 #include <tools/features.hpp>
-#ifdef dHAS_TYPE_TRAITS
-    #include <type_traits>
+
+#ifdef dHAS_VARIADIC_TEMPLATE
+    #include <tools/types/common/has_end/has_end-2013.hpp>
 #else
-    #include <tools/types/traits.hpp>
+    // msvc2012 or older
+    #include <tools/types/common/has_end/has_end-2008.hpp>
 #endif
 
-#include <tools/types/void_t.hpp>
-
 //==============================================================================
 //==============================================================================
-#endif //! dTOOLS_TYPE_TRAITS_USED_
-
+#endif // !dTOOLS_HAS_OPERATOR_ACCESS_USED_

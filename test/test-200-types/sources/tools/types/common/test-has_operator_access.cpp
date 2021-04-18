@@ -28,7 +28,7 @@ namespace
         #define dCHECK(type, expected)      \
         dSTATIC_ASSERT(                     \
             ERROR_INTERNAL,                 \
-            dEXPRESSION(type, expected),    \
+            dEXPRESSION(type, expected)     \
         )
     #endif
 
@@ -40,25 +40,47 @@ namespace
         const bool& operator[](int) const; 
     };
 
-    struct baz;
+    struct dummy{};
 
 } // namespace
+
+
+#if 0
+// bug in msvc2019
+// fatal error C1001: Внутренняя ошибка компилятора.
+// 1>(Файл компилятора "D:\a01\_work\6\s\src\vctools\Compiler\CxxFE\sl\p1\cxx\RDParser.cpp", строка 13284.)
+
+    #ifdef _MSC_VER
+    template<class t>
+    struct Has_operator_access
+    {
+        __if_exists( t::operator[] )
+            { enum { value = true }; }
+
+        __if_not_exists( t::operator[] ) 
+            { enum { value = false }; }
+    };
+    #endif
+#endif
 
 //==============================================================================
 //==============================================================================
 TEST_COMPONENT(000)
 {
     dCHECK(int[1]      , true );
-    dCHECK(int[]       , true );
     dCHECK(foo         , true );
     dCHECK(const foo   , true );
     dCHECK(const foo&  , true );
     dCHECK(foo&        , true );
-    dCHECK(int(&)[]    , true );
     dCHECK(int(&)[1]   , true );
 
+    #ifdef dHAS_ARRAY_EMPTY_SIZE
+    dCHECK(int(&)[]    , true );
+    dCHECK(int[]       , true );
+    #endif
+
     dCHECK(int         , false);
-    dCHECK(baz         , false);
+    dCHECK(dummy       , false);
 }
 TEST_COMPONENT(001)
 {
@@ -91,6 +113,10 @@ TEST_COMPONENT(002)
     dSTATIC_CHECK(
         ERROR_INTERNAL,
         me::has_operator_access<const bar, float>::value
+    );
+    dSTATIC_CHECK(
+        ERROR_INTERNAL,
+        !me::has_operator_access<const bar, foo>::value
     );
 }
 #endif

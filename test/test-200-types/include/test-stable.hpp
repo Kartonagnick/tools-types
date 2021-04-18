@@ -54,20 +54,24 @@
     #define TEST_TOOLS_ADD_CONST_DATA                       // ready!
     #define TEST_TOOLS_ENABLE_FOR                           // ready!
     
-    #define TEST_TOOLS_IS_INCREMENTABLE                     // in progress...
-    #define TEST_TOOLS_IS_DECREMENTABLE                     // in progress...
-    #define TEST_TOOLS_IS_ITERATOR                          // in progress...
-    #define TEST_TOOLS_IS_ITERABLE                          // in progress...
+    #define TEST_TOOLS_IS_INCREMENTABLE                     // ready!
+    #define TEST_TOOLS_IS_DECREMENTABLE                     // ready!
+    #define TEST_TOOLS_IS_ITERATOR                          // ready!
+    #define TEST_TOOLS_IS_ITERABLE                          // ready!
 
-    #define TEST_TOOLS_HAS_VALUE_TYPE                       // in progress...
-    #define TEST_TOOLS_HAS_MAPPED_TYPE                      // in progress...
+    #define TEST_TOOLS_HAS_VALUE_TYPE                       // ready!
+    #define TEST_TOOLS_HAS_MAPPED_TYPE                      // ready!
 
-    #define TEST_TOOLS_HAS_OPERATOR_ACCESS                  // in progress...
+    #define TEST_TOOLS_HAS_OPERATOR_ACCESS                  // ready!
+
+    #define TEST_TOOLS_HAS_BEGIN                            // ready!
+    #define TEST_TOOLS_HAS_END                              // ready!
 
 //==============================================================================
 //===== tools/types ========================================||==================
     #define TEST_TOOLS_FIXED                                // ready!
     #define TEST_TOOLS_DEMANGLE                             // ready!
+    #define TEST_TOOLS_VOID_T                               // ready!
 
 //==============================================================================
 //==============================================================================

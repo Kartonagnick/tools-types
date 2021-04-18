@@ -1,9 +1,11 @@
 // [2021y-04m-13d][21:20:30] Idrisov Denis R. 100
+// [2021y-04m-14d][01:45:51] Idrisov Denis R. 100
 #pragma once
 #ifndef dTOOLS_HAS_OPERATOR_ACCCESS_2013_USED_ 
 #define dTOOLS_HAS_OPERATOR_ACCCESS_2013_USED_ 100,2013
 
 #include <tools/type_traits.hpp>
+#include <cstddef>
 
 //==============================================================================
 //=== has_operaror_access ======================================================
@@ -18,9 +20,9 @@ namespace tools
         {
             template<class u> static ::std::true_type
                 check(
-                    typename std::add_pointer< 
-                        decltype( val<u&>()[ val<a&>() ] )
-                    >::type 
+                    ::std::add_pointer_t< 
+                        decltype( val<u&>()[val<a>()] )
+                    >
                 );
 
             template<class> static ::std::false_type
@@ -36,30 +38,33 @@ namespace tools
         template<class t>
         class has_operator_access_impl_<t, void, true>
         {
+            using x = ::std::remove_cv_t<t>;
+
             template<class u> static ::std::true_type
-                check(decltype(&u::operator[])*);
+                check(decltype(&u::operator[]));
 
             template<class> static ::std::false_type
                 check(...);
 
             using checked
-                = decltype(check<t>(nullptr));
+                = decltype(check<x>(nullptr));
 
-            using x 
+            using additional
                 = ::tools::detail::has_operator_access_impl_<t, size_t, true>;
-            enum { v = x::value };
+            enum { val = additional::value || checked::value };
         public:
             has_operator_access_impl_() = delete;
-            enum { value = checked::value || v};
+            enum { value = val };
         };
 
         template <class t, class a> 
         class has_operator_access_impl_<t, a, false>
         {
-            using check = ::std::is_array<t>;
+            using x = ::std::remove_cv_t<t>;
+            using v = ::std::is_array<x>;
         public:
             has_operator_access_impl_() = delete;
-            enum { value = check::value };
+            enum { value = v::value };
         };
 
         template <class t, class a> 
@@ -68,7 +73,8 @@ namespace tools
             using z = ::std::remove_reference_t<t>;
             using x = ::std::remove_cv_t<z>;
             enum { ok = ::std::is_class<x>::value };
-            using v = ::tools::detail::has_operator_access_impl_<x, a, ok>;
+            using v 
+                = ::tools::detail::has_operator_access_impl_<z, a, ok>;
         public:
             has_operator_access_() = delete;
             enum { value = v::value };
