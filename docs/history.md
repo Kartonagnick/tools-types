@@ -242,7 +242,7 @@
 1) обновлен: version                    118
 2) обновлен: types                      118
 
-3) обновление features                  017
+3) обновление features                  117
      - добавлен: dDETAIL_CONSTANT
 
 4) обновление types/traits              011

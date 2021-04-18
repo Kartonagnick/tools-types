@@ -16,14 +16,14 @@
 Текущая версия types 1.2.6  
 ------
 1. [assert][01]  
-2. dFUNCTION  
-3. features  
+2. [dFUNCTION][02]  
+3. [features][03]  
 4. type_traits  
 5. types  
     5.1. types.hpp  
     5.2. version.hpp  
     5.3. traits.hpp  
-    5.4. [common.hpp][51] [![V]][51] [![V]][51] [![D]][51]  
+    5.4. [common.hpp][51]  
     5.6. variadic.hpp  
     5.7. void_t.hpp  
     5.8. fixed.hpp  
@@ -38,5 +38,7 @@
     7.4. warning.hpp  
 
 
-[01]: code/assert.md         "улучшенный assert"  
-[51]: code/types/common.md   "сборник мета-алгоритмов общего назначения"  
+[01]: cpp/assert.md         "улучшенный assert"  
+[02]: cpp/dfunction.md      "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
+[03]: cpp/features.md       "здесь выявляются возможности компилятора"  
+[51]: cpp/types/common.md   "сборник мета-алгоритмов общего назначения"  
