@@ -1,12 +1,12 @@
 
-Кратко:
+РљСЂР°С‚РєРѕ:
 ------
-Дефект в поведении msvc2013.
+Р”РµС„РµРєС‚ РІ РїРѕРІРµРґРµРЅРёРё msvc2013.
 
 
-Описание проблемы:
+РћРїРёСЃР°РЅРёРµ РїСЂРѕР±Р»РµРјС‹:
 ------            
-В Visual Studio 2013 не работает код вида:
+Р’ Visual Studio 2013 РЅРµ СЂР°Р±РѕС‚Р°РµС‚ РєРѕРґ РІРёРґР°:
 
 ```cpp
 
@@ -25,17 +25,43 @@ struct has_begin<T, dSFINAE_VOID_TYPE( decltype(obj<T>().begin()) )>
 int main(){}
 ```
 
-Ошибка:
+РћС€РёР±РєР°:
 ```cpp
 error C2228: left of '.begin' must have class/struct/union
 ```
 
-Шаблон даже не был инстанцирован.
+РЁР°Р±Р»РѕРЅ РґР°Р¶Рµ РЅРµ Р±С‹Р» РёРЅСЃС‚Р°РЅС†РёСЂРѕРІР°РЅ.
 
 
-## Лекарство
-Не существует.  
-В качестве обходного пути можно использовать альтернативную sfinae-конструкцию:  
+## Р”СЂСѓРіРѕР№ СЌРїРёР·РѕРґ:
+```cpp
+template<class, class, class = void>
+struct can_cast
+    : dTRAIT::false_type
+{};
+
+template<class From, class To>
+struct can_cast<From, To, dSFINAE_VOID_TYPE(
+        decltype(static_cast<To>(obj<From>()))
+    )> : dTRAIT::true_type
+{};
+
+dSTATIC_ASSERT(INT_CAST_ERROR,  can_cast<int, int>::value);
+dSTATIC_ASSERT(INT_CAST_ERROR,  can_cast<int, float>::value);
+dSTATIC_ASSERT(STR_CAST_ERROR, !can_cast<str_t, int>::value);
+
+int main(){}
+```
+
+РћС€РёР±РєР°:
+```cpp
+fatal error C1001: An internal error has occurred in the compiler.
+```
+
+
+## Р›РµРєР°СЂСЃС‚РІРѕ
+РќРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚.  
+Р’ РєР°С‡РµСЃС‚РІРµ РѕР±С…РѕРґРЅРѕРіРѕ РїСѓС‚Рё РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Р°Р»СЊС‚РµСЂРЅР°С‚РёРІРЅСѓСЋ sfinae-РєРѕРЅСЃС‚СЂСѓРєС†РёСЋ:  
 
 ```cpp
 #include <tools/type_traits.hpp>

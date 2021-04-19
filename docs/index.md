@@ -25,7 +25,7 @@
     5.3. traits.hpp  
     5.4. [common.hpp][51]  
     5.6. variadic.hpp  
-    5.7. void_t.hpp  
+    5.7. [void_t.hpp][57]  
     5.8. fixed.hpp  
     5.9. demangle.hpp  
 6. macro  
@@ -43,3 +43,4 @@
 [03]: cpp/features.md       "здесь выявляются возможности компилятора"  
 [04]: cpp/type_traits.md    "подключает type_traits"  
 [51]: cpp/types/common.md   "сборник мета-алгоритмов общего назначения"  
+[57]: cpp/types/void_t.md   "идиома std::void_t: sfinae-конструкция"  

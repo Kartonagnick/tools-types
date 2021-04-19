@@ -74,7 +74,7 @@ namespace
     {};
  
     template<class T>
-    struct has_begin<T, dSFINAE_VOID_TYPE( decltype(obj<T>().begin()) )> 
+    struct has_begin<T, dSFINAE_VOID_TYPE(decltype(obj<T>().begin()))> 
         : dTRAIT::true_type
     {};
 
@@ -82,10 +82,9 @@ namespace
     dSTATIC_ASSERT(VEC_MT_ERROR,  has_begin<vec_t>::value);
     dSTATIC_ASSERT(MAP_MT_ERROR,  has_begin<map_t>::value);
     dSTATIC_ASSERT(INT_MT_ERROR, !has_begin<int>::value);
-    #endif
-//-------------------------------------
 
-    #ifdef dHAS_CPP11
+//-------------------------------------
+    
     template<class, class = size_t, class = void>
     struct has_op_access
         : dTRAIT::false_type
@@ -120,65 +119,24 @@ namespace
     dSTATIC_ASSERT(VEC_ACCESS_ERROR, !has_op_access<vec_t, void*>::value);
     dSTATIC_ASSERT(MAP_ACCESS_ERROR, !has_op_access<map_t, void*>::value);
     dSTATIC_ASSERT(INT_ACCESS_ERROR, !has_op_access<int, void*>::value);
-    #endif
-
-
-#if 0
+    
 //-------------------------------------
-    #if dHAS_TYPE_TRAITS
-        // msvc2010 or newer
-        template<class From, class To> struct can_cast_
-        {
-            typedef ::std::is_convertible<From, To>
-                type;
-        };
-    #else
-        #ifdef _MSC_VER
-            #pragma warning(push)
-            // warning C4244: 'argument' : conversion from 'float' to 'int', 
-            // possible loss of data
-            #pragma warning(disable: 4244)
-        #endif
-
-        // msvc2008 or older
-        template<class From, class To> struct can_cast_
-        {
-            template <class u> static yes check(u);
-            template <class> static no check(...);
-
-            enum { result = sizeof(check<From>(obj<To>())) };
-            enum { value = result != sizeof(no) };
-
-            typedef dTRAIT::conditional<value, 
-                dTRAIT::true_type, 
-                dTRAIT::false_type
-            > cond_t;
-
-            typedef typename cond_t::type
-                type;
-        };
-
-        #ifdef _MSC_VER
-            #pragma warning(pop)
-        #endif
-
-    #endif
-
-    template<class from, class to> struct can_cast 
-        : can_cast_<from, to>::type
+    template<class, class, class = void>
+    struct can_cast
+        : dTRAIT::false_type
+    {};
+ 
+    template<class From, class To>
+    struct can_cast<From, To, dSFINAE_VOID_TYPE(
+            decltype(static_cast<To>(obj<From>()))
+        )> : dTRAIT::true_type
     {};
 
-    dSTATIC_ASSERT(
-        INT_CAST_ERROR, can_cast<int, int>::value
-    );
-    dSTATIC_ASSERT(
-        INT_CAST_ERROR, can_cast<int, float>::value
-    );
-    dSTATIC_ASSERT(
-        STR_CAST_ERROR, !can_cast<str_t, int>::value
-    );
+    dSTATIC_ASSERT(INT_CAST_ERROR,  can_cast<int, int>::value);
+    dSTATIC_ASSERT(INT_CAST_ERROR,  can_cast<int, float>::value);
+    dSTATIC_ASSERT(STR_CAST_ERROR, !can_cast<str_t, int>::value);
 
-#endif
+    #endif
 
 } // namespace
 
