@@ -1,4 +1,4 @@
-﻿
+
 [P]: ../../../icons/progress.png
 [V]: ../../../icons/success.png
 [X]: ../../../icons/failed.png
