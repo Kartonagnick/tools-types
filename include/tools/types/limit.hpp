@@ -1,7 +1,7 @@
-// [2021y-04m-19d][16:17:50] Idrisov Denis R. 100
+// [2021y-04m-19d][16:17:50] Idrisov Denis R. 100 PRE
 #pragma once
 #ifndef dTOOLS_LIMIT_USED_
-#define dTOOLS_LIMIT_USED_ 100
+#define dTOOLS_LIMIT_USED_ 100 PRE
 //==============================================================================
 //==============================================================================
 
@@ -31,18 +31,16 @@ namespace tools
             : ::tools::detail::limit_signed_<t>
         {};
 
-        template <class t> struct limit_impl_<t, true, false>
+        template <class t> struct limit_impl_<t, false, true>
             : ::tools::detail::limit_unsigned_<t>
         {};
 
         template <class t> struct limit_
         {
-            enum { v1 = dTRAIT::is_signed<t>::value         };
-            enum { v2 = dTRAIT::is_integral<t>::value       };
-            enum { v3 = dTRAIT::is_floating_point<t>::value };
-            enum { v4 = v2 || v3 };
-            dSTATIC_ASSERT(ERROR_MUST_BE_ARTITHMETIC, v4);
-            typedef ::tools::detail::limit_impl_<t, v4, v1> 
+            enum { v1 = dTRAIT::is_signed<t>::value   };
+            enum { v2 = dTRAIT::is_integral<t>::value };
+            dSTATIC_ASSERT(ERROR_MUST_BE_INTEGRAL, v2);
+            typedef ::tools::detail::limit_impl_<t, v1, v2> 
                 type;
         };
 

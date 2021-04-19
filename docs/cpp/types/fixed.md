@@ -7,8 +7,8 @@
 [N]: ../../icons/na.png
 
 [M]: #main  "типы фиксированного размера"  
-[OLD]: fixed/fixed-cpp11.md "заголовок <cstdint> недоступен. используется enum"  
-[NEW]: fixed/fixed-cpp98.md "заголовок <cstdint> доступен. используется constexpr"
+[OLD]: fixed/fixed-cpp98.md "заголовок <cstdint> недоступен. используется enum"  
+[NEW]: fixed/fixed-cpp11.md "заголовок <cstdint> доступен. используется constexpr"
 
 version 1.0.3 [![P]][M]
 ---
