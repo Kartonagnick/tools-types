@@ -13,7 +13,7 @@
 [VS-OLD]: #msvc-old.md  "поддержка старых компиляторов msvc"  
 
 
-Текущая версия types 1.2.6  
+Текущая версия types 1.2.7 [![P]][M]  
 ------
 1. [assert][01]  
 2. [dFUNCTION][02]  
@@ -26,7 +26,7 @@
     5.4. [common.hpp][51]  
     5.6. variadic.hpp  
     5.7. [void_t.hpp][57]  
-    5.8. fixed.hpp  
+    5.8. [fixed.hpp][58] ............ [c++11][58-11][![V]][58-11]  [c++98][58-98][![V]][58-11]  
     5.9. [demangle.hpp][59]  
 6. macro  
     6.1. overload-5.hpp  
@@ -44,4 +44,10 @@
 [04]: cpp/type_traits.md     "подключает type_traits"  
 [51]: cpp/types/common.md    "сборник мета-алгоритмов общего назначения"  
 [57]: cpp/types/void_t.md    "идиома std::void_t: sfinae-конструкция"  
+
+[58]: cpp/types/fixed.md     "типы фиксированного размера"  
+[58-98]: cpp/types/fixed/fixed-cpp98.md     "типы фиксированного размера: для старых компилторов, которые не поддерживают с++11"  
+[58-11]: cpp/types/fixed/fixed-cpp11.md     "типы фиксированного размера: для компилторов в с поддержкой с++11"  
+
+
 [59]: cpp/types/demangle.md  "преобразует результат typeid(T).name() в человеко-читабельный вид"  

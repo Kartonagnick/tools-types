@@ -5,40 +5,34 @@
 //==============================================================================
 //==============================================================================
 
-#if (defined(_MSC_VER) && _MSC_VER >= 1900) || __cplusplus >= 201103L
-    // #pragma message("build for msvc2015 (or newer) or other compiler")
-    #include <tools/types/fixed/fixed-cpp11.hpp>
+#include <tools/types/fixed.hpp>
+#ifdef dHAS_TYPE_TRAITS
+    #include <type_traits>
 #else
-    #include <tools/types/fixed/fixed-cpp98.hpp>
+    #include <tools/types/traits.hpp>
 #endif
 
-#include <tools/type_traits.hpp>
-
-//==============================================================================
-//=== limit ====================================================================
-#ifndef dTOOLS_LIMIT_USED_ 
-#define dTOOLS_LIMIT_USED_ 101
 namespace tools
 {
-    template<class t> struct limit_unsigned
-        : map_unsigned<sizeof(t)>
-    {};
-
-    template<class t> struct limit_signed
-        : map_signed<sizeof(t)>
-    {};
-
     namespace detail
     {
+        template<class t> struct limit_unsigned_
+            : ::tools::map_unsigned<sizeof(t)>
+        {};
+
+        template<class t> struct limit_signed_
+            : ::tools::map_signed<sizeof(t)>
+        {};
+
         template <class t, bool, bool> 
             struct limit_impl_;
 
         template <class t> struct limit_impl_<t, true, true>
-            : limit_signed<t>
+            : ::tools::detail::limit_signed_<t>
         {};
 
         template <class t> struct limit_impl_<t, true, false>
-            : limit_unsigned<t>
+            : ::tools::detail::limit_unsigned_<t>
         {};
 
         template <class t> struct limit_
@@ -59,7 +53,6 @@ namespace tools
     {};
 
 } // namespace tools 
-#endif // !dTOOLS_LIMIT_USED_
 
 //==============================================================================
 //==============================================================================

@@ -70,6 +70,7 @@
 //==============================================================================
 //===== tools/types ========================================||==================
     #define TEST_TOOLS_FIXED                                // ready!
+    #define TEST_TOOLS_LIMIT                                // in progress...
     #define TEST_TOOLS_DEMANGLE                             // ready!
     #define TEST_TOOLS_VOID_T                               // ready!
 

@@ -6,7 +6,6 @@
 //==============================================================================
 
 #include <tools/features.hpp>
-
 #ifdef dHAS_CSTDINT
     #include <cstdint>
 #endif
@@ -14,7 +13,7 @@
 namespace tools
 {
     #ifdef dHAS_CSTDINT
-        // #pragma message("build for msvc2010 or newer)")
+        // msvc2010 or newer
         using ::std::uint8_t ;
         using ::std::uint16_t;
         using ::std::uint32_t;
@@ -25,7 +24,7 @@ namespace tools
         using ::std::int32_t ; 
         using ::std::int64_t ; 
     #else
-        // #pragma message("build for msvc2008 or older)")
+        // msvc2008 or older
         typedef unsigned char    uint8_t ;
         typedef unsigned __int16 uint16_t;
         typedef unsigned __int32 uint32_t;
