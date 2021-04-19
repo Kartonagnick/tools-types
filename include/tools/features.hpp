@@ -193,7 +193,6 @@
     #define dNOEXCEPT throw()
 #endif
 
-
 //==============================================================================
 //=== dTHREAD_LOCAL ============================================================
 
@@ -228,7 +227,7 @@
 //=== dHAS_RVALUE_ARRAY ========================================================
 
 #if !defined(_MSC_VER) || _MSC_VER > 1900
-    //#pragma message("build for msvc2017 (or newer) or gcc-like compiler")
+    // #pragma message("build for msvc2017 (or newer) or gcc-like compiler")
     #define dHAS_RVALUE_ARRAY 1
 #endif
 

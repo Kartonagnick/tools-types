@@ -13,21 +13,22 @@
 [VS-OLD]: #msvc-old.md  "поддержка старых компиляторов msvc"  
 
 
-Текущая версия types 1.2.6  
+Текущая версия types 1.2.7 [![P]][M]  
 ------
 1. [assert][01]  
-2. dFUNCTION  
-3. features  
-4. type_traits  
+2. [dFUNCTION][02]  
+3. [features][03]  
+4. [type_traits][04]  
 5. types  
     5.1. types.hpp  
     5.2. version.hpp  
     5.3. traits.hpp  
-    5.4. [common.hpp][51] [![V]][51] [![V]][51] [![D]][51]  
+    5.4. [common.hpp][51]  
     5.6. variadic.hpp  
-    5.7. void_t.hpp  
-    5.8. fixed.hpp  
-    5.9. demangle.hpp  
+    5.7. [void_t.hpp][57]  
+    5.8. [fixed.hpp][58] ............ [c++11][58-11][![V]][58-11]  [c++98][58-98][![V]][58-11]  
+    5.9. [limit.hpp][59]  
+    5.10. [demangle.hpp][510]  
 6. macro  
     6.1. overload-5.hpp  
     6.2. make_version.hpp  
@@ -38,5 +39,16 @@
     7.4. warning.hpp  
 
 
-[01]: code/assert.md         "улучшенный assert"  
-[51]: code/types/common.md   "сборник мета-алгоритмов общего назначения"  
+[01]: cpp/assert.md           "улучшенный assert"  
+[02]: cpp/dfunction.md        "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
+[03]: cpp/features.md         "здесь выявляются возможности компилятора"  
+[04]: cpp/type_traits.md      "подключает type_traits"  
+[51]: cpp/types/common.md     "сборник мета-алгоритмов общего назначения"  
+[57]: cpp/types/void_t.md     "идиома std::void_t: sfinae-конструкция"  
+
+[58]: cpp/types/fixed.md      "типы фиксированного размера"  
+[58-98]: cpp/types/fixed/fixed-cpp98.md  "типы фиксированного размера: для старых компилторов, которые не поддерживают с++11"  
+[58-11]: cpp/types/fixed/fixed-cpp11.md  "типы фиксированного размера: для компилторов в с поддержкой с++11"  
+
+[59]: cpp/types/limit.md      "определяет макс/мин значения различных целочисленных типов"  
+[510]: cpp/types/demangle.md  "преобразует результат typeid(T).name() в человеко-читабельный вид"  
