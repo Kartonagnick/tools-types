@@ -18,7 +18,7 @@
 1. [assert][01]  
 2. [dFUNCTION][02]  
 3. [features][03]  
-4. type_traits  
+4. [type_traits][04]  
 5. types  
     5.1. types.hpp  
     5.2. version.hpp  
@@ -41,4 +41,5 @@
 [01]: cpp/assert.md         "улучшенный assert"  
 [02]: cpp/dfunction.md      "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
 [03]: cpp/features.md       "здесь выявляются возможности компилятора"  
+[04]: cpp/type_traits.md    "подключает type_traits"  
 [51]: cpp/types/common.md   "сборник мета-алгоритмов общего назначения"  

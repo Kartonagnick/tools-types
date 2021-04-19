@@ -135,7 +135,7 @@
 #endif
 
 //==============================================================================
-//=== dSFINAE_VOID_TYPE ========================================================
+//=== dSFINAE_CHECK ============================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1800
     // msvc2013 or newer
@@ -144,6 +144,45 @@
     // msvc2012 or older
     #define dSFINAE_VOID_TYPE(...) \
         typename ::tools::void_type<__VA_ARGS__>::type
+#endif
+
+#if 0
+#if !defined(_MSC_VER) || _MSC_VER >= 1600
+    // msvc2010 or newer
+    #define dSFINAE_EXPRESSION(...) \
+        dSFINAE_CHECK(decltype(__VA_ARGS__))
+#else
+    // msvc2012 or older
+    #define dSFINAE_EXPRESSION(...) \
+        dSFINAE_CHECK(char[1 + sizeof(__VA_ARGS__)])
+#endif
+#endif
+
+//==============================================================================
+//==============================================================================
+
+#if 0
+
+#define dSFINAE_DECLARATION_1(Name, Type, ...)            \
+    template<class, class = void>                         \
+    struct Name                                           \
+        : dTRAIT::false_type                              \
+    {};                                                   \
+    template<class Type>                                  \
+    struct Name <Type, dSFINAE_EXPRESSION(__VA_ARGS__)>   \
+        : dTRAIT::true_type                               \
+    {}
+
+#define dSFINAE_DECLARATION_2(name, T1, T2, ... )         \
+    template<class, class, class = void>                  \
+    struct name                                           \
+        : dTRAIT::false_type                              \
+    {};                                                   \
+    template<class T1, class T2>                          \
+    struct name<T1, T2, dSFINAE_EXPRESSION(__VA_ARGS__) > \
+        : dTRAIT::true_type                               \
+    {}
+
 #endif
 
 //==============================================================================

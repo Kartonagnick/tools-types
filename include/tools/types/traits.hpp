@@ -336,7 +336,7 @@ namespace tools
 
         template <class t> struct can_add_pointer_
         {
-            template <typename u> static 
+            template <class u> static 
                 yes check(u* p);
 
             template <class> static
