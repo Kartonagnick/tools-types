@@ -27,7 +27,7 @@
     5.6. variadic.hpp  
     5.7. [void_t.hpp][57]  
     5.8. fixed.hpp  
-    5.9. demangle.hpp  
+    5.9. [demangle.hpp][59]  
 6. macro  
     6.1. overload-5.hpp  
     6.2. make_version.hpp  
@@ -38,9 +38,10 @@
     7.4. warning.hpp  
 
 
-[01]: cpp/assert.md         "улучшенный assert"  
-[02]: cpp/dfunction.md      "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
-[03]: cpp/features.md       "здесь выявляются возможности компилятора"  
-[04]: cpp/type_traits.md    "подключает type_traits"  
-[51]: cpp/types/common.md   "сборник мета-алгоритмов общего назначения"  
-[57]: cpp/types/void_t.md   "идиома std::void_t: sfinae-конструкция"  
+[01]: cpp/assert.md          "улучшенный assert"  
+[02]: cpp/dfunction.md       "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
+[03]: cpp/features.md        "здесь выявляются возможности компилятора"  
+[04]: cpp/type_traits.md     "подключает type_traits"  
+[51]: cpp/types/common.md    "сборник мета-алгоритмов общего назначения"  
+[57]: cpp/types/void_t.md    "идиома std::void_t: sfinae-конструкция"  
+[59]: cpp/types/demangle.md  "преобразует результат typeid(T).name() в человеко-читабельный вид"  
