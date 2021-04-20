@@ -24,8 +24,8 @@
     5.2. version.hpp  
     5.3. traits.hpp  
     5.4. [common.hpp][54]  
-    5.6. [variadic.hpp][56]  
-    5.7. [void_t.hpp][57]  
+    5.6. [variadic.hpp][56] ......... [new][56-NEW][![V]][56-NEW]  [old][56-OLD][![V]][56-OLD]  
+    5.7. [void_t.hpp][57] ........... [![D]][57]  
     5.8. [fixed.hpp][58] ............ [c++11][58-11][![V]][58-11]  [c++98][58-98][![V]][58-11]  
     5.9. [limit.hpp][59]  
     5.10. [demangle.hpp][510]  
@@ -44,7 +44,12 @@
 [03]: cpp/features.md         "здесь выявляются возможности компилятора"  
 [04]: cpp/type_traits.md      "подключает type_traits"  
 [54]: cpp/types/common.md     "сборник мета-алгоритмов общего назначения"  
+
 [56]: cpp/types/variadic.md   "решение проблемы провалов в шаблоно-конструкторы"  
+[56-OLD]: cpp/types/variadic/variadic-old.md   "решение проблемы провалов в шаблоно-конструкторы"  
+[56-NEW]: cpp/types/variadic/variadic-new.md   "решение проблемы провалов в шаблоно-конструкторы"  
+
+
 [57]: cpp/types/void_t.md     "идиома std::void_t: sfinae-конструкция"  
 
 [58]: cpp/types/fixed.md      "типы фиксированного размера"  
