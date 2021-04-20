@@ -29,14 +29,14 @@
     5.8. [fixed.hpp][58] ............ [c++11][58-11][![V]][58-11]  [c++98][58-98][![V]][58-11]  
     5.9. [limit.hpp][59]  
     5.10. [demangle.hpp][510]  
-6. macro  
-    6.1. overload-5.hpp  
-    6.2. make_version.hpp  
-7. pragma  
-    7.1. pragma.hpp  
-    7.2. confbuild.hpp  
-    7.3. view_build.hpp  
-    7.4. warning.hpp  
+6. [macro][06]  
+    6.1. [overload-5.hpp][61]  
+    6.2. [make_version.hpp][62]  
+7. [pragma][07]  
+    7.1. [pragma.hpp][71]  
+    7.2. [confbuild.hpp][72]  
+    7.3. [view_build.hpp][73]  
+    7.4. [warning.hpp][74]  
 
 
 [01]: cpp/assert.md           "улучшенный assert"  
@@ -52,3 +52,17 @@
 
 [59]: cpp/types/limit.md      "определяет макс/мин значения различных целочисленных типов"  
 [510]: cpp/types/demangle.md  "преобразует результат typeid(T).name() в человеко-читабельный вид"  
+
+[06]: cpp/macro.md                  "магия препроцессора"  
+[61]: cpp/macro/kit-5.md/#overload  "перегрузка макросов"  
+[61]: cpp/macro/make_version.md     "версия продукта"  
+
+[07]: cpp/pragma.md                 "работа с прагмами"  
+[71]: cpp/pragma.md/#pragma         "служебные подавляторы предупреждений для библиотки tools"
+[72]: cpp/pragma.md/#confbuild      "определяет дефайны препроцессора, связанные с конфигурацией сборки"
+[73]: cpp/pragma.md/#view_build     "печатает в лог компиляции название, версию, и конфигурации цели сборки"
+[74]: cpp/pragma.md/#warning        "кросс-платформенный подавлятор предупреждений"
+
+
+
+
