@@ -20,8 +20,8 @@
 3. [features][03]  
 4. [type_traits][04]  
 5. types  
-    5.1. types.hpp  
-    5.2. version.hpp  
+    5.1. [types.hpp][51]  
+    5.2. [version.hpp][52]  
     5.3. traits.hpp  
     5.4. [common.hpp][54]  
     5.6. [variadic.hpp][56] ......... [new][56-NEW][![V]][56-NEW]  [old][56-OLD][![V]][56-OLD]  
@@ -43,6 +43,10 @@
 [02]: cpp/dfunction.md        "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
 [03]: cpp/features.md         "здесь выявляются возможности компилятора"  
 [04]: cpp/type_traits.md      "подключает type_traits"  
+
+[51]: ../include/tools/types/types.hpp    "версия модуля"  
+[52]: ../include/tools/types/version.hpp  "версия модуля"  
+
 [54]: cpp/types/common.md     "сборник мета-алгоритмов общего назначения"  
 
 [56]: cpp/types/variadic.md   "решение проблемы провалов в шаблоно-конструкторы"  
