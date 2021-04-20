@@ -8,11 +8,18 @@
 // [2021y-04m-03d][00:13:00] Idrisov Denis R. 10
 // [2021y-04m-03d][23:11:10] Idrisov Denis R. 11
 // [2021y-04m-04d][01:36:02] Idrisov Denis R. 12
+
+// [2021y-04m-21d][00:41:22] Idrisov Denis R. 13 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 12
+#define dTOOLS_TRAITS_USED_ 13 PRE
 
 #include <tools/features.hpp>
+
+#define dDETAIL_TRAITS(...)                  \
+    public ::tools::integral_constant<bool,  \
+        ::tools::detail::__VA_ARGS__::value  \
+    >
 
 //==============================================================================
 //=== integral_constant ========================================= (features) ===
@@ -44,11 +51,6 @@ namespace tools
 
     typedef integral_constant<bool, false>
         false_type;
-
-    #define dDETAIL_TRAITS(...)                  \
-        public ::tools::integral_constant<bool,  \
-            ::tools::detail::__VA_ARGS__::value  \
-        >
 
 } // namespace tools 
 #endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
@@ -763,7 +765,6 @@ namespace tools
 
 #endif // !dTOOLS_IS_BASE_OF_USED_
 
-
 //==============================================================================
 //=== conditional ==============================================================
 #ifndef dTOOLS_CONDITIONAL_USED_ 
@@ -781,6 +782,70 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_SELECT_USED_
 
+//================================================================= (sfinae) ===
+//=== is_convertible ====================== (integral_constant)(conditional) ===
+#ifndef dTOOLS_IS_CONVERTIBLE_USED_ 
+#define dTOOLS_IS_CONVERTIBLE_USED_ 1
+namespace tools
+{
+    namespace detail
+    {
+        typedef char(&no )[1];
+        typedef char(&yes)[2];
+        template<class t> t obj();
+
+        #ifdef _MSC_VER
+            #pragma warning(push)
+            // warning C4244: 'argument' : conversion from 'float' to 'int', 
+            // possible loss of data
+            #pragma warning(disable: 4244)
+        #endif
+
+        template <class from, class to>
+        struct is_convertible_
+        {
+            #ifdef dHAS_RVALUE_REFERENCES
+                typedef from&& from_t;
+            #endif
+
+            template <class u> static yes check(u);
+            template <class>   static  no check(...);
+
+            #ifdef dHAS_RVALUE_REFERENCES
+                enum { result = sizeof(check<to>(obj<from_t>())) };
+            #else
+                enum { result = sizeof(check<to>(obj<from>())) };
+            #endif
+        
+            enum { value = result != sizeof(no) };
+        };
+
+        #ifdef _MSC_VER
+            #pragma warning(pop)
+        #endif
+
+        template <class to>
+        struct is_convertible_<void, to>
+            { enum { value = false }; };
+
+        template <class from> 
+        struct is_convertible_<from, void>
+            { enum { value = false }; };
+
+        template <class t> 
+        struct is_convertible_<t, t>
+            { enum { value = true }; };
+
+    } // namespace detail
+
+    template <class from, class to>
+    struct is_convertible
+        : dDETAIL_TRAITS(is_convertible_<from, to>)
+    {};
+
+} // namespace tools 
+
+#endif // !dTOOLS_IS_CONVERTIBLE_USED_
 
 //==============================================================================
 //=== decay =================================== (is_array)(remove_reference) ===
@@ -806,8 +871,8 @@ namespace tools
         typedef typename ::tools::add_pointer<x>::type
             ptr1;
         typedef typename ::tools::remove_cv<x>::type
-            n_cv;
-        typedef ::tools::conditional<foo, ptr1, n_cv>
+            no_cv;
+        typedef ::tools::conditional<foo, ptr1, no_cv>
             select1;
         typedef typename select1::type
             one;

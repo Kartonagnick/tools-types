@@ -259,7 +259,7 @@ namespace
             template <class u> static yes check(u);
             template <class> static no check(...);
 
-            enum { result = sizeof(check<From>(obj<To>())) };
+            enum { result = sizeof(check<To>(obj<From>())) };
             enum { value = result != sizeof(no) };
 
             typedef dTRAIT::conditional<value, 
