@@ -136,37 +136,22 @@ namespace
         der2(der2&& rhs):example(::std::move(rhs)){}
         #endif
 
-        #ifdef dHAS_RVALUE_REFERENCES
-            template<class A> 
-            der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
+        template<class A> 
+        der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
 
-            template<class A> 
-            der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
-        #else
-            template<class A> 
-            der2(const A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A))
-                : example(a) 
-            {}
-
-            template<class A> 
-            der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A))
-                : example(a) 
-            {}
-        #endif
-
+        template<class A> 
+        der2(A& a, dTEMPLATE_CONSTRUCT_ARG(der2, A));
     };
 
-    #ifdef dHAS_RVALUE_REFERENCES
-        template<class A>
-        der2::der2(const A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
-            : example(a) 
-        {}
+    template<class A>
+    der2::der2(const A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
+        : example(a) 
+    {}
 
-        template<class A>
-        der2::der2(A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
-            : example(a) 
-        {}
-    #endif
+    template<class A>
+    der2::der2(A& a, dTEMPLATE_CONSTRUCT_IMPL(der2, A))
+        : example(a) 
+    {}
 
     #ifdef dHAS_RVALUE_REFERENCES
         der2 rvalue2() 
@@ -194,7 +179,8 @@ TEST_COMPONENT(000)
     der d2(10);              
     ASSERT_TRUE(d2.m_ctor == eTEMPLATE);
 
-    const bool is = dTRAIT::is_base_of<example, der>::value;
+    const bool is 
+        = dTRAIT::is_base_of<example, der>::value;
     ASSERT_TRUE(is);
 
     der d3(d1); 

@@ -2,22 +2,19 @@
 // [2020y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-26d][01:24:02] Idrisov Denis R.
 // [2021y-04m-03d][19:13:13] Idrisov Denis R. 2
+// [2021y-04m-20d][22:31:51] Idrisov Denis R. 3 PRE
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_VARIADIC_NEW_USED_ 
-#define dTOOLS_VARIADIC_NEW_USED_ 2
+#define dTOOLS_VARIADIC_NEW_USED_ 3 PRE
 
+#include <tools/features.hpp>
 #include <type_traits>
-
-#define dDETAIL_CONSTANT(...)              \
-    public dTRAIT::integral_constant<bool, \
-        detail::__VA_ARGS__::value         \
-    >
 
 //==============================================================================
 //=== is_heir ==================================================================
 #ifndef dTOOLS_IS_HEIR_USED_ 
-#define dTOOLS_IS_HEIR_USED_ 1,2010
+#define dTOOLS_IS_HEIR_USED_ 3, 2010  PRE
 namespace tools
 {
     struct dummy;
@@ -25,27 +22,33 @@ namespace tools
     namespace detail
     {
         template <class... args>
-            struct is_heir;
+            struct is_heir_;
 
-        template <class a> struct is_heir<a>
+        template <class a> struct is_heir_<a>
             { enum { value = false }; };
 
         template <class b, class d, class... args>
-        struct is_heir<b, d, args...>
+        struct is_heir_<b, d, args...>
         {
             using bb  = ::std::decay_t<b>;
             using dd  = ::std::decay_t<d>;
             using xx  = ::std::is_base_of<bb,dd>;
             enum { v1 = sizeof...(args) == 0 };
-            enum { v2 = xx::value   };
-            enum { value = v1 && v2 };
+            enum { value = v1 && xx::value };
         };
+
+        template<class ...args> 
+        using if_variadic_t
+            = ::std::enable_if_t< 
+                !::tools::detail::is_heir_<args...>::value, 
+                ::tools::dummy*
+            >;
 
     } // namespace detail
 
     template<class... args>
     struct is_heir
-        : dDETAIL_CONSTANT(is_heir<args...>)
+        : dDETAIL_CONSTANT(is_heir_<args...>)
     {};
 
 } // namespace tools
@@ -60,9 +63,8 @@ namespace tools
     >
 
 #define dTEMPLATE_CONSTRUCT_IMPL(type, args)  \
-    ::std::enable_if_t<                       \
-        !::tools::is_heir<type, args>::value, \
-         ::tools::dummy*                      \
+    typename ::tools::detail::if_variadic_t<  \
+        type, args                            \
     >
 
 #define dTEMPLATE_CONSTRUCT_ARG(type, args)   \
