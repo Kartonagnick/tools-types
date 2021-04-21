@@ -1,13 +1,14 @@
 // [2021y-04m-13d][01:56:09] Idrisov Denis R.
+// [2021y-04m-21d][13:17:28] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_HAS_END
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD has_end
 #define dTEST_TAG tdd
 
-#include <tools/types/common/has_end.hpp>
+#include <tools/types/sfinae/has_end.hpp>
 #include <string>
 
 namespace me = ::tools;

@@ -1,13 +1,14 @@
 // [2021y-04m-13d][21:15:33] Idrisov Denis R.
+// [2021y-04m-21d][13:18:05] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_HAS_OPERATOR_ACCESS
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD has_operator_access
 #define dTEST_TAG tdd
 
-#include <tools/types/common/has_operator_access.hpp>
+#include <tools/types/sfinae/has_operator_access.hpp>
 
 namespace me = ::tools;
 //==============================================================================

@@ -1,15 +1,16 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-04m-12d][02:22:31] Idrisov Denis R.
+// [2021y-04m-21d][13:19:19] Idrisov Denis R.
 
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_HAS_VALUE_TYPE
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD has_value_type
 #define dTEST_TAG tdd
 
-#include <tools/types/common/has_value_type.hpp>
+#include <tools/types/sfinae/has_value_type.hpp>
 #include <vector>
 #include <map>
 

@@ -1,15 +1,16 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-04m-12d][02:22:31] Idrisov Denis R.
+// [2021y-04m-21d][13:18:27] Idrisov Denis R.
 
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_IS_ITERABLE
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD is_iterable
 #define dTEST_TAG tdd
 
-#include <tools/types/common/is_iterable.hpp>
+#include <tools/types/sfinae/is_iterable.hpp>
 #include <iostream>
 #include <vector>
 #include <map>

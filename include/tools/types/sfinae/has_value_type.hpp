@@ -1,10 +1,11 @@
 // [2021y-04m-13d][18:30:25] Idrisov Denis R. 100
 // [2021y-04m-14d][01:45:51] Idrisov Denis R. 100
+// [2021y-04m-21d][13:27:01] Idrisov Denis R. 101 PRE
 //==============================================================================
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_HAS_VALUE_TYPE_USED_ 
-#define dTOOLS_HAS_VALUE_TYPE_USED_ 100
+#define dTOOLS_HAS_VALUE_TYPE_USED_ 101 PRE
 
 #include <tools/type_traits.hpp>
 

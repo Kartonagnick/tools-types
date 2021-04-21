@@ -1,13 +1,14 @@
 // [2021y-04m-12d][02:19:39] Idrisov Denis R. 100
 // [2021y-04m-14d][01:45:51] Idrisov Denis R. 100
+// [2021y-04m-21d][13:21:17] Idrisov Denis R. 101 PRE
 //==============================================================================
 //==============================================================================
 #pragma once
 #ifndef dTOOLS_IS_ITERABLE_USED_ 
-#define dTOOLS_IS_ITERABLE_USED_ 100
+#define dTOOLS_IS_ITERABLE_USED_ 101 PRE
 
-#include <tools/types/common/is_dereferencable.hpp>
-#include <tools/types/common/is_incrementable.hpp>
+#include <tools/types/sfinae/is_dereferencable.hpp>
+#include <tools/types/sfinae/is_incrementable.hpp>
 
 //==============================================================================
 //==============================================================================

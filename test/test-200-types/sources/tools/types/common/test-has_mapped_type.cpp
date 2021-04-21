@@ -1,13 +1,14 @@
 // [2021y-04m-12d][21:03:40] Idrisov Denis R.
+// [2021y-04m-21d][13:16:22] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_HAS_MAPPED_TYPE
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD has_mapped_type
 #define dTEST_TAG tdd
 
-#include <tools/types/common/has_mapped_type.hpp>
+#include <tools/types/sfinae/has_mapped_type.hpp>
 #include <vector>
 #include <map>
 
