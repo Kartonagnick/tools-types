@@ -608,7 +608,45 @@ TEST_COMPONENT(014)
 }
 
 //==============================================================================
-//==============================================================================
+//=== [bug: msvc2010] ==========================================================
+namespace bug_msvc2010
+{
+    #if defined(_MSC_VER) && _MSC_VER <= 1600
+        // msvc2010 has bug 
+        template<class t> struct no_ref_       { typedef t type; };
+        template<class t> struct no_ref_ <t&>  { typedef t type; };
+    #endif
 
+    template<class t> struct example
+    {
+        #if defined(_MSC_VER) && _MSC_VER <= 1600
+            typedef no_ref_<t> no_ref;
+        #else
+            typedef std::remove_reference<t>
+                no_ref;
+        #endif
+
+        typedef typename no_ref::type
+            type;
+    };
+
+} // namespace test_msvc2010
+
+// ---msvc2010 has bug
+TEST_COMPONENT(015)
+{
+    typedef bug_msvc2010::example<int(&)()>
+        bug;
+    typedef bug::type 
+        result;
+
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int()>::value
+    );
+}
+
+//==============================================================================
+//==============================================================================
 #endif // !TEST_TOOLS_ADD_CONST_DATA
 
