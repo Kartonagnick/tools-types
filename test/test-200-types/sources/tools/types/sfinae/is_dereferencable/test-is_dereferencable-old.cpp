@@ -1,17 +1,15 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-20d][22:41:59] Idrisov Denis R.
+// [2021y-04m-21d][13:34:12] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_IS_DEREFERENCABLE
 
-#include <tools/features.hpp>
-#ifdef dHAS_USING_ALIAS
-
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD is_dereferencable
-#define dTEST_TAG new
+#define dTEST_TAG old
 
-#include <tools/types/common.hpp>
+#include <tools/types/sfinae.hpp>
 
 #include <string>
 #include <memory>
@@ -24,12 +22,20 @@ namespace
     #define dexpression(type, expected) \
         me::is_dereferencable<type>::value == expected
 
-    #define make_test(type, expected)       \
-        static_assert(                      \
-            dexpression(type, expected),    \
-            "is_dereferencable<" #type ">"  \
-            "must be '" #expected "'"       \
-        )
+    #ifdef dHAS_STATIC_ASSERT
+        #define make_test(type, expected)       \
+            static_assert(                      \
+                dexpression(type, expected),    \
+                "is_dereferencable<" #type "> " \
+                "must be '" #expected "'"       \
+            )
+    #else
+        #define make_test(type, expected)       \
+            dSTATIC_ASSERT(                     \
+                ERROR_INTERNAL,                 \
+                dexpression(type, expected)     \
+            )
+    #endif
   
 }//namespace
 
@@ -37,8 +43,13 @@ namespace
 //==============================================================================
 namespace
 {
-    using shared = ::std::shared_ptr<int>;
-    using iter   = ::std::string::iterator;
+    #ifdef dHAS_NULLPTR
+    typedef ::std::shared_ptr<int> 
+        shared;
+    #endif
+
+    typedef ::std::string::iterator  
+        iter;
 
     struct foo
     {
@@ -81,52 +92,76 @@ namespace
         multi();
     };
 
+} // namespace
+
+//==============================================================================
+//==============================================================================
+
+TEST_COMPONENT(000)
+{
     //       |   type         | expected |
     make_test(bool            ,   false  );
-    make_test(::std::nullptr_t,   false  );
-    make_test(::std::string   ,   false  );
+
+    #ifdef dHAS_NULLPTR
+    make_test(std::nullptr_t  ,   false  );
+    #endif
+
+    make_test(std::string     ,   false  );
     make_test(char[2]         ,   true   );
     make_test(char*           ,   true   );
     make_test(iter            ,   true   );
+
+    #ifdef dHAS_NULLPTR
     make_test(shared          ,   true   );
     make_test(shared&         ,   true   );
+    #endif
+
     make_test(foo             ,   true   );
     make_test(foo&            ,   true   );
     make_test(const foo       ,   true   );
     make_test(const foo&      ,   true   );
     make_test(bar             ,   true   );
     make_test(bar&            ,   true   );
-    make_test(const bar       ,   false  );
-    make_test(const bar&      ,   false  );
+
+    #ifdef dHAS_VARIADIC_TEMPLATE
+        // msvc2013
+        make_test(const bar   ,   false  );
+        make_test(const bar&  ,   false  );
+    #else
+        //bug: vc2008 - vc2013  ignore 'qualifier'
+        make_test(const bar   ,   true   );
+        make_test(const bar&  ,   true   );
+    #endif
+
     make_test(baz             ,   false  );
     make_test(baz&            ,   false  );
     make_test(const baz       ,   false  );
     make_test(const baz&      ,   false  );
-
     make_test(voidd           ,   true   );
     make_test(method          ,   false  );
 
-    make_test(multi           ,   false  );
-
-    #if defined(_MSC_VER) && _MSC_VER <= 1800
-    // bug: msvc2013 or older ignore private access
-    make_test(two             ,   true   );
-    make_test(privat          ,   true   );
+    #ifdef dHAS_CPP11
+        make_test(two         ,   false  );
+        make_test(privat      ,   false  );
+        make_test(multi       ,   false  );
     #else
-    make_test(two             ,   false  );
-    make_test(privat          ,   false  );
+        //bug: vc2008 - vc2013  ignore 'private' acccess
+        make_test(two         ,   true   );
+        make_test(privat      ,   true   );
+
+        #ifdef dHAS_USING_ALIAS
+            // msvc2013
+            make_test(multi   ,   false  );
+        #else
+            // bug: vc2008 - vc2012 
+            // does not distinguish between multiplication and dereferencing operator
+            make_test(multi   ,   true   );
+
+        #endif
     #endif
-} // namespace
+}
 
 //==============================================================================
 //==============================================================================
-
-TEST_COMPONENT(000){}
-
-//==============================================================================
-//==============================================================================
-
-
-#endif // !dHAS_USING_ALIAS
 #endif // !TEST_TOOLS_IS_DEREFERENCABLE
 

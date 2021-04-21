@@ -9,11 +9,11 @@
 #include <tools/features.hpp>
 
 #ifdef dHAS_USING_ALIAS
-    #include <tools/types/common/is_incrementable/is_incrementable-2013.hpp>
+    #include <tools/types/sfinae/is_incrementable/is_incrementable-2013.hpp>
 #elif defined (dHAS_ENUM_CLASS)
-    #include <tools/types/common/is_incrementable/is_incrementable-2012.hpp>
+    #include <tools/types/sfinae/is_incrementable/is_incrementable-2012.hpp>
 #else
-    #include <tools/types/common/is_incrementable/is_incrementable-2008.hpp>
+    #include <tools/types/sfinae/is_incrementable/is_incrementable-2008.hpp>
 #endif
 
 //==============================================================================

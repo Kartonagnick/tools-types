@@ -1,7 +1,6 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-04m-12d][02:22:31] Idrisov Denis R.
 // [2021y-04m-21d][13:19:19] Idrisov Denis R.
-
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_HAS_VALUE_TYPE
