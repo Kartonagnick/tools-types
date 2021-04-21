@@ -1,8 +1,10 @@
 // [2021y-04m-05d][03:01:01] Idrisov Denis R. 100
 // [2021y-04m-10d][07:18:56] Idrisov Denis R. 101
+
+// [2021y-04m-21d][12:46:01] Idrisov Denis R. 102 PRE
 #pragma once
 #ifndef dTOOLS_ARRAY_2008_USED_ 
-#define dTOOLS_ARRAY_2008_USED_ 101,2008
+#define dTOOLS_ARRAY_2008_USED_ 102,2008
 
 #include <tools/pragma/pragma.hpp>
 #include <tools/type_traits.hpp>
@@ -124,11 +126,11 @@ namespace tools
 //==============================================================================
 //=== small_array =================================(degradate)(size_array) =====
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 100,2008
+#define dTOOLS_SMALL_ARRAY_USED_ 101,2008
 namespace tools 
 {
     template<class s1, class s2>
-    class small_array_selector
+    class small_array_selector_
     {
         typedef dTRAIT::remove_reference<s1> 
             no_ref1;
@@ -147,16 +149,16 @@ namespace tools
         enum { value = small1 && small2 };
     };
 
-    #define dif_big_arrays(a, b, ret)                    \
-        typename dTRAIT::enable_if<                      \
-            !::tools::small_array_selector<a, b>::value, \
-            ret                                          \
+    #define dif_big_arrays(a, b, ret)                     \
+        typename dTRAIT::enable_if<                       \
+            !::tools::small_array_selector_<a, b>::value, \
+            ret                                           \
         >::type 
 
-    #define dif_small_arrays(a, b, ret)                  \
-        typename dTRAIT::enable_if<                      \
-            ::tools::small_array_selector<a, b>::value,  \
-            ret                                          \
+    #define dif_small_arrays(a, b, ret)                   \
+        typename dTRAIT::enable_if<                       \
+            ::tools::small_array_selector_<a, b>::value,  \
+            ret                                           \
         >::type 
 
 } // namespace tools 

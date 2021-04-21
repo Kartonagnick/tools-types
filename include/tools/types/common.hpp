@@ -13,9 +13,11 @@
 // [2021y-04m-09d][23:48:34] Idrisov Denis R. 112
 // [2021y-04m-10d][07:15:57] Idrisov Denis R. 113
 // [2021y-04m-14d][01:37:47] Idrisov Denis R. 114
+
+// [2021y-04m-21d][03:16:15] Idrisov Denis R. 115 PRE
 #pragma once
 #ifndef dTOOLS_COMMON_USED_ 
-#define dTOOLS_COMMON_USED_ 114
+#define dTOOLS_COMMON_USED_ 115 PRE
 
 #include <tools/features.hpp>
 
@@ -29,15 +31,15 @@
 #include <tools/types/common/enable_for.hpp>
 #include <tools/types/common/type_of_enum.hpp>
 #include <tools/types/common/add_const_data.hpp>
-#include <tools/types/common/is_dereferencable.hpp>
+//#include <tools/types/common/is_dereferencable.hpp>
 #include <tools/types/common/is_volatile_data.hpp>
 #include <tools/types/common/is_const_data.hpp>
-#include <tools/types/common/is_lambda.hpp>
+//#include <tools/types/common/is_lambda.hpp>
 #include <tools/types/common/array.hpp>
 
-#include <tools/types/common/is_incrementable.hpp>
-#include <tools/types/common/is_decrementable.hpp>
-#include <tools/types/common/is_iterator.hpp>
+//#include <tools/types/common/is_incrementable.hpp>
+//#include <tools/types/common/is_decrementable.hpp>
+//#include <tools/types/common/is_iterator.hpp>
 
 //==============================================================================
 //==============================================================================

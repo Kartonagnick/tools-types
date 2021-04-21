@@ -20,19 +20,19 @@
 3. [features][03]  
 4. [type_traits][04]  
 5. types  
-    5.1. types.hpp  
-    5.2. version.hpp  
-    5.3. traits.hpp  
+    5.1. [types.hpp][51]  
+    5.2. [version.hpp][52]  
+    5.3. [traits.hpp][53] ........... [![V]][53]  
     5.4. [common.hpp][54]  
     5.6. [variadic.hpp][56] ......... [new][56-NEW][![V]][56-NEW]  [old][56-OLD][![V]][56-OLD]  
     5.7. [void_t.hpp][57] ........... [![D]][57]  
     5.8. [fixed.hpp][58] ............ [c++11][58-11][![V]][58-11]  [c++98][58-98][![V]][58-11]  
     5.9. [limit.hpp][59]  
     5.10. [demangle.hpp][510]  
-6. [macro][06]  
+6. [macro][06] ...................... [![V]][06]  
     6.1. [overload-5.hpp][61]  
     6.2. [make_version.hpp][62]  
-7. [pragma][07]  
+7. [pragma][07] ..................... [![V]][07]  
     7.1. [pragma.hpp][71]  
     7.2. [confbuild.hpp][72]  
     7.3. [view_build.hpp][73]  
@@ -43,6 +43,11 @@
 [02]: cpp/dfunction.md        "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
 [03]: cpp/features.md         "здесь выявляются возможности компилятора"  
 [04]: cpp/type_traits.md      "подключает type_traits"  
+
+[51]: ../include/tools/types/types.hpp    "версия модуля"  
+[52]: ../include/tools/types/version.hpp  "версия модуля"  
+
+[53]: cpp/types/traits.md     "самодельный type_traits"  
 [54]: cpp/types/common.md     "сборник мета-алгоритмов общего назначения"  
 
 [56]: cpp/types/variadic.md   "решение проблемы провалов в шаблоно-конструкторы"  

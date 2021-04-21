@@ -1,4 +1,5 @@
 
+
 [P]: ../../icons/progress.png
 [V]: ../../icons/success.png
 [X]: ../../icons/failed.png
@@ -6,31 +7,89 @@
 [E]: ../../icons/empty.png
 [N]: ../../icons/na.png
 
-common
+[M]: #common  "сборник мета-алгоритмов общего назначения"  
+
+common 1.1.4  [![P]][M]
 ---
-Элемент в разработке...  
+Каталог раздела:
 
+  - array:
+    - is_zero_array
+    - size_array:
+      - dif_big_array
+      - dif_small_array
+      - dfor_big_array
+      - dfor_small_array
+    - small_array
+      - for_big_arrays_t
+      - for_small_arrays_t
+      - dif_big_arrays
+      - dif_small_arrays
+      - dfor_big_arrays
+      - dfor_small_arrays
 
-история изменений 
----
-current version 1.1.4 
+  - degradate:
+    - ddegradate
+    - degradate
+    - degradate_t
 
-| **ID** |      tools      | types | common |     дата      |  время   |  
-|:------:|:---------------:|:-----:|:------:|:-------------:|:--------:|  
-|  0013  | 0.2.7 [![P]][M] | 1.2.6 | 1.1.4  | 2021y-04m-14d | 11:54:37 |  
-|  0013  | 0.2.7 [![P]][M] | 1.2.5 | 1.1.3  | 2021y-04m-10d | 07:23:33 |  
-|  0012  | 0.2.7 [![P]][M] | 1.2.4 | 1.1.2  | 2021y-04m-09d | 23:32:25 |  
-|  0011  | 0.2.7 [![P]][M] | 1.2.3 | 1.1.1  | 2021y-04m-08d | 20:32:25 |  
-|  0010  | 0.2.7 [![P]][M] | 1.2.2 | 1.1.0  | 2021y-04m-07d | 23:43:10 |  
-|  0009  | 0.2.7 [![P]][M] | 1.2.1 | 1.0.9  | 2021y-04m-06d | 23:43:10 |  
-|  0008  | 0.2.7 [![P]][M] | 1.2.0 | 1.0.8  | 2021y-04m-05d | 04:41:30 |  
-|  0007  | 0.2.7 [![P]][M] | 1.1.9 | 1.0.7  | 2021y-04m-04d | 07:05:55 |  
-|  0006  | 0.2.7 [![P]][M] | 1.1.3 | 1.0.6  | 2021y-03m-30d | 03:40:56 |  
-|  0005  | 0.2.7 [![P]][M] | 1.0.8 | 1.0.5  | 2021y-03m-23d | 23:55:08 |  
-|  0004  | 0.2.7 [![P]][M] | 1.0.6 | 1.0.4  | 2021y-03m-21d | 17:51:39 |  
-|  0003  | 0.2.7 [![P]][M] | 1.0.5 | 1.0.3  | 2021y-03m-20d | 19:45:37 |  
-|  0002  | 0.2.7 [![P]][M] | 1.0.4 | 1.0.2  | 2021y-03m-20d | 05:35:17 |  
-|  0001  | 0.2.7 [![P]][M] | 1.0.3 | 1.0.1  | 2021y-03m-19d | 23:13:45 |  
-|  0000  | 0.2.7 [![P]][M] | 1.0.1 | 1.0.0  | 2021y-03m-18d | 23:45:05 |  
+  - for_lvalue:
+    - for_lvalue_t
+    - for_not_lvalue_t
+    - dfor_lvalue
+    - dfor_not_lvalue
 
+  - for_rvalue:
+    - for_rvalue_t
+    - for_not_rvalue_t
+    - dfor_rvalue
+    - dfor_not_rvalue
 
+  - find_type
+
+  - enable_for:
+    - enable_if_find_t
+    - disable_if_find_t
+    - dif_enabled
+    - dif_disabled
+    - enable_for_t
+    - disable_for_t
+    - dfor_enabled_impl
+    - dfor_disabled_impl
+    - dfor_enabled
+    - dfor_disabled
+
+  - type_of_enum:
+    - type_of_enum
+    - type_of_enum_t
+
+  - add_const_data:
+    - add_const_data
+    - add_const_data_t
+
+  - is_volatile_data:
+    - is_volatile_data
+    - for_volatile_data_t
+    - for_not_volatile_data_t
+    - dif_volatile_data
+    - dif_not_volatile_data
+    - dfor_volatile_data
+    - dfor_not_volatile_data
+
+  - is_const_data:
+    - is_const_data
+    - for_const_data_t
+    - for_not_const_data_t
+    - dif_const_data
+    - dif_not_const_data
+    - dfor_const_data
+    - dfor_not_const_data
+
+Каталог sfinae
+---  
+  - is_dereferencable
+  - is_lambda
+
+  - is_incrementable
+  - is_decrementable
+  - is_iterator

@@ -10,6 +10,41 @@
 
 **Версия 1.2.7 (промежуточная)**  
 ----------------------------------
+[2021y-04m-21d][11:00:00] #67_docs
+1) обновлен: traits                     013 PRE
+     - добавлен: 
+       - is_convertible      001 PRE
+       - is_lvalue_reference 001 PRE
+       - is_rvalue_reference 001 PRE
+
+2) добавлен: sfinae                     100 PRE
+     - добавлен: has_reserve     100 PRE
+     - добавлен: has_splice      100 PRE
+
+3) обновлен: common                     115 PRE
+     - обновлен: array                102 PRE
+       - обновлен: array-2008       102 PRE
+       - обновлен: array-2012       102 PRE
+       - обновлен: array-2013       102 PRE
+     - обновлен: is_volatile_data     102 PRE
+       - обновлен: is_volatile_data-2013  102 PRE
+     - обновлен: is_const_data     102 PRE
+       - обновлен: is_const_data-2013  102 PRE
+     - перемещены в sfinae:
+       - is_dereferencable       102 PRE
+       - is_lambda               101 PRE
+       - is_incrementable        101 PRE
+       - is_decrementable        101 PRE
+       - is_iterator             101 PRE
+       - is_iterable             101 PRE
+       - has_value_type          101 PRE
+       - has_mapped_type         101 PRE
+       - has_operator_access     101 PRE
+       - has_begin               101 PRE
+       - has_end                 101 PRE
+
+**Версия 1.2.7 (промежуточная)**  
+----------------------------------
 [2021y-04m-20d][16:11:27] #65_docs
 1) обновлен: pragma                     103 PRE
      - добавлено версионирование
@@ -37,7 +72,7 @@
     - добавлен: limit               100 PRE
       - добавлены: тесты
 
-**Версия 1.2.6 (предварительная)**  
+**Версия 1.2.6 (промежуточная)**  
 ----------------------------------
 [2021y-04m-14d][01:40:23] #61_is_iterable
 

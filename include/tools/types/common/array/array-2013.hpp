@@ -1,8 +1,10 @@
 // [2021y-04m-05d][03:01:01] Idrisov Denis R. 100
 // [2021y-04m-10d][07:18:56] Idrisov Denis R. 101
+
+// [2021y-04m-21d][12:42:43] Idrisov Denis R. 102 PRE
 #pragma once
 #ifndef dTOOLS_ARRAY_2013_USED_ 
-#define dTOOLS_ARRAY_2013_USED_ 101,2013
+#define dTOOLS_ARRAY_2013_USED_ 102,2013
 
 #include <tools/pragma/pragma.hpp>
 #include <tools/features.hpp>
@@ -117,11 +119,11 @@ namespace tools
 //==============================================================================
 //=== small_array ================================== (degradate)(size_array) ===
 #ifndef dTOOLS_SMALL_ARRAY_USED_ 
-#define dTOOLS_SMALL_ARRAY_USED_ 100,2013
+#define dTOOLS_SMALL_ARRAY_USED_ 101,2013
 namespace tools 
 {
     template<class s1, class s2>
-    class small_array_selector
+    class small_array_selector_
     {
         using x  = ::std::remove_reference_t<s1>;
         using z  = ::std::remove_reference_t<s2>;
@@ -137,14 +139,14 @@ namespace tools
     template<class arr1, class arr2, class ret = void>
     using for_big_arrays_t 
         = ::std::enable_if_t< 
-            !::tools::small_array_selector<arr1, arr2>::value,
+            !::tools::small_array_selector_<arr1, arr2>::value,
             ret
         >;
 
     template<class arr1, class arr2, class ret = void>
     using for_small_arrays_t 
         = ::std::enable_if_t<
-            ::tools::small_array_selector<arr1, arr2>::value, 
+            ::tools::small_array_selector_<arr1, arr2>::value, 
             ret
         >;
 
