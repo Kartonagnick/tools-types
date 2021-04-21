@@ -108,3 +108,11 @@ int main()
 error C2338: ERROR_BUG_RVALUE_MSVC2010
 ```
 Исправить данную ошибку не удалось.  
+Проблема в том, что компилятор msvc2010 не опознает подобный тип как rvalue_reference:  
+
+```cpp
+    dSTATIC_CHECK(
+        ERROR_BUG_IS_RVALUE_MSVC2010, 
+        std::is_rvalue_reference<void(&&)()>::value
+    );
+```

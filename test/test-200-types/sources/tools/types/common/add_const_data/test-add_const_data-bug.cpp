@@ -193,6 +193,11 @@ TEST_COMPONENT(022)
 {
     dSTATIC_CHECK(
         ERROR_BUG_IS_RVALUE_MSVC2010, 
+        std::is_rvalue_reference<void(&&)()>::value
+    );
+
+    dSTATIC_CHECK(
+        ERROR_BUG_IS_RVALUE_MSVC2010, 
         bug_msvc2010::is_rval_ref_<void(&&)()>::value
     );
 
