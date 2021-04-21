@@ -26,7 +26,7 @@ namespace
             dEXPRESSION(a,b)      \
         )
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
         #define dTEST_RVAL(a,b) dTEST_TRUE(a,b)
     #else
         #define dTEST_RVAL(a,b) void()
@@ -202,9 +202,10 @@ TEST_COMPONENT(003)
 // --- arrays[255]
 TEST_COMPONENT(004)
 {
-    dTEST_TRUE(char[255]                       , char*       );
-    dTEST_TRUE(char(&)[255]                    , char*       );
-    dTEST_RVAL(char(&&)[255]                   , char*[255]  );
+    dTEST_TRUE(char[255]                       , char*);
+    dTEST_TRUE(char(&)[255]                    , char*);
+    dTEST_RVAL(char(&&)[255]                   , char*);
+
     dTEST_TRUE(char(*)[255]                    , char(*)[255]);
     dTEST_TRUE(char(*&)[255]                   , char(*)[255]);
 //------------------------------------------------------------------------------
@@ -229,7 +230,7 @@ TEST_COMPONENT(004)
 //------------------------------------------------------------------------------
     dTEST_TRUE(char[1][2][3]                   , char(*)[2][3]   );
     dTEST_TRUE(char(&)[1][2][3]                , char(*)[2][3]   );
-    dTEST_RVAL(char(&&)[1][2][3]               , char(*)[1][2][3]);
+    dTEST_RVAL(char(&&)[1][2][3]               , char(*)[2][3]   );
     dTEST_TRUE(char(*)[1][2][3]                , char(*)[1][2][3]);
     dTEST_TRUE(char(*&)[1][2][3]               , char(*)[1][2][3]);
 //------------------------------------------------------------------------------

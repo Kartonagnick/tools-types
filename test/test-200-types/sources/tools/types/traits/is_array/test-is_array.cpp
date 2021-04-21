@@ -60,7 +60,7 @@ TEST_COMPONENT(000)
     dCHECK(int(&)[1][2]      , false );
     dCHECK(const int(&)[1][2], false );
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
     dCHECK(int(&&)[1]         , false );
     dCHECK(int(&&)[1][2]      , false );
     dCHECK(const int(&&)[1][2], false );
@@ -71,7 +71,7 @@ TEST_COMPONENT(000)
     dCHECK(const int(*)[1][2], false );
 }
 
-#ifdef dHAS_RVALUE_REFERENCE
+#ifdef dHAS_RVALUE_REFERENCES
 TEST_COMPONENT(001)
 {
     dCHECK(int&&       , false);

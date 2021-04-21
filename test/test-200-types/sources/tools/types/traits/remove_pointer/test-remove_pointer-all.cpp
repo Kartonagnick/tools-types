@@ -26,7 +26,7 @@ namespace
             dEXPRESSION(a,b)      \
         )
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
         #define dTEST_RVAL(a,b) dTEST_TRUE(a,b)
     #else
         #define dTEST_RVAL(a,b) void()
