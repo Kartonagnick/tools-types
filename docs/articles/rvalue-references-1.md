@@ -31,18 +31,14 @@ int main()
 Ошибка:
 
 ```cpp
-c:\program files (x86)\microsoft visual studio 10.0\vc\include\type_traits(197): error C2752: std::tr1::_Remove_reference<_Ty>: списку аргументов шаблона соответствует более одной частичной специализации
-2>          with
-2>          [
-2>              _Ty=int (__cdecl &)(void)
-2>          ]
-2>          c:\program files (x86)\microsoft visual studio 10.0\vc\include\xtr1common(356): может быть "std::tr1::_Remove_reference<_Ty&&>"
-2>          c:\program files (x86)\microsoft visual studio 10.0\vc\include\xtr1common(350): или       "std::tr1::_Remove_reference<_Ty&>"
-2>          c:\kartonagnick\public\tools-types\include\tools\types\common\add_const_data.hpp(163): см. ссылку на создание экземпляров класса шаблон при компиляции "std::tr1::remove_reference<_Ty>"
-2>          with
-2>          [
-2>              _Ty=int (__cdecl &)(void)
-2>          ]
+error C2752: std::tr1::_Remove_reference<_Ty>: 
+списку аргументов шаблона соответствует более одной частичной специализации
+with
+[
+    _Ty=int (__cdecl &)(void)
+]
+xtr1common(356): может быть "std::tr1::_Remove_reference<_Ty&&>"
+xtr1common(350): или       "std::tr1::_Remove_reference<_Ty&>"
 ```
 
 ## Анализ
