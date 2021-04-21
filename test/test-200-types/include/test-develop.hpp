@@ -54,16 +54,17 @@
     #define TEST_TOOLS_ADD_CONST_DATA                       // ready!
     #define TEST_TOOLS_ENABLE_FOR                           // ready!
 
+//==============================================================================
+//===== tools/types/sfinae =================================||==================
+    #define TEST_TOOLS_SFINAE                               // in progress...
+
     #define TEST_TOOLS_IS_INCREMENTABLE                     // ready!
     #define TEST_TOOLS_IS_DECREMENTABLE                     // ready!
     #define TEST_TOOLS_IS_ITERATOR                          // ready!
     #define TEST_TOOLS_IS_ITERABLE                          // ready!
-
     #define TEST_TOOLS_HAS_VALUE_TYPE                       // ready!
     #define TEST_TOOLS_HAS_MAPPED_TYPE                      // ready!
-
     #define TEST_TOOLS_HAS_OPERATOR_ACCESS                  // ready!
-
     #define TEST_TOOLS_HAS_BEGIN                            // ready!
     #define TEST_TOOLS_HAS_END                              // ready!
 
