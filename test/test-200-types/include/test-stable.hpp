@@ -31,9 +31,7 @@
     #define TEST_IS_FUNCTION                                // ready!
     #define TEST_IS_ARRAY                                   // ready!
     #define TEST_IS_BASE_OF                                 // ready!
-
-    #define TEST_IS_CONVERTIBLE                             // in progress...
-
+    #define TEST_IS_CONVERTIBLE                             // ready!
     #define TEST_REMOVE_EXTENSION                           // ready!
     #define TEST_REMOVE_ALL_EXTENSION                       // ready!
     #define TEST_ADD_POINTER                                // ready!
