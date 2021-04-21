@@ -8,12 +8,12 @@
 //==============================================================================
 //==============================================================================
 
-#include <tools/types/common/is_dereferencable.hpp>
-#include <tools/types/common/is_lambda.hpp>
+#include <tools/types/sfinae/is_dereferencable.hpp>
+#include <tools/types/sfinae/is_lambda.hpp>
 
-#include <tools/types/common/is_incrementable.hpp>
-#include <tools/types/common/is_decrementable.hpp>
-#include <tools/types/common/is_iterator.hpp>
+#include <tools/types/sfinae/is_incrementable.hpp>
+#include <tools/types/sfinae/is_decrementable.hpp>
+#include <tools/types/sfinae/is_iterator.hpp>
 
 //==============================================================================
 //==============================================================================

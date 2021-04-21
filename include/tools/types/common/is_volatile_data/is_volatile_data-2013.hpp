@@ -1,10 +1,13 @@
 // [2021y-04m-06d][20:56:12] Idrisov Denis R.
 // [2021y-04m-10d][07:21:56] Idrisov Denis R. 101
+
+// [2021y-04m-21d][13:06:13] Idrisov Denis R. 102 PRE
+
 #pragma once
 #ifndef dTOOLS_IS_VOLATILE_DATA_2015_USED_ 
-#define dTOOLS_IS_VOLATILE_DATA_2015_USED_ 101,2013
+#define dTOOLS_IS_VOLATILE_DATA_2015_USED_ 102,2013
 
-#include <tools/types/common/is_dereferencable.hpp>
+#include <tools/types/sfinae/is_dereferencable.hpp>
 
 //==============================================================================
 //=== is_volatile_data =========================================================

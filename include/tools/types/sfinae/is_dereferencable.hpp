@@ -9,9 +9,9 @@
 #include <tools/features.hpp>
 
 #ifdef dHAS_USING_ALIAS
-    #include <tools/types/common/is_dereferencable/is_dereferencable-2013.hpp>
+    #include <tools/types/sfinae/is_dereferencable/is_dereferencable-2013.hpp>
 #else
-    #include <tools/types/common/is_dereferencable/is_dereferencable-2008.hpp>
+    #include <tools/types/sfinae/is_dereferencable/is_dereferencable-2008.hpp>
 #endif
 
 //==============================================================================

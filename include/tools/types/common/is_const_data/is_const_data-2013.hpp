@@ -1,11 +1,13 @@
 // [2020y-09m-04d][00:00:00] Idrisov Denis R.
 // [2021y-04m-08d][03:04:34] Idrisov Denis R.
 // [2021y-04m-10d][07:21:07] Idrisov Denis R. 101
+
+// [2021y-04m-21d][13:08:54] Idrisov Denis R. 102 PRE
 #pragma once
 #ifndef dTOOLS_IS_CONST_DATA_2013_USED_ 
-#define dTOOLS_IS_CONST_DATA_2013_USED_ 101,2013
+#define dTOOLS_IS_CONST_DATA_2013_USED_ 102,2013
 
-#include <tools/types/common/is_dereferencable.hpp>
+#include <tools/types/sfinae/is_dereferencable.hpp>
 
 //==============================================================================
 //=== is_volatile_data =========================================================

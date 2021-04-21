@@ -1,15 +1,16 @@
 // [2021y-02m-20d][18:40:18] Idrisov Denis R.
 // [2021y-03m-20d][05:14:05] Idrisov Denis R.
 // [2021y-04m-06d][23:09:28] Idrisov Denis R.
+// [2021y-04m-21d][13:11:42] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_IS_LAMBDA
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD is_lambda
 #define dTEST_TAG tdd
 
-#include <tools/types/common.hpp>
+#include <tools/types/sfinae.hpp>
 #include <utility>
 
 namespace me = ::tools;

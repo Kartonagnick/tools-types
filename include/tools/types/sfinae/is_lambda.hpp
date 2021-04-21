@@ -8,10 +8,10 @@
 #include <tools/features.hpp>
 
 #ifdef dHAS_VARIADIC_TEMPLATE
-    #include <tools/types/common/is_lambda/is_lambda-2013.hpp>
+    #include <tools/types/sfinae/is_lambda/is_lambda-2013.hpp>
 #else
     // msvc2012 or older
-    #include <tools/types/common/is_lambda/is_lambda-2008.hpp>
+    #include <tools/types/sfinae/is_lambda/is_lambda-2008.hpp>
 #endif
 
 //==============================================================================

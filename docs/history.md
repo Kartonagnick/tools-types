@@ -24,6 +24,10 @@
        - обновлен: array-2008       102 PRE
        - обновлен: array-2012       102 PRE
        - обновлен: array-2013       102 PRE
+     - обновлен: is_volatile_data     102 PRE
+       - обновлен: is_volatile_data-2013  102 PRE
+     - обновлен: is_const_data     102 PRE
+       - обновлен: is_const_data-2013  102 PRE
      - перемещены в sfinae:
        - is_dereferencable       102 PRE
        - is_lambda               101 PRE

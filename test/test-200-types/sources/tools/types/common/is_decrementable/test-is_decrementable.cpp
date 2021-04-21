@@ -1,13 +1,14 @@
 // [2021y-04m-12d][17:38:09] Idrisov Denis R.
+// [2021y-04m-21d][13:10:33] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_IS_DECREMENTABLE
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD is_decrementable
 #define dTEST_TAG tdd
 
-#include <tools/types/common.hpp>
+#include <tools/types/sfinae.hpp>
 #include <vector>
 #include <map>
 

@@ -1,4 +1,5 @@
 // [2021y-04m-12d][16:30:57] Idrisov Denis R.
+// [2021y-04m-21d][13:13:19] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_IS_INCREMENTABLE
@@ -6,11 +7,11 @@
 #include <tools/features.hpp>
 #if defined(dHAS_USING_ALIAS) || defined(dHAS_ENUM_CLASS)
 
-#define dTEST_COMPONENT tools, types, common
+#define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD is_prefix_incrementable
 #define dTEST_TAG 2013
 
-#include <tools/types/common.hpp>
+#include <tools/types/sfinae.hpp>
 #include <vector>
 #include <map>
 
