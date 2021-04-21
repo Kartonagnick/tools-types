@@ -12,8 +12,10 @@
 ----------------------------------
 [2021y-04m-21d][11:00:00] #67_docs
 1) обновлен: traits                     013 PRE
-     - добавлен: is_convertible     001 PRE
-         - добавлены: тесты
+     - добавлен: 
+       - is_convertible      001 PRE
+       - is_lvalue_reference 001 PRE
+       - is_rvalue_reference 001 PRE
 
 2) добавлен: sfinae                     100 PRE
      - добавлен: has_reserve     100 PRE
