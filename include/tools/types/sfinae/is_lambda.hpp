@@ -1,7 +1,9 @@
 // [2021y-04m-06d][15:43:33] Idrisov Denis R. 100
+
+// [2021y-04m-21d][12:54:38] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_IS_LAMBDA_USED_ 
-#define dTOOLS_IS_LAMBDA_USED_ 100
+#define dTOOLS_IS_LAMBDA_USED_ 101 PRE
 
 #include <tools/features.hpp>
 
