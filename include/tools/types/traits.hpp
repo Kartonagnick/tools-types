@@ -185,6 +185,58 @@ namespace tools
 
 
 //==============================================================================
+//=== is_lvalue_reference ============================== (integral_constant) ===
+#ifndef dTOOLS_IS_LVALUE_REFERENCE_USED_ 
+#define dTOOLS_IS_LVALUE_REFERENCE_USED_ 1
+namespace tools
+{
+    namespace detail
+    {
+        template <class t> struct is_lvalue_reference_
+            { enum { value = false }; };
+
+        template <class t> struct is_lvalue_reference_<t&>
+            { enum { value = true }; };
+
+    } // namespace detail
+
+    template <class t> struct is_lvalue_reference
+        : dDETAIL_TRAITS(is_lvalue_reference_<t>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_LVALUE_REFERENCE_USED_
+
+
+//==============================================================================
+//=== is_rvalue_reference ============================== (integral_constant) ===
+#ifndef dTOOLS_IS_RVALUE_REFERENCE_USED_ 
+#define dTOOLS_IS_RVALUE_REFERENCE_USED_ 2
+namespace tools
+{
+    namespace detail
+    {
+        template <class t> struct is_rvalue_reference_
+            { enum { value = false }; };
+
+        #ifdef dHAS_RVALUE_REFERENCES
+        template <class t> struct is_rvalue_reference_<t&&>
+            { enum { value = true }; };
+        #endif
+
+    } // namespace detail
+
+    template <class t> struct is_rvalue_reference
+        : dDETAIL_TRAITS(is_rvalue_reference_<t>)
+    {};
+
+} // namespace tools 
+#endif // !dTOOLS_IS_RVALUE_REFERENCE_USED_
+
+
+//==============================================================================
+//=== is_reference =================================== (is_lvalue_reference) ===
+//=== is_reference =================================== (is_rvalue_reference) ===
 //=== is_reference ===================================== (integral_constant) ===
 #ifndef dTOOLS_IS_REFERENCE_USED_ 
 #define dTOOLS_IS_REFERENCE_USED_ 2
@@ -192,15 +244,34 @@ namespace tools
 {
     namespace detail
     {
-        template <class t> struct is_reference_
-            { enum { value = false }; };
+        #if defined(_MSC_VER) && _MSC_VER == 1600
+            // msvc2010
+            template <class t> class is_reference_
+            { 
+                typedef ::tools::detail::is_lvalue_reference_<t>
+                    lval_t;
+                typedef ::tools::detail::is_rvalue_reference_<t>
+                    rval_t;
 
-        template <class t> struct is_reference_ <t&>
-            { enum { value = true }; };
+                enum { lval = lval_t::value }; 
+                enum { rval = rval_t::value }; 
+            public:
+                is_reference_();
+                enum { value = lval || rval }; 
+            };
+        #else
+            // if not msvc2010
+            template <class t> struct is_reference_
+                { enum { value = false }; };
 
-        #ifdef dHAS_RVALUE_REFERENCES
-        template <class t> struct is_reference_ <t&&>
-            { enum { value = true }; };
+            template <class t> struct is_reference_ <t&>
+                { enum { value = true }; };
+
+            #ifdef dHAS_RVALUE_REFERENCES
+            template <class t> struct is_reference_ <t&&>
+                { enum { value = true }; };
+            #endif
+
         #endif
 
     } // namespace detail
