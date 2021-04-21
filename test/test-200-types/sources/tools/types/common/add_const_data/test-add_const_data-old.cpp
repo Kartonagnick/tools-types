@@ -611,26 +611,48 @@ TEST_COMPONENT(014)
 //=== [bug: msvc2010] ==========================================================
 namespace bug_msvc2010
 {
-    #if defined(_MSC_VER) && _MSC_VER <= 1600
-        // msvc2010 has bug 
-        template<class t> struct no_ref_       { typedef t type; };
-        template<class t> struct no_ref_ <t&>  { typedef t type; };
-    #endif
-
+    #if !defined(dHAS_TYPE_TRAITS)
+    // msvc2008
     template<class t> struct example
     {
-        #if defined(_MSC_VER) && _MSC_VER <= 1600
-            typedef no_ref_<t> no_ref;
-        #else
-            typedef std::remove_reference<t>
-                no_ref;
-        #endif
-
+        typedef dTRAIT::remove_reference<t>
+            no_ref;
         typedef typename no_ref::type
             type;
     };
+    #elif !defined(dHAS_ENUM_CLASS)
+        // msvc2010
+        template<class t> t& obj_();
+        template<class t> t* decay_(t&);
 
-} // namespace test_msvc2010
+        template<class t> struct remove_reference_
+        {
+            typedef decltype(decay_(obj_<t>()))
+                naked;
+            typedef ::std::remove_pointer<naked>
+                no_ptr;
+            typedef typename no_ptr::type
+                type;
+        };
+        template<class t> struct example
+        {
+            typedef bug_msvc2010::remove_reference_<t>
+                no_ref;
+            typedef typename no_ref::type
+                type;
+        };
+    #else
+        // msvc2012 or newer
+        template<class t> struct example
+        {
+            typedef ::std::remove_reference<t>
+                no_ref;
+            typedef typename no_ref::type
+                type;
+        };
+    #endif
+
+} // namespace bug_msvc2010
 
 // ---msvc2010 has bug
 TEST_COMPONENT(015)
@@ -643,6 +665,63 @@ TEST_COMPONENT(015)
     dSTATIC_CHECK(
         ERROR_BUG_MSVC2010, 
         dTRAIT::is_same<result, int()>::value
+    );
+}
+TEST_COMPONENT(016)
+{
+    typedef bug_msvc2010::example<int(&&)()>
+        bug;
+    typedef bug::type 
+        result;
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int()>::value
+    );
+}
+
+TEST_COMPONENT(017)
+{
+    typedef bug_msvc2010::example<int()>
+        bug;
+    typedef bug::type 
+        result;
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int()>::value
+    );
+}
+
+TEST_COMPONENT(018)
+{
+    typedef bug_msvc2010::example<int[2]>
+        bug;
+    typedef bug::type 
+        result;
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int[2]>::value
+    );
+}
+TEST_COMPONENT(019)
+{
+    typedef bug_msvc2010::example<int(&)[2]>
+        bug;
+    typedef bug::type 
+        result;
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int[2]>::value
+    );
+}
+TEST_COMPONENT(020)
+{
+    typedef bug_msvc2010::example<int(&&)[2]>
+        bug;
+    typedef bug::type 
+        result;
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int[2]>::value
     );
 }
 

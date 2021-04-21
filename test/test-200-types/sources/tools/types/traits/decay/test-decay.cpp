@@ -105,8 +105,9 @@ TEST_COMPONENT(004)
 
 TEST_COMPONENT(005)
 {
-    dCHECK(int()    , int(*)()   );
-    dCHECK(int(int) , int(*)(int));
+    dCHECK(int()      , int(*)()   );
+    dCHECK(int(int)   , int(*)(int));
+    dCHECK(int(&)(int), int(*)(int));
 }
 
 //==============================================================================

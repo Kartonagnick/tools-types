@@ -856,6 +856,7 @@ namespace tools
 #define dTOOLS_DECAY_USED_ 2
 namespace tools
 {
+    // first step: remove reference
     // function ---> pointer-to-function
     // array ------> pointer-to-first-element (remove one extent)
     // other ------> remove-reference and remove-cv
