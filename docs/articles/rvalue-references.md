@@ -45,7 +45,7 @@ c:\program files (x86)\microsoft visual studio 10.0\vc\include\type_traits(197):
 2>          ]
 ```
 
-## Лекарство
+## Анализ
 msvc2010 не всегда правильно понимает, 
 какие типы относятся к rvalue-reference, а какаие к rvalue-reference.  
 
@@ -55,45 +55,67 @@ msvc2010 не всегда правильно понимает,
 Например, ломается `std::decay<int (&)()>`
 
 
+## Лекарство
+Для msvc2010 используется необычная конструкция `remove_reference` 
+При помощи `decltype` и вспомогательных функций достигается эффект `decay`,
 
-
-Очевидное решение: 
-
-
-
-
-Поломка происходит по причине забагованного `std::tr1::_Remove_reference<_Ty>`  
-Очевидное решение проблемы: просто не использовать его для msvc2010:  
 
 ```cpp
-#include <type_traits>
+#include <tools/type_traits.hpp>
 
-#if defined(_MSC_VER) && _MSC_VER <= 1600
-    // msvc2010 or older
-    template<class t> struct no_ref_      { typedef t type; };
-    template<class t> struct no_ref_ <t&> { typedef t type; };
-#endif
-
-template<class t> struct example
-{
-    #if defined(_MSC_VER) && _MSC_VER <= 1600
-        // msvc2010 or older
-        typedef no_ref_<t> no_ref;
-    #else
-        typedef std::remove_reference<t>
+#if !defined(dHAS_TYPE_TRAITS)
+    // msvc2008 or older
+    template<class t> struct example
+    {
+        typedef dTRAIT::remove_reference<t>
             no_ref;
-    #endif
+        typedef typename no_ref::type
+            type;
+    };
+#elif !defined(dHAS_ENUM_CLASS)
+    // msvc2010
+    template<class t> t& obj_();
+    template<class t> t* decay_(t&);
 
-    typedef typename no_ref::type
-        type;
-};
+    template<class t> struct remove_reference_
+    {
+        typedef decltype(decay_(obj_<t>()))
+            naked;
+        typedef ::std::remove_pointer<naked>
+            no_ptr;
+        typedef typename no_ptr::type
+            type;
+    };
+
+    template<class t> struct example
+    {
+        typedef remove_reference_<t>
+            no_ref;
+        typedef typename no_ref::type
+            type;
+    };
+#else
+    // msvc2012 or newer
+    template<class t> struct example
+    {
+        typedef ::std::remove_reference<t>
+            no_ref;
+        typedef typename no_ref::type
+            type;
+    };
+#endif
 
 int main()
 {
-    typedef example<int (&)()> 
-        workaround;
-    typedef workaround::type 
+    typedef bug_msvc2010::example<int(&)()>
+        bug;
+    typedef bug::type 
         result;
+
+    dSTATIC_CHECK(
+        ERROR_BUG_MSVC2010, 
+        dTRAIT::is_same<result, int()>::value
+    );
 }
 ```
 
