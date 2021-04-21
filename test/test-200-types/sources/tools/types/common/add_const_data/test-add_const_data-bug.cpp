@@ -132,6 +132,79 @@ TEST_COMPONENT(020)
 #endif
 
 //==============================================================================
+//=== [bug: msvc2010] ==========================================================
+namespace bug_msvc2010
+{
+    template <class t> struct is_lval_ref_
+        { enum { value = false }; };
+
+    template <class t> struct is_lval_ref_<t&>
+        { enum { value = true }; };
+
+    template <class t> struct is_rval_ref_
+        { enum { value = false }; };
+
+    #ifdef dHAS_TYPE_TRAITS
+    template <class t> struct is_rval_ref_<t&&>
+        { enum { value = true }; };
+    #endif
+
+    #if defined(_MSC_VER) && _MSC_VER == 1600
+        // msvc2010
+        template <class t> struct is_ref_
+        { 
+            typedef is_lval_ref_<t> lval_t;
+            typedef is_rval_ref_<t> rval_t;
+            enum { lval = lval_t::value }; 
+            enum { rval = rval_t::value }; 
+            enum { value = lval || rval }; 
+        };
+    #else
+        // not msvc2010
+        template <class t> struct is_ref_
+            { enum { value = false }; };
+        template <class t> struct is_ref_ <t&>
+            { enum { value = true }; };
+        #ifdef dHAS_TYPE_TRAITS
+        template <class t> struct is_ref_ <t&&>
+            { enum { value = true }; };
+        #endif
+    #endif
+
+} // namespace bug_msvc2010
+
+TEST_COMPONENT(021)
+{
+    dSTATIC_CHECK(
+        ERROR_BUG_LVALUE_MSVC2010, 
+        bug_msvc2010::is_lval_ref_<void(&)()>::value
+    );
+
+    dSTATIC_CHECK(
+        ERROR_BUG_LVALUE_MSVC2010, 
+        bug_msvc2010::is_ref_<void(&)()>::value
+    );
+}
+
+#if 0
+// bug
+#ifdef dHAS_TYPE_TRAITS
+TEST_COMPONENT(022)
+{
+    dSTATIC_CHECK(
+        ERROR_BUG_IS_RVALUE_MSVC2010, 
+        bug_msvc2010::is_rval_ref_<void(&&)()>::value
+    );
+
+    dSTATIC_CHECK(
+        ERROR_BUG_IS_REF_MSVC2010, 
+        bug_msvc2010::is_ref_<void(&&)()>::value
+    );
+}
+#endif
+#endif
+
+//==============================================================================
 //==============================================================================
 #endif // !TEST_TOOLS_ADD_CONST_DATA
 
