@@ -246,7 +246,7 @@
 
 **Версия 1.2.2 (предварительная)**  
 ----------------------------------
-[2021y-04m-07d][23:43:10] #47_is_dereference
+[2021y-04m-08d][02:25:10] #47_is_dereference
 
 1) обновлен: version                    122
 2) обновлен: types                      122
@@ -267,6 +267,28 @@
      - is_lambda-2008        100
      - is_lambda-2013        100
 
+4) перестановки:
+    - rvalue-2013     100
+    - lvalue-2013     100
+    - degradate-2013  100
+    - array                      100
+      - array-2013                 100
+      - array-2012                 100
+      - array-2008                 100
+    - is_const_data              100
+    - is_dereferencable          100
+      - is_dereferencable-2013     100
+      - is_dereferencable-2008     100
+    - is_volatile_data           100
+      - is_volatile_data-2013      100
+      - is_volatile_data-2012      100
+      - is_volatile_data-2008      100
+    - find_types                 100
+      - find_types-2013            100
+      - find_types-2008            100
+    - type_of_enum               100
+      - type_of_enum-2013          100
+      - type_of_enum-2012          100
 
 
 **Версия 1.2.0 (предварительная)**  
