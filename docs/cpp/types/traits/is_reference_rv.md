@@ -6,7 +6,7 @@
 [E]: ../../../icons/empty.png
 [N]: ../../../icons/na.png
 
-is_lvalue_reference 0.0.1
+is_rvalue_reference 0.0.1
 ---
 
 | **ID**  | 2019      | 20017     | 2015      | 2013      | 2012      | 2010      | 2008      |  
@@ -17,12 +17,12 @@ is_lvalue_reference 0.0.1
 |:-------:|:---------:|:---------:|:---------:|  
 |  mingw  | [![V]][M] | [![V]][M] | [![V]][M] |  
 
-[M]: #is_lvalue_reference  "мета-функция: true, если тип - lvalue-ссылка"  
+[M]: #is_rvalue_reference  "мета-функция: true, если тип - rvalue-ссылка"  
 [0]: #-баг-msvc2010  "msvc2010 не правильно определяет характеристики rvalue-reference типов"
 
-is_lvalue_reference
+is_rvalue_reference
 --------
-Мета-функция: true, если тип - lvalue-ссылка.  
+Мета-функция: true, если тип - rvalue-ссылка.  
 
 ```cpp
 const bool v1 = tools::is_reference<int>::value;        // FALSE

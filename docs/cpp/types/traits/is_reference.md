@@ -20,7 +20,7 @@ is_reference 0.0.2
 [M]: #is_reference  "мета-функция: true, если тип - ссылочный"  
 [0]: #-баг-msvc2010  "msvc2010 не правильно определяет характеристики rvalue-reference типов"
 
-описание
+is_reference
 --------
 Мета-функция: true, если тип - ссылочный.  
 
@@ -39,11 +39,10 @@ const bool v2 = tools::is_reference<int(&&)[1]>::value; // TRUE
 
 [![D]][0] баг msvc2010
 ---
-В компиляторах msvc2010 обнаружился неприятный баг:  
 
+В компиляторах msvc2010 обнаружился неприятный баг:
 ```cpp
-#include <type_traits>
-
+include <type_traits>
 int main()
 {
     static_assert(
@@ -56,8 +55,7 @@ int main()
 Второй пример:
 
 ```cpp
-#include <type_traits>
-
+include <type_traits>
 template<class t> struct example
 {
     typedef std::remove_reference<t>
@@ -65,7 +63,6 @@ template<class t> struct example
     typedef typename no_ref::type
         type;
 };
-
 int main()
 {
     typedef example<int (&)()> 
@@ -74,7 +71,6 @@ int main()
         result;
 }
 ```
-
 Ошибка компиляции:  
 
 ```cpp
@@ -86,24 +82,19 @@ error C2752: is_ref_<t>:
 Третий пример:  
 
 ```cpp
-
-#include <string>
-
+include <string>
 void foo(std::string&&){}
-
 int main()
 {
     foo("111");
 }
 ```
-
 Ошибка компиляции:
 ```cpp
 error C2664: невозможно преобразовать параметр 1 из "const char [4]" в "std::string &&"
 Нельзя привязать левостороннее значение к ссылке на правостороннее значение
 ```
-
-Итого:
+Итого:  
 Так как msvc2010 не умеет нормально работать с rvalue-reference,  
 то их поддержка оффициально заявлена только начинася с msvc2012.  
 Макрос: `dHAS_RVALUE_REFERENCES` активирован начиная с msvc2012.  
