@@ -14,23 +14,23 @@
 |:-------:|:---------:|:---------:|:---------:|  
 |  mingw  | [![V]][M] | [![V]][M] | [![V]][M] |  
 
-[M]: #for_lvalue  "мета-функция: для обработки lvalue-аргументов функций"  
+[M]: #for_rvalue  "мета-функция: для обработки rvalue-аргументов функций"  
 [0]: #-Ограничения  "требуется поддержка using alias"  
 
-for_lvalue-2013, v1.0.1
+for_rvalue-2013, v1.0.1
 ---
 Концепт позволяет инстанцировать шаблон функции 
-только для lvalue аргументов.
+только для rvalue аргументов.  
 
 ```
-template<class t, dfor_lvalue(t&&)>
+template<class t, dfor_rvalue(t&&)>
 constexpr bool 
-    is_lvalue_argument(t&&) { return true; }
+    is_rvalue_argument(t&&) { return true; }
 
 int main()
 {
     const int v;
-    const bool result = is_lvalue_argument(v);
+    const bool result = is_rvalue_argument(v);
     std::cout << result << '\n';
 }
 ```
