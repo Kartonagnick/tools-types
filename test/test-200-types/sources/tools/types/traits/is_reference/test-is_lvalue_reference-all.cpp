@@ -1,7 +1,7 @@
 // [2021y-04m-21d][23:27:37] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_IS_REFERENCE__
+#ifdef TEST_IS_REFERENCE
 
 #define dTEST_COMPONENT tools, types, traits
 #define dTEST_METHOD is_lvalue_reference
@@ -14,7 +14,7 @@ namespace me = ::tools;
 namespace
 {
     #define dEXPRESSION(a,v) \
-        me::is_reference<a>::value == v
+        me::is_lvalue_reference<a>::value == v
 
     #define dCHECK(a, v)       \
         dSTATIC_ASSERT(        \
@@ -22,7 +22,7 @@ namespace
             dEXPRESSION(a, v)  \
         )
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
         #define dRVAL_(a, v) dCHECK(a, v)
     #else
         #define dRVAL_(a, v) void()
@@ -41,13 +41,13 @@ TEST_COMPONENT(000)
     dCHECK(const char     , false);
     dCHECK(volatile char  , false);
                               
-    dCHECK(char&          , true);
-    dCHECK(const char&    , true);
-    dCHECK(volatile char& , true);
+    dCHECK(char&          , true );
+    dCHECK(const char&    , true );
+    dCHECK(volatile char& , true );
                               
-    dRVAL_(char&&         , true);
-    dRVAL_(const char&&   , true);
-    dRVAL_(volatile char&&, true);
+    dRVAL_(char&&         , false);
+    dRVAL_(const char&&   , false);
+    dRVAL_(volatile char&&, false);
 }
 
 // --- pointers*
@@ -95,25 +95,25 @@ TEST_COMPONENT(001)
     dCHECK(volatile const char* volatile const& , true);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    dRVAL_(char*&&                              , true);
-    dRVAL_(const char*&&                        , true);
-    dRVAL_(volatile char*&&                     , true);
-    dRVAL_(volatile const char*&&               , true);
+    dRVAL_(char*&&                              , false);
+    dRVAL_(const char*&&                        , false);
+    dRVAL_(volatile char*&&                     , false);
+    dRVAL_(volatile const char*&&               , false);
 //------------------------------------------------------------------------------
-    dRVAL_(char* const&&                        , true);
-    dRVAL_(const char* const&&                  , true);
-    dRVAL_(volatile char* const&&               , true);
-    dRVAL_(volatile const char* const&&         , true);
+    dRVAL_(char* const&&                        , false);
+    dRVAL_(const char* const&&                  , false);
+    dRVAL_(volatile char* const&&               , false);
+    dRVAL_(volatile const char* const&&         , false);
 //------------------------------------------------------------------------------
-    dRVAL_(char* volatile&&                     , true);
-    dRVAL_(const char* volatile&&               , true);
-    dRVAL_(volatile char* volatile&&            , true);
-    dRVAL_(volatile const char* volatile&&      , true);
+    dRVAL_(char* volatile&&                     , false);
+    dRVAL_(const char* volatile&&               , false);
+    dRVAL_(volatile char* volatile&&            , false);
+    dRVAL_(volatile const char* volatile&&      , false);
 //------------------------------------------------------------------------------
-    dRVAL_(char* volatile const&&               , true);
-    dRVAL_(const char* volatile const&&         , true);
-    dRVAL_(volatile char* volatile const&&      , true);
-    dRVAL_(volatile const char* volatile const&&, true);
+    dRVAL_(char* volatile const&&               , false);
+    dRVAL_(const char* volatile const&&         , false);
+    dRVAL_(volatile char* volatile const&&      , false);
+    dRVAL_(volatile const char* volatile const&&, false);
 }
 
 // --- pointers**
@@ -161,25 +161,25 @@ TEST_COMPONENT(002)
     dCHECK(volatile const char** volatile const& , true);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
-    dRVAL_(char**&&                              , true);
-    dRVAL_(const char**&&                        , true);
-    dRVAL_(volatile char**&&                     , true);
-    dRVAL_(volatile const char**&&               , true);
+    dRVAL_(char**&&                              , false);
+    dRVAL_(const char**&&                        , false);
+    dRVAL_(volatile char**&&                     , false);
+    dRVAL_(volatile const char**&&               , false);
 //------------------------------------------------------------------------------
-    dRVAL_(char** const&&                        , true);
-    dRVAL_(const char** const&&                  , true);
-    dRVAL_(volatile char** const&&               , true);
-    dRVAL_(volatile const char** const&&         , true);
+    dRVAL_(char** const&&                        , false);
+    dRVAL_(const char** const&&                  , false);
+    dRVAL_(volatile char** const&&               , false);
+    dRVAL_(volatile const char** const&&         , false);
 //------------------------------------------------------------------------------
-    dRVAL_(char** volatile&&                     , true);
-    dRVAL_(const char** volatile&&               , true);
-    dRVAL_(volatile char** volatile&&            , true);
-    dRVAL_(volatile const char** volatile&&      , true);
+    dRVAL_(char** volatile&&                     , false);
+    dRVAL_(const char** volatile&&               , false);
+    dRVAL_(volatile char** volatile&&            , false);
+    dRVAL_(volatile const char** volatile&&      , false);
 //------------------------------------------------------------------------------
-    dRVAL_(char** volatile const&&               , true);
-    dRVAL_(const char** volatile const&&         , true);
-    dRVAL_(volatile char** volatile const&&      , true);
-    dRVAL_(volatile const char** volatile const&&, true);
+    dRVAL_(char** volatile const&&               , false);
+    dRVAL_(const char** volatile const&&         , false);
+    dRVAL_(volatile char** volatile const&&      , false);
+    dRVAL_(volatile const char** volatile const&&, false);
 }
 
 // --- pointers stress
@@ -189,10 +189,10 @@ TEST_COMPONENT(003)
     dCHECK(char* const* const               , false);
     dCHECK(char* const* const&              , true);
 
-    dRVAL_(char* const** const&&            , true);
-    dRVAL_(char*** const* const** const&&   , true);
-    dRVAL_(char*** volatile* const** const&&, true);
-    dRVAL_(char*** const* volatile** const&&, true);
+    dRVAL_(char* const** const&&            , false);
+    dRVAL_(char*** const* const** const&&   , false);
+    dRVAL_(char*** volatile* const** const&&, false);
+    dRVAL_(char*** const* volatile** const&&, false);
 }
 
 // --- arrays[255]
@@ -200,50 +200,50 @@ TEST_COMPONENT(004)
 {
     dCHECK(char[255]                       , false);
     dCHECK(char(&)[255]                    , true);
-    dRVAL_(char(&&)[255]                   , true);
+    dRVAL_(char(&&)[255]                   , false);
     dCHECK(char(*)[255]                    , false);
     dCHECK(char(*&)[255]                   , true);
 //------------------------------------------------------------------------------
     dCHECK(const char[255]                 , false);
     dCHECK(const char(&)[255]              , true);
-    dRVAL_(const char(&&)[255]             , true);
+    dRVAL_(const char(&&)[255]             , false);
     dCHECK(const char(*)[255]              , false);
     dCHECK(const char(*&)[255]             , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile char[255]              , false);
     dCHECK(volatile char(&)[255]           , true);
-    dRVAL_(volatile char(&&)[255]          , true);
+    dRVAL_(volatile char(&&)[255]          , false);
     dCHECK(volatile char(*)[255]           , false);
     dCHECK(volatile char(*&)[255]          , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile const char[255]        , false);
     dCHECK(volatile const char(&)[255]     , true);
-    dRVAL_(volatile const char(&&)[255]    , true);
+    dRVAL_(volatile const char(&&)[255]    , false);
     dCHECK(volatile const char(*)[255]     , false);
     dCHECK(volatile const char(*&)[255]    , true);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
     dCHECK(char[1][2][3]                   , false);
     dCHECK(char(&)[1][2][3]                , true);
-    dRVAL_(char(&&)[1][2][3]               , true);
+    dRVAL_(char(&&)[1][2][3]               , false);
     dCHECK(char(*)[1][2][3]                , false);
     dCHECK(char(*&)[1][2][3]               , true);
 //------------------------------------------------------------------------------
     dCHECK(const char[1][2][3]             , false);
     dCHECK(const char(&)[1][2][3]          , true);
-    dRVAL_(const char(&&)[1][2][3]         , true);
+    dRVAL_(const char(&&)[1][2][3]         , false);
     dCHECK(const char(*)[1][2][3]          , false);
     dCHECK(const char(*&)[1][2][3]         , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile char[1][2][3]          , false);
     dCHECK(volatile char(&)[1][2][3]       , true);
-    dRVAL_(volatile char(&&)[1][2][3]      , true);
+    dRVAL_(volatile char(&&)[1][2][3]      , false);
     dCHECK(volatile char(*)[1][2][3]       , false);
     dCHECK(volatile char(*&)[1][2][3]      , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile const char[1][2][3]    , false);
     dCHECK(volatile const char(&)[1][2][3] , true);
-    dRVAL_(volatile const char(&&)[1][2][3], true);
+    dRVAL_(volatile const char(&&)[1][2][3], false);
     dCHECK(volatile const char(*)[1][2][3] , false);
     dCHECK(volatile const char(*&)[1][2][3], true);
 }
@@ -255,50 +255,50 @@ TEST_COMPONENT(005)
     dCHECK(wchar_t[]                      , false);
     dCHECK(char[]                         , false);
     dCHECK(char(&)[]                      , true);
-    dRVAL_(char(&&)[]                     , true);
+    dRVAL_(char(&&)[]                     , false);
     dCHECK(char(*)[]                      , false);
     dCHECK(char(*&)[]                     , true);
 //------------------------------------------------------------------------------
     dCHECK(const char[]                   , false);
     dCHECK(const char(&)[]                , true);
-    dRVAL_(const char(&&)[]               , true);
+    dRVAL_(const char(&&)[]               , false);
     dCHECK(const char(*)[]                , false);
     dCHECK(const char(*&)[]               , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile char[]                , false);
     dCHECK(volatile char(&)[]             , true);
-    dRVAL_(volatile char(&&)[]            , true);
+    dRVAL_(volatile char(&&)[]            , false);
     dCHECK(volatile char(*)[]             , false);
     dCHECK(volatile char(*&)[]            , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile const char[]          , false);
     dCHECK(volatile const char(&)[]       , true);
-    dRVAL_(volatile const char(&&)[]      , true);
+    dRVAL_(volatile const char(&&)[]      , false);
     dCHECK(volatile const char(*)[]       , false);
     dCHECK(volatile const char(*&)[]      , true);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
     dCHECK(char[][2][3]                   , false);
     dCHECK(char(&)[][2][3]                , true);
-    dRVAL_(char(&&)[][2][3]               , true);
+    dRVAL_(char(&&)[][2][3]               , false);
     dCHECK(char(*)[][2][3]                , false);
     dCHECK(char(*&)[][2][3]               , true);
 //------------------------------------------------------------------------------
     dCHECK(const char[][2][3]             , false);
     dCHECK(const char(&)[][2][3]          , true);
-    dRVAL_(const char(&&)[][2][3]         , true);
+    dRVAL_(const char(&&)[][2][3]         , false);
     dCHECK(const char(*)[][2][3]          , false);
     dCHECK(const char(*&)[][2][3]         , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile char[][2][3]          , false);
     dCHECK(volatile char(&)[][2][3]       , true);
-    dRVAL_(volatile char(&&)[][2][3]      , true);
+    dRVAL_(volatile char(&&)[][2][3]      , false);
     dCHECK(volatile char(*)[][2][3]       , false);
     dCHECK(volatile char(*&)[][2][3]      , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile const char[][2][3]    , false);
     dCHECK(volatile const char(&)[][2][3] , true);
-    dRVAL_(volatile const char(&&)[][2][3], true);
+    dRVAL_(volatile const char(&&)[][2][3], false);
     dCHECK(volatile const char(*)[][2][3] , false);
     dCHECK(volatile const char(*&)[][2][3], true);
 }
@@ -316,7 +316,7 @@ TEST_COMPONENT(006)
     dCHECK(const char* const(**&)[1][2][3]                      , true);
     dCHECK(const char* const(* const* const&)[1][2][3]          , true);
     dCHECK(const char* const(* volatile* const&)[1][2][3]       , true);
-    dRVAL_(volatile char* const(* volatile* volatile&&)[1][2][3], true);
+    dRVAL_(volatile char* const(* volatile* volatile&&)[1][2][3], false);
 }
 
 // --- arrays[0]
@@ -326,50 +326,50 @@ TEST_COMPONENT(007)
     dCHECK(wchar_t[0]                      , false);
     dCHECK(char[0]                         , false);
     dCHECK(char(&)[0]                      , true);
-    dRVAL_(char(&&)[0]                     , true);
+    dRVAL_(char(&&)[0]                     , false);
     dCHECK(char(*)[0]                      , false);
     dCHECK(char(*&)[0]                     , true);
 //------------------------------------------------------------------------------
     dCHECK(const char[0]                   , false);
     dCHECK(const char(&)[0]                , true);
-    dRVAL_(const char(&&)[0]               , true);
+    dRVAL_(const char(&&)[0]               , false);
     dCHECK(const char(*)[0]                , false);
     dCHECK(const char(*&)[0]               , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile char[0]                , false);
     dCHECK(volatile char(&)[0]             , true);
-    dRVAL_(volatile char(&&)[0]            , true);
+    dRVAL_(volatile char(&&)[0]            , false);
     dCHECK(volatile char(*)[0]             , false);
     dCHECK(volatile char(*&)[0]            , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile const char[0]          , false);
     dCHECK(volatile const char(&)[0]       , true);
-    dRVAL_(volatile const char(&&)[0]      , true);
+    dRVAL_(volatile const char(&&)[0]      , false);
     dCHECK(volatile const char(*)[0]       , false);
     dCHECK(volatile const char(*&)[0]      , true);
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
     dCHECK(char[0][2][3]                   , false);
     dCHECK(char(&)[0][2][3]                , true);
-    dRVAL_(char(&&)[0][2][3]               , true);
+    dRVAL_(char(&&)[0][2][3]               , false);
     dCHECK(char(*)[0][2][3]                , false);
     dCHECK(char(*&)[0][2][3]               , true);
 //------------------------------------------------------------------------------
     dCHECK(const char[0][2][3]             , false);
     dCHECK(const char(&)[0][2][3]          , true);
-    dRVAL_(const char(&&)[0][2][3]         , true);
+    dRVAL_(const char(&&)[0][2][3]         , false);
     dCHECK(const char(*)[0][2][3]          , false);
     dCHECK(const char(*&)[0][2][3]         , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile char[0][2][3]          , false);
     dCHECK(volatile char(&)[0][2][3]       , true);
-    dRVAL_(volatile char(&&)[0][2][3]      , true);
+    dRVAL_(volatile char(&&)[0][2][3]      , false);
     dCHECK(volatile char(*)[0][2][3]       , false);
     dCHECK(volatile char(*&)[0][2][3]      , true);
 //------------------------------------------------------------------------------
     dCHECK(volatile const char[0][2][3]    , false);
     dCHECK(volatile const char(&)[0][2][3] , true);
-    dRVAL_(volatile const char(&&)[0][2][3], true);
+    dRVAL_(volatile const char(&&)[0][2][3], false);
     dCHECK(volatile const char(*)[0][2][3] , false);
     dCHECK(volatile const char(*&)[0][2][3], true);
 }
@@ -380,7 +380,7 @@ TEST_COMPONENT(008)
 {
     dCHECK(int()                    , false);
     dCHECK(int(&)()                 , true);
-    dRVAL_(int(&&)()                , true);
+    dRVAL_(int(&&)()                , false);
     
     dCHECK(int(*)()                 , false);
     dCHECK(int(* const)()           , false);
@@ -392,10 +392,10 @@ TEST_COMPONENT(008)
     dCHECK(int(* volatile&)()       , true);
     dCHECK(int(* volatile const&)() , true);
     
-    dRVAL_(int(*&&)()               , true);
-    dRVAL_(int(* const&&)()         , true);
-    dRVAL_(int(* volatile&&)()      , true);
-    dRVAL_(int(* volatile const&&)(), true);
+    dRVAL_(int(*&&)()               , false);
+    dRVAL_(int(* const&&)()         , false);
+    dRVAL_(int(* volatile&&)()      , false);
+    dRVAL_(int(* volatile const&&)(), false);
 }
 
 // --- function-pointers
@@ -435,7 +435,7 @@ TEST_COMPONENT(011)
 {
     dCHECK(int(some::*)()                 , false);
     dCHECK(int(some::*&)()                , true);
-    dRVAL_(int(some::*&&)()               , true);
+    dRVAL_(int(some::*&&)()               , false);
                                           
     dCHECK(int(some::* const)()           , false);
     dCHECK(int(some::* volatile)()        , false);
@@ -445,9 +445,9 @@ TEST_COMPONENT(011)
     dCHECK(int(some::* volatile&)()       , true);
     dCHECK(int(some::* volatile const&)() , true);
 
-    dRVAL_(int(some::* const&&)()         , true);
-    dRVAL_(int(some::* volatile&&)()      , true);
-    dRVAL_(int(some::* volatile const&&)(), true);
+    dRVAL_(int(some::* const&&)()         , false);
+    dRVAL_(int(some::* volatile&&)()      , false);
+    dRVAL_(int(some::* volatile const&&)(), false);
 }
 
 // --- member int
@@ -455,67 +455,67 @@ TEST_COMPONENT(012)
 {
     dCHECK(int some::*                                , false);
     dCHECK(int some::*&                               , true);
-    dRVAL_(int some::*&&                              , true);
+    dRVAL_(int some::*&&                              , false);
 
     dCHECK(int some::* const                          , false);
     dCHECK(int some::* const&                         , true);
-    dRVAL_(int some::* const&&                        , true);
+    dRVAL_(int some::* const&&                        , false);
 
     dCHECK(int some::* volatile                       , false);
     dCHECK(int some::* volatile&                      , true);
-    dRVAL_(int some::* volatile&&                     , true);
+    dRVAL_(int some::* volatile&&                     , false);
 
     dCHECK(int some::* volatile const                 , false);
     dCHECK(int some::* volatile const&                , true);
-    dRVAL_(int some::* volatile const&&               , true);
+    dRVAL_(int some::* volatile const&&               , false);
 //------------------------------------------------------------------------------
     dCHECK(const int some::*                          , false);
     dCHECK(const int some::*&                         , true);
-    dRVAL_(const int some::*&&                        , true);
+    dRVAL_(const int some::*&&                        , false);
                                                       
     dCHECK(const int some::* const                    , false);
     dCHECK(const int some::* const&                   , true);
-    dRVAL_(const int some::* const&&                  , true);
+    dRVAL_(const int some::* const&&                  , false);
 
     dCHECK(const int some::* volatile                 , false);
     dCHECK(const int some::* volatile&                , true);
-    dRVAL_(const int some::* volatile&&               , true);
+    dRVAL_(const int some::* volatile&&               , false);
 
     dCHECK(const int some::* volatile const           , false);
     dCHECK(const int some::* volatile const&          , true);
-    dRVAL_(const int some::* volatile const&&         , true);
+    dRVAL_(const int some::* volatile const&&         , false);
 //------------------------------------------------------------------------------
     dCHECK(volatile int some::*                       , false);
     dCHECK(volatile int some::*&                      , true);
-    dRVAL_(volatile int some::*&&                     , true);
+    dRVAL_(volatile int some::*&&                     , false);
                                                       
     dCHECK(volatile int some::* const                 , false);
     dCHECK(volatile int some::* const&                , true);
-    dRVAL_(volatile int some::* const&&               , true);
+    dRVAL_(volatile int some::* const&&               , false);
                                                       
     dCHECK(volatile int some::* volatile              , false);
     dCHECK(volatile int some::* volatile&             , true);
-    dRVAL_(volatile int some::* volatile&&            , true);
+    dRVAL_(volatile int some::* volatile&&            , false);
                                                       
     dCHECK(volatile int some::* volatile const        , false);
     dCHECK(volatile int some::* volatile const&       , true);
-    dRVAL_(volatile int some::* volatile const&&      , true);
+    dRVAL_(volatile int some::* volatile const&&      , false);
 //------------------------------------------------------------------------------
     dCHECK(volatile const int some::*                 , false);
     dCHECK(volatile const int some::*&                , true);
-    dRVAL_(volatile const int some::*&&               , true);
+    dRVAL_(volatile const int some::*&&               , false);
                                                       
     dCHECK(volatile const int some::* const           , false);
     dCHECK(volatile const int some::* const&          , true);
-    dRVAL_(volatile const int some::* const&&         , true);
+    dRVAL_(volatile const int some::* const&&         , false);
                                                       
     dCHECK(volatile const int some::* volatile        , false);
     dCHECK(volatile const int some::* volatile&       , true);
-    dRVAL_(volatile const int some::* volatile&&      , true);
+    dRVAL_(volatile const int some::* volatile&&      , false);
                                                       
     dCHECK(volatile const int some::* volatile const  , false);
     dCHECK(volatile const int some::* volatile const& , true);
-    dRVAL_(volatile const int some::* volatile const&&, true);
+    dRVAL_(volatile const int some::* volatile const&&, false);
 }
 
 // --- member int stress

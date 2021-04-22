@@ -53,7 +53,7 @@ TEST_COMPONENT(000)
     #endif
 }
 
-#ifdef dHAS_RVALUE_REFERENCE
+#ifdef dHAS_RVALUE_REFERENCES
 TEST_COMPONENT(001)
 {
     dCHECK(int&&       , false);

@@ -24,7 +24,7 @@ namespace
             dEXPRESSION(a, v)  \
         )
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
         #define dRVAL_(a, v) dCHECK(a, v)
     #else
         #define dRVAL_(a, v) void()

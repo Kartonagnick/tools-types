@@ -61,7 +61,7 @@ namespace
             dEXPRESSION(a)       \
         )
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
         #define dTST_RVALUE(a) dTEST_FALSE(a)
     #else
         #define dTST_RVALUE(a) void()

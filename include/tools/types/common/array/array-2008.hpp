@@ -61,7 +61,7 @@ namespace tools
         typedef elem  type;
         typedef type   arr;
         typedef type&  ref;
-        #ifdef dHAS_RVALUE_REFERENCE
+        #ifdef dHAS_RVALUE_REFERENCES
         typedef type&& rval;
         #endif
     };
@@ -79,7 +79,7 @@ namespace tools
         typedef t type;
         typedef type arr[value];
         typedef type(&ref)[value];
-        #ifdef dHAS_RVALUE_REFERENCE
+        #ifdef dHAS_RVALUE_REFERENCES
         typedef type(&&rval)[value];
         #endif
     };
@@ -99,7 +99,7 @@ namespace tools
 
         #ifdef dHAS_ARRAY_EMPTY_SIZE
             typedef type(&ref)[];
-            #ifdef dHAS_RVALUE_REFERENCE
+            #ifdef dHAS_RVALUE_REFERENCES
                 typedef type(&&rval)[];
             #endif
         #endif

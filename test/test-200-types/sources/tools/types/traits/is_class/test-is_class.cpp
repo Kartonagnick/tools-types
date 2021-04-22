@@ -70,7 +70,7 @@ TEST_COMPONENT(001)
     dCHECK(some* , false);
     dCHECK(some*&, false);
 
-    #ifdef dHAS_RVALUE_REFERENCE
+    #ifdef dHAS_RVALUE_REFERENCES
     dCHECK(some&&, false);
     #endif
 }
