@@ -11,7 +11,7 @@
 #include <tools/types/common/degradate.hpp>
 
 //==============================================================================
-//=== enable_for/disable_for ======================= (degradate)(find_type) ====
+//=== dif_enabled/dif_disabled ===================== (degradate)(find_type) ====
 namespace tools 
 {
     // if type 't' is in the list 'args' --> compile
