@@ -8,7 +8,7 @@
 #define dTEST_METHOD has_end
 #define dTEST_TAG tdd
 
-#include <tools/types/sfinae/has_end.hpp>
+#include <tools/types/sfinae.hpp>
 #include <string>
 
 namespace me = ::tools;

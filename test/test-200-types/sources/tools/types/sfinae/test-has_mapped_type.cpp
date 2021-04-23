@@ -8,7 +8,7 @@
 #define dTEST_METHOD has_mapped_type
 #define dTEST_TAG tdd
 
-#include <tools/types/sfinae/has_mapped_type.hpp>
+#include <tools/types/sfinae.hpp>
 #include <vector>
 #include <map>
 

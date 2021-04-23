@@ -9,7 +9,7 @@
 #define dTEST_METHOD is_iterable
 #define dTEST_TAG tdd
 
-#include <tools/types/sfinae/is_iterable.hpp>
+#include <tools/types/sfinae.hpp>
 #include <iostream>
 #include <vector>
 #include <map>
@@ -113,7 +113,6 @@ TEST_COMPONENT(001)
     dCHECK(map_t , false);
     dCHECK(double, false);
     dCHECK(A     , false);
-    dCHECK(int   , false);
 }
 
 #ifdef dHAS_ENUM_CLASS

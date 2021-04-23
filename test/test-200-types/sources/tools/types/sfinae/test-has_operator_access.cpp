@@ -8,7 +8,7 @@
 #define dTEST_METHOD has_operator_access
 #define dTEST_TAG tdd
 
-#include <tools/types/sfinae/has_operator_access.hpp>
+#include <tools/types/sfinae.hpp>
 
 namespace me = ::tools;
 //==============================================================================
@@ -70,8 +70,6 @@ TEST_COMPONENT(000)
 {
     dCHECK(int[1]      , true );
     dCHECK(foo         , true );
-    dCHECK(const foo   , true );
-    dCHECK(const foo&  , true );
     dCHECK(foo&        , true );
     dCHECK(int(&)[1]   , true );
 
@@ -82,6 +80,9 @@ TEST_COMPONENT(000)
 
     dCHECK(int         , false);
     dCHECK(dummy       , false);
+
+    dCHECK(const foo   , false);
+    dCHECK(const foo&  , false);
 }
 TEST_COMPONENT(001)
 {
