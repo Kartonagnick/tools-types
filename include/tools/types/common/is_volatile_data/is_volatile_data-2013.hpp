@@ -7,7 +7,7 @@
 #ifndef dTOOLS_IS_VOLATILE_DATA_2013_USED_ 
 #define dTOOLS_IS_VOLATILE_DATA_2013_USED_ 102,2013
 
-#include <tools/types/sfinae/is_dereferencable.hpp>
+#include <tools/types/sfinae.hpp>
 
 //==============================================================================
 //=== is_volatile_data =========================================================
