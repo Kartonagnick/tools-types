@@ -2,6 +2,7 @@
 #pragma once
 #ifndef dTOOLS_SFINAE_2010_USED_ 
 #define dTOOLS_SFINAE_2010_USED_ 100 PRE
+
 #include <tools/features.hpp>
 #include <type_traits>
 
@@ -17,7 +18,8 @@ namespace tools
         {
             typedef ::std::remove_reference<lambda>
                 no_ref;
-            typedef typename no_ref::type x;
+            typedef typename no_ref::type 
+                x;
 
             template<class u> static ::std::true_type
                 check(decltype(&u::operator()));
@@ -40,41 +42,47 @@ namespace tools
 } // namespace tools 
 #endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
 
-  //==============================================================================
-  //=== is_dereferencable ========================================================
-#ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
-#define dTOOLS_IS_DEREFERENCABLE_USED_ 1
-    #include <tools/types/sfinae/is_deref-2010.hpp>
-#endif // !dTOOLS_IS_DEREFERENCABLE_USED_
-
-#if 0
-
 //==============================================================================
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
 #define dTOOLS_IS_DEREFERENCABLE_USED_ 1
+
 namespace tools 
 {
     namespace detail
     {
-        template<class t> t obj_();
+        template<class u> u obj();
 
-        template<class t, bool> class is_deref_
+        template<class u, class t, 
+            class r = decltype(*::tools::detail::obj_<u>()),
+            bool = ::std::is_same<r, t>::value
+        > struct enable_;
+
+        template<class u, class t, class r>
+        struct enable_<u, t, r, false>
         {
+            typedef ::std::true_type type; 
+        };
+
+        template<class t, bool> struct is_deref_
+        {
+            // decltype(*::obj_<u>(), ::std::true_type())
+
             #define dCHECK_EXPRESSION_ \
-                decltype(*::tools::detail::obj_<u>(), ::std::true_type()) 
+            decltype(*::tools::detail::obj<u>(), ::std::true_type())
 
-            template<class u> static dCHECK_EXPRESSION_ 
+                //typename enable_<u, t>::type
+
+            template<class u> static 
+                dCHECK_EXPRESSION_ 
                 check(dCHECK_EXPRESSION_*);
-
-            #undef dCHECK_EXPRESSION_
 
             template<class> static ::std::false_type
                 check(...);
-
             typedef decltype(check<t>(nullptr))
                 checked;
         public:
+            #undef dCHECK_EXPRESSION_
             enum { value = checked::value };
         };
 
@@ -92,9 +100,8 @@ namespace tools
                 no_ref;
             typedef typename no_ref::type
                 x;
-
             enum { ok = ::std::is_class<x>::value };
-            typedef::tools::detail::is_deref_<x, ok> 
+            typedef ::tools::detail::is_deref_<x, ok> 
                 v;
         public:
             enum { value = v::value };
@@ -108,9 +115,11 @@ namespace tools
     {};
 
 } // namespace tools 
+
+//#include <tools/types/sfinae/is_deref-2010.hpp>
 #endif // !dTOOLS_IS_DEREFERENCABLE_USED_
 
-#endif
+
 
 //==============================================================================
 //==============================================================================
