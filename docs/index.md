@@ -8,10 +8,7 @@
 [N]: icons/na.png
 
 [M]: #main "проект tools-types"  
-[MINGW]:  #mingw-new.md "поддержка компиляторов mingw"  
-[VS-NEW]: #msvc-new.md  "поддержка новых компиляторов msvc"  
-[VS-OLD]: #msvc-old.md  "поддержка старых компиляторов msvc"  
-
+[H]: history.md "история проекта"  
 
 Текущая версия types 1.2.7 [![P]][M]  
 ------
@@ -23,7 +20,7 @@
     5.1. [types.hpp][51]  
     5.2. [version.hpp][52]  
     5.3. [traits.hpp][53] ........... [![V]][53]  
-    5.4. [common.hpp][54]  
+    5.4. [common.hpp][54] ........... [new][54][![V]][54]          [old][54][![D]][54]  
     5.6. [variadic.hpp][56] ......... [new][56-NEW][![V]][56-NEW]  [old][56-OLD][![V]][56-OLD]  
     5.7. [void_t.hpp][57] ........... [![D]][57]  
     5.8. [fixed.hpp][58] ............ [c++11][58-11][![V]][58-11]  [c++98][58-98][![V]][58-11]  
@@ -38,7 +35,6 @@
     7.3. [view_build.hpp][73]  
     7.4. [warning.hpp][74]  
 
-
 [01]: cpp/assert.md           "улучшенный assert"  
 [02]: cpp/dfunction.md        "макрос dFUNCTION раскрывается в текст, хранящий имя и сигнатуру функции, где он был использован"  
 [03]: cpp/features.md         "здесь выявляются возможности компилятора"  
@@ -48,6 +44,7 @@
 [52]: ../include/tools/types/version.hpp  "версия модуля"  
 
 [53]: cpp/types/traits.md     "самодельный type_traits"  
+
 [54]: cpp/types/common.md     "сборник мета-алгоритмов общего назначения"  
 
 [56]: cpp/types/variadic.md   "решение проблемы провалов в шаблоно-конструкторы"  

@@ -4,8 +4,8 @@
 // [2021y-04m-21d][13:06:13] Idrisov Denis R. 102 PRE
 
 #pragma once
-#ifndef dTOOLS_IS_VOLATILE_DATA_2015_USED_ 
-#define dTOOLS_IS_VOLATILE_DATA_2015_USED_ 102,2013
+#ifndef dTOOLS_IS_VOLATILE_DATA_2013_USED_ 
+#define dTOOLS_IS_VOLATILE_DATA_2013_USED_ 102,2013
 
 #include <tools/types/sfinae/is_dereferencable.hpp>
 
@@ -94,4 +94,4 @@ namespace tools
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_IS_VOLATILE_DATA_2015_USED_
+#endif // !dTOOLS_IS_VOLATILE_DATA_2013_USED_
