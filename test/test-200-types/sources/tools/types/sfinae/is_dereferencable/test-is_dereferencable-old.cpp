@@ -23,11 +23,11 @@ namespace
         me::is_dereferencable<type>::value == expected
 
     #ifdef dHAS_STATIC_ASSERT
-        #define make_test(type, expected)       \
-            static_assert(                      \
-                dexpression(type, expected),    \
-                "is_dereferencable<" #type "> " \
-                "must be '" #expected "'"       \
+        #define make_test(type, expected)              \
+            static_assert(                             \
+                dexpression(type, expected),           \
+                "tools::is_dereferencable<" #type "> " \
+                "must be '" #expected "'"              \
             )
     #else
         #define make_test(type, expected)       \
@@ -96,7 +96,6 @@ namespace
 
 //==============================================================================
 //==============================================================================
-
 TEST_COMPONENT(000)
 {
     //       |   type         | expected |

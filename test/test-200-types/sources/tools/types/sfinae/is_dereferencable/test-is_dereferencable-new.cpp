@@ -29,7 +29,7 @@ namespace
         static_assert(                      \
             dexpression(type, expected),    \
             "is_dereferencable<" #type ">"  \
-            "must be '" #expected "'"       \
+            " must be '" #expected "'"      \
         )
   
 }//namespace

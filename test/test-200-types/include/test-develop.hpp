@@ -59,15 +59,15 @@
     #define TEST_TOOLS_SFINAE                               // ready!
     #define TEST_TOOLS_IS_LAMBDA                            // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
-    #define TEST_TOOLS_HAS_OPERATOR_ACCESS                  // ready!
-    #define TEST_TOOLS_IS_INCREMENTABLE                     // ready!
-    #define TEST_TOOLS_IS_DECREMENTABLE                     // ready!
-    #define TEST_TOOLS_IS_ITERABLE                          // ready!
-    #define TEST_TOOLS_IS_ITERATOR                          // ready!
-    #define TEST_TOOLS_HAS_VALUE_TYPE                       // ready!
-    #define TEST_TOOLS_HAS_MAPPED_TYPE                      // ready!
-    #define TEST_TOOLS_HAS_BEGIN                            // ready!
-    #define TEST_TOOLS_HAS_END                              // ready!
+    // #define TEST_TOOLS_HAS_OPERATOR_ACCESS               // ready!
+    // #define TEST_TOOLS_IS_INCREMENTABLE                  // ready!
+    // #define TEST_TOOLS_IS_DECREMENTABLE                  // ready!
+    // #define TEST_TOOLS_IS_ITERABLE                       // ready!
+    // #define TEST_TOOLS_IS_ITERATOR                       // ready!
+    // #define TEST_TOOLS_HAS_VALUE_TYPE                    // ready!
+    // #define TEST_TOOLS_HAS_MAPPED_TYPE                   // ready!
+    // #define TEST_TOOLS_HAS_BEGIN                         // ready!
+    // #define TEST_TOOLS_HAS_END                           // ready!
 
 //==============================================================================
 //===== tools/types ========================================||==================

@@ -34,17 +34,21 @@ namespace tools
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
 #define dTOOLS_IS_DEREFERENCABLE_USED_ 1
-namespace tools 
-{
-    template<class, class = void>
-    struct is_dereferencable : ::std::false_type {};
+    #ifdef dHAS_CPP14
+        namespace tools 
+        {
+            template<class, class = void>
+            struct is_dereferencable : ::std::false_type {};
  
-    template<class t> struct is_dereferencable<t, 
-        ::std::void_t<decltype(*::std::declval<t>())> >
-        : ::std::true_type
-    {};
+            template<class t> struct is_dereferencable<t, 
+                ::std::void_t<decltype(*::std::declval<t>())> >
+                : ::std::true_type
+            {};
 
-} // namespace tools
+        } // namespace tools
+    #else
+        #include <tools/types/sfinae/is_deref-2010.hpp>
+    #endif
 #endif // !dTOOLS_IS_DEREFERENCABLE_USED_
 
 //==============================================================================
@@ -153,8 +157,9 @@ namespace tools
 {
     template<class t> struct is_iterable
         : ::std::integral_constant<bool, 
-        ::tools::is_dereferencable<t>::value &&
-        ::tools::is_incrementable<t>::value>
+        (::tools::is_dereferencable<t>::value &&
+        ::tools::is_incrementable<t>::value)
+        >
     {};
 
 } // namespace tools 
