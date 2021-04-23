@@ -93,15 +93,15 @@ TEST_COMPONENT(000)
     dCHECK(it_m    , true );
     dCHECK(iter    , true );
     dCHECK(postfix , true );
+
+    dCHECK(int     , true );
+    dCHECK(double  , true );
 }
 TEST_COMPONENT(001)
 {
-    dCHECK(int   , false);
     dCHECK(vec_t , false);
     dCHECK(map_t , false);
-    dCHECK(double, false);
     dCHECK(A     , false);
-    dCHECK(int   , false);
 }
 TEST_COMPONENT(002)
 {

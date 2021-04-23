@@ -42,11 +42,11 @@
     #define TEST_TOOLS_FOR_LVALUE                           // ready!
     #define TEST_TOOLS_FOR_RVALUE                           // ready!
     #define TEST_TOOLS_FIND_TYPE                            // ready!
-    #define TEST_TOOLS_IS_LAMBDA                            // ready!
+
     #define TEST_TOOLS_IS_ZERO_ARRAY                        // ready!
     #define TEST_TOOLS_SIZE_ARRAY                           // ready!
     #define TEST_TOOLS_SMALL_ARRAY                          // ready!
-    #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
+
     #define TEST_TYPE_OF_ENUM                               // ready!
     #define TEST_TOOLS_VARIADIC                             // ready!
     #define TEST_TOOLS_IS_VOLATILE_DATA                     // ready!
@@ -56,17 +56,18 @@
 
 //==============================================================================
 //===== tools/types/sfinae =================================||==================
-    #define TEST_TOOLS_SFINAE                               // in progress...
-
-    #define TEST_TOOLS_IS_INCREMENTABLE                     // ready!
-    #define TEST_TOOLS_IS_DECREMENTABLE                     // ready!
-    #define TEST_TOOLS_IS_ITERATOR                          // ready!
-    #define TEST_TOOLS_IS_ITERABLE                          // ready!
-    #define TEST_TOOLS_HAS_VALUE_TYPE                       // ready!
-    #define TEST_TOOLS_HAS_MAPPED_TYPE                      // ready!
-    #define TEST_TOOLS_HAS_OPERATOR_ACCESS                  // ready!
-    #define TEST_TOOLS_HAS_BEGIN                            // ready!
-    #define TEST_TOOLS_HAS_END                              // ready!
+    #define TEST_TOOLS_SFINAE                               // ready!
+    #define TEST_TOOLS_IS_LAMBDA                            // ready!
+    #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!
+    // #define TEST_TOOLS_HAS_OPERATOR_ACCESS               // ready!
+    // #define TEST_TOOLS_IS_INCREMENTABLE                  // ready!
+    // #define TEST_TOOLS_IS_DECREMENTABLE                  // ready!
+    // #define TEST_TOOLS_IS_ITERABLE                       // ready!
+    // #define TEST_TOOLS_IS_ITERATOR                       // ready!
+    // #define TEST_TOOLS_HAS_VALUE_TYPE                    // ready!
+    // #define TEST_TOOLS_HAS_MAPPED_TYPE                   // ready!
+    // #define TEST_TOOLS_HAS_BEGIN                         // ready!
+    // #define TEST_TOOLS_HAS_END                           // ready!
 
 //==============================================================================
 //===== tools/types ========================================||==================

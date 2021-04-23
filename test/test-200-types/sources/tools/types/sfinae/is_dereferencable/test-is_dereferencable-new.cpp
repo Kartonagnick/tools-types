@@ -29,7 +29,7 @@ namespace
         static_assert(                      \
             dexpression(type, expected),    \
             "is_dereferencable<" #type ">"  \
-            "must be '" #expected "'"       \
+            " must be '" #expected "'"      \
         )
   
 }//namespace
@@ -126,7 +126,6 @@ TEST_COMPONENT(000){}
 
 //==============================================================================
 //==============================================================================
-
 
 #endif // !dHAS_USING_ALIAS
 #endif // !TEST_TOOLS_IS_DEREFERENCABLE

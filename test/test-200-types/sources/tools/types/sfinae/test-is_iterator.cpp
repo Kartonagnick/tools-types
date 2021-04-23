@@ -8,7 +8,7 @@
 #define dTEST_METHOD is_iterator
 #define dTEST_TAG tdd
 
-#include <tools/types/sfinae/is_iterator.hpp>
+#include <tools/types/sfinae.hpp>
 #include <iostream>
 #include <vector>
 #include <map>
@@ -98,7 +98,25 @@ TEST_COMPONENT(004)
     dCHECK(volatile const it_m, true );
     dCHECK(volatile const iter, true );
 }
+
 TEST_COMPONENT(005)
+{
+    dCHECK(it_v&, true);
+    dCHECK(it_m&, true);
+    dCHECK(iter&, true);
+}
+
+#ifdef dHAS_RVALUE_REFERENCES
+TEST_COMPONENT(006)
+{
+    dCHECK(it_v&&, true);
+    dCHECK(it_m&&, true);
+    dCHECK(iter&&, true);
+}
+#endif
+
+
+TEST_COMPONENT(007)
 {
     dCHECK(int*              , true );
     dCHECK(int*const         , true );
@@ -121,10 +139,58 @@ TEST_COMPONENT(005)
     dCHECK(volatile const int*volatile const, true );
 }
 
+TEST_COMPONENT(008)
+{
+    dCHECK(int*&              , true );
+    dCHECK(int*const&         , true );
+    dCHECK(int*volatile&      , true );
+    dCHECK(int*volatile const&, true );
+
+    dCHECK(const int*&              , true );
+    dCHECK(const int*const&         , true );
+    dCHECK(const int*volatile&      , true );
+    dCHECK(const int*volatile const&, true );
+
+    dCHECK(volatile int*&              , true );
+    dCHECK(volatile int*const&         , true );
+    dCHECK(volatile int*volatile&      , true );
+    dCHECK(volatile int*volatile const&, true );
+
+    dCHECK(volatile const int*&              , true );
+    dCHECK(volatile const int*const&         , true );
+    dCHECK(volatile const int*volatile&      , true );
+    dCHECK(volatile const int*volatile const&, true );
+}
+
+#ifdef dHAS_RVALUE_REFERENCES
+TEST_COMPONENT(009)
+{
+    dCHECK(int*&&              , true );
+    dCHECK(int*const&&         , true );
+    dCHECK(int*volatile&&      , true );
+    dCHECK(int*volatile const&&, true );
+
+    dCHECK(const int*&&              , true );
+    dCHECK(const int*const&&         , true );
+    dCHECK(const int*volatile&&      , true );
+    dCHECK(const int*volatile const&&, true );
+
+    dCHECK(volatile int*&&              , true );
+    dCHECK(volatile int*const&&         , true );
+    dCHECK(volatile int*volatile&&      , true );
+    dCHECK(volatile int*volatile const&&, true );
+
+    dCHECK(volatile const int*&&              , true );
+    dCHECK(volatile const int*const&&         , true );
+    dCHECK(volatile const int*volatile&&      , true );
+    dCHECK(volatile const int*volatile const&&, true );
+}
+#endif
+
 //==============================================================================
 //==============================================================================
 
-TEST_COMPONENT(006)
+TEST_COMPONENT(010)
 {
     dCHECK(int   , false);
     dCHECK(vec_t , false);

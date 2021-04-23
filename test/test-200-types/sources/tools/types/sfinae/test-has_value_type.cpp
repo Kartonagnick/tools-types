@@ -9,7 +9,7 @@
 #define dTEST_METHOD has_value_type
 #define dTEST_TAG tdd
 
-#include <tools/types/sfinae/has_value_type.hpp>
+#include <tools/types/sfinae.hpp>
 #include <vector>
 #include <map>
 
