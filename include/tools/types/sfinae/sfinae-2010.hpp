@@ -55,17 +55,20 @@ namespace tools
         typedef char(&no )[1];
         typedef char(&yes)[2];
 
+        template <class v, v> struct sfinae_sig_;
+
         template<class t, class sig> class is_deref_sig_ 
         {
-            template <class V, V> struct help_ {};
+            struct s { void operator*(); };
+            struct der: s, t {};
 
             template <class u> static
-                yes check( help_< sig, &u::operator* >* );
+                yes check( ::tools::detail::sfinae_sig_<sig, &u::operator*> * );
 
             template <class> static
                 no check(...);
 
-            enum { sz = sizeof(check<t>(0)) };
+            enum { sz = sizeof(check<der>(0)) };
         public:
             enum { value = sz != sizeof(no) };
         };
