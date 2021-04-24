@@ -19,6 +19,8 @@
     // msvc2008 or older: used '__if_exist'
 #endif
 
+#include <tools/types/sfinae/deref_available.hpp>
+
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_USED_

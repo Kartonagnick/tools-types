@@ -85,6 +85,12 @@ namespace
         two();
     };
 
+    struct stwo
+    {
+        int operator*();
+        int operator*(int);
+    };
+
     class multi
     {
         int operator*(int);
@@ -96,6 +102,7 @@ namespace
 
 //==============================================================================
 //==============================================================================
+#if 0
 TEST_COMPONENT(000)
 {
     //       |   type         | expected |
@@ -144,8 +151,14 @@ TEST_COMPONENT(000)
         make_test(privat      ,   false  );
         make_test(multi       ,   false  );
     #else
-        //bug: vc2008 - vc2013  ignore 'private' acccess
-        make_test(two         ,   true   );
+        //bug: vc2008: ignore 'private' acccess
+        #ifndef dHAS_TYPE_TRAITS
+            make_test(two         ,   true   );
+        #else
+            // bug msvc2010-msvc2013
+            make_test(stwo        ,   false  );  
+        #endif
+
         make_test(privat      ,   true   );
 
         #ifdef dHAS_USING_ALIAS
@@ -159,6 +172,18 @@ TEST_COMPONENT(000)
         #endif
     #endif
 }
+#endif
+
+#if 0
+TEST_COMPONENT(001)
+{
+    std::cout << ::tools::detail::is_deref_sizeof_<std::string>::sz << '\n';
+
+    int v = 1;
+    (void)v;
+}
+#endif
+
 
 //==============================================================================
 //==============================================================================
