@@ -56,6 +56,7 @@
 
 //==============================================================================
 //===== tools/types/sfinae =================================||==================
+    #define TEST_TOOLS_DEREF_AVAILABLE                      // in progress...
     #define TEST_TOOLS_SFINAE                               // ready!
     #define TEST_TOOLS_IS_LAMBDA                            // ready!
     #define TEST_TOOLS_IS_DEREFERENCABLE                    // ready!

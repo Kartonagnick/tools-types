@@ -33,8 +33,8 @@ namespace tools
             typedef typename no_ref::type
                 x;
 
-            struct s { void operator*(); };
-            struct der: s, x {};
+            // struct s { void operator*(){} };
+            // struct der: s, x {};
 
             template <class u> static 
                 yes check(dSFINAE_*);
@@ -43,7 +43,7 @@ namespace tools
                 no check(...);
 
             #undef dSFINAE_
-            enum { sz = sizeof(check<der>(0)) };
+            enum { sz = sizeof(check<x>(0)) };
         public:
             enum { value = sz != sizeof(no) };
         };
