@@ -141,6 +141,12 @@ namespace sfinae
             ::sfinae::obj<u>().begin()               
         );
 
+        #if 0
+        dSFINAE_DECLARATION_1(has_op_deref, (), u, 
+            *::sfinae::obj<u>()
+        );
+        #endif
+
         dSFINAE_DECLARATION_2(has_op_access, (= size_t), cl, id, 
             ::sfinae::obj<cl>()[::sfinae::obj<id>()]  
         );
@@ -164,6 +170,11 @@ namespace
     typedef ::std::string           str_t;
     typedef ::std::vector<int>      vec_t;
     typedef ::std::map<size_t, int> map_t;
+
+    struct foo
+    {
+        int operator*() const;
+    };
 
 } // namespace
 
@@ -191,7 +202,19 @@ TEST_COMPONENT(002)
     dSTATIC_ASSERT(MAP_BEGIN_ERROR,  has_begin<map_t>::value    );
     dSTATIC_ASSERT(INT_BEGIN_ERROR, !has_begin<int>::value      );
 }
+#if 0
 TEST_COMPONENT(003)
+{
+    using namespace sfinae;
+    dSTATIC_ASSERT(STR_DEREF_ERROR, !has_op_deref<str_t>::value);
+    dSTATIC_ASSERT(VEC_DEREF_ERROR, !has_op_deref<vec_t>::value);
+    dSTATIC_ASSERT(MAP_DEREF_ERROR, !has_op_deref<map_t>::value);
+    dSTATIC_ASSERT(INT_DEREF_ERROR, !has_op_deref<int>::value  );
+    dSTATIC_ASSERT(INTP_DEREF_ERROR, has_op_deref<int*>::value );
+    dSTATIC_ASSERT(FOO_DEREF_ERROR,  has_op_deref<foo>::value  );
+}
+#endif
+TEST_COMPONENT(004)
 {
     using namespace sfinae;
     dSTATIC_ASSERT(STR_ACCESS_ERROR,  has_op_access<str_t>::value);

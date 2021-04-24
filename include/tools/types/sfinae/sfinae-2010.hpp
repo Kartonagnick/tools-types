@@ -5,6 +5,7 @@
 
 #include <tools/features.hpp>
 #include <type_traits>
+#include <cstddef>
 
 //==============================================================================
 //=== is_lambda ================================================= (features) ===
@@ -51,41 +52,82 @@ namespace tools
 {
     namespace detail
     {
-        template<class u> u obj();
+        template<class u> u obj_();
 
-        template<class u, class t, 
-            class r = decltype(*::tools::detail::obj_<u>()),
-            bool = ::std::is_same<r, t>::value
-        > struct enable_;
-
-        template<class u, class t, class r>
-        struct enable_<u, t, r, false>
+        template<class t> class is_deref_decltype_ 
         {
-            typedef ::std::true_type type; 
-        };
+            struct no_ {};
 
-        template<class t, bool> struct is_deref_
-        {
-            // decltype(*::obj_<u>(), ::std::true_type())
+            template <class u> static
+                decltype(*::tools::detail::obj_<u>())
+                check(u*);
 
-            #define dCHECK_EXPRESSION_ \
-            decltype(*::tools::detail::obj<u>(), ::std::true_type())
+            template <class> static
+                no_ check(...);
 
-                //typename enable_<u, t>::type
-
-            template<class u> static 
-                dCHECK_EXPRESSION_ 
-                check(dCHECK_EXPRESSION_*);
-
-            template<class> static ::std::false_type
-                check(...);
-            typedef decltype(check<t>(nullptr))
+            typedef decltype(check<t>(0))
                 checked;
+
+            enum { invalid1 = ::std::is_same<checked, t  >::value };
+            enum { invalid2 = ::std::is_same<checked, no_>::value };
         public:
-            #undef dCHECK_EXPRESSION_
-            enum { value = checked::value };
+            enum { value = !(invalid1 || invalid2) };
+            enum { problem = invalid1 };
         };
 
+        #ifdef _MSC_VER
+            #pragma warning(push)
+            // warning C4200: nonstandard extension used : zero-sized array in struct/union
+            #pragma warning(disable : 4200)
+        #endif
+
+        template<size_t n> struct sfinae_
+            { char buf[n]; };
+
+        #ifdef _MSC_VER
+            #pragma warning(pop)
+        #endif
+
+        template<class t> class is_deref_sizeof_ 
+        {
+            struct no_ { char buf[1024]; };
+
+            template <class u> static
+                sfinae_< sizeof( *::tools::detail::obj_<u>()) >
+                check(u*);
+
+            template <class> static
+                no_ check(...);
+
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            //enum { value = sz == 0 || sz != sizeof(no_) };
+            enum { value = sz != sizeof(no_) };
+            enum { problem = sz == 1 };
+        };
+
+
+        template<class t, bool> struct is_deref_ 
+        {
+            typedef is_deref_decltype_<t>
+                decltype_;
+
+            typedef is_deref_sizeof_<t>                
+                sizeof_;
+
+            enum { v1 = sizeof_::value     };
+            enum { v2 = sizeof_::problem   };
+
+            enum { v3 = decltype_::value   };
+            enum { v4 = decltype_::problem };
+
+            enum  { value = v4? v1: v3 };
+        };
+
+    } // namespace detail
+
+    namespace detail
+    {
         template<class t> class is_deref_<t, false>
         {
             enum { v1 = ::std::is_pointer<t>::value };  
@@ -120,7 +162,7 @@ namespace tools
 #endif // !dTOOLS_IS_DEREFERENCABLE_USED_
 
 
-
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_2010_USED_
+
