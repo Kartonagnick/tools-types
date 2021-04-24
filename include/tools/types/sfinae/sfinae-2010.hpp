@@ -52,6 +52,28 @@ namespace tools
 {
     namespace detail
     {
+        typedef char(&no )[1];
+        typedef char(&yes)[2];
+
+        template<class t, class sig> class is_deref_sig_ 
+        {
+            template <class V, V> struct help_ {};
+
+            template <class u> static
+                yes check( help_< sig, &u::operator* >* );
+
+            template <class> static
+                no check(...);
+
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz != sizeof(no) };
+        };
+
+    } // namespace detail
+
+    namespace detail
+    {
         template<class u> u obj_();
 
         template<class t> class is_deref_decltype_ 
@@ -101,22 +123,27 @@ namespace tools
 
             enum { sz = sizeof(check<t>(0)) };
         public:
-            //enum { value = sz == 0 || sz != sizeof(no_) };
             enum { value = sz != sizeof(no_) };
             enum { problem = sz == 1 };
         };
 
-
         template<class t, bool> struct is_deref_ 
         {
+            enum { const_ = ::std::is_const<t>::value };
+            typedef t (t::*sig_const_t  )() const;
+            typedef t (t::*sig_mutable_t)();
+            typedef ::std::conditional<const_, sig_const_t, sig_mutable_t>
+                cond_t;
+            typedef typename cond_t::type
+                signature_t;
+
+            typedef ::tools::detail::is_deref_sig_<t, signature_t>
+                sig_t;
+
+            enum { v1 = sig_t::value };
+
             typedef is_deref_decltype_<t>
                 decltype_;
-
-            typedef is_deref_sizeof_<t>                
-                sizeof_;
-
-            enum { v1 = sizeof_::value     };
-            enum { v2 = sizeof_::problem   };
 
             enum { v3 = decltype_::value   };
             enum { v4 = decltype_::problem };
