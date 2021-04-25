@@ -1,22 +1,10 @@
 // [2021y-04m-24d][22:30:39] Idrisov Denis R. 100 PRE
+// [2021y-04m-25d][23:17:59] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_DEREF_AVAILABLE_USED_ 
-#define dTOOLS_DEREF_AVAILABLE_USED_ 1
+#ifndef dTOOLS_DEREF_AVAILABLE_OLD_USED_ 
+#define dTOOLS_DEREF_AVAILABLE_OLD_USED_ 1
 
-#include <tools/features.hpp>
-#ifdef dHAS_CPP11
-    #include <tools/types/sfinae/deref/deref-new.hpp>
-#else
-    #include <tools/types/sfinae/deref/deref-old.hpp>
-#endif
-
-#ifdef dHAS_TYPE_TRAITS
-    #include <type_traits>
-#else
-    #include <tools/types/traits.hpp>
-#endif
-
-#if 0
+#include <tools/types/traits.hpp>
 
 //==============================================================================
 //=== is_dereferencable ========================================================
@@ -28,37 +16,6 @@ namespace tools
 
         typedef char(&no )[1];
         typedef char(&yes)[2];
-
-        #ifdef dHAS_CPP11
-
-        template<class t, class sig> 
-        class deref_available_ 
-        {
-            template <class cl>
-            using method
-                = decltype(static_cast<sig>(&cl::operator*));
-            #define dSFINAE_ method<u>
-
-            typedef dTRAIT::remove_reference<t>
-                no_ref;
-            typedef typename no_ref::type
-                x;
-
-            template <class u> static 
-                yes check(dSFINAE_*);
-
-            template <class> static    
-                no check(...);
-
-            #undef dSFINAE_
-
-            enum { sz = sizeof(check<x>(0)) };
-        public:
-            deref_available_();
-            enum { value = sz != sizeof(no) };
-        };
-
-        #else
 
         template <class v, v> struct 
             sfinae_sig_;
@@ -94,8 +51,6 @@ namespace tools
             enum { value = sz != sizeof(no) };
         };
 
-        #endif
-
     } // namespace detail
 
     // if the syntax is valid: *obj ---> dereferencable 
@@ -105,8 +60,6 @@ namespace tools
 
 } // namespace tools 
 
-#endif
-
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_DEREF_AVAILABLE_USED_
+#endif // !dTOOLS_DEREF_AVAILABLE_OLD_USED_
