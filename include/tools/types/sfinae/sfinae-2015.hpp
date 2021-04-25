@@ -3,6 +3,7 @@
 #ifndef dTOOLS_SFINAE_2015_USED_ 
 #define dTOOLS_SFINAE_2015_USED_ 100 PRE
 
+#include <tools/features.hpp>
 #include <type_traits>
 
 //==============================================================================
@@ -34,15 +35,15 @@ namespace tools
 //=== is_dereferencable ========================================================
 #ifndef dTOOLS_IS_DEREFERENCABLE_USED_ 
 #define dTOOLS_IS_DEREFERENCABLE_USED_ 1
-    #ifdef dHAS_CPP14
+    #ifdef dHAS_CPP11
         namespace tools 
         {
             template<class, class = void>
             struct is_dereferencable : ::std::false_type {};
  
-            template<class t> struct is_dereferencable<t, 
-                ::std::void_t<decltype(*::std::declval<t>())> >
-                : ::std::true_type
+            template<class t> struct is_dereferencable<t,
+                ::std::void_t<decltype(*::std::declval<t>())>
+            > : ::std::true_type
             {};
 
         } // namespace tools

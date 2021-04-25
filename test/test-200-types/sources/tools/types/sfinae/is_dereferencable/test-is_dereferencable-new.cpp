@@ -114,8 +114,11 @@ namespace
     make_test(two             ,   true   );
     make_test(privat          ,   true   );
     #else
-    make_test(two             ,   false  );
-    make_test(privat          ,   false  );
+
+    //make_test(two             ,   false  );
+    //make_test(two             ,   true   );
+
+    //make_test(privat          ,   false  );
     #endif
 } // namespace
 

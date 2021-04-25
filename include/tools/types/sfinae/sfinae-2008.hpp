@@ -19,12 +19,14 @@ namespace tools
     namespace detail
     {
         template<class t> struct is_lambda_
-        {                                       
-            __if_exists(t::operator())     
-                { typedef dTRAIT::true_type type ; }
+        {                             
+            typedef dTRAIT::remove_reference<t>
+                no_ref;
+            typedef typename no_ref::type
+                x;
 
-            __if_not_exists(t::operator()) 
-                { typedef dTRAIT::false_type type; }
+            __if_exists( x::operator() )     { enum { value = 1 }; }
+            __if_not_exists( x::operator() ) { enum { value = 0 }; }
         };                                      
 
     } // namespace detail
@@ -47,11 +49,9 @@ namespace tools
     {
         template<class t, bool> class is_deref_
         {
-            __if_exists(t::operator*)     
-                { typedef dTRAIT::true_type type ; }
-
-            __if_not_exists(t::operator*) 
-                { typedef dTRAIT::false_type type; }
+        public:
+            __if_exists(t::operator*)     { enum { value = 1 }; }
+            __if_not_exists(t::operator*) { enum { value = 0 }; }
         };
 
         template<class t> class is_deref_<t, false>
@@ -69,7 +69,7 @@ namespace tools
             typedef typename no_ref::type
                 x;
             enum { ok = dTRAIT::is_class<x>::value };
-            typedef::tools::detail::is_deref_<x, ok> 
+            typedef ::tools::detail::is_deref_<x, ok> 
                 v;
         public:
             enum { value = v::value };
