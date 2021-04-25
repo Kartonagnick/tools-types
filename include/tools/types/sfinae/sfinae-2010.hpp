@@ -59,8 +59,9 @@ namespace tools
 
         template<class t, class sig> class is_deref_sig_ 
         {
-            struct s { void operator*(); };
-            struct der: s, t {};
+            struct my {};
+            struct s { my operator*(); };
+            struct der: public s, public t {};
 
             template <class u> static
                 yes check( ::tools::detail::sfinae_sig_<sig, &u::operator*> * );
@@ -100,43 +101,17 @@ namespace tools
             enum { problem = invalid1 };
         };
 
-        #ifdef _MSC_VER
-            #pragma warning(push)
-            // warning C4200: nonstandard extension used : zero-sized array in struct/union
-            #pragma warning(disable : 4200)
-        #endif
 
-        template<size_t n> struct sfinae_
-            { char buf[n]; };
 
-        #ifdef _MSC_VER
-            #pragma warning(pop)
-        #endif
 
-        template<class t> class is_deref_sizeof_ 
+        template<class t, bool> class is_deref_ 
         {
-            struct no_ { char buf[1024]; };
+            typedef ::std::conditional<
+                ::std::is_const<t>::value, 
+                t (t::*)() const,
+                t (t::*)()
+            > cond_t;
 
-            template <class u> static
-                sfinae_< sizeof( *::tools::detail::obj_<u>()) >
-                check(u*);
-
-            template <class> static
-                no_ check(...);
-
-            enum { sz = sizeof(check<t>(0)) };
-        public:
-            enum { value = sz != sizeof(no_) };
-            enum { problem = sz == 1 };
-        };
-
-        template<class t, bool> struct is_deref_ 
-        {
-            enum { const_ = ::std::is_const<t>::value };
-            typedef t (t::*sig_const_t  )() const;
-            typedef t (t::*sig_mutable_t)();
-            typedef ::std::conditional<const_, sig_const_t, sig_mutable_t>
-                cond_t;
             typedef typename cond_t::type
                 signature_t;
 
@@ -150,7 +125,7 @@ namespace tools
 
             enum { v3 = decltype_::value   };
             enum { v4 = decltype_::problem };
-
+        public:
             enum  { value = v4? v1: v3 };
         };
 
@@ -191,6 +166,44 @@ namespace tools
 //#include <tools/types/sfinae/is_deref-2010.hpp>
 #endif // !dTOOLS_IS_DEREFERENCABLE_USED_
 
+#if 0
+namespace tools
+{
+    namespace detail
+    {
+        #ifdef _MSC_VER
+            #pragma warning(push)
+            // warning C4200: nonstandard extension used : zero-sized array in struct/union
+            #pragma warning(disable : 4200)
+        #endif
+
+        template<size_t n> struct sfinae_
+            { char buf[n]; };
+
+        #ifdef _MSC_VER
+            #pragma warning(pop)
+        #endif
+
+        template<class t> class is_deref_sizeof_ 
+        {
+            struct no_ { char buf[1024]; };
+
+            template <class u> static
+                sfinae_< sizeof( *::tools::detail::obj_<u>()) >
+                check(u*);
+
+            template <class> static
+                no_ check(...);
+
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz != sizeof(no_) };
+            enum { problem = sz == 1 };
+        };
+    
+    } // namespace detail
+} // namespace tools
+#endif
 
 //==============================================================================
 //==============================================================================
