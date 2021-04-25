@@ -51,6 +51,11 @@ namespace
     typedef ::std::string::iterator  
         iter;
 
+    struct rec
+    {
+        rec operator*();
+    };
+
     struct foo
     {
         int operator*() const;
@@ -107,6 +112,8 @@ TEST_COMPONENT(000)
 {
     //       |   type         | expected |
     make_test(bool            ,   false  );
+
+    // make_test(rec          ,   true   );
 
     #ifdef dHAS_NULLPTR
     make_test(std::nullptr_t  ,   false  );
