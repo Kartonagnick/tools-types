@@ -21,20 +21,20 @@ namespace tools
         typedef char(&no )[1];
         typedef char(&yes)[2];
 
-        template <class v, v> struct sfinae_sig_;
+        #ifdef dHAS_CPP11
 
-        template<class t, class sig> class deref_available_ 
+        template<class t, class sig> 
+        class deref_available_ 
         {
-            #define dSFINAE_ \
-                ::tools::detail::sfinae_sig_<sig, &u::operator*>
+            template <class cl>
+            using method
+                = decltype(static_cast<sig>(&cl::operator*));
+            #define dSFINAE_ method<u>
 
             typedef dTRAIT::remove_reference<t>
                 no_ref;
             typedef typename no_ref::type
                 x;
-
-            // struct s { void operator*(){} };
-            // struct der: s, x {};
 
             template <class u> static 
                 yes check(dSFINAE_*);
@@ -43,10 +43,51 @@ namespace tools
                 no check(...);
 
             #undef dSFINAE_
+
             enum { sz = sizeof(check<x>(0)) };
         public:
+            deref_available_();
             enum { value = sz != sizeof(no) };
         };
+
+        #else
+
+        template <class v, v> struct sfinae_sig_;
+
+
+        template<class t, class sig> 
+        class deref_available_ 
+        {
+            #define dSFINAE_                             \
+                ::tools::detail::sfinae_sig_<            \
+                    sig, static_cast<sig>(&u::operator*) \
+                >
+
+            struct my {};
+            struct s { my operator*(); };
+            struct der: /*public s, */public t {};
+
+            typedef dTRAIT::remove_reference<t>
+                no_ref;
+            typedef typename no_ref::type
+                x;
+
+            template <class u> static 
+                yes check(dSFINAE_*);
+                //no check(decltype(&u::operator*)*);
+
+            template <class> static    
+                no check(...);
+
+            #undef dSFINAE_
+
+            enum { sz = sizeof(check<der>(0)) };
+        public:
+            deref_available_();
+            enum { value = sz != sizeof(no) };
+        };
+
+        #endif
 
     } // namespace detail
 
