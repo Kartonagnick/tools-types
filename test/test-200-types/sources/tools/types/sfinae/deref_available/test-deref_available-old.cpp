@@ -1,17 +1,17 @@
 // [2021y-04m-24d][22:40:39] Idrisov Denis R.
+// [2021y-04m-25d][22:21:44] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_DEREF_AVAILABLE
+
+#include <tools/features.hpp>
+#if defined(dHAS_TYPE_TRAITS) && !defined(dHAS_CPP11)
 
 #define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD deref_available
 #define dTEST_TAG old
 
 #include <tools/types/sfinae.hpp>
-
-#include <string>
-#include <memory>
-
 namespace me = ::tools;
 //==============================================================================
 //=== macro ====================================================================
@@ -20,19 +20,12 @@ namespace
     #define dexpression(type, sig, expected) \
         me::deref_available<type, sig>::value == expected
 
-    #ifdef dHAS_STATIC_ASSERT
-        #define make_test(type, sig, expected)                 \
-            static_assert(                                     \
-                dexpression(type, sig, expected),              \
-                "tools::deref_available<" #type ", " #sig "> " \
-                "must be '" #expected "'"                      \
-            )
-    #else
-        #define make_test(type, sig, expected)   \
-            dSTATIC_ASSERT(ERROR_INTERNAL,       \
-                dexpression(type, sig, expected) \
-            )
-    #endif
+    #define make_test(type, sig, expected)                 \
+        static_assert(                                     \
+            dexpression(type, sig, expected),              \
+            "tools::deref_available<" #type ", " #sig "> " \
+            "must be '" #expected "'"                      \
+        )
 
 //----------------------------------
     struct maket;
@@ -141,87 +134,30 @@ namespace
     class der_priv_over_const   : public overload_priv_const {};
     class der_over_private      : public overload_private    {};
 
+//----------------------------------
+    struct rec_mutable 
+    {
+        rec_mutable operator*() {}
+    };
+    struct rec_const 
+    {
+        rec_const operator*()const {}
+    };
+    struct rec
+    {
+        rec operator*() {}
+        rec operator*(int) {}
+        rec operator*() const {}
+        rec operator*(int) const {}
+    };
+    struct der_rec: public rec {};
+
+    struct der_rec_private: private rec {};
+
 } // namespace
 
 //==============================================================================
 //==============================================================================
-#ifdef dHAS_CPP11
-TEST_COMPONENT(000)
-{
-    //       |   type              |      signature                  | expected |
-    make_test(maket                , void(maket::*)()                ,  false   );
-    make_test(dummy                , void(dummy::*)()                ,  false   );
-    make_test(one_mutable          , void(one_mutable::*)()          ,  true    );
-    make_test(one_const            , void(one_const::*)()            ,  false   );
-    make_test(two                  , void(two::*)()                  ,  true    );
-//---------                                                          
-    make_test(one_private_mutable  , void(one_private_mutable::*)()  ,  false   );
-    make_test(one_private_const    , void(one_private_const::*)()    ,  false   );
-    make_test(two_private          , void(two_private::*)()          ,  false   );
-//---------                                                          
-    make_test(der_mutable          , void(der_mutable::*)()          ,  true    );
-    make_test(der_const            , void(der_const::*)()            ,  false   );
-    make_test(der_two              , void(der_two::*)()              ,  true    );
-//---------                                                          
-    make_test(der_private_mutable  , void(der_private_mutable::*)()  ,  false   );
-    make_test(der_private_const    , void(der_private_const::*)()    ,  false   );
-    make_test(der_two_private      , void(der_two_private::*)()      ,  false   );
-//---------                                                          
-    make_test(overload_mutable     , void(overload_mutable::*)()     ,  true    );
-    make_test(overload_const       , void(overload_const::*)()       ,  false   );
-    make_test(overload             , void(overload::*)()             ,  true    );
-//---------                                                          
-    make_test(overload_priv_mut    , void(overload_priv_mut::*)()    ,  false   );
-    make_test(overload_priv_const  , void(overload_priv_const::*)()  ,  false   );
-    make_test(overload_private     , void(overload_private::*)()     ,  false   );
-//---------
-    make_test(der_overload_mutable , void(der_overload_mutable::*)() ,  true    );
-    make_test(der_overload_const   , void(der_overload_const::*)()   ,  false   );
-    make_test(der_overload_two     , void(der_overload_two::*)()     ,  true    );
-//---------
-    make_test(der_priv_over_mutable , void(der_priv_over_mutable::*)() ,  false );
-    make_test(der_priv_over_const   , void(der_priv_over_const::*)()   ,  false );
-    make_test(der_over_private      , void(der_over_private::*)()      ,  false );
-}
-
-TEST_COMPONENT(001)
-{
-    //       |   type              |      signature                        | expected |
-    make_test(maket                , void(maket::*)()                const ,  false   );
-    make_test(dummy                , void(dummy::*)()                const ,  false   );
-    make_test(one_mutable          , void(one_mutable::*)()          const ,  false   );
-    make_test(one_const            , void(one_const::*)()            const ,  true    );
-    make_test(two                  , void(two::*)()                  const ,  true    );
-//---------                                                         
-    make_test(one_private_mutable  , void(one_private_mutable::*)()  const ,  false   );
-    make_test(one_private_const    , void(one_private_const::*)()    const ,  false   );
-    make_test(two_private          , void(two_private::*)()          const ,  false   );
-//---------                                                         
-    make_test(der_mutable          , void(der_mutable::*)()          const ,  false   );
-    make_test(der_const            , void(der_const::*)()            const ,  true    );
-    make_test(der_two              , void(der_two::*)()              const ,  true    );
-//---------                                                         
-    make_test(der_private_mutable  , void(der_private_mutable::*)()  const ,  false   );
-    make_test(der_private_const    , void(der_private_const::*)()    const ,  false   );
-    make_test(der_two_private      , void(der_two_private::*)()      const ,  false   );
-//---------                                                         
-    make_test(overload_mutable     , void(overload_mutable::*)()     const ,  false   );
-    make_test(overload_const       , void(overload_const::*)()       const ,  true    );
-    make_test(overload             , void(overload::*)()             const ,  true    );
-//---------                                                         
-    make_test(overload_priv_mut    , void(overload_priv_mut::*)()    const ,  false   );
-    make_test(overload_priv_const  , void(overload_priv_const::*)()  const ,  false   );
-    make_test(overload_private     , void(overload_private::*)()     const ,  false   );
-//---------
-    make_test(der_overload_mutable , void(der_overload_mutable::*)() const ,  false   );
-    make_test(der_overload_const   , void(der_overload_const::*)()   const ,  true    );
-    make_test(der_overload_two     , void(der_overload_two::*)()     const ,  true    );
-//---------
-    make_test(der_priv_over_mutable , void(der_priv_over_mutable::*)() const ,  false );
-    make_test(der_priv_over_const   , void(der_priv_over_const::*)()   const ,  false );
-    make_test(der_over_private      , void(der_over_private::*)()      const ,  false );
-}
-#else
 
 TEST_COMPONENT(000)
 {
@@ -298,9 +234,28 @@ TEST_COMPONENT(001)
     // make_test(der_priv_over_const   , void(der_priv_over_const::*)()   const ,  false );
     // make_test(der_over_private      , void(der_over_private::*)()      const ,  false );
 }
-#endif
+
+TEST_COMPONENT(002)
+{
+    //       |   type         |      signature                        | expected |
+    make_test(rec_mutable     , rec_mutable(rec_mutable::*)()         ,  true    );
+    make_test(rec_const       , rec_const(rec_const::*)()             ,  false   );
+    make_test(rec             , rec(rec::*)()                         ,  true    );
+    // make_test(der_rec         , rec(der_rec::*)()                     ,  true    );
+    make_test(der_rec_private , der_rec_private(der_rec_private::*)() ,  false   );
+}
+
+TEST_COMPONENT(003)
+{
+    make_test(rec_mutable     , rec_mutable(rec_mutable::*)()         const,  false   );
+    make_test(rec_const       , rec_const(rec_const::*)()             const,  true    );
+    make_test(rec             , rec(rec::*)()                         const,  true    );
+    // make_test(der_rec         , rec(der_rec::*)()                     const,  true    );
+    make_test(der_rec_private , der_rec_private(der_rec_private::*)() const,  false   );
+}
 
 //==============================================================================
 //==============================================================================
+#endif // #if defined(dHAS_TYPE_TRAITS) && !defined(dHAS_CPP11)
 #endif // !TEST_TOOLS_DEREF_AVAILABLE
 

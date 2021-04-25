@@ -52,8 +52,8 @@ namespace tools
 
         #else
 
-        template <class v, v> struct sfinae_sig_;
-
+        template <class v, v> struct 
+            sfinae_sig_;
 
         template<class t, class sig> 
         class deref_available_ 
