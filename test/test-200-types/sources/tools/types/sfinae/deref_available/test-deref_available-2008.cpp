@@ -12,10 +12,6 @@
 #define dTEST_TAG vc2008
 
 #include <tools/types/sfinae.hpp>
-
-#include <string>
-#include <memory>
-
 namespace me = ::tools;
 //==============================================================================
 //=== macro ====================================================================
