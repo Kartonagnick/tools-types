@@ -256,6 +256,71 @@ TEST_COMPONENT(003)
 
 //==============================================================================
 //==============================================================================
+
+namespace
+{
+    template <class F, F>
+    struct help { typedef void type; };
+
+    template <class, class = void>
+    struct has_overload : std::false_type {};
+
+    template <class T>
+    struct has_overload<T, typename help<int (T::*)(), static_cast<int (T::*)()>(&T::operator()) >::type>
+        : std::true_type 
+    {};
+
+    struct B { int operator()(){ return 1; } };
+    struct D : B {};
+    struct P : private B {};
+    struct DP : private B {};
+
+} // namespace
+
+#if 1
+TEST_COMPONENT(004)
+{
+    using x = has_overload<B>;
+    using t = x::type;
+    using z = std::is_same<t, std::true_type>;
+    enum { v = z::value };
+    static_assert(v, "bug");
+}
+TEST_COMPONENT(005)
+{
+    using x = has_overload<D>;
+    using t = x::type;
+    using z = std::is_same<t, std::true_type>;
+    enum { v = z::value };
+    static_assert(v, "bug");
+}
+TEST_COMPONENT(006)
+{
+    using x = has_overload<P>;
+    using t = x::type;
+    using z = std::is_same<t, std::true_type>;
+    enum { v = z::value };
+    static_assert(!v, "bug");
+}
+TEST_COMPONENT(007)
+{
+    using x = has_overload<DP>;
+    using t = x::type;
+    using z = std::is_same<t, std::true_type>;
+    enum { v = z::value };
+    static_assert(!v, "bug");
+}
+#endif
+
+TEST_COMPONENT(008)
+{
+    int(D::*m)() = &D::operator();
+    (void)m;
+}
+
+
+//==============================================================================
+//==============================================================================
 #endif // #if defined(dHAS_TYPE_TRAITS) && !defined(dHAS_CPP11)
 #endif // !TEST_TOOLS_DEREF_AVAILABLE
 
