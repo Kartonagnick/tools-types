@@ -250,13 +250,13 @@ TEST_COMPONENT(003)
     make_test(rec_mutable     , rec_mutable(rec_mutable::*)()         const,  false   );
     make_test(rec_const       , rec_const(rec_const::*)()             const,  true    );
     make_test(rec             , rec(rec::*)()                         const,  true    );
-    // make_test(der_rec         , rec(der_rec::*)()                     const,  true    );
+    //make_test(der_rec         , rec(der_rec::*)()                     const,  true    );
     make_test(der_rec_private , der_rec_private(der_rec_private::*)() const,  false   );
 }
 
 //==============================================================================
 //==============================================================================
-
+#if 0
 namespace
 {
     template <class F, F>
@@ -317,7 +317,7 @@ TEST_COMPONENT(008)
     int(D::*m)() = &D::operator();
     (void)m;
 }
-
+#endif
 
 //==============================================================================
 //==============================================================================
