@@ -17,14 +17,13 @@ namespace tools
         typedef char(&no )[1];
         typedef char(&yes)[2];
 
-        template <class v, v> struct 
-            sfinae_sig_;
+        template <class v, v> struct sig;
 
         template<class t, class sig> 
         class deref_available_ 
         {
             #define dSFINAE_                             \
-                ::tools::detail::sfinae_sig_<            \
+                ::tools::detail::sig<                    \
                     sig, static_cast<sig>(&u::operator*) \
                 >
 
@@ -51,6 +50,13 @@ namespace tools
             enum { value = sz != sizeof(no) };
         };
 
+        template<class t> struct deref_exists
+        {
+
+
+        };
+
+
     } // namespace detail
 
     // if the syntax is valid: *obj ---> dereferencable 
@@ -63,3 +69,8 @@ namespace tools
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_DEREF_AVAILABLE_OLD_USED_
+
+
+struct op_dereference;
+struct op_access;
+struct op_call;
