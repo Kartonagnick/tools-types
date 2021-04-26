@@ -253,6 +253,74 @@ TEST_COMPONENT(003)
     make_test(der_rec_private , der_rec_private(der_rec_private::*)() const,  false   );
 }
 
+#if 0
+namespace
+{
+    template <class A, class = void>
+    struct has_overload : std::false_type {};
+
+    template <class T>
+    struct has_overload<T, decltype((void)(void (T::*)())& T::operator())>
+        : std::true_type {};
+
+    struct B { int operator()(); };
+    struct D : B {};
+    struct P : private B {};
+    struct DP : private B {};
+}
+#endif
+
+namespace
+{
+    template <class F, F>
+    struct help { typedef void type; };
+
+    template <class, class = void>
+    struct has_overload : std::false_type {};
+
+    template <class T>
+    struct has_overload<T, typename help<int (T::*)(),  static_cast<int (T::*)()>(&T::operator()) >::type >
+        : std::true_type 
+    {};
+
+
+    /*
+    template <class T>
+    struct has_overload<T, decltype( 
+        static_cast<void>(
+            static_cast<void (T::*)()>(&T::operator())
+        )
+    )> : std::true_type {};
+    */
+
+    struct B { int operator()() { return 1; } };
+    struct D : B {};
+    struct P : private B {};
+    struct DP : private B {};
+
+} // namespace
+
+TEST_COMPONENT(004)
+{
+    using x = has_overload<B>;
+    static_assert(::std::is_same<typename x::type, std::true_type>::value, "bug");
+}
+TEST_COMPONENT(005)
+{
+    using x = has_overload<D>;
+    static_assert(::std::is_same<typename x::type, std::true_type>::value, "bug");
+}
+TEST_COMPONENT(006)
+{
+    using x = has_overload<P>;
+    static_assert(!::std::is_same<typename x::type, std::true_type>::value, "bug");
+}
+TEST_COMPONENT(007)
+{
+    using x = has_overload<DP>;
+    static_assert(!::std::is_same<typename x::type, std::true_type>::value, "bug");
+}
+
 //==============================================================================
 //==============================================================================
 #endif // !dHAS_CPP11

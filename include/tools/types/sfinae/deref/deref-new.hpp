@@ -21,20 +21,14 @@ namespace tools
             template <class cl>
             using method
                 = decltype(static_cast<sig>(&cl::operator*));
-            #define dSFINAE_ method<u>
 
             typedef dTRAIT::remove_reference<t>
                 no_ref;
             typedef typename no_ref::type
                 x;
 
-            template <class u> static 
-                yes check(dSFINAE_*);
-
-            template <class> static    
-                no check(...);
-
-            #undef dSFINAE_
+            template <class u> static yes check(method<u>*);
+            template <class> static   no check(...);
 
             enum { sz = sizeof(check<x>(0)) };
         public:
