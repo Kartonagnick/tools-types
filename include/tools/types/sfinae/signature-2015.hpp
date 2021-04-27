@@ -6,7 +6,7 @@
 #include <type_traits>
 
 #ifndef _MSC_VER
-    #include <tools/types/sfinae/exist-2015.hpp>
+//    #include <tools/types/sfinae/exist-2015.hpp>
 #endif
 
 #define dIMPLEMENT_(...)                  \
@@ -63,9 +63,12 @@ namespace signature {
         template<class t, class sig>
         class access_
         {
-            template <class cl>
-            using method
-                = decltype(static_cast<sig>(&cl::operator[]));
+            template <class u, 
+                class x = decltype(static_cast<sig>(&u::operator[]))>
+            struct method
+            {
+                using type = x;
+            };
 
             using x = ::std::remove_reference_t<t>;
 

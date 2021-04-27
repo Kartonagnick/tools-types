@@ -159,6 +159,8 @@ namespace
 
 } // namespace
 
+    //static_cast<void(cl::*)(size_t)>(&cl::operator[])
+
 //==============================================================================
 //==============================================================================
 TEST_COMPONENT(000)
@@ -255,6 +257,28 @@ TEST_COMPONENT(003)
     make_test(der_rec         , rec(der_rec::*)(size_t)                     const,  true    );
     make_test(der_rec_private , der_rec_private(der_rec_private::*)(size_t) const,  false   );
 }
+
+#if 0
+
+// bug msvc2017
+
+struct foo 
+{
+    void operator[](size_t) {}
+};
+
+
+template <class t>
+struct help
+{
+    using type = decltype(&t::operator[]);
+};
+
+template <class t>
+using method = typename help<t>::type;
+
+using x = method<foo>;
+#endif
 
 //==============================================================================
 //==============================================================================
