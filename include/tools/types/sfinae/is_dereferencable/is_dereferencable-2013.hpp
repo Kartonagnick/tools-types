@@ -1,7 +1,9 @@
-// [2021y-04m-23d][17:54:39] Idrisov Denis R. 100 PRE
+// [2021y-04m-06d][21:36:00] Idrisov Denis R.
+// [2021y-04m-08d][01:38:17] Idrisov Denis R. 101
 #pragma once
-#ifndef dTOOLS_IS_DEREFERENCABLE_2010_USED_ 
-#define dTOOLS_IS_DEREFERENCABLE_2010_USED_ 1
+#ifndef dTOOLS_IS_DEREFERENCABLE_2013_USED_ 
+#define dTOOLS_IS_DEREFERENCABLE_2013_USED_ 101,2013
+
 #include <tools/features.hpp>
 #include <type_traits>
 
@@ -11,24 +13,28 @@ namespace tools
 {
     namespace detail
     {
-        template<class t> t obj_();
+        template<class t> t val();
 
         template<class t, bool> class is_deref_
         {
-            #define dCHECK_EXPRESSION_ \
-                decltype(*::tools::detail::obj_<u>(), ::std::true_type()) 
+            using x = ::std::remove_reference_t<t>;
 
-            template<class u> static dCHECK_EXPRESSION_ 
-                check(dCHECK_EXPRESSION_*);
+            #define dCHECK_EXPRESSION(...) \
+                decltype(__VA_ARGS__, ::std::true_type{})
 
-            #undef dCHECK_EXPRESSION_
+            template<class u> static dCHECK_EXPRESSION( 
+                *val<u&>()
+            ) check(u*);
+
+            #undef dCHECK_EXPRESSION
 
             template<class> static ::std::false_type
                 check(...);
 
-            typedef decltype(check<t>(nullptr))
-                checked;
+            using checked 
+                = decltype(check<x>(nullptr));
         public:
+            is_deref_() = delete;
             enum { value = checked::value };
         };
 
@@ -37,19 +43,18 @@ namespace tools
             enum { v1 = ::std::is_pointer<t>::value };  
             enum { v2 = ::std::is_array<t>::value   };  
         public:
+            is_deref_() = delete;
             enum { value = v1 || v2 };  
         };
 
         template <class t> class is_dereferencable_
         {
-            typedef ::std::remove_reference<t>
-                no_ref;
-            typedef typename no_ref::type
-                x;
+            using no_ref = ::std::remove_reference<t>;
+            using x = typename no_ref::type;
             enum { ok = ::std::is_class<x>::value };
-            typedef::tools::detail::is_deref_<x, ok> 
-                v;
+            using v = ::tools::detail::is_deref_<x, ok>;
         public:
+            is_dereferencable_() = delete;
             enum { value = v::value };
         };
 
@@ -64,4 +69,4 @@ namespace tools
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_IS_DEREFERENCABLE_2010_USED_
+#endif // !dTOOLS_IS_DEREFERENCABLE_2013_USED_
