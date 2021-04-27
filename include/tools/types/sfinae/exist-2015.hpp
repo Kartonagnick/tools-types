@@ -14,20 +14,20 @@ namespace sfinae {
 namespace exist  {
 
     template<class t> struct call
-    {                             
-        __if_exists(t::operator())     { enum { value = 1 }; }
+    {
+        __if_exists    (t::operator()) { enum { value = 1 }; }
         __if_not_exists(t::operator()) { enum { value = 0 }; }
     };                                      
 
     template<class t> struct dereference
     {                             
-        __if_exists(t::operator*)     { enum { value = 1 }; }
+        __if_exists    (t::operator*) { enum { value = 1 }; }
         __if_not_exists(t::operator*) { enum { value = 0 }; }
     };               
 
     template<class t> struct access
     {                             
-        __if_exists(t::operator[])     { enum { value = 1 }; }
+        __if_exists    (t::operator[]) { enum { value = 1 }; }
         __if_not_exists(t::operator[]) { enum { value = 0 }; }
     };               
 
