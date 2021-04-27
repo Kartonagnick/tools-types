@@ -55,6 +55,66 @@ namespace signature {
         : dIMPLEMENT_(dereference_<t, sig>)
     {};
 
+//==============================================================================
+//==============================================================================
+
+    namespace detail
+    {
+        template<class t, class sig>
+        class access_
+        {
+            template <class cl>
+            using method
+                = decltype(static_cast<sig>(&cl::operator[]));
+
+            using x = ::std::remove_reference_t<t>;
+
+            template <class u> static yes check(method<u>*);
+            template <class>   static no  check(...);
+
+            enum { sz = sizeof(check<x>(0)) };
+        public:
+            access_() = delete;
+            enum { value = sz != sizeof(no) };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class access
+        : dIMPLEMENT_(access_<t, sig>)
+    {};
+
+//==============================================================================
+//==============================================================================
+
+    namespace detail
+    {
+        template<class t, class sig>
+        class call_
+        {
+            template <class cl>
+            using method
+                = decltype(static_cast<sig>(&cl::operator()));
+
+            using x = ::std::remove_reference_t<t>;
+
+            template <class u> static yes check(method<u>*);
+            template <class>   static no  check(...);
+
+            enum { sz = sizeof(check<x>(0)) };
+        public:
+            call_() = delete;
+            enum { value = sz != sizeof(no) };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class call
+        : dIMPLEMENT_(call_<t, sig>)
+    {};
+
 } // namespace signature
 } // namespace sfinae
 } // namespace tools
