@@ -9,9 +9,9 @@
     #include <tools/types/sfinae/exist-2015.hpp>
 #endif
 
-#define dIMPLEMENT_(...)                \
-    public std::integral_constant<bool, \
-        detail::__VA_ARGS__::value      \
+#define dIMPLEMENT_(...)                  \
+    public ::std::integral_constant<bool, \
+        detail::__VA_ARGS__::value        \
     >
 
 namespace tools 
