@@ -7,7 +7,12 @@
     #error Visual Studio compiler required.
 #endif
 
-#if defined(_MSC_FULL_VER) && _MSC_FULL_VER != 192829334
+#if _MSC_VER != 1928
+// bug msvc2019: not worked in (Visual Studio 2019 version 16.8, 16.9)
+// workaround: disable compatibility mode 
+// workaround: change 
+//   from:  /permissive- 
+//   to:    /permissive-
 
 namespace tools  {
 namespace sfinae {
@@ -37,5 +42,5 @@ namespace exist  {
 
 //==============================================================================
 //==============================================================================
-#endif // #if defined(_MSC_FULL_VER) && _MSC_FULL_VER != 192829334
+#endif // _MSC_VER != 1928
 #endif // !dTOOLS_SFINAE_EXIST_2015_USED_

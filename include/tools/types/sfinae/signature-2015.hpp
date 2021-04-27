@@ -31,7 +31,7 @@ namespace signature {
     namespace detail
     {
         template<class t, class sig>
-        class dereferencable_
+        class dereference_
         {
             template <class cl>
             using method
@@ -44,15 +44,15 @@ namespace signature {
 
             enum { sz = sizeof(check<x>(0)) };
         public:
-            dereferencable_() = delete;
+            dereference_() = delete;
             enum { value = sz != sizeof(no) };
         };
 
     } // namespace detail
 
     template<class t, class sig> 
-    class dereferencable
-        : dIMPLEMENT_(dereferencable_<t, sig>)
+    class dereference
+        : dIMPLEMENT_(dereference_<t, sig>)
     {};
 
 } // namespace signature
