@@ -61,17 +61,25 @@ namespace signature {
         template<class t, class sig>
         class access_
         {
-            #define dSFINAE_ \
-                decltype(static_cast<sig>(&u::operator[]))
-            template <class u, class x = dSFINAE_>
-            struct method { typedef x type; };
-            #undef dSFINAE_
+            //template<class v,v> struct help;
+
+            //#define dSFINAE_ \
+            //    decltype(static_cast<sig>(&u::operator[]))
+            //template <class u, class x = dSFINAE_>
+            //struct method { typedef x type; };
+            //#undef dSFINAE_
 
             typedef ::std::remove_reference<t>
                 no_ref;
             typedef typename no_ref::type x;
 
-            template <class u> static yes check(method<u>*);
+            template<class u, class v, v f = &u::operator[]> struct help;
+
+            //template <class u> static yes check(method<u>*);
+
+            //template <class u> static yes check(help<sig, &u::operator[]>*);
+
+            template <class u> static yes check(help<u, sig>*);
             template <class>   static no  check(...);
 
             enum { sz = sizeof(check<x>(0)) };

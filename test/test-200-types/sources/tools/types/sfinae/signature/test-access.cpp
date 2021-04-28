@@ -159,11 +159,9 @@ namespace
 
 } // namespace
 
-    //static_cast<void(cl::*)(size_t)>(&cl::operator[])
+//==============================================================================
+//==============================================================================
 
-//==============================================================================
-//==============================================================================
-#if 0
 TEST_COMPONENT(000)
 {
     //       |   type               |      signature                         | expected |
@@ -258,7 +256,6 @@ TEST_COMPONENT(003)
     make_test(der_rec         , rec(der_rec::*)(size_t)                     const,  true    );
     make_test(der_rec_private , der_rec_private(der_rec_private::*)(size_t) const,  false   );
 }
-#endif
 
 #if 0
 
