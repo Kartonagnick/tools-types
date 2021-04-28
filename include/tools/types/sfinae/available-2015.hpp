@@ -50,9 +50,9 @@ namespace available {
 //==============================================================================
 
     template<class, class = void>
-    struct dereferencable : ::std::false_type {};
+    struct dereference : ::std::false_type {};
  
-    template<class t> struct dereferencable<t,
+    template<class t> struct dereference<t,
             ::std::void_t<decltype(*::std::declval<t>())>
         > : ::std::true_type
     {};
