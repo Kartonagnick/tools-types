@@ -63,12 +63,15 @@ namespace signature {
         template<class t, class sig>
         class access_
         {
-            template <class u, 
-                class x = decltype(static_cast<sig>(&u::operator[]))>
+            #define dSFINAE_ \
+                decltype(static_cast<sig>(&u::operator[]))
+
+            template <class u, class x = dSFINAE_ >
             struct method
             {
                 using type = x;
             };
+            #undef dSFINAE_
 
             using x = ::std::remove_reference_t<t>;
 

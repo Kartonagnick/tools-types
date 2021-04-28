@@ -16,17 +16,17 @@ namespace
         me::call<type>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, expected)                \
-            static_assert(                               \
-                dexpression(type, expected),             \
-                "tools::sfinae::exist::call<" #type "> " \
-                "must be '" #expected "'"                \
+        #define make_test(type, expected)                    \
+            static_assert(                                   \
+                dexpression(type, expected),                 \
+                "tools::sfinae::available::call<" #type "> " \
+                "must be '" #expected "'"                    \
             )
     #else
-        #define make_test(type, expected)                \
-            dSTATIC_CHECK(                               \
-                ERROR_MUST_BE_##expected,                \
-                dexpression(type, expected)              \
+        #define make_test(type, expected)   \
+            dSTATIC_CHECK(                  \
+                ERROR_MUST_BE_##expected,   \
+                dexpression(type, expected) \
             )
     #endif
 
@@ -161,6 +161,7 @@ namespace
 
 //==============================================================================
 //==============================================================================
+#if 0
 TEST_COMPONENT(000)
 {
     //       |   type               | expected |
@@ -255,7 +256,7 @@ TEST_COMPONENT(003)
     make_test(der_rec         ,  true    );
     make_test(der_rec_private ,  false   );
 }
-
+#endif
 //==============================================================================
 //==============================================================================
 #endif // !TEST_TOOLS_SFINAE_CALL
