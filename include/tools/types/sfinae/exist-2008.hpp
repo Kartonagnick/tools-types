@@ -1,7 +1,8 @@
 // [2021y-04m-27d][20:51:13] Idrisov Denis R. 100 PRE
+// [2021y-04m-28d][17:16:02] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_EXIST_2015_USED_ 
-#define dTOOLS_SFINAE_EXIST_2015_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_EXIST_2008_USED_ 
+#define dTOOLS_SFINAE_EXIST_2008_USED_ 100 PRE
 
 #ifndef _MSC_VER
     #error Visual Studio compiler required.
@@ -43,4 +44,4 @@ namespace exist  {
 //==============================================================================
 //==============================================================================
 #endif // _MSC_VER != 1928
-#endif // !dTOOLS_SFINAE_EXIST_2015_USED_
+#endif // !dTOOLS_SFINAE_EXIST_2008_USED_
