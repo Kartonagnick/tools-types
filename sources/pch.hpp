@@ -8,6 +8,7 @@
 
 #define dPCH_USED 1
 #include <tools/pragma/view_build.hpp>
+#include <tools/pragma/compilers.hpp>
 
 //==============================================================================
 //=== [view build`s info =======================================================

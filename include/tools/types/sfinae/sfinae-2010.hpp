@@ -20,7 +20,9 @@ namespace tools
     {
         template<class lambda> class is_lambda_
         {
-            using x = ::std::remove_reference_t<lambda>;
+            typedef ::std::remove_reference<lambda>
+                no_ref;
+            typedef typename no_ref::type x;
 
             template<class u> static ::std::true_type
                 check(decltype(&u::operator()));
@@ -28,7 +30,7 @@ namespace tools
             template<class> static ::std::false_type
                 check(...);
 
-            typedef decltype(check<x>(nullptr))
+            typedef decltype(check<x>(0))
                 checked;
         public:
             enum { value = checked::value };
