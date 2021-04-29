@@ -1,15 +1,17 @@
 ﻿// [2021y-02m-16d][16:14:09] Idrisov Denis R.
 // [2021y-03m-19d][14:51:27] Idrisov Denis R.
 // [2021y-03m-22d][08:56:37] Idrisov Denis R.
+// [2021y-03m-29d][14:48:27] Idrisov Denis R. 102 PRE
 #pragma once
 #ifndef dTOOLS_VIEW_BUILD_USED_
-#define dTOOLS_VIEW_BUILD_USED_ 101
+#define dTOOLS_VIEW_BUILD_USED_ 102 PRE
 //================================================================================
 //================================================================================
 
 #define dSTRINGIZE(...) #__VA_ARGS__
 #define dSSTRINGIZE(x) dSTRINGIZE(x)
 
+#include <tools/pragma/compilers.hpp>
 #include <tools/pragma/confbuild.hpp>
 
 #ifdef _MSC_VER
