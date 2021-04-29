@@ -23,6 +23,9 @@
 
 #include <tools/types/sfinae/is_dereferencable.hpp>
 
+
+#include <tools/types/sfinae/begin.hpp>
+
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_USED_
