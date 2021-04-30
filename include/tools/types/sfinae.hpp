@@ -5,26 +5,46 @@
 #define dTOOLS_SFINAE_USED_ 100 PRE
 
 #include <tools/features.hpp>
+#include <tools/types/sfinae/exist-2008.hpp>
 //==============================================================================
 //==============================================================================
 
 #ifdef dHAS_CPP11
-    // msvc2015 or newer: used 'void_t' idiom
-    #include <tools/types/sfinae/sfinae-2015.hpp>
+
+    // msvc2015 or newer: 
+    //   - used 'void_t' idiom
+    //   - correct implementation
+    //   - has no restrictions
+    //   - recommended for use
+
+    #include <tools/types/sfinae/available-2015.hpp>
+    #include <tools/types/sfinae/signature-2015.hpp>
+
+#elif defined(dHAS_VARIADIC_TEMPLATE) 
+    // msvc2013: 
+    //   - used classic sfinae with 'decltype'
+    //   - ignored private/protected access
+    //   - signature: not worked for derived 
+    #include <tools/types/sfinae/available-2013.hpp>
+    #include <tools/types/sfinae/signature-2013.hpp>
 #elif defined(dHAS_TYPE_TRAITS) 
-    // msvc2010 or newer: used classic sfinae with 'decltype'
-    #include <tools/types/sfinae/sfinae-2010.hpp>
+    // msvc2013 - msvc2010: 
+    //   - used classic sfinae with 'decltype'
+    //   - ignored private/protected access
+    //   - signature: not worked for derived 
+    #include <tools/types/sfinae/available-2010.hpp>
+    #include <tools/types/sfinae/signature-2010.hpp>
 #else
-    #include <tools/types/sfinae/sfinae-2008.hpp>
-    // msvc2008 or older: used '__if_exist'
+    // msvc2008: 
+    //   - used classic sfinae with 'decltype'
+    //   - ignored private/protected access
+    //   - signature: not worked for derived 
+    #include <tools/types/sfinae/available-2008.hpp>
+    #include <tools/types/sfinae/signature-2008.hpp>
 #endif
 
-//#include <tools/types/sfinae/deref_available.hpp>
-
 #include <tools/types/sfinae/is_dereferencable.hpp>
-
-
-#include <tools/types/sfinae/begin.hpp>
+//#include <tools/types/sfinae/begin.hpp>
 
 //==============================================================================
 //==============================================================================

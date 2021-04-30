@@ -26,7 +26,8 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template<class u> static
-            decltype(::std::declval<u>()(::std::declval<args>()...), ::std::true_type())
+            decltype(::std::declval<u>()(::std::declval<args>()...), 
+                ::std::true_type())
                 check(u*);
 
             template<class> static
@@ -71,6 +72,17 @@ namespace available {
     template<class t, class i> struct access<t, i,
             ::std::void_t<decltype(::std::declval<t>()[::std::declval<i>()])>
         > : ::std::true_type
+    {};
+
+//==============================================================================
+//==============================================================================
+
+    template<class, class = void>
+    struct begin : ::std::false_type {};
+ 
+    template<class t> struct begin<t,
+            ::std::void_t<decltype(::std::declval<t>().begin())>
+        > : ::std::true_type 
     {};
 
 } // namespace available

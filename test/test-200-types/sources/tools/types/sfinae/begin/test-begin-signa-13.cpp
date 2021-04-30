@@ -8,6 +8,7 @@
 
 // msvc2013 has bug: 
 //  - ignored private/protected access
+//  - derived not worked
 
 #include <tools/features.hpp>
 #ifndef dHAS_CPP11 

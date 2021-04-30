@@ -1,8 +1,9 @@
-// [2021y-04m-28d][17:13:14] Idrisov Denis R. 100 PRE
+// [2021y-04m-30d][03:11:14] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_SIGNATURE_2010_USED_ 
-#define dTOOLS_SFINAE_SIGNATURE_2010_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
+#define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
 
+#include <tools/types/traits/no_ref.hpp>
 #include <type_traits>
 
 #define dIMPLEMENT_(...)                  \
@@ -10,12 +11,10 @@
         detail::__VA_ARGS__::value        \
     >
 
-namespace tools 
-{
-    typedef char(&no)[1];
-    typedef char(&yes)[2];
-
-} // namespace tools 
+#define dNO_REFERENCE_(t,x)              \
+    typedef ::tools::remove_reference<t> \
+        no_ref;                          \
+    typedef typename no_ref::type x
 
 //==============================================================================
 //==============================================================================
@@ -24,74 +23,7 @@ namespace tools  {
 namespace sfinae {
 namespace signature {
 
-    namespace detail
-    {
-        template<class t, class sig>
-        class dereference_
-        {
-            #define dSFINAE_ \
-                decltype(static_cast<sig>(&u::operator*))
-            template <class u, class x = dSFINAE_>
-            struct method { typedef x type; };
-            #undef dSFINAE_
-
-            typedef ::std::remove_reference<t>
-                no_ref;
-            typedef typename no_ref::type x;
-
-            template <class u> static yes check(method<u>*);
-            template <class>   static no  check(...);
-
-            enum { sz = sizeof(check<x>(0)) };
-        public:
-            dereference_();
-            enum { value = sz != sizeof(no) };
-        };
-
-    } // namespace detail
-
-    template<class t, class sig> 
-    class dereference : dIMPLEMENT_(dereference_<t, sig>) {};
-
-//==============================================================================
-//==============================================================================
-
-    namespace detail
-    {
-        template<class t, class sig>
-        class access_
-        {
-            //template<class v,v> struct help;
-
-            //#define dSFINAE_ \
-            //    decltype(static_cast<sig>(&u::operator[]))
-            //template <class u, class x = dSFINAE_>
-            //struct method { typedef x type; };
-            //#undef dSFINAE_
-
-            typedef ::std::remove_reference<t>
-                no_ref;
-            typedef typename no_ref::type x;
-
-            template<class u, class v, v f = &u::operator[]> struct help;
-
-            //template <class u> static yes check(method<u>*);
-
-            //template <class u> static yes check(help<sig, &u::operator[]>*);
-
-            template <class u> static yes check(help<u, sig>*);
-            template <class>   static no  check(...);
-
-            enum { sz = sizeof(check<x>(0)) };
-        public:
-            access_();
-            enum { value = sz != sizeof(no) };
-        };
-
-    } // namespace detail
-
-    template<class t, class sig> 
-    class access : dIMPLEMENT_(access_<t, sig>) {};
+    template<class V, V> struct help;
 
 //==============================================================================
 //==============================================================================
@@ -101,23 +33,18 @@ namespace signature {
         template<class t, class sig>
         class call_
         {
-            #define dSFINAE_ \
-                decltype(static_cast<sig>(&u::operator()))
-            template <class u, class x = dSFINAE_>
-            struct method { typedef x type; };
-            #undef dSFINAE_
+            dNO_REFERENCE_(t, x);
+            template <class u> static 
+                ::std::true_type check(help<sig, &u::operator()>*);
 
-            typedef ::std::remove_reference<t>
-                no_ref;
-            typedef typename no_ref::type x;
+            template <class> static 
+                ::std::false_type  check(...);
 
-            template <class u> static yes check(method<u>*);
-            template <class>   static no  check(...);
-
-            enum { sz = sizeof(check<x>(0)) };
+            typedef decltype(check<x>(0))
+                checked;
         public:
             call_();
-            enum { value = sz != sizeof(no) };
+            enum { value = checked::value };
         };
 
     } // namespace detail
@@ -127,6 +54,99 @@ namespace signature {
         : dIMPLEMENT_(call_<t, sig>)
     {};
 
+//==============================================================================
+//==============================================================================
+
+    namespace detail
+    {
+        template<class t, class sig>
+        class dereference_
+        {
+            dNO_REFERENCE_(t, x);
+
+            template <class u> static 
+                ::std::true_type check(help<sig, &u::operator*>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<x>(0))
+                checked;
+        public:
+            dereference_();
+            enum { value = checked::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class dereference
+        : dIMPLEMENT_(dereference_<t, sig>)
+    {};
+
+//==============================================================================
+//==============================================================================
+
+    namespace detail
+    {
+        template<class t, class sig>
+        class access_
+        {
+            dNO_REFERENCE_(t, x);
+
+            template <class u> static 
+                ::std::true_type check(help<sig, &u::operator[]>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<x>(0))
+                checked;
+        public:
+            access_();
+            enum { value = checked::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class access
+        : dIMPLEMENT_(access_<t, sig>)
+    {};
+
+//==============================================================================
+//==============================================================================
+
+    namespace detail
+    {
+        template<class t, class sig>
+        class begin_
+        {
+            dNO_REFERENCE_(t, x);
+
+            template <class u> static 
+                ::std::true_type check(help<sig, &u::begin>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<x>(0))
+                checked;
+        public:
+            begin_();
+            enum { value = checked::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class begin
+        : dIMPLEMENT_(begin_<t, sig>)
+    {};
+
+//==============================================================================
+//==============================================================================
+
 } // namespace signature
 } // namespace sfinae
 } // namespace tools
@@ -134,4 +154,4 @@ namespace signature {
 #undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SFINAE_SIGNATURE_2010_USED_
+#endif // !dTOOLS_SFINAE_SIGNATURE_2013_USED_
