@@ -3,12 +3,12 @@
 #ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
 #define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
 
-#include <tools/types/traits/no_ref.hpp>
+#include <tools/types/traits.hpp>
 #include <cstddef>
 
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
+#define dIMPLEMENT_(...)                    \
+    public ::tools::integral_constant<bool, \
+        detail::__VA_ARGS__::value          \
     >
 
 #define dNO_REFERENCE_(t,x)              \
@@ -29,8 +29,7 @@ namespace available {
     typedef char(&no )[1];
     typedef char(&yes)[2];
 
-    template<class a, size_t n>
-    struct help { char buf[n]; };
+    template<size_t n> struct help { char buf[n]; };
 
     template<class t> t obj();
 
@@ -40,7 +39,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>(), obj<t7>() ))>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>(), obj<t7>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -53,7 +52,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>()) )>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -66,7 +65,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>()) )>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -79,7 +78,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>()) )>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -92,7 +91,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>(), obj<t2>(), obj<t3>()) )>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -105,7 +104,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>(), obj<t2>()))>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -118,7 +117,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()(obj<t1>()))>::type
+                typename help<sizeof(obj<u>().operator()(obj<t1>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -130,8 +129,11 @@ namespace available {
         class call_<t, empty, empty, empty, empty, empty, empty, empty>
         {
             dNO_REFERENCE_(t, x);
+
             template <class u> static 
-                typename help<u, sizeof(obj<u>()())>::type
+                //typename help<u, sizeof(obj<u>()())>::type
+
+                typename help<sizeof( obj<u>().operator()() )>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -159,7 +161,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(*obj<u>())>::type
+                typename help<sizeof(*obj<u>())>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -183,7 +185,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>()[ obj<i>() ] >::type
+                typename help<sizeof(obj<u>()[ obj<i>() ]) >::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -207,7 +209,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, sizeof(obj<u>().begin()) >::type
+                typename help<sizeof(obj<u>().begin()) >::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
