@@ -1,5 +1,5 @@
 // [2021y-04m-27d][22:26:21] Idrisov Denis R.
-#if _MSC_VER != 1928
+#if defined(_MSC_VER) && _MSC_VER != 1928
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_SFINAE_DEREFERENCE
@@ -259,5 +259,5 @@ TEST_COMPONENT(003)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_DEREFERENCE
-#endif // #if _MSC_VER != 1928
+#endif // TEST_TOOLS_SFINAE_DEREFERENCE
+#endif // defined(_MSC_VER) && _MSC_VER != 1928
