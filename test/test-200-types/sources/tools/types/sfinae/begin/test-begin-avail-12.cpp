@@ -7,9 +7,9 @@
 #define dTEST_TAG new
 
 #include <tools/features.hpp>
-#if defined(dHAS_VARIADIC_TEMPLATE) && !defined(dHAS_CPP11)
+#if defined(dHAS_ENUM_CLASS) && !defined(dHAS_CPP11)
 
-// msvc2013 has bug: 
+// msvc2012 - msvc2013 has bug: 
 //  - ignored private/protected access
 
 #include <tools/types/sfinae.hpp>
@@ -461,5 +461,5 @@ TEST_COMPONENT(016)
 
 //==============================================================================
 //==============================================================================
-#endif // defined(dHAS_VARIADIC_TEMPLATE) && !defined(dHAS_CPP11)
+#endif // defined(dHAS_ENUM_CLASS) && !defined(dHAS_CPP11)
 #endif // TEST_TOOLS_SFINAE_BEGIN

@@ -6,7 +6,7 @@
 #define dTEST_METHOD begin
 #define dTEST_TAG new
 
-// msvc2013 has bug: 
+// msvñ2008 - msvc2013 has bug: 
 //  - ignored private/protected access
 //  - derived not worked
 

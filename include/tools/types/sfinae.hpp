@@ -104,7 +104,13 @@ namespace tools
 
         #ifdef dHAS_CPP11
             //msvc2015 or newer
-
+            template<class, class = void>
+            struct is_lambda_ : ::std::false_type {};
+ 
+            template<class F> struct is_lambda_<F, 
+                ::std::void_t<decltype(&F::operator())> >
+                : ::std::true_type
+            {};
         #elif defined(dHAS_USING_ALIAS)
             //msvc2013
             template<class lambda> class is_lambda_

@@ -27,8 +27,21 @@ namespace tools
 namespace sfinae    {
 namespace available {
 
+    template<class t> t obj();
+
     template<class a, class b>
-    struct help { typedef ::std::true_type type; };
+    struct help
+    { 
+        enum { v = ::std::is_same<a, b>::value };
+        typedef ::std::integral_constant<bool, !v>
+            type;
+        //typedef ::std::true_type type; 
+    };
+    template<class a> struct help<a, a>
+    { 
+        typedef ::std::false_type
+            type;
+    };
 
     namespace detail
     {
@@ -298,9 +311,9 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, 
-                    decltype(::std::declval<u>().begin()) 
-                >::type check(u*);
+                //typename help<u, decltype(::std::declval<u>().begin()) >::type
+                typename help<u, decltype(obj<u>().begin()) >::type
+                check(u*);
 
             template <class> static
                 ::std::false_type check(...);
