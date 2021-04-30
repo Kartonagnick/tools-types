@@ -5,6 +5,8 @@
 #define dTOOLS_SFINAE_USED_ 100 PRE
 
 #include <tools/features.hpp>
+#include <tools/types/traits/no_ref.hpp>
+
 //==============================================================================
 //==============================================================================
 
@@ -18,6 +20,7 @@
     //         to:    /permissive
     #include <tools/types/sfinae/exist-2008.hpp>
 #endif
+
 //==============================================================================
 //==============================================================================
 
@@ -86,7 +89,72 @@ namespace tools
         : dDETAIL_CONSTANT(is_dereferencable_<t>)
     {};
 
-}
+    namespace detail
+    {
+        // msvc2015 or newer: 
+        //   - used 'void_t' idiom
+        //   - correct implementation
+        //   - has no restrictions
+        //   - recommended for use
+
+        // msvc2008 - msvc2013:
+        //   - has bugs:
+        //     - ignored private/protected access
+        //     - signature: not worked for derived 
+
+        #ifdef dHAS_CPP11
+            //msvc2015 or newer
+
+        #elif defined(dHAS_USING_ALIAS)
+            //msvc2013
+            template<class lambda> class is_lambda_
+            {
+                using x = ::std::remove_reference_t<lambda>;
+
+                template<class u> static ::std::true_type
+                    check(decltype(&u::operator()));
+
+                template<class> static ::std::false_type
+                    check(...);
+
+                typedef decltype(check<x>(nullptr))
+                    checked;
+            public:
+                enum { value = checked::value };
+            };
+        #elif defined(dHAS_TYPE_TRAITS) 
+            //msvc2010-2012
+            template<class lambda> class is_lambda_
+            {
+                dNO_REFERENCE_(lambda, x);
+                template<class u> static ::std::true_type
+                    check(decltype(&u::operator()));
+                template<class> static ::std::false_type
+                    check(...);
+                typedef decltype(check<x>(nullptr))
+                    checked;
+            public:
+                enum { value = checked::value };
+            };
+        #else
+            //msvc2008 or older
+            template<class lambda> struct is_lambda_
+            {
+                dNO_REFERENCE_(lambda, x);
+                __if_exists    (t::operator()) { enum { value = 1 }; }
+                __if_not_exists(t::operator()) { enum { value = 0 }; }
+            };                                      
+        #endif
+
+    } // namespace detail
+
+    // if the syntax is valid: *obj ---> dereferencable 
+    template<class t> struct is_lambda
+        : dDETAIL_CONSTANT(is_lambda_<t>)
+    {};
+
+} // namespace tools
+
 //#include <tools/types/sfinae/is_dereferencable.hpp>
 //#include <tools/types/sfinae/begin.hpp>
 

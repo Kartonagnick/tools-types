@@ -42,7 +42,6 @@ namespace tools
             typedef typename no_ptr::type
                 type;
         };
-
     #else
         template<class t> struct remove_reference
             { typedef t type; };
@@ -57,6 +56,11 @@ namespace tools
         #endif
 
     #endif
+
+    #define dNO_REFERENCE_(t,x)              \
+        typedef ::tools::remove_reference<t> \
+            no_ref;                          \
+        typedef typename no_ref::type x
 
 } // namespace tools 
 //==============================================================================
