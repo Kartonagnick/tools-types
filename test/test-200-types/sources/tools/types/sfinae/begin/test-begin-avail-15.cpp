@@ -226,7 +226,7 @@ TEST_COMPONENT(006)
 // --- non-const derived private 
 TEST_COMPONENT(007)
 {
-    //       |   type      | expected |
+    //       |   type       | expected |
     make_test(DPConst       ,  false   );
     make_test(DPMutable     ,  false   );
     make_test(DPContainer   ,  false   );
@@ -243,7 +243,7 @@ TEST_COMPONENT(007)
 // --- const derived private 
 TEST_COMPONENT(008)
 {
-    //       |   type            | expected |
+    //       |   type             | expected |
     make_test(const DPConst       ,  false   );
     make_test(const DPMutable     ,  false   );
     make_test(const DPContainer   ,  false   );
