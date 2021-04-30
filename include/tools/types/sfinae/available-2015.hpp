@@ -37,6 +37,7 @@ namespace available {
             typedef decltype(check<x>(nullptr))
                 checked;
         public:
+            call_() = delete;
             enum { value = checked::value };
         };
 

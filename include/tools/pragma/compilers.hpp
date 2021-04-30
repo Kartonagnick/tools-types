@@ -3,19 +3,29 @@
 #pragma once
 #ifndef dTOOLS_COMPILERS_USED_ 
 #define dTOOLS_COMPILERS_USED_ 100 PRE
+
+//==============================================================================
+//=== dMESSAGE =================================================================
+
+#ifdef _MSC_VER
+    #define dMESSAGE(...)  __pragma(message(__VA_ARGS__))
+#else
+    #define dMESSAGE(...)
+#endif
+
 //==============================================================================
 //==============================================================================
 
     #if defined(__cplusplus) && __cplusplus >= 201103L
-        #pragma message("c++11: enabled") 
+        dMESSAGE("c++11: enabled")
     #endif
 
     #if defined(__GNUC__) 
-        #pragma message("gnu: enabled") 
+        dMESSAGE("gnu: enabled")
     #endif
 
     #if defined(__MINGW__) || defined(__MINGW32__)
-        #pragma message("mingw: enabled") 
+        dMESSAGE("mingw: enabled")
     #endif
 
     #if defined(_MSC_VER)

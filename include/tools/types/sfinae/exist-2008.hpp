@@ -6,7 +6,7 @@
 
 #ifndef _MSC_VER
     #error Visual Studio compiler required.
-#endif
+#else
 
 #include <tools/types/traits/no_ref.hpp>
 
@@ -64,4 +64,5 @@ namespace exist  {
 
 //==============================================================================
 //==============================================================================
+#endif // _MSC_VER
 #endif // !dTOOLS_SFINAE_EXIST_2008_USED_

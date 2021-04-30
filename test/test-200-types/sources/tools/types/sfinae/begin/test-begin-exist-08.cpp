@@ -1,13 +1,11 @@
 // [2021y-04m-29d][12:21:22] Idrisov Denis R.
+#ifdef _MSC_VER
 #include <mygtest/modern.hpp>
 
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, exist
 #define dTEST_METHOD begin
 #define dTEST_TAG new
-
-#include <tools/features.hpp>
-#if defined(dHAS_VARIADIC_TEMPLATE) && !defined(dHAS_CPP11)
 
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::exist;
@@ -259,5 +257,5 @@ TEST_COMPONENT(008)
 
 //==============================================================================
 //==============================================================================
-#endif // defined(dHAS_VARIADIC_TEMPLATE) && !defined(dHAS_CPP11)
+#endif // _MSC_VER
 #endif // TEST_TOOLS_SFINAE_BEGIN
