@@ -1,15 +1,15 @@
 // [2021y-04m-29d][12:57:49] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_BEGIN__
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD begin
 #define dTEST_TAG new
 
 #include <tools/features.hpp>
-#if defined(dHAS_VARIADIC_TEMPLATE) && !defined(dHAS_CPP11)
+#if defined(dHAS_ENUM_CLASS) && !defined(dHAS_CPP11)
 
-// msvc2013 has bug: 
+// msvc2012 - msvc2013 has bug: 
 //  - ignored private/protected access
 
 #include <tools/types/sfinae.hpp>
@@ -113,22 +113,22 @@ namespace
 //----------------------------------
     class PRMutable 
     {
-        void begin();
+        PRMutable begin();
     public:
         PRMutable();
     };
 
     class PRConst
     {
-        void begin() const;
+        PRConst begin() const;
     public:
         PRConst();
     };
 
     class PRContainer
     {
-        void begin() ;
-        void begin() const;
+        PRContainer begin() ;
+        PRContainer begin() const;
     public:
         PRContainer();
     };
@@ -461,5 +461,5 @@ TEST_COMPONENT(016)
 
 //==============================================================================
 //==============================================================================
-#endif // defined(dHAS_VARIADIC_TEMPLATE) && !defined(dHAS_CPP11)
+#endif // defined(dHAS_ENUM_CLASS) && !defined(dHAS_CPP11)
 #endif // TEST_TOOLS_SFINAE_BEGIN

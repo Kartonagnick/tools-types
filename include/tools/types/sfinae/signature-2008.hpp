@@ -1,14 +1,13 @@
-// [2021y-04m-30d][03:11:14] Idrisov Denis R. 100 PRE
+// [2021y-04m-30d][03:26:10] Idrisov Denis R. 100 PRE
 #pragma once
 #ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
 #define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
 
-#include <tools/types/traits/no_ref.hpp>
-#include <type_traits>
+#include <tools/types/traits.hpp>
 
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
+#define dIMPLEMENT_(...)                    \
+    public ::tools::integral_constant<bool, \
+        detail::__VA_ARGS__::value          \
     >
 
 #define dNO_REFERENCE_(t,x)              \
@@ -23,28 +22,25 @@ namespace tools  {
 namespace sfinae {
 namespace signature {
 
-    template<class V, V> struct help;
+    typedef char(&no )[1];
+    typedef char(&yes)[2];
+
+    template<class v, v> struct help;
 
 //==============================================================================
 //==============================================================================
 
     namespace detail
     {
-        template<class t, class sig>
-        class call_
+        template<class t, class sig> class call_
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                ::std::true_type check(help<sig, &u::operator()>*);
-
-            template <class> static 
-                ::std::false_type  check(...);
-
-            typedef decltype(check<x>(0))
-                checked;
+                yes check(help<sig, &u::operator()>*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<x>(0)) };
         public:
-            call_();
-            enum { value = checked::value };
+            enum { value = sz != sizeof(no) };
         };
 
     } // namespace detail
@@ -65,24 +61,20 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                ::std::true_type check(help<sig, &u::operator*>*);
+                yes check(help<sig, &u::operator*>*);
 
-            template <class> static 
-                ::std::false_type check(...);
+            template <class> static no check(...);
 
-            typedef decltype(check<x>(0))
-                checked;
+            enum { sz = sizeof(check<x>(0)) };
         public:
             dereference_();
-            enum { value = checked::value };
+            enum { value = sz != sizeof(no) };
         };
 
     } // namespace detail
 
     template<class t, class sig> 
-    class dereference
-        : dIMPLEMENT_(dereference_<t, sig>)
-    {};
+    class dereference : dIMPLEMENT_(dereference_<t, sig>) {};
 
 //==============================================================================
 //==============================================================================
@@ -95,24 +87,20 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                ::std::true_type check(help<sig, &u::operator[]>*);
+                yes check(help<sig, &u::operator[]>*);
 
-            template <class> static 
-                ::std::false_type check(...);
+            template <class> static no check(...);
 
-            typedef decltype(check<x>(0))
-                checked;
+            enum { sz = sizeof(check<x>(0)) };
         public:
             access_();
-            enum { value = checked::value };
+            enum { value = sz != sizeof(no) };
         };
 
     } // namespace detail
 
     template<class t, class sig> 
-    class access
-        : dIMPLEMENT_(access_<t, sig>)
-    {};
+    class access : dIMPLEMENT_(access_<t, sig>) {};
 
 //==============================================================================
 //==============================================================================
@@ -125,24 +113,20 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                ::std::true_type check(help<sig, &u::begin>*);
+                yes check(help<sig, &u::begin>*);
 
-            template <class> static 
-                ::std::false_type check(...);
+            template <class> static no check(...);
 
-            typedef decltype(check<x>(0))
-                checked;
+            enum { sz = sizeof(check<x>(0)) };
         public:
             begin_();
-            enum { value = checked::value };
+            enum { value = sz != sizeof(no) };
         };
 
     } // namespace detail
 
     template<class t, class sig> 
-    class begin
-        : dIMPLEMENT_(begin_<t, sig>)
-    {};
+    class begin : dIMPLEMENT_(begin_<t, sig>) {};
 
 //==============================================================================
 //==============================================================================
