@@ -32,10 +32,10 @@ namespace available {
     template<class a, class b>
     struct help
     { 
-        enum { v = ::std::is_same<a, b>::value };
-        typedef ::std::integral_constant<bool, !v>
-            type;
-        //typedef ::std::true_type type; 
+        //enum { v = ::std::is_same<a, b>::value };
+        //typedef ::std::integral_constant<bool, !v>
+        //    type;
+        typedef ::std::true_type type; 
     };
     template<class a> struct help<a, a>
     { 
@@ -311,8 +311,8 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                //typename help<u, decltype(::std::declval<u>().begin()) >::type
-                typename help<u, decltype(obj<u>().begin()) >::type
+                typename help<u, decltype(::std::declval<u>().begin()) >::type
+                //typename help<u, decltype(obj<u>().begin()) >::type
                 check(u*);
 
             template <class> static

@@ -18,8 +18,23 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
+    /*
+    template<class a, class b, bool v = !::std::is_same<a,b>::value >
+    struct help;
+
     template<class a, class b>
-    struct help { using type = ::std::true_type; };
+    struct help<a, b, false> 
+        { using type = ::std::true_type;};
+        */
+
+
+    template<class a, class b>
+    struct help 
+        { using type = ::std::true_type;};
+
+    template<class a> 
+    struct help<a, a>
+        { using type = ::std::false_type; };
 
     namespace detail
     {
@@ -28,9 +43,8 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, 
-                    decltype(::std::declval<u>()(::std::declval<args>()...))
-                >::type check(u*);
+                typename help<u, decltype(::std::declval<u>()(::std::declval<args>()...))>::type 
+				check(u*);
 
             template<class> static
                 ::std::false_type
@@ -60,9 +74,8 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, 
-                    decltype(*::std::declval<u>())
-                >::type check(u*);
+                typename help<u, decltype(*::std::declval<u>())>::type 
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -90,9 +103,8 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, 
-                    decltype(::std::declval<u>()[::std::declval<i>()]) 
-                >::type check(u*);
+                typename help<u, decltype(::std::declval<u>()[::std::declval<i>()])>::type 
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -120,9 +132,8 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, 
-                    decltype(::std::declval<u>().begin()) 
-                >::type check(u*);
+                typename help<u, decltype(::std::declval<u>().begin())>::type 
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
