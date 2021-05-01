@@ -1,7 +1,7 @@
 // [2021y-04m-29d][12:57:49] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_BEGIN__
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD begin
 #define dTEST_TAG new
@@ -113,22 +113,22 @@ namespace
 //----------------------------------
     class PRMutable 
     {
-        void begin();
+        PRMutable begin();
     public:
         PRMutable();
     };
 
     class PRConst
     {
-        void begin() const;
+        PRConst begin() const;
     public:
         PRConst();
     };
 
     class PRContainer
     {
-        void begin() ;
-        void begin() const;
+        PRContainer begin() ;
+        PRContainer begin() const;
     public:
         PRContainer();
     };

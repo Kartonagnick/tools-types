@@ -4,10 +4,10 @@
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD begin
-#define dTEST_TAG new
+#define dTEST_TAG tdd
 
-#include <tools/features.hpp>
-#ifdef dHAS_CPP11
+// #include <tools/features.hpp>
+// #ifdef dHAS_CPP11
 
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::available;
@@ -44,17 +44,14 @@ namespace
 //----------------------------------
     struct Maket;
     struct Dummy {};
-
-    struct Mutable 
+    struct Mutable
     {
-        void begin();
+        void begin(); 
     };
-
-    struct Const
+    struct Const 
     {
         void begin() const;
     };
-
     struct Container
     {
         void begin() ;
@@ -71,14 +68,12 @@ namespace
     public:
         PMutable();
     };
-
     class PConst
     {
         void begin() const;
     public:
         PConst();
     };
-
     class PContainer
     {
         void begin() ;
@@ -90,6 +85,47 @@ namespace
     struct DPMutable   : PMutable   {};
     struct DPConst     : PConst     {};
     struct DPContainer : PContainer {};
+//----------------------------------
+    struct RMutable 
+    {
+        RMutable begin();
+    };
+    struct RConst 
+    {
+        RConst begin() const;
+    };
+    struct RContainer
+    {
+        RContainer begin() ;
+        RContainer begin() const;
+    };
+    struct DRMutable   : RMutable   {};
+    struct DRConst     : RConst     {};
+    struct DRContainer : RContainer {};
+//----------------------------------
+    class PRMutable 
+    {
+        PRMutable begin();
+    public:
+        PRMutable();
+    };
+    class PRConst
+    {
+        PRConst begin() const;
+    public:
+        PRConst();
+    };
+    class PRContainer
+    {
+        PRContainer begin() ;
+        PRContainer begin() const;
+    public:
+        PRContainer();
+    };
+//----------------------------------
+    struct DPRMutable   : PRMutable   {};
+    struct DPRConst     : PRConst     {};
+    struct DPRContainer : PRContainer {};
 //----------------------------------
 
 } // namespace
@@ -155,7 +191,10 @@ TEST_COMPONENT(002)
     make_rval(const Container&& ,  true    );
 }
 
-// --- non-const derived
+//==============================================================================
+//==============================================================================
+
+// --- derived non-const
 TEST_COMPONENT(003)
 {
     //       |   type      | expected |
@@ -172,7 +211,7 @@ TEST_COMPONENT(003)
     make_rval(DContainer&& ,  true    );
 }
 
-// --- const derived
+// --- derived const
 TEST_COMPONENT(004)
 {
     //       |   type            | expected |
@@ -189,7 +228,7 @@ TEST_COMPONENT(004)
     make_rval(const DContainer&& ,  true    );
 }
 
-// --- non-const private
+// --- private non-const
 TEST_COMPONENT(005)
 {
     //       |   type      | expected |
@@ -206,7 +245,7 @@ TEST_COMPONENT(005)
     make_rval(PContainer&& ,  false   );
 }
 
-// --- const private
+// --- private const
 TEST_COMPONENT(006)
 {
     //       |   type            | expected |
@@ -223,7 +262,7 @@ TEST_COMPONENT(006)
     make_rval(const PContainer&& ,  false   );
 }
 
-// --- non-const derived private 
+// --- derived private  non-const
 TEST_COMPONENT(007)
 {
     //       |   type       | expected |
@@ -240,7 +279,7 @@ TEST_COMPONENT(007)
     make_rval(DPContainer&& ,  false   );
 }
 
-// --- const derived private 
+// --- derived private const
 TEST_COMPONENT(008)
 {
     //       |   type             | expected |
@@ -259,5 +298,145 @@ TEST_COMPONENT(008)
 
 //==============================================================================
 //==============================================================================
-#endif // !#ifdef dHAS_CPP11
+
+// --- recursieve non-const
+TEST_COMPONENT(009)
+{
+    //       |   type      | expected |
+    make_test(RConst       ,   true   );
+    make_test(RMutable     ,   true   );
+    make_test(RContainer   ,   true   );
+                               
+    make_test(RConst&      ,   true   );
+    make_test(RMutable&    ,   true   );
+    make_test(RContainer&  ,   true   );
+                               
+    make_rval(RConst&&     ,   true   );
+    make_rval(RMutable&&   ,   true   );
+    make_rval(RContainer&& ,   true   );
+}
+
+// --- recursieve const
+TEST_COMPONENT(010)
+{
+    //       |   type            | expected |
+    make_test(const RConst       ,   true   );
+    make_test(const RMutable     ,   false  );
+    make_test(const RContainer   ,   true   );
+                                     
+    make_test(const RConst&      ,   true   );
+    make_test(const RMutable&    ,   false  );
+    make_test(const RContainer&  ,   true   );
+                                     
+    make_rval(const RConst&&     ,   true   );
+    make_rval(const RMutable&&   ,   false  );
+    make_rval(const RContainer&& ,   true   );
+}
+
+// --- derived recursieve non-const
+TEST_COMPONENT(011)
+{
+    //       |   type       | expected |
+    make_test(DRConst       ,   true   );
+    make_test(DRMutable     ,   true   );
+    make_test(DRContainer   ,   true   );
+                                
+    make_test(DRConst&      ,   true   );
+    make_test(DRMutable&    ,   true   );
+    make_test(DRContainer&  ,   true   );
+                                
+    make_rval(DRConst&&     ,   true   );
+    make_rval(DRMutable&&   ,   true   );
+    make_rval(DRContainer&& ,   true   );
+}
+
+// --- derived recursieve const
+TEST_COMPONENT(012)
+{
+    //       |   type             | expected |
+    make_test(const DRConst       ,   true   );
+    make_test(const DRMutable     ,   false  );
+    make_test(const DRContainer   ,   true   );
+                                      
+    make_test(const DRConst&      ,   true   );
+    make_test(const DRMutable&    ,   false  );
+    make_test(const DRContainer&  ,   true   );
+                                      
+    make_rval(const DRConst&&     ,   true   );
+    make_rval(const DRMutable&&   ,   false  );
+    make_rval(const DRContainer&& ,   true   );
+}
+
+// --- private recursieve non-const
+TEST_COMPONENT(013)
+{
+    //       |   type       | expected |
+    make_test(PRConst       ,  false   );
+    make_test(PRMutable     ,  false   );
+    make_test(PRContainer   ,  false   );
+                                       
+    make_test(PRConst&      ,  false   );
+    make_test(PRMutable&    ,  false   );
+    make_test(PRContainer&  ,  false   );
+                                       
+    make_rval(PRConst&&     ,  false   );
+    make_rval(PRMutable&&   ,  false   );
+    make_rval(PRContainer&& ,  false   );
+}
+
+// --- private recursieve const
+TEST_COMPONENT(014)
+{
+    //       |   type             | expected |
+B    make_test(const PRConst       ,  false   );
+    make_test(const PRMutable     ,  false   );
+    make_test(const PRContainer   ,  false   );
+                                       
+    make_test(const PRConst&      ,  false   );
+    make_test(const PRMutable&    ,  false   );
+    make_test(const PRContainer&  ,  false   );
+                                     
+    make_rval(const PRConst&&     ,  false   );
+    make_rval(const PRMutable&&   ,  false   );
+    make_rval(const PRContainer&& ,  false   );
+}
+
+// --- derived private recursieve non-const
+TEST_COMPONENT(015)
+{
+    //       |   type        | expected |
+    make_test(DPRConst       ,  false   );
+    make_test(DPRMutable     ,  false   );
+    make_test(DPRContainer   ,  false   );
+                                
+    make_test(DPRConst&      ,  false   );
+    make_test(DPRMutable&    ,  false   );
+    make_test(DPRContainer&  ,  false   );
+                                
+    make_rval(DPRConst&&     ,  false   );
+    make_rval(DPRMutable&&   ,  false   );
+    make_rval(DPRContainer&& ,  false   );
+}
+
+// --- derived private recursieve const
+TEST_COMPONENT(016)
+{
+    //       |   type              | expected |
+    make_test(const DPRConst       ,  false   );
+    make_test(const DPRMutable     ,  false   );
+    make_test(const DPRContainer   ,  false   );
+                                      
+    make_test(const DPRConst&      ,  false   );
+    make_test(const DPRMutable&    ,  false   );
+    make_test(const DPRContainer&  ,  false   );
+                                      
+    make_rval(const DPRConst&&     ,  false   );
+    make_rval(const DPRMutable&&   ,  false   );
+    make_rval(const DPRContainer&& ,  false   );
+}
+
+//==============================================================================
+//==============================================================================
+
+//#endif // !#ifdef dHAS_CPP11
 #endif // !TEST_TOOLS_SFINAE_BEGIN
