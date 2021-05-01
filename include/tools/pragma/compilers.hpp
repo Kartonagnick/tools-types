@@ -3,32 +3,47 @@
 #pragma once
 #ifndef dTOOLS_COMPILERS_USED_ 
 #define dTOOLS_COMPILERS_USED_ 100 PRE
-
 //==============================================================================
 //=== dMESSAGE =================================================================
 
 #ifdef _MSC_VER
     #define dMESSAGE(...)  __pragma(message(__VA_ARGS__))
 #else
-    #define dMESSAGE(...)
+    #define dMESSAGE(...) 
 #endif
+
+#define dSTRINGIZE(...) #__VA_ARGS__
+#define dSSTRINGIZE(x) dSTRINGIZE(x)
 
 //==============================================================================
 //==============================================================================
 
     #if defined(__cplusplus) && __cplusplus >= 201103L
-        dMESSAGE("c++11: enabled")
+        dMESSAGE("c++11: enabled") 
+    #endif
+    #if defined(__cplusplus) && __cplusplus >= 201402L
+        dMESSAGE("c++14: enabled") 
+    #endif
+    #if defined(__cplusplus) && __cplusplus >= 201703L
+        dMESSAGE("c++17: enabled") 
+    #endif
+    #if defined(__cplusplus) && __cplusplus >= 202002L
+        dMESSAGE("c++20: enabled") 
     #endif
 
     #if defined(__GNUC__) 
-        dMESSAGE("gnu: enabled")
+        dMESSAGE("gnu: enabled") 
     #endif
 
     #if defined(__MINGW__) || defined(__MINGW32__)
-        dMESSAGE("mingw: enabled")
+        dMESSAGE("mingw: enabled") 
     #endif
 
     #if defined(_MSC_VER)
+        
+        #pragma message("msvc: lang : " dSSTRINGIZE(_MSVC_LANG))
+        #pragma message("msvc: full version: " dSSTRINGIZE(_MSC_FULL_VER))
+
         #if _MSC_VER >= 1929 
             #pragma message("msvc2019: 16.10") 
         #elif _MSC_VER == 1928 
