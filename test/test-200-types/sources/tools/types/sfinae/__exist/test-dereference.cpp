@@ -1,10 +1,10 @@
 // [2021y-04m-27d][22:26:21] Idrisov Denis R.
-#if _MSC_VER != 1928
+#if defined(_MSC_VER) && _MSC_VER != 1928
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_CALL
+#ifdef TEST_TOOLS_SFINAE_DEREFERENCE
 #define dTEST_COMPONENT tools, types, sfinae, exist
-#define dTEST_METHOD call
+#define dTEST_METHOD dereference
 #define dTEST_TAG new
 
 #include <tools/types/sfinae.hpp>
@@ -14,20 +14,20 @@ namespace me = ::tools::sfinae::exist;
 namespace
 {
     #define dexpression(type, expected) \
-        me::call<type>::value == expected
+        me::dereference<type>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, expected)                \
-            static_assert(                               \
-                dexpression(type, expected),             \
-                "tools::sfinae::exist::call<" #type "> " \
-                "must be '" #expected "'"                \
+        #define make_test(type, expected)                       \
+            static_assert(                                      \
+                dexpression(type, expected),                    \
+                "tools::sfinae::exist::dereference<" #type "> " \
+                "must be '" #expected "'"                       \
             )
     #else
-        #define make_test(type, expected)                \
-            dSTATIC_CHECK(                               \
-                ERROR_MUST_BE_##expected,                \
-                dexpression(type, expected)              \
+        #define make_test(type, expected)                       \
+            dSTATIC_CHECK(                                      \
+                ERROR_MUST_BE_##expected,                       \
+                dexpression(type, expected)                     \
             )
     #endif
 
@@ -38,37 +38,37 @@ namespace
 
     struct one_mutable 
     {
-        void operator()() {}
+        void operator*() {}
     };
     struct one_const
     {
-        void operator()() const {}
+        void operator*() const {}
     };
 
     struct two
     {
-        void operator()() {}
-        void operator()() const {}
+        void operator*() {}
+        void operator*() const {}
     };
 
     class one_private_mutable 
     {
-        void operator()() {}
+        void operator*() {}
     public:
         one_private_mutable() {}
     };
 
     class one_private_const
     {
-        void operator()() const {}
+        void operator*() const {}
     public:
         one_private_const() {}
     };
 
     class two_private
     {
-        void operator()() {}
-        void operator()() const {}
+        void operator*() {}
+        void operator*() const {}
     public:
         two_private() {}
     };
@@ -85,45 +85,45 @@ namespace
 //----------------------------------
     struct overload_mutable 
     {
-        void operator()() {}
-        void operator()(int) {}
+        void operator*() {}
+        void operator*(int) {}
     };
     struct overload_const 
     {
-        void operator()() const    {}
-        void operator()(int) const {}
+        void operator*() const    {}
+        void operator*(int) const {}
     };
     struct overload
     {
-        void operator()() {}
-        void operator()(int) {}
-        void operator()() const {}
-        void operator()(int) const {}
+        void operator*() {}
+        void operator*(int) {}
+        void operator*() const {}
+        void operator*(int) const {}
     };
 
     class overload_priv_mut
     {
-        void operator()() {}
-        void operator()(int) {}
+        void operator*() {}
+        void operator*(int) {}
     public:
         overload_priv_mut() {}
     };
 
     class overload_priv_const
     {
-        void operator()() const {}
-        void operator()(int) const {}
+        void operator*() const {}
+        void operator*(int) const {}
     public:
         overload_priv_const() {}
     };
 
     class overload_private
     {
-        void operator()() {}
-        void operator()() const {}
+        void operator*() {}
+        void operator*() const {}
 
-        void operator()(int) {}
-        void operator()(int) const {}
+        void operator*(int) {}
+        void operator*(int) const {}
 
     public:
         overload_private() {}
@@ -141,18 +141,18 @@ namespace
 
     struct rec_mutable 
     {
-        rec_mutable operator()();
+        rec_mutable operator*();
     };
     struct rec_const 
     {
-        rec_const operator()() const;
+        rec_const operator*() const;
     };
     struct rec
     {
-        rec operator()();
-        rec operator()(int);
-        rec operator()() const;
-        rec operator()(int) const;
+        rec operator*();
+        rec operator*(int);
+        rec operator*() const;
+        rec operator*(int) const;
     };
     struct der_rec: public rec {};
 
@@ -259,5 +259,5 @@ TEST_COMPONENT(003)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_CALL
-#endif // #if _MSC_VER != 1928
+#endif // TEST_TOOLS_SFINAE_DEREFERENCE
+#endif // defined(_MSC_VER) && _MSC_VER != 1928

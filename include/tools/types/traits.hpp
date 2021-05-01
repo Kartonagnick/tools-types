@@ -10,10 +10,12 @@
 // [2021y-04m-04d][01:36:02] Idrisov Denis R. 12
 
 // [2021y-04m-21d][00:41:22] Idrisov Denis R. 13 PRE
+// [2021y-04m-30d][01:24:10] Idrisov Denis R. 14 PRE
 #pragma once
 #ifndef dTOOLS_TRAITS_USED_ 
-#define dTOOLS_TRAITS_USED_ 13 PRE
+#define dTOOLS_TRAITS_USED_ 14 PRE
 
+#include <tools/types/traits/no_ref.hpp>
 #include <tools/features.hpp>
 
 #define dDETAIL_TRAITS(...)                  \
@@ -54,28 +56,6 @@ namespace tools
 
 } // namespace tools 
 #endif // !dTOOLS_INTEGRAL_CONSTANT_USED_
-
-
-//==============================================================================
-//=== remove_reference ======================= (features)(integral_constant) ===
-#ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
-#define dTOOLS_REMOVE_REFERENCE_USED_ 2
-namespace tools
-{
-    template<class t> struct remove_reference
-        { typedef t type; };
-
-    template<class t> struct remove_reference <t&>           
-        { typedef t type; };
-
-    #ifdef dHAS_RVALUE_REFERENCES
-    template<class t> struct remove_reference <t&&>        
-        { typedef t type; };
-    #endif
-
-} // namespace tools 
-#endif // !dTOOLS_REMOVE_REFERENCE_USED_
-
 
 //==============================================================================
 //=== remove_extent ============================================================
@@ -216,11 +196,13 @@ namespace tools
 {
     namespace detail
     {
-        template <class t> struct is_rvalue_reference_
+        template <class t> 
+        struct is_rvalue_reference_
             { enum { value = false }; };
 
         #ifdef dHAS_RVALUE_REFERENCES
-        template <class t> struct is_rvalue_reference_<t&&>
+        template <class t>
+        struct is_rvalue_reference_<t&&>
             { enum { value = true }; };
         #endif
 

@@ -1,13 +1,14 @@
 // [2021y-04m-29d][12:21:22] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_BEGIN__
 #define dTEST_COMPONENT tools, types, sfinae, signature
 #define dTEST_METHOD begin
 #define dTEST_TAG new
 
-// msvc2013 has bug: 
+// msvñ2008 - msvc2013 has bug: 
 //  - ignored private/protected access
+//  - derived not worked
 
 #include <tools/features.hpp>
 #ifndef dHAS_CPP11 

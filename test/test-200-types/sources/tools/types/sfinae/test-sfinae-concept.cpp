@@ -2,9 +2,7 @@
 // [2021y-04m-21d][14:03:07] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE
-
-#ifdef TEST_TOOLS_SFINAE
+#ifdef TEST_TOOLS_SFINAE_CONCEPT
 
 #define dTEST_COMPONENT tools, types, sfinae
 #define dTEST_METHOD concept
@@ -225,5 +223,5 @@ TEST_COMPONENT(004)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_VOID_T
+#endif // !TEST_TOOLS_SFINAE_CONCEPT
 

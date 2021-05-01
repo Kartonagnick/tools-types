@@ -4,10 +4,9 @@
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, signature
 #define dTEST_METHOD begin
-#define dTEST_TAG new
+#define dTEST_TAG tdd
 
 #include <tools/features.hpp>
-#ifdef dHAS_CPP11
 
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::signature;
@@ -44,17 +43,14 @@ namespace
 //----------------------------------
     struct Maket;
     struct Dummy {};
-
     struct Mutable 
     {
         void begin();
     };
-
     struct Const
     {
         void begin() const;
     };
-
     struct Container
     {
         void begin() ;
@@ -71,14 +67,12 @@ namespace
     public:
         PMutable();
     };
-
     class PConst
     {
         void begin() const;
     public:
         PConst();
     };
-
     class PContainer
     {
         void begin() ;
@@ -90,6 +84,48 @@ namespace
     struct DPMutable   : PMutable   {};
     struct DPConst     : PConst     {};
     struct DPContainer : PContainer {};
+//----------------------------------
+//----------------------------------
+    struct RMutable 
+    {
+        RMutable begin();
+    };
+    struct RConst 
+    {
+        RConst begin() const;
+    };
+    struct RContainer
+    {
+        RContainer begin() ;
+        RContainer begin() const;
+    };
+    struct DRMutable   : RMutable   {};
+    struct DRConst     : RConst     {};
+    struct DRContainer : RContainer {};
+//----------------------------------
+    class PRMutable 
+    {
+        PRMutable begin();
+    public:
+        PRMutable();
+    };
+    class PRConst
+    {
+        PRConst begin() const;
+    public:
+        PRConst();
+    };
+    class PRContainer
+    {
+        PRContainer begin() ;
+        PRContainer begin() const;
+    public:
+        PRContainer();
+    };
+//----------------------------------
+    struct DPRMutable   : PRMutable   {};
+    struct DPRConst     : PRConst     {};
+    struct DPRContainer : PRContainer {};
 //----------------------------------
 
 } // namespace
@@ -137,7 +173,6 @@ TEST_COMPONENT(001)
     make_rval(Mutable&&   , void(Mutable::*)()   ,  true    );
     make_rval(Container&& , void(Container::*)() ,  true    );
 }
-
 TEST_COMPONENT(002)
 {
     //       |   type     | signature                 | expected |
@@ -170,7 +205,6 @@ TEST_COMPONENT(003)
     make_rval(const Mutable&&   , void(Mutable::*)()   ,  true    );
     make_rval(const Container&& , void(Container::*)() ,  true    );
 }
-
 TEST_COMPONENT(004)
 {
     //       |   type           | signature                 | expected |
@@ -187,7 +221,12 @@ TEST_COMPONENT(004)
     make_rval(const Container&& , void(Container::*)() const,  true    );
 }
 
-// --- non-const derived
+//==============================================================================
+//==============================================================================
+
+#ifdef dHAS_CPP11
+
+// --- derived non-const
 TEST_COMPONENT(005)
 {
     //       |   type      | signature             | expected |
@@ -219,7 +258,7 @@ TEST_COMPONENT(006)
     make_rval(DContainer&& , void(DContainer::*)() const ,  true    );
 }
 
-// --- const derived
+// --- derived const
 TEST_COMPONENT(007)
 {
     //       |   type            | signature             | expected |
@@ -235,7 +274,6 @@ TEST_COMPONENT(007)
     make_rval(const DMutable&&   , void(DMutable::*)()   ,  true    );
     make_rval(const DContainer&& , void(DContainer::*)() ,  true    );
 }
-
 TEST_COMPONENT(008)
 {
     //       |   type            | signature                  | expected |
@@ -252,7 +290,7 @@ TEST_COMPONENT(008)
     make_rval(const DContainer&& , void(DContainer::*)() const,  true    );
 }
 
-// --- non-const private
+// --- private non-const 
 TEST_COMPONENT(009)
 {
     //       |   type      | signature             | expected |
@@ -284,7 +322,7 @@ TEST_COMPONENT(010)
     make_rval(PContainer&& , void(PContainer::*)() const ,  false   );
 }
 
-// --- const private
+// --- private const 
 TEST_COMPONENT(011)
 {
     //       |   type            | signature             | expected |
@@ -316,7 +354,7 @@ TEST_COMPONENT(012)
     make_rval(const PContainer&& , void(PContainer::*)() const ,  false   );
 }
 
-// --- non-const derived private 
+// --- derived private non-const  
 TEST_COMPONENT(013)
 {
     //       |   type       | signature              | expected |
@@ -348,7 +386,7 @@ TEST_COMPONENT(014)
     make_rval(DPContainer&& , void(DPContainer::*)() const ,  false   );
 }
 
-// --- const derived private 
+// --- derived private const 
 TEST_COMPONENT(015)
 {
     //       |   type             | signature              | expected |
@@ -382,5 +420,264 @@ TEST_COMPONENT(016)
 
 //==============================================================================
 //==============================================================================
+
+// --- recursieve non-const
+TEST_COMPONENT(017)
+{
+    //       |   type      | signature                   | expected |
+    make_test(RConst       , RConst(RConst::*)()         ,  false   );
+    make_test(RMutable     , RMutable(RMutable::*)()     ,  true    );
+    make_test(RContainer   , RContainer(RContainer::*)() ,  true    );
+              
+    make_test(RConst&      , RConst(RConst::*)()         ,  false   );
+    make_test(RMutable&    , RMutable(RMutable::*)()     ,  true    );
+    make_test(RContainer&  , RContainer(RContainer::*)() ,  true    );
+                                  
+    make_rval(RConst&&     , RConst(RConst::*)()         ,  false   );
+    make_rval(RMutable&&   , RMutable(RMutable::*)()     ,  true    );
+    make_rval(RContainer&& , RContainer(RContainer::*)() ,  true    );
+}
+TEST_COMPONENT(018)
+{ 
+    //       |   type      | signature                         | expected |
+    make_test(RConst       , RConst(RConst::*)()         const ,  true    );
+    make_test(RMutable     , RMutable(RMutable::*)()     const ,  false   );
+    make_test(RContainer   , RContainer(RContainer::*)() const ,  true    );
+                                                          
+    make_test(RConst&      , RConst(RConst::*)()         const ,  true    );
+    make_test(RMutable&    , RMutable(RMutable::*)()     const ,  false   );
+    make_test(RContainer&  , RContainer(RContainer::*)() const ,  true    );
+                                                         
+    make_rval(RConst&&     , RConst(RConst::*)()         const ,  true    );
+    make_rval(RMutable&&   , RMutable(RMutable::*)()     const ,  false   );
+    make_rval(RContainer&& , RContainer(RContainer::*)() const ,  true    );
+}
+
+// --- recursieve const
+TEST_COMPONENT(019)
+{
+    //       |   type            | signature                   | expected |
+    make_test(const RConst       , RConst(RConst::*)()         ,  false   );
+    make_test(const RMutable     , RMutable(RMutable::*)()     ,  true    );
+    make_test(const RContainer   , RContainer(RContainer::*)() ,  true    );
+              
+    make_test(const RConst&      , RConst(RConst::*)()         ,  false   );
+    make_test(const RMutable&    , RMutable(RMutable::*)()     ,  true    );
+    make_test(const RContainer&  , RContainer(RContainer::*)() ,  true    );
+              
+    make_rval(const RConst&&     , RConst(RConst::*)()         ,  false   );
+    make_rval(const RMutable&&   , RMutable(RMutable::*)()     ,  true    );
+    make_rval(const RContainer&& , RContainer(RContainer::*)() ,  true    );
+}
+TEST_COMPONENT(020)
+{ 
+    //       |   type            | signature                         | expected |
+    make_test(const RConst       , RConst(RConst::*)()         const ,  true    );
+    make_test(const RMutable     , RMutable(RMutable::*)()     const ,  false   );
+    make_test(const RContainer   , RContainer(RContainer::*)() const ,  true    );
+                                                          
+    make_test(const RConst&      , RConst(RConst::*)()         const ,  true    );
+    make_test(const RMutable&    , RMutable(RMutable::*)()     const ,  false   );
+    make_test(const RContainer&  , RContainer(RContainer::*)() const ,  true    );
+              
+    make_rval(const RConst&&     , RConst(RConst::*)()         const ,  true    );
+    make_rval(const RMutable&&   , RMutable(RMutable::*)()     const ,  false   );
+    make_rval(const RContainer&& , RContainer(RContainer::*)() const ,  true    );
+}
+
+// --- derived recursieve non-const
+TEST_COMPONENT(021)
+{
+    //       |   type       | signature                    | expected |
+    make_test(DRConst       , RConst(DRConst::*)()         ,  false   );
+    make_test(DRMutable     , RMutable(DRMutable::*)()     ,  true    );
+    make_test(DRContainer   , RContainer(DRContainer::*)() ,  true    );
+                                 
+    make_test(DRConst&      , RConst(DRConst::*)()         ,  false   );
+    make_test(DRMutable&    , RMutable(DRMutable::*)()     ,  true    );
+    make_test(DRContainer&  , RContainer(DRContainer::*)() ,  true    );
+    
+    make_rval(DRConst&&     , RConst(DRConst::*)()         ,  false   );
+    make_rval(DRMutable&&   , RMutable(DRMutable::*)()     ,  true    );
+    make_rval(DRContainer&& , RContainer(DRContainer::*)() ,  true    );
+}
+TEST_COMPONENT(022)
+{
+    //       |   type       | signature                          | expected |
+    make_test(DRConst       , RConst(DRConst::*)()         const ,  true    );
+    make_test(DRMutable     , RMutable(DRMutable::*)()     const ,  false   );
+    make_test(DRContainer   , RContainer(DRContainer::*)() const ,  true    );
+                              
+    make_test(DRConst&      , RConst(DRConst::*)()         const ,  true    );
+    make_test(DRMutable&    , RMutable(DRMutable::*)()     const ,  false   );
+    make_test(DRContainer&  , RContainer(DRContainer::*)() const ,  true    );
+                              
+    make_rval(DRConst&&     , RConst(DRConst::*)()         const ,  true    );
+    make_rval(DRMutable&&   , RMutable(DRMutable::*)()     const ,  false   );
+    make_rval(DRContainer&& , RContainer(DRContainer::*)() const ,  true    );
+}
+
+// --- derived recursieve const
+TEST_COMPONENT(023)
+{
+    //       |   type             | signature                    | expected |
+    make_test(const DRConst       , RConst(DRConst::*)()         ,  false   );
+    make_test(const DRMutable     , RMutable(DRMutable::*)()     ,  true    );
+    make_test(const DRContainer   , RContainer(DRContainer::*)() ,  true    );
+                                 
+    make_test(const DRConst&      , RConst(DRConst::*)()         ,  false   );
+    make_test(const DRMutable&    , RMutable(DRMutable::*)()     ,  true    );
+    make_test(const DRContainer&  , RContainer(DRContainer::*)() ,  true    );
+              
+    make_rval(const DRConst&&     , RConst(DRConst::*)()         ,  false   );
+    make_rval(const DRMutable&&   , RMutable(DRMutable::*)()     ,  true    );
+    make_rval(const DRContainer&& , RContainer(DRContainer::*)() ,  true    );
+}
+TEST_COMPONENT(024)
+{
+    //       |   type             | signature                          | expected |
+    make_test(const DRConst       , RConst(DRConst::*)()         const ,  true    );
+    make_test(const DRMutable     , RMutable(DRMutable::*)()     const ,  false   );
+    make_test(const DRContainer   , RContainer(DRContainer::*)() const ,  true    );
+                              
+    make_test(const DRConst&      , RConst(DRConst::*)()         const ,  true    );
+    make_test(const DRMutable&    , RMutable(DRMutable::*)()     const ,  false   );
+    make_test(const DRContainer&  , RContainer(DRContainer::*)() const ,  true    );
+              
+    make_rval(const DRConst&&     , RConst(DRConst::*)()         const ,  true    );
+    make_rval(const DRMutable&&   , RMutable(DRMutable::*)()     const ,  false   );
+    make_rval(const DRContainer&& , RContainer(DRContainer::*)() const ,  true    );
+}
+
+// --- private recursieve non-const 
+TEST_COMPONENT(025)
+{
+    //       |   type       | signature                    | expected |
+    make_test(PRConst       , PConst(PRConst::*)()         ,  false   );
+    make_test(PRMutable     , PMutable(PRMutable::*)()     ,  false   );
+    make_test(PRContainer   , PContainer(PRContainer::*)() ,  false   );
+                                    
+    make_test(PRConst&      , PConst(PRConst::*)()         ,  false   );
+    make_test(PRMutable&    , PMutable(PRMutable::*)()     ,  false   );
+    make_test(PRContainer&  , PContainer(PRContainer::*)() ,  false   );
+                                    
+    make_rval(PRConst&&     , PConst(PRConst::*)()         ,  false   );
+    make_rval(PRMutable&&   , PMutable(PRMutable::*)()     ,  false   );
+    make_rval(PRContainer&& , PContainer(PRContainer::*)() ,  false   );
+}
+TEST_COMPONENT(026)
+{
+    //       |   type       | signature                          | expected |
+    make_test(PRConst       , PConst(PRConst::*)()         const ,  false   );
+    make_test(PRMutable     , PMutable(PRMutable::*)()     const ,  false   );
+    make_test(PRContainer   , PContainer(PRContainer::*)() const ,  false   );
+                                                                 
+    make_test(PRConst&      , PConst(PRConst::*)()         const ,  false   );
+    make_test(PRMutable&    , PMutable(PRMutable::*)()     const ,  false   );
+    make_test(PRContainer&  , PContainer(PRContainer::*)() const ,  false   );
+                                                                 
+    make_rval(PRConst&&     , PConst(PRConst::*)()         const ,  false   );
+    make_rval(PRMutable&&   , PMutable(PRMutable::*)()     const ,  false   );
+    make_rval(PRContainer&& , PContainer(PRContainer::*)() const ,  false   );
+}
+
+// --- private recursieve non-const 
+TEST_COMPONENT(027)
+{
+    //       |   type             | signature                    | expected |
+    make_test(const PRConst       , PConst(PRConst::*)()         ,  false   );
+    make_test(const PRMutable     , PMutable(PRMutable::*)()     ,  false   );
+    make_test(const PRContainer   , PContainer(PRContainer::*)() ,  false   );
+                                    
+    make_test(const PRConst&      , PConst(PRConst::*)()         ,  false   );
+    make_test(const PRMutable&    , PMutable(PRMutable::*)()     ,  false   );
+    make_test(const PRContainer&  , PContainer(PRContainer::*)() ,  false   );
+              
+    make_rval(const PRConst&&     , PConst(PRConst::*)()         ,  false   );
+    make_rval(const PRMutable&&   , PMutable(PRMutable::*)()     ,  false   );
+    make_rval(const PRContainer&& , PContainer(PRContainer::*)() ,  false   );
+}
+TEST_COMPONENT(028)
+{
+    //       |   type             | signature                          | expected |
+    make_test(const PRConst       , PConst(PRConst::*)()         const ,  false   );
+    make_test(const PRMutable     , PMutable(PRMutable::*)()     const ,  false   );
+    make_test(const PRContainer   , PContainer(PRContainer::*)() const ,  false   );
+                                                                 
+    make_test(const PRConst&      , PConst(PRConst::*)()         const ,  false   );
+    make_test(const PRMutable&    , PMutable(PRMutable::*)()     const ,  false   );
+    make_test(const PRContainer&  , PContainer(PRContainer::*)() const ,  false   );
+              
+    make_rval(const PRConst&&     , PConst(PRConst::*)()         const ,  false   );
+    make_rval(const PRMutable&&   , PMutable(PRMutable::*)()     const ,  false   );
+    make_rval(const PRContainer&& , PContainer(PRContainer::*)() const ,  false   );
+}
+
+// --- derived private recursieve non-const  
+TEST_COMPONENT(029)
+{
+    //       |   type        | signature                      | expected |
+    make_test(DPRConst       , PRConst(DPRConst::*)()         ,  false   );
+    make_test(DPRMutable     , PRMutable(DPRMutable::*)()     ,  false   );
+    make_test(DPRContainer   , PRContainer(DPRContainer::*)() ,  false   );
+                
+    make_test(DPRConst&      , PRConst(DPRConst::*)()         ,  false   );
+    make_test(DPRMutable&    , PRMutable(DPRMutable::*)()     ,  false   );
+    make_test(DPRContainer&  , PRContainer(DPRContainer::*)() ,  false   );
+                
+    make_rval(DPRConst&&     , PRConst(DPRConst::*)()         ,  false   );
+    make_rval(DPRMutable&&   , PRMutable(DPRMutable::*)()     ,  false   );
+    make_rval(DPRContainer&& , PRContainer(DPRContainer::*)() ,  false   );
+}
+TEST_COMPONENT(030)
+{
+    //       |   type        | signature                            | expected |
+    make_test(DPRConst       , PRConst(DPRConst::*)()         const ,  false   );
+    make_test(DPRMutable     , PRMutable(DPRMutable::*)()     const ,  false   );
+    make_test(DPRContainer   , PRContainer(DPRContainer::*)() const ,  false   );
+
+    make_test(DPRConst&      , PRConst(DPRConst::*)()         const ,  false   );
+    make_test(DPRMutable&    , PRMutable(DPRMutable::*)()     const ,  false   );
+    make_test(DPRContainer&  , PRContainer(DPRContainer::*)() const ,  false   );
+
+    make_rval(DPRConst&&     , PRConst(DPRConst::*)()         const ,  false   );
+    make_rval(DPRMutable&&   , PRMutable(DPRMutable::*)()     const ,  false   );
+    make_rval(DPRContainer&& , PRContainer(DPRContainer::*)() const ,  false   );
+}
+
+// --- derived private recursieve non-const  
+TEST_COMPONENT(031)
+{
+    //       |   type              | signature                      | expected |
+    make_test(const DPRConst       , PRConst(DPRConst::*)()         ,  false   );
+    make_test(const DPRMutable     , PRMutable(DPRMutable::*)()     ,  false   );
+    make_test(const DPRContainer   , PRContainer(DPRContainer::*)() ,  false   );
+              
+    make_test(const DPRConst&      , PRConst(DPRConst::*)()         ,  false   );
+    make_test(const DPRMutable&    , PRMutable(DPRMutable::*)()     ,  false   );
+    make_test(const DPRContainer&  , PRContainer(DPRContainer::*)() ,  false   );
+                
+    make_rval(const DPRConst&&     , PRConst(DPRConst::*)()         ,  false   );
+    make_rval(const DPRMutable&&   , PRMutable(DPRMutable::*)()     ,  false   );
+    make_rval(const DPRContainer&& , PRContainer(DPRContainer::*)() ,  false   );
+}
+TEST_COMPONENT(032)
+{
+    //       |   type              | signature                            | expected |
+    make_test(const DPRConst       , PRConst(DPRConst::*)()         const ,  false   );
+    make_test(const DPRMutable     , PRMutable(DPRMutable::*)()     const ,  false   );
+    make_test(const DPRContainer   , PRContainer(DPRContainer::*)() const ,  false   );
+              
+    make_test(const DPRConst&      , PRConst(DPRConst::*)()         const ,  false   );
+    make_test(const DPRMutable&    , PRMutable(DPRMutable::*)()     const ,  false   );
+    make_test(const DPRContainer&  , PRContainer(DPRContainer::*)() const ,  false   );
+              
+    make_rval(const DPRConst&&     , PRConst(DPRConst::*)()         const ,  false   );
+    make_rval(const DPRMutable&&   , PRMutable(DPRMutable::*)()     const ,  false   );
+    make_rval(const DPRContainer&& , PRContainer(DPRContainer::*)() const ,  false   );
+}
 #endif // !dHAS_CPP11
+
+//==============================================================================
+//==============================================================================
 #endif // !TEST_TOOLS_SFINAE_BEGIN
