@@ -6,134 +6,70 @@
 #define dTEST_METHOD begin
 #define dTEST_TAG tdd
 
+#include <tools/features.hpp>
 
-// #include <tools/features.hpp>
-// #ifdef dHAS_CPP11
+#ifdef dHAS_CPP11
+    // msvc2015 or newer 
+    #define dTEST_SFINAE_REGULAR       1
+    #define dTEST_SFINAE_DERIVED       1
+    #define dTEST_SFINAE_PRIVATE       1
+    #define dTEST_SFINAE_DPRVATE       1
 
-#include <tools/types/sfinae.hpp>
-namespace me = ::tools::sfinae::available;
-//==============================================================================
-//==============================================================================
-namespace
-{
-    #define dexpression(type, expected) \
-        me::begin<type>::value == expected
+    #define dTEST_SFINAE_RECURSIEVE    1
+    #define dTEST_SFINAE_DRECURSIEVE   1
+    #define dTEST_SFINAE_PRECURSIEVE   1
+    #define dTEST_SFINAE_DPRECURSIEVE  1
 
-    #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, expected)                     \
-            static_assert(                                    \
-                dexpression(type, expected),                  \
-                "tools::sfinae::available::begin<" #type "> " \
-                "must be '" #expected "'"                     \
-            )
-    #else
-        #define make_test(type, expected)   \
-            dSTATIC_CHECK(                  \
-                ERROR_MUST_BE_##expected,   \
-                dexpression(type, expected) \
-            )
-    #endif
+    #define dTEST_SFINAE_UNSUITABLE    1
+    #define dTEST_SFINAE_DUNSUITABLE   1
+    #define dTEST_SFINAE_PUNSUITABLE   1
+    #define dTEST_SFINAE_DPUNSUITABLE  1
+#elif defined(dHAS_VARIADIC_TEMPLATE) 
+    // msvc2013
+    //   - has bug:
+    //     - ignore private/protected access
 
-    #ifdef dHAS_RVALUE_REFERENCES
-        #define make_rval(type, expected) \
-            make_test(type, expected)
-    #else
-        #define make_rval(type, expected) \
-            void()
-    #endif
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
+                                          
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
 
-//----------------------------------
-    struct Maket;
-    struct Dummy {};
-    struct Mutable
-    {
-        void begin(); 
-    };
-    struct Const 
-    {
-        void begin() const;
-    };
-    struct Container
-    {
-        void begin() ;
-        void begin() const;
-    };
-//----------------------------------
-    struct DMutable   : Mutable   {};
-    struct DConst     : Const     {};
-    struct DContainer : Container {};
-//----------------------------------
-    class PMutable 
-    {
-        void begin();
-    public:
-        PMutable();
-    };
-    class PConst
-    {
-        void begin() const;
-    public:
-        PConst();
-    };
-    class PContainer
-    {
-        void begin() ;
-        void begin() const;
-    public:
-        PContainer();
-    };
-//----------------------------------
-    struct DPMutable   : PMutable   {};
-    struct DPConst     : PConst     {};
-    struct DPContainer : PContainer {};
-//----------------------------------
-    struct RMutable 
-    {
-        RMutable begin();
-    };
-    struct RConst 
-    {
-        RConst begin() const;
-    };
-    struct RContainer
-    {
-        RContainer begin() ;
-        RContainer begin() const;
-    };
-    struct DRMutable   : RMutable   {};
-    struct DRConst     : RConst     {};
-    struct DRContainer : RContainer {};
-//----------------------------------
-    class PRMutable 
-    {
-        PRMutable begin();
-    public:
-        PRMutable();
-    };
-    class PRConst
-    {
-        PRConst begin() const;
-    public:
-        PRConst();
-    };
-    class PRContainer
-    {
-        PRContainer begin() ;
-        PRContainer begin() const;
-    public:
-        PRContainer();
-    };
-//----------------------------------
-    struct DPRMutable   : PRMutable   {};
-    struct DPRConst     : PRConst     {};
-    struct DPRContainer : PRContainer {};
-//----------------------------------
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
+#elif defined(dHAS_TYPE_TRAITS) 
+    // msvc2013 - msvc2010
+    #define dTEST_SFINAE_REGULAR       1
+    #define dTEST_SFINAE_DERIVED       1
+    // #define dTEST_SFINAE_PRIVATE       1
+    // #define dTEST_SFINAE_DPRVATE       1
 
-} // namespace
+    #define dTEST_SFINAE_RECURSIEVE    1
+    #define dTEST_SFINAE_DRECURSIEVE   1
+    // #define dTEST_SFINAE_PRECURSIEVE   1
+    // #define dTEST_SFINAE_DPRECURSIEVE  1
+
+    #define dTEST_SFINAE_UNSUITABLE    1
+    #define dTEST_SFINAE_DUNSUITABLE   1
+    #define dTEST_SFINAE_PUNSUITABLE   1
+    #define dTEST_SFINAE_DPUNSUITABLE  1
+#else
+    // msvc20008 or older
+#endif
+
+#include "test-begin.hpp"
+#include "test-avail.hpp"
 
 //==============================================================================
 //==============================================================================
-// --- simple false
+#ifdef dTEST_SFINAE_REGULAR
+// --- simple: false
 TEST_COMPONENT(000)
 {
     //       |   type   | expected |
@@ -191,10 +127,11 @@ TEST_COMPONENT(002)
     make_rval(const Mutable&&   ,  false   );
     make_rval(const Container&& ,  true    );
 }
+#endif // dTEST_SFINAE_REGULAR
 
 //==============================================================================
 //==============================================================================
-
+#ifdef dTEST_SFINAE_DERIVED
 // --- derived non-const
 TEST_COMPONENT(003)
 {
@@ -228,7 +165,11 @@ TEST_COMPONENT(004)
     make_rval(const DMutable&&   ,  false   );
     make_rval(const DContainer&& ,  true    );
 }
+#endif  // dTEST_SFINAE_DERIVED
 
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PRIVATE
 // --- private non-const
 TEST_COMPONENT(005)
 {
@@ -262,7 +203,11 @@ TEST_COMPONENT(006)
     make_rval(const PMutable&&   ,  false   );
     make_rval(const PContainer&& ,  false   );
 }
+#endif // dTEST_SFINAE_PRIVATE
 
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPRVATE
 // --- derived private  non-const
 TEST_COMPONENT(007)
 {
@@ -296,10 +241,14 @@ TEST_COMPONENT(008)
     make_rval(const DPMutable&&   ,  false   );
     make_rval(const DPContainer&& ,  false   );
 }
+#endif // dTEST_SFINAE_DPRVATE
+
+//..............................................................................
+//..............................................................................
 
 //==============================================================================
 //==============================================================================
-
+#ifdef dTEST_SFINAE_RECURSIEVE
 // --- recursieve non-const
 TEST_COMPONENT(009)
 {
@@ -334,6 +283,10 @@ TEST_COMPONENT(010)
     make_rval(const RContainer&& ,   true   );
 }
 
+#endif // dTEST_SFINAE_RECURSIEVE
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DRECURSIEVE
 // --- derived recursieve non-const
 TEST_COMPONENT(011)
 {
@@ -367,7 +320,11 @@ TEST_COMPONENT(012)
     make_rval(const DRMutable&&   ,   false  );
     make_rval(const DRContainer&& ,   true   );
 }
+#endif // dTEST_SFINAE_DRECURSIEVE
 
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PRECURSIEVE
 // --- private recursieve non-const
 TEST_COMPONENT(013)
 {
@@ -389,7 +346,7 @@ TEST_COMPONENT(013)
 TEST_COMPONENT(014)
 {
     //       |   type             | expected |
-B    make_test(const PRConst       ,  false   );
+    make_test(const PRConst       ,  false   );
     make_test(const PRMutable     ,  false   );
     make_test(const PRContainer   ,  false   );
                                        
@@ -401,7 +358,11 @@ B    make_test(const PRConst       ,  false   );
     make_rval(const PRMutable&&   ,  false   );
     make_rval(const PRContainer&& ,  false   );
 }
+#endif // dTEST_SFINAE_PRECURSIEVE
 
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPRECURSIEVE
 // --- derived private recursieve non-const
 TEST_COMPONENT(015)
 {
@@ -435,9 +396,146 @@ TEST_COMPONENT(016)
     make_rval(const DPRMutable&&   ,  false   );
     make_rval(const DPRContainer&& ,  false   );
 }
+#endif // dTEST_SFINAE_DPRECURSIEVE
+
+//..............................................................................
+//..............................................................................
 
 //==============================================================================
 //==============================================================================
+#ifdef dTEST_SFINAE_UNSUITABLE
+// --- unsuitable non-const
+TEST_COMPONENT(017)
+{
+    //       |   type             | expected |
+    make_test(UnsuitableConst     ,  false   );
+    make_test(UnsuitableMutable   ,  false   );
+    make_test(Unsuitable          ,  false   );
+                                            
+    make_test(UnsuitableConst&    ,  false   );
+    make_test(UnsuitableMutable&  ,  false   );
+    make_test(Unsuitable&         ,  false   );
+                                            
+    make_test(UnsuitableConst&&   ,  false   );
+    make_test(UnsuitableMutable&& ,  false   );
+    make_test(Unsuitable&&        ,  false   );
+}
+TEST_COMPONENT(018)
+{
+    //       |   type                   | expected |
+    make_test(const UnsuitableConst     ,  false   );
+    make_test(const UnsuitableMutable   ,  false   );
+    make_test(const Unsuitable          ,  false   );
 
-//#endif // !#ifdef dHAS_CPP11
+    make_test(const UnsuitableConst&    ,  false   );
+    make_test(const UnsuitableMutable&  ,  false   );
+    make_test(const Unsuitable&         ,  false   );
+                              
+    make_test(const UnsuitableConst&&   ,  false   );
+    make_test(const UnsuitableMutable&& ,  false   );
+    make_test(const Unsuitable&&        ,  false   );
+}
+#endif // dTEST_SFINAE_UNSUITABLE
+
+#ifdef dTEST_SFINAE_DUNSUITABLE
+TEST_COMPONENT(019)
+{ 
+    //       |   type              | expected |
+    make_test(DUnsuitableConst     ,  false   );
+    make_test(DUnsuitableMutable   ,  false   );
+    make_test(DUnsuitable          ,  false   );
+                                            
+    make_test(DUnsuitableConst&    ,  false   );
+    make_test(DUnsuitableMutable&  ,  false   );
+    make_test(DUnsuitable&         ,  false   );
+                                            
+    make_rval(DUnsuitableConst&&   ,  false   );
+    make_rval(DUnsuitableMutable&& ,  false   );
+    make_rval(DUnsuitable&&        ,  false   );
+}
+TEST_COMPONENT(020)
+{ 
+    //       |   type                    | expected |
+    make_test(const DUnsuitableConst     ,  false   );
+    make_test(const DUnsuitableMutable   ,  false   );
+    make_test(const DUnsuitable          ,  false   );
+              
+    make_test(const DUnsuitableConst&    ,  false   );
+    make_test(const DUnsuitableMutable&  ,  false   );
+    make_test(const DUnsuitable&         ,  false   );
+                                            
+    make_rval(const DUnsuitableConst&&   ,  false   );
+    make_rval(const DUnsuitableMutable&& ,  false   );
+    make_rval(const DUnsuitable&&        ,  false   );
+}
+#endif // dTEST_SFINAE_DUNSUITABLE
+
+#ifdef dTEST_SFINAE_PUNSUITABLE
+TEST_COMPONENT(021)
+{ 
+    //       |   type              | expected |
+    make_test(PUnsuitableConst     ,  false   );
+    make_test(PUnsuitableMutable   ,  false   );
+    make_test(PUnsuitable          ,  false   );
+                                           
+    make_test(PUnsuitableConst&    ,  false   );
+    make_test(PUnsuitableMutable&  ,  false   );
+    make_test(PUnsuitable&         ,  false   );
+              
+    make_rval(PUnsuitableConst&&   ,  false   );
+    make_rval(PUnsuitableMutable&& ,  false   );
+    make_rval(PUnsuitable&&        ,  false   );
+}
+TEST_COMPONENT(022)
+{ 
+    //       |   type                    | expected |
+    make_test(const PUnsuitableConst     ,  false   );
+    make_test(const PUnsuitableMutable   ,  false   );
+    make_test(const PUnsuitable          ,  false   );
+                    
+    make_test(const PUnsuitableConst&    ,  false   );
+    make_test(const PUnsuitableMutable&  ,  false   );
+    make_test(const PUnsuitable&         ,  false   );
+                    
+    make_rval(const PUnsuitableConst&&   ,  false   );
+    make_rval(const PUnsuitableMutable&& ,  false   );
+    make_rval(const PUnsuitable&&        ,  false   );
+}
+#endif // dTEST_SFINAE_PUNSUITABLE
+
+#ifdef dTEST_SFINAE_DPUNSUITABLE
+TEST_COMPONENT(023)
+{ 
+    //       |   type              | expected |
+    make_test(DPUnsuitableConst     ,  false   );
+    make_test(DPUnsuitableMutable   ,  false   );
+    make_test(DPUnsuitable          ,  false   );
+              
+    make_test(DPUnsuitableConst&    ,  false   );
+    make_test(DPUnsuitableMutable&  ,  false   );
+    make_test(DPUnsuitable&         ,  false   );
+              
+    make_rval(DPUnsuitableConst&&   ,  false   );
+    make_rval(DPUnsuitableMutable&& ,  false   );
+    make_rval(DPUnsuitable&&        ,  false   );
+}
+TEST_COMPONENT(024)
+{ 
+    //       |   type                    | expected |
+    make_test(const DPUnsuitableConst     ,  false   );
+    make_test(const DPUnsuitableMutable   ,  false   );
+    make_test(const DPUnsuitable          ,  false   );
+                    
+    make_test(const DPUnsuitableConst&    ,  false   );
+    make_test(const DPUnsuitableMutable&  ,  false   );
+    make_test(const DPUnsuitable&         ,  false   );
+                    
+    make_rval(const DPUnsuitableConst&&   ,  false   );
+    make_rval(const DPUnsuitableMutable&& ,  false   );
+    make_rval(const DPUnsuitable&&        ,  false   );
+}
+#endif // dTEST_SFINAE_PUNSUITABLE
+
+//==============================================================================
+//==============================================================================
 #endif // !TEST_TOOLS_SFINAE_BEGIN
