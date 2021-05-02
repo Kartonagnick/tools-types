@@ -41,7 +41,7 @@ namespace
         struct DContainer : Container {};
     #endif // dTEST_SFINAE_DERIVED
 
-    #ifdef dTEST_SFINAE_PRIVATE
+    #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
             void begin();
@@ -96,7 +96,7 @@ namespace
         struct DRContainer : RContainer {};
     #endif // dTEST_SFINAE_DRECURSIEVE
 
-    #ifdef dTEST_SFINAE_PRECURSIEVE
+    #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
             PRMutable begin();
@@ -151,7 +151,7 @@ namespace
         struct DUnsuitable        : Unsuitable        {};
     #endif // dTEST_SFINAE_DUNSUITABLE
 
-    #ifdef dTEST_SFINAE_PUNSUITABLE
+    #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
              void begin(int); 

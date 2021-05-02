@@ -18,23 +18,9 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
-    /*
-    template<class a, class b, bool v = !::std::is_same<a,b>::value >
-    struct help;
-
-    template<class a, class b>
-    struct help<a, b, false> 
-        { using type = ::std::true_type;};
-        */
-
-
     template<class a, class b>
     struct help 
         { using type = ::std::true_type;};
-
-    template<class a> 
-    struct help<a, a>
-        { using type = ::std::false_type; };
 
     namespace detail
     {

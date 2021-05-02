@@ -26,22 +26,25 @@
     #define dTEST_SFINAE_DPUNSUITABLE  1
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
-    #define dTEST_SFINAE_REGULAR       1
-    #define dTEST_SFINAE_DERIVED       1
-    #define dTEST_SFINAE_PRIVATE       1
-    #define dTEST_SFINAE_DPRVATE       1
+    //   - has bug:
+    //     - ignore private/protected access
 
-    #define dTEST_SFINAE_RECURSIEVE    1
-    #define dTEST_SFINAE_DRECURSIEVE   1
-    #define dTEST_SFINAE_PRECURSIEVE   1
-    #define dTEST_SFINAE_DPRECURSIEVE  1
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
+                                          
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
 
-    #define dTEST_SFINAE_UNSUITABLE    1
-    #define dTEST_SFINAE_DUNSUITABLE   1
-    #define dTEST_SFINAE_PUNSUITABLE   1
-    #define dTEST_SFINAE_DPUNSUITABLE  1
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
 #elif defined(dHAS_TYPE_TRAITS) 
-    // msvc2013 - msvc2010:
+    // msvc2013 - msvc2010
 #else
     // msvc20008 or older
 #endif
