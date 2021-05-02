@@ -6,9 +6,8 @@
 #define dTEST_METHOD begin
 #define dTEST_TAG tdd
 
-
-// #include <tools/features.hpp>
-// #ifdef dHAS_CPP11
+#include <tools/features.hpp>
+#ifdef dHAS_CPP11
 
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::available;
@@ -128,7 +127,48 @@ namespace
     struct DPRConst     : PRConst     {};
     struct DPRContainer : PRContainer {};
 //----------------------------------
-
+    struct UnsuitableMutable
+    {
+         void begin(int); 
+    };
+    struct UnsuitableConst
+    {
+         void begin(int) const; 
+    };
+    struct Unsuitable
+    {
+         void begin(int) ; 
+         void begin(int) const; 
+    };
+//----------------------------------
+    struct DUnsuitableMutable : Mutable   {};
+    struct DUnsuitableConst   : Const     {};
+    struct DUnsuitable        : Container {};
+//----------------------------------
+    class PUnsuitableMutable
+    {
+         void begin(int); 
+    public:
+        PUnsuitableMutable();
+    };
+    class PUnsuitableConst
+    {
+         void begin(int) const; 
+    public:
+        PUnsuitableConst();
+    };
+    class PUnsuitable
+    {
+         void begin(int) ; 
+         void begin(int) const; 
+    public:
+        PUnsuitable();
+    };
+//----------------------------------
+    struct DPUnsuitableMutable : PUnsuitableMutable {};
+    struct DPUnsuitableConst   : PUnsuitableConst   {};
+    struct DPUnsuitable        : PUnsuitable        {};
+//----------------------------------
 } // namespace
 
 //==============================================================================
@@ -389,7 +429,7 @@ TEST_COMPONENT(013)
 TEST_COMPONENT(014)
 {
     //       |   type             | expected |
-B    make_test(const PRConst       ,  false   );
+    make_test(const PRConst       ,  false   );
     make_test(const PRMutable     ,  false   );
     make_test(const PRContainer   ,  false   );
                                        
@@ -438,6 +478,5 @@ TEST_COMPONENT(016)
 
 //==============================================================================
 //==============================================================================
-
-//#endif // !#ifdef dHAS_CPP11
+#endif // !#ifdef dHAS_CPP11
 #endif // !TEST_TOOLS_SFINAE_BEGIN
