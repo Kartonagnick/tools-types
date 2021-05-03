@@ -18,25 +18,6 @@
 
 //==============================================================================
 //==============================================================================
-#if 0
-namespace tools
-{
-    struct empty;
-
-    namespace sfinae
-    {
-        typedef char(&no)[1000000];
-
-        template<size_t n> struct sizeof_ 
-            { typedef char(&type)[n]; };
-
-        template<class t> t obj();
-        
-    } // namespace sfinae
-} // namespace tools
-#endif
-//==============================================================================
-//==============================================================================
 
 namespace tools     {
 namespace sfinae    {

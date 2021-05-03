@@ -28,7 +28,7 @@
 //=== [first unit-tests] =======================================================
 namespace
 {
-    //#ifdef dTEST_SFINAE_REGULAR
+    #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
         struct Dummy {};
         struct Mutable { void begin(); };
@@ -38,7 +38,7 @@ namespace
             void begin();
             void begin() const;
         };
-    //#endif // dTEST_SFINAE_REGULAR
+    #endif // dTEST_SFINAE_REGULAR
 
     #ifdef dTEST_SFINAE_DERIVED
         struct DMutable   : Mutable   {};

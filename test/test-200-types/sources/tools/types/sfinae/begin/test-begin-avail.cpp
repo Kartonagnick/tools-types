@@ -89,23 +89,23 @@
 
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
-    // #define dTEST_SFINAE_PRIVATE       0
-    // #define dTEST_SFINAE_DPRVATE       0
+    #define dTEST_SFINAE_PRIVATE          0
+    #define dTEST_SFINAE_DPRVATE          0
 
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
-    // #define dTEST_SFINAE_PRECURSIEVE   0
-    // #define dTEST_SFINAE_DPRECURSIEVE  0
+    #define dTEST_SFINAE_PRECURSIEVE      0
+    #define dTEST_SFINAE_DPRECURSIEVE     0
 
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
-    // #define dTEST_SFINAE_PUNSUITABLE   0
-    // #define dTEST_SFINAE_DPUNSUITABLE  0
+    #define dTEST_SFINAE_PUNSUITABLE      0
+    #define dTEST_SFINAE_DPUNSUITABLE     0
 
     #define dTEST_SFINAE_INT              1
-    // #define dTEST_SFINAE_DINT          1
-    // #define dTEST_SFINAE_PINT          0
-    // #define dTEST_SFINAE_DPINT         0
+    #define dTEST_SFINAE_DINT             1
+    #define dTEST_SFINAE_PINT             0
+    #define dTEST_SFINAE_DPINT            0
 
 #else
     // msvc20008 or older

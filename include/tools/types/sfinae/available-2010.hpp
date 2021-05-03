@@ -291,63 +291,22 @@ namespace available
 {
     namespace detail_begin
     {
-        template<class t> class avail_
-        {
-        public:
-            template <class u> static 
-                decltype_<u, decltype(obj<u>().begin())>
-				check(u*);
-
-            template <class> static
-                ::std::false_type check(...);
-
-            typedef decltype(check<t>(nullptr)) 
-				check_t;
-
-            typedef ::std::is_same<check_t, ::std::false_type>
-                fail_1;
-
-            typedef ::std::is_same<typename check_t::second, int>
-                fail_2;
-
-            enum { invalid_1 = fail_1::value     };
-            enum { invalid_2 = fail_2::value     };
-            enum { fail = invalid_1 || invalid_2 };
-        public:
-            enum { value = !fail };
-        };
-
-        template<class t, class sig> class sig_
-        {
-            template <class u> static 
-                ::std::true_type 
-                check(signature_<sig, &u::begin>* );
-
-            template <class> static 
-                ::std::false_type check(...);
-
-            typedef decltype(check<t>(nullptr))
-                checked;
-        public:
-            enum { value = checked::value };
-        };
-
         template<class t, bool> class impl_
         {
+            dNO_REFERENCE_(t, x);
+            template <class u> static 
+                typename sizeof_< sizeof(obj<u>().begin()) >::type
+                check(u*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<x>(0)) };
         public:
-            enum { isConst = ::std::is_const<t>::value       };
-            enum { Mutab = sig_<t, int(t::*)()>::value       };
-            enum { Const = sig_<t, int(t::*)()const >::value };
-            enum { valid = isConst ? Const : Const || Mutab  };
-            typedef avail_<t> x;
-        public:
-            enum { value = valid || x::value }; 
+            enum { value = sz < sizeof(no) };
         };
 
         template<class t> class impl_<t, false>
         {
         public:
-            enum { value = false }; 
+            enum { value = false };
         };
 
     } // namespace detail_begin
@@ -366,7 +325,8 @@ namespace available
 
     } // namespace detail
 
-    template<class t> class begin
+    template<class t> 
+    class begin
         : dIMPLEMENT_(begin_<t>)
     {};
 
