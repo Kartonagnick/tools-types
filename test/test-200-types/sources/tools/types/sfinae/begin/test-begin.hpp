@@ -17,6 +17,11 @@
 #define dTEST_SFINAE_DUNSUITABLE   1
 #define dTEST_SFINAE_PUNSUITABLE   1
 #define dTEST_SFINAE_DPUNSUITABLE  1
+
+#define dTEST_SFINAE_INT           1
+#define dTEST_SFINAE_DINT          1
+#define dTEST_SFINAE_PINT          1
+#define dTEST_SFINAE_DPINT         1
 #endif
 
 //==============================================================================
@@ -61,7 +66,7 @@ namespace
         public:
             PContainer();
         };
-    #endif // dTEST_SFINAE_PRIVATE
+    #endif // defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
 
     #ifdef dTEST_SFINAE_DPRVATE
         struct DPMutable   : PMutable   {};
@@ -116,7 +121,7 @@ namespace
         public:
             PRContainer();
         };
-    #endif // dTEST_SFINAE_PRECURSIEVE
+    #endif // defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
 
     #ifdef dTEST_SFINAE_DPRECURSIEVE
         struct DPRMutable   : PRMutable   {};
@@ -145,7 +150,7 @@ namespace
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
-    #ifdef dTEST_SFINAE_UNSUITABLE
+    #ifdef dTEST_SFINAE_DUNSUITABLE
         struct DUnsuitableMutable : UnsuitableMutable {};
         struct DUnsuitableConst   : UnsuitableConst   {};
         struct DUnsuitable        : Unsuitable        {};
@@ -171,13 +176,69 @@ namespace
         public:
             PUnsuitable();
         };
-    #endif // dTEST_SFINAE_PUNSUITABLE
+    #endif // defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
 
     #ifdef dTEST_SFINAE_DPUNSUITABLE
         struct DPUnsuitableMutable : PUnsuitableMutable {};
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
+} // namespace
+
+//==============================================================================
+//=== [ return int ] ===========================================================
+namespace
+{
+    #ifdef dTEST_SFINAE_INT
+        struct IntMutable
+        {
+             int begin(); 
+        };
+        struct IntConst
+        {
+             int begin() const; 
+        };
+        struct Int
+        {
+             int begin() ; 
+             int begin() const; 
+        };
+    #endif // dTEST_SFINAE_INT
+
+    #ifdef dTEST_SFINAE_DINT
+        struct DIntMutable : IntMutable {};
+        struct DIntConst   : IntConst   {};
+        struct DInt        : Int        {};
+    #endif // dTEST_SFINAE_DUNSUITABLE
+
+    #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
+        class PIntMutable
+        {
+             int begin(); 
+        public:
+            PIntMutable();
+        };
+        class PIntConst
+        {
+             int begin() const; 
+        public:
+            PIntConst();
+        };
+        class PInt
+        {
+             int begin() ; 
+             int begin() const; 
+        public:
+            PInt();
+        };
+    #endif // defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
+
+    #ifdef dTEST_SFINAE_DPINT
+        struct DPIntMutable : PIntMutable {};
+        struct DPIntConst   : PIntConst   {};
+        struct DPInt        : PInt        {};
+    #endif
+
 } // namespace
 
 //==============================================================================

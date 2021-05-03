@@ -4,9 +4,7 @@
 #ifndef dTOOLS_SFINAE_USED_ 
 #define dTOOLS_SFINAE_USED_ 100 PRE
 
-#include <tools/features.hpp>
-#include <tools/types/traits/no_ref.hpp>
-
+#include <tools/types/sfinae/staff.hpp>
 //==============================================================================
 //==============================================================================
 
@@ -49,10 +47,19 @@
     //     - signature: not worked for derived 
     #include <tools/types/sfinae/available-2013.hpp>
     #include <tools/types/sfinae/signature-2013.hpp>
-#elif defined(dHAS_TYPE_TRAITS) 
-    // msvc2013 - msvc2010:
+#elif defined (dHAS_ENUM_CLASS)
+    // msvc2012:
     //   - used classic sfinae with 'decltype'
     //   - has bugs:
+    //     - ignored private/protected access
+    //     - signature: not worked for derived 
+    #include <tools/types/sfinae/available-2012.hpp>
+    #include <tools/types/sfinae/signature-2010.hpp>
+#elif defined(dHAS_TYPE_TRAITS) 
+    // msvc2010:
+    //   - used classic sfinae with 'decltype'
+    //   - has bugs:
+	//     - invalis sfinea
     //     - ignored private/protected access
     //     - signature: not worked for derived 
     #include <tools/types/sfinae/available-2010.hpp>

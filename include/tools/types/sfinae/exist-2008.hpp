@@ -14,11 +14,6 @@ namespace tools  {
 namespace sfinae {
 namespace exist  {
 
-    #define dNO_REFERENCE_(t,x)              \
-        typedef ::tools::remove_reference<t> \
-            no_ref;                          \
-        typedef typename no_ref::type x
-
     #if _MSC_VER != 1928
     // bug msvc2019: not worked in (Visual Studio 2019 version 16.8, 16.9)
     // workaround: disable compatibility mode 
@@ -55,8 +50,6 @@ namespace exist  {
         __if_exists    (x::begin) { enum { value = 1 }; }
         __if_not_exists(x::begin) { enum { value = 0 }; }
     };                                      
-
-    #undef dNO_REFERENCE_
 
 } // namespace exist
 } // namespace sfinae

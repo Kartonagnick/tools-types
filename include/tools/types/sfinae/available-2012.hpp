@@ -1,4 +1,4 @@
-// [2021y-04m-30d][03:08:52] Idrisov Denis R. 100 PRE
+// [2021y-05m-03d][16:50:15] Idrisov Denis R. 100 PRE
 #pragma once
 #ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
 #define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
@@ -6,7 +6,7 @@
 #include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
-//=== call =====================================================================
+//==============================================================================
 
 namespace tools     {
 namespace sfinae    {
@@ -210,11 +210,10 @@ namespace available {
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t4,t6,t7>)
     {};
-} // namespace available 
 
 //==============================================================================
-//=== dereference ==============================================================
-namespace available {
+//==============================================================================
+
     namespace detail
     {
         template<class t> class dereference_
@@ -222,7 +221,7 @@ namespace available {
             dNO_REFERENCE_(t, x);
             template <class u> static 
                 typename decltype_<u, decltype(*::std::declval<u>())>::type 
-                check(u*);
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -240,19 +239,18 @@ namespace available {
     class dereference
         : dIMPLEMENT_(dereference_<t>)
     {};
-} // namespace available
 
 //==============================================================================
-//=== access ===================================================================
-namespace available {
+//==============================================================================
+
     namespace detail
     {
         template<class t, class i> class access_
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type 
-                check(u*);
+                typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -271,23 +269,24 @@ namespace available {
         : dIMPLEMENT_(access_<t, i>)
     {};
 
-} // namespace available
-
 //==============================================================================
-//=== begin ====================================================================
-namespace available
-{
+//==============================================================================
+
     namespace detail_begin
     {
         template<class t, bool> class impl_
         {
             template <class u> static 
-                typename sizeof_< sizeof(obj<u>().begin()) >::type
+                typename decltype_<u, decltype(::std::declval<u>().begin())>::type
                 check(u*);
-            template <class> static no check(...);
-            enum { sz = sizeof(check<t>(0)) };
+
+            template <class> static
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(0))
+                result;
         public:
-            enum { value = sz < sizeof(no) };
+            enum { value = result::value };
         };
 
         template<class t> class impl_<t, false>
@@ -311,7 +310,7 @@ namespace available
     } // namespace detail
 
     template<class t> 
-    class begin 
+    class begin
         : dIMPLEMENT_(begin_<t>)
     {};
 
