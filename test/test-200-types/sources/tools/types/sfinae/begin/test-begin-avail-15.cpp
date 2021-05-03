@@ -548,12 +548,15 @@ public:
 
 TEST_COMPONENT(025)
 { 
-    using x = tools::sfinae::available::detail::begin_<PConstEx>::result_t;
+    typedef tools::sfinae::available::detail::begin_<PConstEx>
+		result_t;
+	typedef result_t::result_t x;
     std::cout << typeid(x).name() << '\n';
 
-    using z = tools::sfinae::available::detail::begin_<PConstEx>::check_t;
+    typedef tools::sfinae::available::detail::begin_<PConstEx>
+		check_t;
+	typedef check_t::check_t z;
     std::cout << typeid(z).name() << '\n';
-
 
     int a = 10;
     (void)a;

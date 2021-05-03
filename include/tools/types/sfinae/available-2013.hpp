@@ -150,7 +150,7 @@ namespace available {
             enum { v = ! ::std::is_same<check_t, ::std::false_type>::value };
 
             using cond_t
-                = ::std::conditional_t<v, ::std::true_type, ::std::false_type>;
+                = ::std::conditional<v, ::std::true_type, ::std::false_type>;
 
             using result_t = typename cond_t::type;
         public:

@@ -37,11 +37,13 @@ namespace available {
         //    type;
         typedef ::std::true_type type; 
     };
+#if 0
     template<class a> struct help<a, a>
     { 
         typedef ::std::false_type
             type;
     };
+#endif
 
     namespace detail
     {
@@ -307,12 +309,12 @@ namespace available {
 
     namespace detail
     {
+#if 1
         template<class t> class begin_
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
                 typename help<u, decltype(::std::declval<u>().begin()) >::type
-                //typename help<u, decltype(obj<u>().begin()) >::type
                 check(u*);
 
             template <class> static
@@ -324,7 +326,37 @@ namespace available {
             begin_();
             enum { value = result::value };
         };
+#endif
 
+#if 0
+        // diagnostic version
+        template<class t> class begin_
+        {
+        public:
+            dNO_REFERENCE_(t, x);
+
+            template <class u> static 
+                help<u, decltype(::std::declval<u>().begin())>
+				check(u*);
+
+            template <class> static
+                ::std::false_type check(...);
+
+            typedef decltype(check<x>(nullptr)) 
+				check_t;
+
+            enum { v = ! ::std::is_same<check_t, ::std::false_type>::value };
+
+            typedef ::std::conditional<v, ::std::true_type, ::std::false_type>
+				cond_t;
+
+            typedef typename cond_t::type 
+				result_t;
+        public:
+            begin_();
+            enum { value = result_t::value };
+        };
+#endif
     } // namespace detail
 
     template<class t> 
