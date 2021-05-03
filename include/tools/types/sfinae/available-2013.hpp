@@ -115,20 +115,49 @@ namespace available {
     {
         template<class t> class begin_
         {
+        public:
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, decltype(::std::declval<u>().begin())>::type 
+                typename help<u, decltype(::std::declval<u>().begin())>::type
 				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
 
-            using result = decltype(check<x>(0));
+            using result_t = decltype(check<x>(nullptr));
         public:
             begin_() = delete;
-            enum { value = result::value };
+            enum { value = result_t::value };
         };
+
+#if 0
+        // diagnostic version
+        template<class t> class begin_
+        {
+        public:
+            using x = ::std::remove_reference_t<t>;
+
+            template <class u> static 
+                help<u, decltype(::std::declval<u>().begin())>
+				check(u*);
+
+            template <class> static
+                ::std::false_type check(...);
+
+            using check_t = decltype(check<x>(nullptr));
+
+            enum { v = ! ::std::is_same<check_t, ::std::false_type>::value };
+
+            using cond_t
+                = ::std::conditional_t<v, ::std::true_type, ::std::false_type>;
+
+            using result_t = typename cond_t::type;
+        public:
+            begin_() = delete;
+            enum { value = result_t::value };
+        };
+#endif
 
     } // namespace detail
 

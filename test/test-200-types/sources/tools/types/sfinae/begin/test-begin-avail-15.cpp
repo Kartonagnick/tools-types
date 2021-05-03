@@ -10,20 +10,20 @@
 
 #ifdef dHAS_CPP11
     // msvc2015 or newer 
-    #define dTEST_SFINAE_REGULAR       1
-    #define dTEST_SFINAE_DERIVED       1
-    #define dTEST_SFINAE_PRIVATE       1
-    #define dTEST_SFINAE_DPRVATE       1
-
-    #define dTEST_SFINAE_RECURSIEVE    1
-    #define dTEST_SFINAE_DRECURSIEVE   1
-    #define dTEST_SFINAE_PRECURSIEVE   1
-    #define dTEST_SFINAE_DPRECURSIEVE  1
-
-    #define dTEST_SFINAE_UNSUITABLE    1
-    #define dTEST_SFINAE_DUNSUITABLE   1
-    #define dTEST_SFINAE_PUNSUITABLE   1
-    #define dTEST_SFINAE_DPUNSUITABLE  1
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    #define dTEST_SFINAE_PRIVATE          1
+    #define dTEST_SFINAE_DPRVATE          1
+                                          
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    #define dTEST_SFINAE_PRECURSIEVE      1
+    #define dTEST_SFINAE_DPRECURSIEVE     1
+                                          
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
@@ -44,21 +44,21 @@
     #define dTEST_SFINAE_PUNSUITABLE      1
     #define dTEST_SFINAE_DPUNSUITABLE     1
 #elif defined(dHAS_TYPE_TRAITS) 
-    // msvc2013 - msvc2010
-    #define dTEST_SFINAE_REGULAR       1
-    #define dTEST_SFINAE_DERIVED       1
+    // msvc2010 - msvc2012
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
     // #define dTEST_SFINAE_PRIVATE       1
     // #define dTEST_SFINAE_DPRVATE       1
 
-    #define dTEST_SFINAE_RECURSIEVE    1
-    #define dTEST_SFINAE_DRECURSIEVE   1
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
     // #define dTEST_SFINAE_PRECURSIEVE   1
     // #define dTEST_SFINAE_DPRECURSIEVE  1
 
-    #define dTEST_SFINAE_UNSUITABLE    1
-    #define dTEST_SFINAE_DUNSUITABLE   1
-    #define dTEST_SFINAE_PUNSUITABLE   1
-    #define dTEST_SFINAE_DPUNSUITABLE  1
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
 #else
     // msvc20008 or older
 #endif
@@ -536,6 +536,36 @@ TEST_COMPONENT(024)
 }
 #endif // dTEST_SFINAE_PUNSUITABLE
 
+//==============================================================================
+//==============================================================================
+#if 0
+class PConstEx
+{
+    void* begin() const;
+public:
+    PConstEx();
+};
+
+TEST_COMPONENT(025)
+{ 
+    using x = tools::sfinae::available::detail::begin_<PConstEx>::result_t;
+    std::cout << typeid(x).name() << '\n';
+
+    using z = tools::sfinae::available::detail::begin_<PConstEx>::check_t;
+    std::cout << typeid(z).name() << '\n';
+
+
+    int a = 10;
+    (void)a;
+
+    //const bool v = tools::sfinae::available::begin<PConst>::value;
+    //ASSERT_TRUE(!v);
+
+
+    //       |   type      | expected |
+    //make_test(PConst       ,  false   );
+}
+#endif
 //==============================================================================
 //==============================================================================
 #endif // !TEST_TOOLS_SFINAE_BEGIN
