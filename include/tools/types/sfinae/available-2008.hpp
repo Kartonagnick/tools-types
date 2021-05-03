@@ -1,7 +1,7 @@
 // [2021y-04m-30d][03:25:40] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
-#define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_AVAILABLE_2008_USED_ 
+#define dTOOLS_SFINAE_AVAILABLE_2008_USED_ 100 PRE
 
 #include <tools/types/traits.hpp>
 #include <cstddef>
@@ -24,14 +24,17 @@ namespace tools
     struct empty;
 
 namespace sfinae    {
-namespace available {
 
-    typedef char(&no )[1];
-    typedef char(&yes)[2];
+    //typedef char(&no)[569456500];
+    typedef char(&no)[1000000];
+    //typedef char(&yes)[2];
 
-    template<size_t n> struct help { char buf[n]; };
+    template<size_t n> struct sizeof_ 
+        { typedef char(&type)[n]; };
 
     template<class t> t obj();
+
+namespace available {
 
     namespace detail
     {
@@ -39,7 +42,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>(), obj<t7>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>(), obj<t7>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -52,7 +55,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>(), obj<t6>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -65,7 +68,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>(), obj<t5>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -78,7 +81,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>(), obj<t4>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -91,7 +94,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>(), obj<t3>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -104,7 +107,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>(), obj<t2>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -117,7 +120,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().operator()(obj<t1>()))>::type
+                typename sizeof_<sizeof(obj<u>().operator()(obj<t1>()))>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -131,9 +134,9 @@ namespace available {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                //typename help<u, sizeof(obj<u>()())>::type
+                //typename sizeof_<u, sizeof(obj<u>()())>::type
 
-                typename help<sizeof( obj<u>().operator()() )>::type
+                typename sizeof_<sizeof( obj<u>().operator()() )>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -161,7 +164,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(*obj<u>())>::type
+                typename sizeof_<sizeof(*obj<u>())>::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -185,7 +188,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>()[ obj<i>() ]) >::type
+                typename sizeof_<sizeof(obj<u>()[ obj<i>() ]) >::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
@@ -207,14 +210,15 @@ namespace available {
     {
         template<class t> class begin_
         {
+		public:
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<sizeof(obj<u>().begin()) >::type
+                typename sizeof_< sizeof(obj<u>().begin()) >::type
                 check(u*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
         public:
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -231,4 +235,4 @@ namespace available {
 #undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SFINAE_AVAILABLE_2010_USED_
+#endif // !dTOOLS_SFINAE_AVAILABLE_2008_USED_

@@ -1,6 +1,8 @@
 // [2021y-04m-29d][12:57:49] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
+#define TEST_TOOLS_SFINAE_BEGIN
+
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD begin
@@ -107,6 +109,25 @@
 
 #else
     // msvc20008 or older
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    // #define dTEST_SFINAE_PRIVATE       1
+    // #define dTEST_SFINAE_DPRVATE       1
+                                          
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE      1
+    // #define dTEST_SFINAE_DPRECURSIEVE     1
+                                          
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
+
+    #define dTEST_SFINAE_INT              1
+    #define dTEST_SFINAE_DINT             1
+    // #define dTEST_SFINAE_PINT             1
+    // #define dTEST_SFINAE_DPINT            1
 #endif
 
 #include "test-begin.hpp"
@@ -462,9 +483,9 @@ TEST_COMPONENT(017)
     make_test(UnsuitableMutable&  ,  false   );
     make_test(Unsuitable&         ,  false   );
                                             
-    make_test(UnsuitableConst&&   ,  false   );
-    make_test(UnsuitableMutable&& ,  false   );
-    make_test(Unsuitable&&        ,  false   );
+    make_rval(UnsuitableConst&&   ,  false   );
+    make_rval(UnsuitableMutable&& ,  false   );
+    make_rval(Unsuitable&&        ,  false   );
 }
 TEST_COMPONENT(018)
 {
@@ -477,9 +498,9 @@ TEST_COMPONENT(018)
     make_test(const UnsuitableMutable&  ,  false   );
     make_test(const Unsuitable&         ,  false   );
                               
-    make_test(const UnsuitableConst&&   ,  false   );
-    make_test(const UnsuitableMutable&& ,  false   );
-    make_test(const Unsuitable&&        ,  false   );
+    make_rval(const UnsuitableConst&&   ,  false   );
+    make_rval(const UnsuitableMutable&& ,  false   );
+    make_rval(const Unsuitable&&        ,  false   );
 }
 #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -600,9 +621,9 @@ TEST_COMPONENT(025)
     make_test(IntMutable&  ,  true    );
     make_test(Int&         ,  true    );
 
-    make_test(IntConst&&   ,  true    );
-    make_test(IntMutable&& ,  true    );
-    make_test(Int&&        ,  true    );
+    make_rval(IntConst&&   ,  true    );
+    make_rval(IntMutable&& ,  true    );
+    make_rval(Int&&        ,  true    );
 }
 
 // --- const
@@ -617,9 +638,9 @@ TEST_COMPONENT(026)
     make_test(const IntMutable&  ,  false   );
     make_test(const Int&         ,  true    );
               
-    make_test(const IntConst&&   ,  true    );
-    make_test(const IntMutable&& ,  false   );
-    make_test(const Int&&        ,  true    );
+    make_rval(const IntConst&&   ,  true    );
+    make_rval(const IntMutable&& ,  false   );
+    make_rval(const Int&&        ,  true    );
 }
 #endif // dTEST_SFINAE_INT
 
@@ -638,9 +659,9 @@ TEST_COMPONENT(027)
     make_test(DIntMutable&  ,  true    );
     make_test(DInt&         ,  true    );
               
-    make_test(DIntConst&&   ,  true    );
-    make_test(DIntMutable&& ,  true    );
-    make_test(DInt&&        ,  true    );
+    make_rval(DIntConst&&   ,  true    );
+    make_rval(DIntMutable&& ,  true    );
+    make_rval(DInt&&        ,  true    );
 }
 
 // --- const
@@ -655,9 +676,9 @@ TEST_COMPONENT(028)
     make_test(const DIntMutable&  ,  false   );
     make_test(const DInt&         ,  true    );
                     
-    make_test(const DIntConst&&   ,  true    );
-    make_test(const DIntMutable&& ,  false   );
-    make_test(const DInt&&        ,  true    );
+    make_rval(const DIntConst&&   ,  true    );
+    make_rval(const DIntMutable&& ,  false   );
+    make_rval(const DInt&&        ,  true    );
 }
 #endif // dTEST_SFINAE_DINT
 
@@ -676,9 +697,9 @@ TEST_COMPONENT(029)
     make_test(PIntMutable&  ,  false   );
     make_test(PInt&         ,  false   );
                                
-    make_test(PIntConst&&   ,  false   );
-    make_test(PIntMutable&& ,  false   );
-    make_test(PInt&&        ,  false   );
+    make_rval(PIntConst&&   ,  false   );
+    make_rval(PIntMutable&& ,  false   );
+    make_rval(PInt&&        ,  false   );
 }
 
 // --- const
@@ -693,9 +714,9 @@ TEST_COMPONENT(030)
     make_test(const PIntMutable&  ,  false   );
     make_test(const PInt&         ,  false   );
                                
-    make_test(const PIntConst&&   ,  false   );
-    make_test(const PIntMutable&& ,  false   );
-    make_test(const PInt&&        ,  false   );
+    make_rval(const PIntConst&&   ,  false   );
+    make_rval(const PIntMutable&& ,  false   );
+    make_rval(const PInt&&        ,  false   );
 }
 #endif // dTEST_SFINAE_PINT
 
@@ -714,9 +735,9 @@ TEST_COMPONENT(031)
     make_test(DPIntMutable&  ,  false   );
     make_test(DPInt&         ,  false   );
                           
-    make_test(DPIntConst&&   ,  false   );
-    make_test(DPIntMutable&& ,  false   );
-    make_test(DPInt&&        ,  false   );
+    make_rval(DPIntConst&&   ,  false   );
+    make_rval(DPIntMutable&& ,  false   );
+    make_rval(DPInt&&        ,  false   );
 }
 
 // --- const
@@ -731,34 +752,27 @@ TEST_COMPONENT(032)
     make_test(const DPIntMutable&  ,  false   );
     make_test(const DPInt&         ,  false   );
                     
-    make_test(const DPIntConst&&   ,  false   );
-    make_test(const DPIntMutable&& ,  false   );
-    make_test(const DPInt&&        ,  false   );
+    make_rval(const DPIntConst&&   ,  false   );
+    make_rval(const DPIntMutable&& ,  false   );
+    make_rval(const DPInt&&        ,  false   );
 }
 #endif // dTEST_SFINAE_DPINT
-
 
 //==============================================================================
 //==============================================================================
 
 TEST_COMPONENT(sfinae_1)
 { 
-    typedef ::tools::sfinae::available::detail_begin::impl_<DIntConst, true>
+    //typedef ::tools::sfinae::available::detail_begin::impl_<DIntConst, true>
+
+	typedef ::tools::sfinae::available::detail::begin_<Maket>
         impl;
 
-    enum { v1 = impl::Const } ;
-    enum { v2 = impl::Mutab } ;
-    enum { v3 = impl::isConst } ;
-    enum { v4 = impl::valid } ;
-    
-    std::cout << "Const = "   << v1 << '\n';
-    std::cout << "Mutab = "   << v2 << '\n';
-    std::cout << "isConst = " << v3 << '\n';
-    std::cout << "valid = "   << v4 << '\n';
+	std::cout << "sz = " << impl::sz << '\n';
+
     int a = 10;
     (void)a;
 }
-
 
 //==============================================================================
 //==============================================================================
