@@ -738,4 +738,548 @@ TEST_COMPONENT(034)
 
 //==============================================================================
 //==============================================================================
+#ifdef dTEST_SFINAE_UNSUITABLE
+// --- non-const
+TEST_COMPONENT(035)
+{
+    //       |   type             | signature                   | expected |
+    make_test(UnsuitableConst     , void(UnsuitableConst::*)()  ,  false   );
+    make_test(UnsuitableMutable   , void(Mutable::*)()          ,  false   );
+    make_test(Unsuitable          , void(Container::*)()        ,  false   );
+                                  
+    make_test(UnsuitableConst&    , void(UnsuitableConst::*)()  ,  false   );
+    make_test(UnsuitableMutable&  , void(Mutable::*)()          ,  false   );
+    make_test(Unsuitable&         , void(Container::*)()        ,  false   );
+
+    make_rval(UnsuitableConst&&   , void(UnsuitableConst::*)()  ,  false   );
+    make_rval(UnsuitableMutable&& , void(Mutable::*)()          ,  false   );
+    make_rval(Unsuitable&&        , void(Container::*)()        ,  false   );
+}
+TEST_COMPONENT(036)
+{
+    //       |   type             | signature                        | expected |
+    make_test(UnsuitableConst     , void(UnsuitableConst::*)() const ,  false   );
+    make_test(UnsuitableMutable   , void(Mutable::*)()         const ,  false   );
+    make_test(Unsuitable          , void(Container::*)()       const ,  false   );
+
+    make_test(UnsuitableConst&    , void(UnsuitableConst::*)() const ,  false   );
+    make_test(UnsuitableMutable&  , void(Mutable::*)()         const ,  false   );
+    make_test(Unsuitable&         , void(Container::*)()       const ,  false   );
+
+    make_rval(UnsuitableConst&&   , void(UnsuitableConst::*)() const ,  false   );
+    make_rval(UnsuitableMutable&& , void(Mutable::*)()         const ,  false   );
+    make_rval(Unsuitable&&        , void(Container::*)()       const ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(037)
+{
+    //       |   type                   | signature                   | expected |
+    make_test(const UnsuitableConst     , void(UnsuitableConst::*)()  ,  false   );
+    make_test(const UnsuitableMutable   , void(Mutable::*)()          ,  false   );
+    make_test(const Unsuitable          , void(Container::*)()        ,  false   );
+                                  
+    make_test(const UnsuitableConst&    , void(UnsuitableConst::*)()  ,  false   );
+    make_test(const UnsuitableMutable&  , void(Mutable::*)()          ,  false   );
+    make_test(const Unsuitable&         , void(Container::*)()        ,  false   );
+              
+    make_rval(const UnsuitableConst&&   , void(UnsuitableConst::*)()  ,  false   );
+    make_rval(const UnsuitableMutable&& , void(Mutable::*)()          ,  false   );
+    make_rval(const Unsuitable&&        , void(Container::*)()        ,  false   );
+}
+TEST_COMPONENT(038)
+{
+    //       |   type                   | signature                         | expected |
+    make_test(const UnsuitableConst     , void(UnsuitableConst::*)()  const ,  false   );
+    make_test(const UnsuitableMutable   , void(Mutable::*)()          const ,  false   );
+    make_test(const Unsuitable          , void(Container::*)()        const ,  false   );
+
+    make_test(const UnsuitableConst&    , void(UnsuitableConst::*)()  const ,  false   );
+    make_test(const UnsuitableMutable&  , void(Mutable::*)()          const ,  false   );
+    make_test(const Unsuitable&         , void(Container::*)()        const ,  false   );
+
+    make_rval(const UnsuitableConst&&   , void(UnsuitableConst::*)()  const ,  false   );
+    make_rval(const UnsuitableMutable&& , void(Mutable::*)()          const ,  false   );
+    make_rval(const Unsuitable&&        , void(Container::*)()        const ,  false   );
+}
+#endif // dTEST_SFINAE_UNSUITABLE
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DUNSUITABLE
+// --- non-const
+TEST_COMPONENT(039)
+{
+    //       |   type              | signature                    | expected |
+    make_test(DUnsuitableConst     , void(DUnsuitableConst::*)()  ,  false   );
+    make_test(DUnsuitableMutable   , void(DMutable::*)()          ,  false   );
+    make_test(DUnsuitable          , void(DContainer::*)()        ,  false   );
+                                          
+    make_test(DUnsuitableConst&    , void(DUnsuitableConst::*)()  ,  false   );
+    make_test(DUnsuitableMutable&  , void(DMutable::*)()          ,  false   );
+    make_test(DUnsuitable&         , void(DContainer::*)()        ,  false   );
+                                          
+    make_rval(DUnsuitableConst&&   , void(DUnsuitableConst::*)()  ,  false   );
+    make_rval(DUnsuitableMutable&& , void(DMutable::*)()          ,  false   );
+    make_rval(DUnsuitable&&        , void(DContainer::*)()        ,  false   );
+}
+TEST_COMPONENT(040)
+{
+    //       |   type              | signature                         | expected |
+    make_test(DUnsuitableConst     , void(DUnsuitableConst::*)() const ,  false   );
+    make_test(DUnsuitableMutable   , void(DMutable::*)()         const ,  false   );
+    make_test(DUnsuitable          , void(DContainer::*)()       const ,  false   );
+              
+    make_test(DUnsuitableConst&    , void(DUnsuitableConst::*)() const ,  false   );
+    make_test(DUnsuitableMutable&  , void(DMutable::*)()         const ,  false   );
+    make_test(DUnsuitable&         , void(DContainer::*)()       const ,  false   );
+              
+    make_rval(DUnsuitableConst&&   , void(DUnsuitableConst::*)() const ,  false   );
+    make_rval(DUnsuitableMutable&& , void(DMutable::*)()         const ,  false   );
+    make_rval(DUnsuitable&&        , void(DContainer::*)()       const ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(041)
+{ 
+    //       |   type                    | signature                    | expected |
+    make_test(const DUnsuitableConst     , void(DUnsuitableConst::*)()  ,  false   );
+    make_test(const DUnsuitableMutable   , void(DMutable::*)()          ,  false   );
+    make_test(const DUnsuitable          , void(DContainer::*)()        ,  false   );
+
+    make_test(const DUnsuitableConst&    , void(DUnsuitableConst::*)()  ,  false   );
+    make_test(const DUnsuitableMutable&  , void(DMutable::*)()          ,  false   );
+    make_test(const DUnsuitable&         , void(DContainer::*)()        ,  false   );
+
+    make_rval(const DUnsuitableConst&&   , void(DUnsuitableConst::*)()  ,  false   );
+    make_rval(const DUnsuitableMutable&& , void(DMutable::*)()          ,  false   );
+    make_rval(const DUnsuitable&&        , void(DContainer::*)()        ,  false   );
+}
+TEST_COMPONENT(042)
+{
+    //       |   type                    | signature                          | expected |
+    make_test(const DUnsuitableConst     , void(DUnsuitableConst::*)()  const ,  false   );
+    make_test(const DUnsuitableMutable   , void(DMutable::*)()          const ,  false   );
+    make_test(const DUnsuitable          , void(DContainer::*)()        const ,  false   );
+
+    make_test(const DUnsuitableConst&    , void(DUnsuitableConst::*)()  const ,  false   );
+    make_test(const DUnsuitableMutable&  , void(DMutable::*)()          const ,  false   );
+    make_test(const DUnsuitable&         , void(DContainer::*)()        const ,  false   );
+
+    make_rval(const DUnsuitableConst&&   , void(DUnsuitableConst::*)()  const ,  false   );
+    make_rval(const DUnsuitableMutable&& , void(DMutable::*)()          const ,  false   );
+    make_rval(const DUnsuitable&&        , void(DContainer::*)()        const ,  false   );
+}
+#endif // dTEST_SFINAE_DUNSUITABLE
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PUNSUITABLE
+// --- non-const
+TEST_COMPONENT(043)
+{
+    //       |   type              | signature                    | expected |
+    make_test(PUnsuitableConst     , void(PUnsuitableConst::*)()  ,  false   );
+    make_test(PUnsuitableMutable   , void(PMutable::*)()          ,  false   );
+    make_test(PUnsuitable          , void(PContainer::*)()        ,  false   );
+              
+    make_test(PUnsuitableConst&    , void(PUnsuitableConst::*)()  ,  false   );
+    make_test(PUnsuitableMutable&  , void(PMutable::*)()          ,  false   );
+    make_test(PUnsuitable&         , void(PContainer::*)()        ,  false   );
+              
+    make_rval(PUnsuitableConst&&   , void(PUnsuitableConst::*)()  ,  false   );
+    make_rval(PUnsuitableMutable&& , void(PMutable::*)()          ,  false   );
+    make_rval(PUnsuitable&&        , void(PContainer::*)()        ,  false   );
+}
+TEST_COMPONENT(044)
+{
+    //       |   type              | signature                         | expected |
+    make_test(PUnsuitableConst     , void(PUnsuitableConst::*)() const ,  false   );
+    make_test(PUnsuitableMutable   , void(PMutable::*)()         const ,  false   );
+    make_test(PUnsuitable          , void(PContainer::*)()       const ,  false   );
+              
+    make_test(PUnsuitableConst&    , void(PUnsuitableConst::*)() const ,  false   );
+    make_test(PUnsuitableMutable&  , void(PMutable::*)()         const ,  false   );
+    make_test(PUnsuitable&         , void(PContainer::*)()       const ,  false   );
+              
+    make_rval(PUnsuitableConst&&   , void(PUnsuitableConst::*)() const ,  false   );
+    make_rval(PUnsuitableMutable&& , void(PMutable::*)()         const ,  false   );
+    make_rval(PUnsuitable&&        , void(PContainer::*)()       const ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(045)
+{ 
+    //       |   type                    | signature                    | expected |
+    make_test(const PUnsuitableConst     , void(PUnsuitableConst::*)()  ,  false   );
+    make_test(const PUnsuitableMutable   , void(PMutable::*)()          ,  false   );
+    make_test(const PUnsuitable          , void(PContainer::*)()        ,  false   );
+                    
+    make_test(const PUnsuitableConst&    , void(PUnsuitableConst::*)()  ,  false   );
+    make_test(const PUnsuitableMutable&  , void(PMutable::*)()          ,  false   );
+    make_test(const PUnsuitable&         , void(PContainer::*)()        ,  false   );
+                    
+    make_rval(const PUnsuitableConst&&   , void(PUnsuitableConst::*)()  ,  false   );
+    make_rval(const PUnsuitableMutable&& , void(PMutable::*)()          ,  false   );
+    make_rval(const PUnsuitable&&        , void(PContainer::*)()        ,  false   );
+}
+TEST_COMPONENT(046)
+{
+    //       |   type                    | signature                          | expected |
+    make_test(const PUnsuitableConst     , void(PUnsuitableConst::*)()  const ,  false   );
+    make_test(const PUnsuitableMutable   , void(PMutable::*)()          const ,  false   );
+    make_test(const PUnsuitable          , void(PContainer::*)()        const ,  false   );
+                    
+    make_test(const PUnsuitableConst&    , void(PUnsuitableConst::*)()  const ,  false   );
+    make_test(const PUnsuitableMutable&  , void(PMutable::*)()          const ,  false   );
+    make_test(const PUnsuitable&         , void(PContainer::*)()        const ,  false   );
+                    
+    make_rval(const PUnsuitableConst&&   , void(PUnsuitableConst::*)()  const ,  false   );
+    make_rval(const PUnsuitableMutable&& , void(PMutable::*)()          const ,  false   );
+    make_rval(const PUnsuitable&&        , void(PContainer::*)()        const ,  false   );
+}
+#endif // dTEST_SFINAE_PUNSUITABLE
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPUNSUITABLE
+// --- non-const
+TEST_COMPONENT(047)
+{
+    //       |   type               | signature                     | expected |
+    make_test(DPUnsuitableConst     , void(DPUnsuitableConst::*)()  ,  false   );
+    make_test(DPUnsuitableMutable   , void(DPMutable::*)()          ,  false   );
+    make_test(DPUnsuitable          , void(DPContainer::*)()        ,  false   );
+              
+    make_test(DPUnsuitableConst&    , void(DPUnsuitableConst::*)()  ,  false   );
+    make_test(DPUnsuitableMutable&  , void(DPMutable::*)()          ,  false   );
+    make_test(DPUnsuitable&         , void(DPContainer::*)()        ,  false   );
+              
+    make_rval(DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()  ,  false   );
+    make_rval(DPUnsuitableMutable&& , void(DPMutable::*)()          ,  false   );
+    make_rval(DPUnsuitable&&        , void(DPContainer::*)()        ,  false   );
+}
+TEST_COMPONENT(048)
+{
+    //       |   type               | signature                          | expected |
+    make_test(DPUnsuitableConst     , void(DPUnsuitableConst::*)() const ,  false   );
+    make_test(DPUnsuitableMutable   , void(DPMutable::*)()         const ,  false   );
+    make_test(DPUnsuitable          , void(DPContainer::*)()       const ,  false   );
+
+    make_test(DPUnsuitableConst&    , void(DPUnsuitableConst::*)() const ,  false   );
+    make_test(DPUnsuitableMutable&  , void(DPMutable::*)()         const ,  false   );
+    make_test(DPUnsuitable&         , void(DPContainer::*)()       const ,  false   );
+
+    make_rval(DPUnsuitableConst&&   , void(DPUnsuitableConst::*)() const ,  false   );
+    make_rval(DPUnsuitableMutable&& , void(DPMutable::*)()         const ,  false   );
+    make_rval(DPUnsuitable&&        , void(DPContainer::*)()       const ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(049)
+{ 
+    //       |   type                     | signature                     | expected |
+    make_test(const DPUnsuitableConst     , void(DPUnsuitableConst::*)()  ,  false   );
+    make_test(const DPUnsuitableMutable   , void(DPMutable::*)()          ,  false   );
+    make_test(const DPUnsuitable          , void(DPContainer::*)()        ,  false   );
+                    
+    make_test(const DPUnsuitableConst&    , void(DPUnsuitableConst::*)()  ,  false   );
+    make_test(const DPUnsuitableMutable&  , void(DPMutable::*)()          ,  false   );
+    make_test(const DPUnsuitable&         , void(DPContainer::*)()        ,  false   );
+                    
+    make_rval(const DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()  ,  false   );
+    make_rval(const DPUnsuitableMutable&& , void(DPMutable::*)()          ,  false   );
+    make_rval(const DPUnsuitable&&        , void(DPContainer::*)()        ,  false   );
+}
+TEST_COMPONENT(050)
+{
+    //       |   type                     | signature                           | expected |
+    make_test(const DPUnsuitableConst     , void(DPUnsuitableConst::*)()  const ,  false   );
+    make_test(const DPUnsuitableMutable   , void(DPMutable::*)()          const ,  false   );
+    make_test(const DPUnsuitable          , void(DPContainer::*)()        const ,  false   );
+
+    make_test(const DPUnsuitableConst&    , void(DPUnsuitableConst::*)()  const ,  false   );
+    make_test(const DPUnsuitableMutable&  , void(DPMutable::*)()          const ,  false   );
+    make_test(const DPUnsuitable&         , void(DPContainer::*)()        const ,  false   );
+
+    make_rval(const DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()  const ,  false   );
+    make_rval(const DPUnsuitableMutable&& , void(DPMutable::*)()          const ,  false   );
+    make_rval(const DPUnsuitable&&        , void(DPContainer::*)()        const ,  false   );
+}
+#endif // dTEST_SFINAE_DPUNSUITABLE
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_INT
+// --- non-const
+TEST_COMPONENT(051)
+{
+    //       |   type      | signature            | expected |
+    make_test(IntConst     , int(IntConst::*)()   ,   false  );
+    make_test(IntMutable   , int(IntMutable::*)() ,   true   );
+    make_test(Int          , int(Int::*)()        ,   true   );
+
+    make_test(IntConst&    , int(IntConst::*)()   ,   false  );
+    make_test(IntMutable&  , int(IntMutable::*)() ,   true   );
+    make_test(Int&         , int(Int::*)()        ,   true   );
+
+    make_rval(IntConst&&   , int(IntConst::*)()   ,   false  );
+    make_rval(IntMutable&& , int(IntMutable::*)() ,   true   );
+    make_rval(Int&&        , int(Int::*)()        ,   true   );
+}
+TEST_COMPONENT(052)
+{
+    //       |   type      | signature                  | expected |
+    make_test(IntConst     , int(IntConst::*)()   const ,   true   );
+    make_test(IntMutable   , int(IntMutable::*)() const ,   false  );
+    make_test(Int          , int(Int::*)()        const ,   true   );
+
+    make_test(IntConst&    , int(IntConst::*)()   const ,   true   );
+    make_test(IntMutable&  , int(IntMutable::*)() const ,   false  );
+    make_test(Int&         , int(Int::*)()        const ,   true   );
+
+    make_rval(IntConst&&   , int(IntConst::*)()   const ,   true   );
+    make_rval(IntMutable&& , int(IntMutable::*)() const ,   false  );
+    make_rval(Int&&        , int(Int::*)()        const ,   true   );
+}
+
+// --- const
+TEST_COMPONENT(053)
+{
+    //       |   type            | signature            | expected |
+    make_test(const IntConst     , int(IntConst::*)()   ,   false  );
+    make_test(const IntMutable   , int(IntMutable::*)() ,   true   );
+    make_test(const Int          , int(Int::*)()        ,   true   );
+
+    make_test(const IntConst&    , int(IntConst::*)()   ,   false  );
+    make_test(const IntMutable&  , int(IntMutable::*)() ,   true   );
+    make_test(const Int&         , int(Int::*)()        ,   true   );
+
+    make_rval(const IntConst&&   , int(IntConst::*)()   ,   false  );
+    make_rval(const IntMutable&& , int(IntMutable::*)() ,   true   );
+    make_rval(const Int&&        , int(Int::*)()        ,   true   );
+}
+TEST_COMPONENT(054)
+{
+    //       |   type            | signature                  | expected |
+    make_test(const IntConst     , int(IntConst::*)()   const ,   true   );
+    make_test(const IntMutable   , int(IntMutable::*)() const ,   false  );
+    make_test(const Int          , int(Int::*)()        const ,   true   );
+              
+    make_test(const IntConst&    , int(IntConst::*)()   const ,   true   );
+    make_test(const IntMutable&  , int(IntMutable::*)() const ,   false  );
+    make_test(const Int&         , int(Int::*)()        const ,   true   );
+              
+    make_rval(const IntConst&&   , int(IntConst::*)()   const ,   true   );
+    make_rval(const IntMutable&& , int(IntMutable::*)() const ,   false  );
+    make_rval(const Int&&        , int(Int::*)()        const ,   true   );
+}
+#endif // dTEST_SFINAE_INT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DINT
+// --- non-const
+TEST_COMPONENT(055)
+{
+    //       |   type       | signature             | expected |
+    make_test(DIntConst     , int(DIntConst::*)()   ,   false  );
+    make_test(DIntMutable   , int(DIntMutable::*)() ,   true   );
+    make_test(DInt          , int(DInt::*)()        ,   true   );
+              
+    make_test(DIntConst&    , int(DIntConst::*)()   ,   false  );
+    make_test(DIntMutable&  , int(DIntMutable::*)() ,   true   );
+    make_test(DInt&         , int(DInt::*)()        ,   true   );
+              
+    make_rval(DIntConst&&   , int(DIntConst::*)()   ,   false  );
+    make_rval(DIntMutable&& , int(DIntMutable::*)() ,   true   );
+    make_rval(DInt&&        , int(DInt::*)()        ,   true   );
+}
+TEST_COMPONENT(056)
+{
+    //       |   type       | signature                   | expected |
+    make_test(DIntConst     , int(DIntConst::*)()   const ,   true   );
+    make_test(DIntMutable   , int(DIntMutable::*)() const ,   false  );
+    make_test(DInt          , int(DInt::*)()        const ,   true   );
+              
+    make_test(DIntConst&    , int(DIntConst::*)()   const ,   true   );
+    make_test(DIntMutable&  , int(DIntMutable::*)() const ,   false  );
+    make_test(DInt&         , int(DInt::*)()        const ,   true   );
+              
+    make_rval(DIntConst&&   , int(DIntConst::*)()   const ,   true   );
+    make_rval(DIntMutable&& , int(DIntMutable::*)() const ,   false  );
+    make_rval(DInt&&        , int(DInt::*)()        const ,   true   );
+}
+
+// --- const
+TEST_COMPONENT(057)
+{
+    //       |   type             | signature             | expected |
+    make_test(const DIntConst     , int(DIntConst::*)()   ,   false  );
+    make_test(const DIntMutable   , int(DIntMutable::*)() ,   true   );
+    make_test(const DInt          , int(DInt::*)()        ,   true   );
+                    
+    make_test(const DIntConst&    , int(DIntConst::*)()   ,   false  );
+    make_test(const DIntMutable&  , int(DIntMutable::*)() ,   true   );
+    make_test(const DInt&         , int(DInt::*)()        ,   true   );
+                    
+    make_rval(const DIntConst&&   , int(DIntConst::*)()   ,   false  );
+    make_rval(const DIntMutable&& , int(DIntMutable::*)() ,   true   );
+    make_rval(const DInt&&        , int(DInt::*)()        ,   true   );
+}
+TEST_COMPONENT(058)
+{
+    //       |   type             | signature                   | expected |
+    make_test(const DIntConst     , int(DIntConst::*)()   const ,   true   );
+    make_test(const DIntMutable   , int(DIntMutable::*)() const ,   false  );
+    make_test(const DInt          , int(DInt::*)()        const ,   true   );
+                    
+    make_test(const DIntConst&    , int(DIntConst::*)()   const ,   true   );
+    make_test(const DIntMutable&  , int(DIntMutable::*)() const ,   false  );
+    make_test(const DInt&         , int(DInt::*)()        const ,   true   );
+                    
+    make_rval(const DIntConst&&   , int(DIntConst::*)()   const ,   true   );
+    make_rval(const DIntMutable&& , int(DIntMutable::*)() const ,   false  );
+    make_rval(const DInt&&        , int(DInt::*)()        const ,   true   );
+}
+#endif // dTEST_SFINAE_DINT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PINT
+// --- non-const
+TEST_COMPONENT(059)
+{
+    //       |   type       | signature             | expected |
+    make_test(PIntConst     , int(PIntConst::*)()   ,   false  );
+    make_test(PIntMutable   , int(PIntMutable::*)() ,   false  );
+    make_test(PInt          , int(PInt::*)()        ,   false  );
+
+    make_test(PIntConst&    , int(PIntConst::*)()   ,   false  );
+    make_test(PIntMutable&  , int(PIntMutable::*)() ,   false  );
+    make_test(PInt&         , int(PInt::*)()        ,   false  );
+
+    make_rval(PIntConst&&   , int(PIntConst::*)()   ,   false  );
+    make_rval(PIntMutable&& , int(PIntMutable::*)() ,   false  );
+    make_rval(PInt&&        , int(PInt::*)()        ,   false  );
+}
+TEST_COMPONENT(060)
+{
+    //       |   type       | signature                   | expected |
+    make_test(PIntConst     , int(PIntConst::*)()   const ,   false  );
+    make_test(PIntMutable   , int(PIntMutable::*)() const ,   false  );
+    make_test(PInt          , int(PInt::*)()        const ,   false  );
+              
+    make_test(PIntConst&    , int(PIntConst::*)()   const ,   false  );
+    make_test(PIntMutable&  , int(PIntMutable::*)() const ,   false  );
+    make_test(PInt&         , int(PInt::*)()        const ,   false  );
+              
+    make_rval(PIntConst&&   , int(PIntConst::*)()   const ,   false  );
+    make_rval(PIntMutable&& , int(PIntMutable::*)() const ,   false  );
+    make_rval(PInt&&        , int(PInt::*)()        const ,   false  );
+}
+
+// --- const
+TEST_COMPONENT(061)
+{
+    //       |   type             | signature             | expected |
+    make_test(const PIntConst     , int(PIntConst::*)()   ,   false  );
+    make_test(const PIntMutable   , int(PIntMutable::*)() ,   false  );
+    make_test(const PInt          , int(PInt::*)()        ,   false  );
+                    
+    make_test(const PIntConst&    , int(PIntConst::*)()   ,   false  );
+    make_test(const PIntMutable&  , int(PIntMutable::*)() ,   false  );
+    make_test(const PInt&         , int(PInt::*)()        ,   false  );
+                    
+    make_rval(const PIntConst&&   , int(PIntConst::*)()   ,   false  );
+    make_rval(const PIntMutable&& , int(PIntMutable::*)() ,   false  );
+    make_rval(const PInt&&        , int(PInt::*)()        ,   false  );
+}
+TEST_COMPONENT(062)
+{
+    //       |   type             | signature                   | expected |
+    make_test(const PIntConst     , int(PIntConst::*)()   const ,   false  );
+    make_test(const PIntMutable   , int(PIntMutable::*)() const ,   false  );
+    make_test(const PInt          , int(PInt::*)()        const ,   false  );
+
+    make_test(const PIntConst&    , int(PIntConst::*)()   const ,   false  );
+    make_test(const PIntMutable&  , int(PIntMutable::*)() const ,   false  );
+    make_test(const PInt&         , int(PInt::*)()        const ,   false  );
+
+    make_rval(const PIntConst&&   , int(PIntConst::*)()   const ,   false  );
+    make_rval(const PIntMutable&& , int(PIntMutable::*)() const ,   false  );
+    make_rval(const PInt&&        , int(PInt::*)()        const ,   false  );
+}
+#endif // dTEST_SFINAE_PINT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPINT
+// --- non-const
+TEST_COMPONENT(063)
+{
+    //       |   type        | signature              | expected |
+    make_test(DPIntConst     , int(DPIntConst::*)()   ,   false  );
+    make_test(DPIntMutable   , int(DPIntMutable::*)() ,   false  );
+    make_test(DPInt          , int(DPInt::*)()        ,   false  );
+              
+    make_test(DPIntConst&    , int(DPIntConst::*)()   ,   false  );
+    make_test(DPIntMutable&  , int(DPIntMutable::*)() ,   false  );
+    make_test(DPInt&         , int(DPInt::*)()        ,   false  );
+              
+    make_rval(DPIntConst&&   , int(DPIntConst::*)()   ,   false  );
+    make_rval(DPIntMutable&& , int(DPIntMutable::*)() ,   false  );
+    make_rval(DPInt&&        , int(DPInt::*)()        ,   false  );
+}
+TEST_COMPONENT(064)
+{
+    //       |   type        | signature                    | expected |
+    make_test(DPIntConst     , int(DPIntConst::*)()   const ,   false  );
+    make_test(DPIntMutable   , int(DPIntMutable::*)() const ,   false  );
+    make_test(DPInt          , int(DPInt::*)()        const ,   false  );
+              
+    make_test(DPIntConst&    , int(DPIntConst::*)()   const ,   false  );
+    make_test(DPIntMutable&  , int(DPIntMutable::*)() const ,   false  );
+    make_test(DPInt&         , int(DPInt::*)()        const ,   false  );
+              
+    make_rval(DPIntConst&&   , int(DPIntConst::*)()   const ,   false  );
+    make_rval(DPIntMutable&& , int(DPIntMutable::*)() const ,   false  );
+    make_rval(DPInt&&        , int(DPInt::*)()        const ,   false  );
+}
+
+// --- const
+TEST_COMPONENT(065)
+{
+    //       |   type              | signature              | expected |
+    make_test(const DPIntConst     , int(DPIntConst::*)()   ,   false  );
+    make_test(const DPIntMutable   , int(DPIntMutable::*)() ,   false  );
+    make_test(const DPInt          , int(DPInt::*)()        ,   false  );
+                    
+    make_test(const DPIntConst&    , int(DPIntConst::*)()   ,   false  );
+    make_test(const DPIntMutable&  , int(DPIntMutable::*)() ,   false  );
+    make_test(const DPInt&         , int(DPInt::*)()        ,   false  );
+                    
+    make_rval(const DPIntConst&&   , int(DPIntConst::*)()   ,   false  );
+    make_rval(const DPIntMutable&& , int(DPIntMutable::*)() ,   false  );
+    make_rval(const DPInt&&        , int(DPInt::*)()        ,   false  );
+}
+TEST_COMPONENT(066)
+{
+    //       |   type              | signature                    | expected |
+    make_test(const DPIntConst     , int(DPIntConst::*)()   const ,   false  );
+    make_test(const DPIntMutable   , int(DPIntMutable::*)() const ,   false  );
+    make_test(const DPInt          , int(DPInt::*)()        const ,   false  );
+                    
+    make_test(const DPIntConst&    , int(DPIntConst::*)()   const ,   false  );
+    make_test(const DPIntMutable&  , int(DPIntMutable::*)() const ,   false  );
+    make_test(const DPInt&         , int(DPInt::*)()        const ,   false  );
+                    
+    make_rval(const DPIntConst&&   , int(DPIntConst::*)()   const ,   false  );
+    make_rval(const DPIntMutable&& , int(DPIntMutable::*)() const ,   false  );
+    make_rval(const DPInt&&        , int(DPInt::*)()        const ,   false  );
+}
+#endif // dTEST_SFINAE_DPINT
+
+//==============================================================================
+//==============================================================================
 #endif // !TEST_TOOLS_SFINAE_BEGIN
