@@ -3,19 +3,7 @@
 #ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
 #define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
 
-#include <cstddef>
-#include <type_traits>
-#include <tools/types/traits/no_ref.hpp>
-
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
-    >
-
-#define dNO_REFERENCE_(t, x)              \
-    typedef ::tools::remove_reference<t>  \
-        no_ref;                           \
-    typedef typename no_ref::type x
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //=== call =====================================================================
@@ -293,12 +281,11 @@ namespace available
     {
         template<class t, bool> class impl_
         {
-            dNO_REFERENCE_(t, x);
             template <class u> static 
                 typename sizeof_< sizeof(obj<u>().begin()) >::type
                 check(u*);
             template <class> static no check(...);
-            enum { sz = sizeof(check<x>(0)) };
+            enum { sz = sizeof(check<t>(0)) };
         public:
             enum { value = sz < sizeof(no) };
         };
@@ -316,9 +303,7 @@ namespace available
         template<class t> class begin_
         {
             dNO_REFERENCE_(t, x);
-            __if_exists    (x::begin) { enum { v = 1 }; }
-            __if_not_exists(x::begin) { enum { v = 0 }; }
-            typedef detail_begin::impl_<x, v> impl;
+            dSFINAE_PROTECTOR_(begin, x, impl);
         public:
             enum { value = impl::value };
         };
@@ -326,7 +311,7 @@ namespace available
     } // namespace detail
 
     template<class t> 
-    class begin
+    class begin 
         : dIMPLEMENT_(begin_<t>)
     {};
 
@@ -334,7 +319,6 @@ namespace available
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_AVAILABLE_2010_USED_

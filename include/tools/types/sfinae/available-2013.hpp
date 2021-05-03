@@ -3,13 +3,7 @@
 #ifndef dTOOLS_SFINAE_AVAILABLE_2013_USED_ 
 #define dTOOLS_SFINAE_AVAILABLE_2013_USED_ 100 PRE
 
-#include <type_traits>
-#include <cstddef>
-
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
-    >
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //==============================================================================
@@ -107,11 +101,10 @@ namespace available {
 //==============================================================================
 //==============================================================================
 
-    namespace detail
+    namespace detail_begin
     {
-        template<class t> class begin_
+        template<class t, bool> class impl_
         {
-        public:
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
@@ -123,8 +116,26 @@ namespace available {
 
             using result_t = decltype(check<x>(nullptr));
         public:
-            begin_() = delete;
+            impl_() = delete;
             enum { value = result_t::value };
+        };
+
+        template<class t> class impl_<t, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail_begin
+
+    namespace detail
+    {
+        template<class t> class begin_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_(begin, x, impl);
+        public:
+            enum { value = impl::value };
         };
 
     } // namespace detail
@@ -138,7 +149,6 @@ namespace available {
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_AVAILABLE_2015_USED_

@@ -3,19 +3,7 @@
 #ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
 #define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
 
-#include <tools/types/traits/no_ref.hpp>
-#include <type_traits>
-#include <cstddef>
-
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
-    >
-
-#define dNO_REFERENCE_(t,x)              \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
-    typedef typename no_ref::type x
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //==============================================================================
@@ -284,23 +272,39 @@ namespace available {
 //==============================================================================
 //==============================================================================
 
-    namespace detail
+    namespace detail_begin
     {
-        template<class t> class begin_
+        template<class t, bool> class impl_
         {
-            dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename decltype_<u, decltype(::std::declval<u>().begin()) >::type
+                typename decltype_<u, decltype(::std::declval<u>().begin())>::type
                 check(u*);
 
             template <class> static
                 ::std::false_type check(...);
 
-            typedef decltype(check<x>(0))
+            typedef decltype(check<t>(0))
                 result;
         public:
-            begin_();
             enum { value = result::value };
+        };
+
+        template<class t> class impl_<t, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail_begin
+
+    namespace detail
+    {
+        template<class t> class begin_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_(begin, x, impl);
+        public:
+            enum { value = impl::value };
         };
 
     } // namespace detail
@@ -314,7 +318,6 @@ namespace available {
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_AVAILABLE_2010_USED_

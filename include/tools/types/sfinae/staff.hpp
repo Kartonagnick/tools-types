@@ -3,7 +3,41 @@
 #ifndef dTOOLS_SFINAE_STAFF_USED_ 
 #define dTOOLS_SFINAE_STAFF_USED_ 100 PRE
 
+#include <cstddef>
 #include <tools/types/traits/no_ref.hpp>
+
+#ifdef dHAS_TYPE_TRAITS
+    #include <type_traits>
+
+    #define dIMPLEMENT_(...)                    \
+        public ::std::integral_constant<bool,   \
+            detail::__VA_ARGS__::value          \
+        >
+
+#else
+    #include <tools/types/traits.hpp>
+
+    #define dIMPLEMENT_(...)                    \
+        public ::tools::integral_constant<bool, \
+            detail::__VA_ARGS__::value          \
+        >
+
+#endif
+
+#define dNO_REFERENCE_(t, x)             \
+    typedef ::tools::remove_reference<t> \
+        no_ref;                          \
+    typedef typename no_ref::type x
+
+#ifdef _MSC_VER
+    #define dSFINAE_PROTECTOR_(name, x, impl)        \
+        __if_exists    (x::name) { enum { v = 1 }; } \
+        __if_not_exists(x::name) { enum { v = 0 }; } \
+        typedef detail_##name::impl_<x, v> impl
+#else
+    #define dSFINAE_PROTECTOR_(name, x, impl) \
+        typedef detail_##name::impl_<x, true> impl
+#endif
 
 namespace tools  
 {
