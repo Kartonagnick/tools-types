@@ -160,7 +160,6 @@ namespace signature {
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_SIGNATURE_2015_USED_

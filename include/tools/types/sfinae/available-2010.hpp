@@ -303,9 +303,9 @@ namespace available
         template<class t> class begin_
         {
             dNO_REFERENCE_(t, x);
-            dSFINAE_PROTECTOR_(begin, x, impl);
+            dSFINAE_PROTECTOR_(begin, x, impl_);
         public:
-            enum { value = impl::value };
+            enum { value = impl_::value };
         };
 
     } // namespace detail

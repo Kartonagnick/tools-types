@@ -3,18 +3,7 @@
 #ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
 #define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
 
-#include <tools/types/traits/no_ref.hpp>
-#include <type_traits>
-
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
-    >
-
-#define dNO_REFERENCE_(t,x)              \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
-    typedef typename no_ref::type x
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //==============================================================================
@@ -22,8 +11,6 @@
 namespace tools  {
 namespace sfinae {
 namespace signature {
-
-    template<class V, V> struct help;
 
 //==============================================================================
 //==============================================================================
@@ -35,7 +22,7 @@ namespace signature {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                ::std::true_type check(help<sig, &u::operator()>*);
+                ::std::true_type check(signature_<sig, &u::operator()>*);
 
             template <class> static 
                 ::std::false_type  check(...);
@@ -65,7 +52,7 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                ::std::true_type check(help<sig, &u::operator*>*);
+                ::std::true_type check(signature_<sig, &u::operator*>*);
 
             template <class> static 
                 ::std::false_type check(...);
@@ -95,7 +82,7 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                ::std::true_type check(help<sig, &u::operator[]>*);
+                ::std::true_type check(signature_<sig, &u::operator[]>*);
 
             template <class> static 
                 ::std::false_type check(...);
@@ -117,15 +104,15 @@ namespace signature {
 //==============================================================================
 //==============================================================================
 
-    namespace detail
+	namespace detail_begin
     {
-        template<class t, class sig>
-        class begin_
+        template<class t, class sig, bool>
+        class impl_
         {
             dNO_REFERENCE_(t, x);
-
+            
             template <class u> static 
-                ::std::true_type check(help<sig, &u::begin>*);
+                ::std::true_type check(signature_<sig, &u::begin>*);
 
             template <class> static 
                 ::std::false_type check(...);
@@ -133,8 +120,26 @@ namespace signature {
             typedef decltype(check<x>(0))
                 checked;
         public:
-            begin_();
+            impl_();
             enum { value = checked::value };
+        };
+
+        template<class t, class sig> class impl_<t, sig, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail
+
+    namespace detail
+    {
+        template<class t, class sig> class begin_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_SIG_(begin, x, sig, impl_);
+        public:
+            enum { value = impl_::value };
         };
 
     } // namespace detail
@@ -151,7 +156,6 @@ namespace signature {
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_SIGNATURE_2013_USED_

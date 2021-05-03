@@ -3,17 +3,7 @@
 #ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
 #define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
 
-#include <tools/types/traits.hpp>
-
-#define dIMPLEMENT_(...)                    \
-    public ::tools::integral_constant<bool, \
-        detail::__VA_ARGS__::value          \
-    >
-
-#define dNO_REFERENCE_(t,x)              \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
-    typedef typename no_ref::type x
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //==============================================================================
@@ -21,11 +11,6 @@
 namespace tools  {
 namespace sfinae {
 namespace signature {
-
-    typedef char(&no )[1];
-    typedef char(&yes)[2];
-
-    template<class v, v> struct help;
 
 //==============================================================================
 //==============================================================================
@@ -36,11 +21,11 @@ namespace signature {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                yes check(help<sig, &u::operator()>*);
+                yes check(signature_<sig, &u::operator()>*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
         public:
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -61,14 +46,14 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                yes check(help<sig, &u::operator*>*);
+                yes check(signature_<sig, &u::operator*>*);
 
             template <class> static no check(...);
 
             enum { sz = sizeof(check<x>(0)) };
         public:
             dereference_();
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -87,14 +72,14 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                yes check(help<sig, &u::operator[]>*);
+                yes check(signature_<sig, &u::operator[]>*);
 
             template <class> static no check(...);
 
             enum { sz = sizeof(check<x>(0)) };
         public:
             access_();
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -105,6 +90,7 @@ namespace signature {
 //==============================================================================
 //==============================================================================
 
+#if 0
     namespace detail
     {
         template<class t, class sig>
@@ -113,17 +99,57 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                yes check(help<sig, &u::begin>*);
+                yes check(signature_<sig, &u::begin>*);
 
             template <class> static no check(...);
 
             enum { sz = sizeof(check<x>(0)) };
         public:
             begin_();
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
+#endif
+
+	namespace detail_begin
+    {
+        template<class t, class sig, bool>
+        class impl_
+        {
+            template <class u> static 
+                ::std::true_type check(signature_<sig, &u::begin>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(0))
+                checked;
+        public:
+            impl_();
+            enum { value = checked::value };
+        };
+
+        template<class t, class sig> class impl_<t, sig, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail
+
+    namespace detail
+    {
+        template<class t, class sig> class begin_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_SIG_(begin, x, sig, impl_);
+        public:
+            enum { value = impl_::value };
+        };
+
+    } // namespace detail
+
 
     template<class t, class sig> 
     class begin : dIMPLEMENT_(begin_<t, sig>) {};
@@ -135,7 +161,6 @@ namespace signature {
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_SIGNATURE_2013_USED_
