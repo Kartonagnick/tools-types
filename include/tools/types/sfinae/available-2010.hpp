@@ -19,31 +19,30 @@
 
 //==============================================================================
 //==============================================================================
-
 namespace tools     
 {
     struct empty;
+    namespace sfinae    
+    {
+        template<class t> t obj();
 
+        template<class a, class b> struct decltype_
+        {
+		    typedef ::std::true_type type;
+		    typedef b second;
+    	};
+
+        template<class v, v> struct signature_;
+
+    } // namespace sfinae
+} // namespace tools
+
+//==============================================================================
+//=== call =====================================================================
+
+namespace tools     {
 namespace sfinae    {
 namespace available {
-
-    template<class t> t obj();
-
-    template<class a, class b>
-    struct help
-    { 
-        //enum { v = ::std::is_same<a, b>::value };
-        //typedef ::std::integral_constant<bool, !v>
-        //    type;
-        typedef ::std::true_type type; 
-    };
-#if 0
-    template<class a> struct help<a, a>
-    { 
-        typedef ::std::false_type
-            type;
-    };
-#endif
 
     namespace detail
     {
@@ -243,19 +242,19 @@ namespace available {
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t4,t6,t7>)
     {};
+} // namespace available 
 
 //==============================================================================
-//==============================================================================
-
+//=== dereference ==============================================================
+namespace available {
     namespace detail
     {
         template<class t> class dereference_
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, 
-                    decltype(*::std::declval<u>())
-                >::type check(u*);
+                typename decltype_<u, decltype(*::std::declval<u>())>::type 
+                check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -273,19 +272,19 @@ namespace available {
     class dereference
         : dIMPLEMENT_(dereference_<t>)
     {};
+} // namespace available
 
 //==============================================================================
-//==============================================================================
-
+//=== access ===================================================================
+namespace available {
     namespace detail
     {
         template<class t, class i> class access_
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, 
-                    decltype(::std::declval<u>()[::std::declval<i>()]) 
-                >::type check(u*);
+                typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type 
+                check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -304,63 +303,90 @@ namespace available {
         : dIMPLEMENT_(access_<t, i>)
     {};
 
-//==============================================================================
-//==============================================================================
+} // namespace available
 
-    namespace detail
+//==============================================================================
+//=== begin ====================================================================
+namespace available
+{
+    namespace detail_begin
     {
-#if 0
-        template<class t> class begin_
-        {
-            dNO_REFERENCE_(t, x);
-            template <class u> static 
-                typename help<u, decltype(::std::declval<u>().begin()) >::type
-                check(u*);
-
-            template <class> static
-                ::std::false_type check(...);
-
-            typedef decltype(check<x>(0))
-                result;
-        public:
-            begin_();
-            enum { value = result::value };
-        };
-#endif
-
-#if 1
-        // diagnostic version
-        template<class t> class begin_
+        template<class t> class avail_
         {
         public:
-            dNO_REFERENCE_(t, x);
-
             template <class u> static 
-                help<u, decltype(::std::declval<u>().begin())>
+                decltype_<u, decltype(obj<u>().begin())>
 				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
 
-            typedef decltype(check<x>(nullptr)) 
+            typedef decltype(check<t>(nullptr)) 
 				check_t;
 
-            enum { v = ! ::std::is_same<check_t, ::std::false_type>::value };
+            typedef ::std::is_same<check_t, ::std::false_type>
+                fail_1;
 
-            typedef ::std::conditional<v, ::std::true_type, ::std::false_type>
-				cond_t;
+            typedef ::std::is_same<typename check_t::second, int>
+                fail_2;
 
-            typedef typename cond_t::type 
-				result_t;
+            enum { invalid_1 = fail_1::value     };
+            enum { invalid_2 = fail_2::value     };
+            enum { fail = invalid_1 || invalid_2 };
         public:
-            begin_();
-            enum { value = result_t::value };
+            enum { value = !fail };
         };
-#endif
+
+        template<class t, class sig> class sig_
+        {
+            template <class u> static 
+                ::std::true_type 
+                check(signature_<sig, &u::begin>* );
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(nullptr))
+                checked;
+        public:
+            enum { value = checked::value };
+        };
+
+        template<class t, bool> class impl_
+        {
+        public:
+            enum { isConst = ::std::is_const<t>::value       };
+            enum { Mutab = sig_<t, int(t::*)()>::value       };
+            enum { Const = sig_<t, int(t::*)()const >::value };
+            enum { valid = isConst ? Const : Const || Mutab  };
+            typedef avail_<t> x;
+        public:
+            enum { value = valid || x::value }; 
+        };
+
+        template<class t> class impl_<t, false>
+        {
+        public:
+            enum { value = false }; 
+        };
+
+    } // namespace detail_begin
+
+    namespace detail
+    {
+        template<class t> class begin_
+        {
+            dNO_REFERENCE_(t, x);
+            __if_exists    (x::begin) { enum { v = 1 }; }
+            __if_not_exists(x::begin) { enum { v = 0 }; }
+            typedef detail_begin::impl_<x, v> impl;
+        public:
+            enum { value = impl::value };
+        };
+
     } // namespace detail
 
-    template<class t> 
-    class begin
+    template<class t> class begin
         : dIMPLEMENT_(begin_<t>)
     {};
 

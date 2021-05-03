@@ -24,6 +24,11 @@
     #define dTEST_SFINAE_DUNSUITABLE      1
     #define dTEST_SFINAE_PUNSUITABLE      1
     #define dTEST_SFINAE_DPUNSUITABLE     1
+
+    #define dTEST_SFINAE_INT              1
+    #define dTEST_SFINAE_DINT             1
+    #define dTEST_SFINAE_PINT             1
+    #define dTEST_SFINAE_DPINT            1
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
@@ -43,22 +48,63 @@
     #define dTEST_SFINAE_DUNSUITABLE      1
     #define dTEST_SFINAE_PUNSUITABLE      1
     #define dTEST_SFINAE_DPUNSUITABLE     1
+
+    #define dTEST_SFINAE_INT              1
+    #define dTEST_SFINAE_DINT             1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
+
+#elif defined(dHAS_ENUM_CLASS) 
+    // msvc2012
+    //   - has bug:
+    //     - ignore private/protected access
+
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
+
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
+
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
+
+    #define dTEST_SFINAE_INT              1
+    #define dTEST_SFINAE_DINT             1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
+
 #elif defined(dHAS_TYPE_TRAITS) 
-//    // msvc2010 - msvc2012
-//    #define dTEST_SFINAE_REGULAR          1
-//    #define dTEST_SFINAE_DERIVED          1
-//    // #define dTEST_SFINAE_PRIVATE       1
-//    // #define dTEST_SFINAE_DPRVATE       1
-//
-//    #define dTEST_SFINAE_RECURSIEVE       1
-//    #define dTEST_SFINAE_DRECURSIEVE      1
-//    // #define dTEST_SFINAE_PRECURSIEVE   1
-//    // #define dTEST_SFINAE_DPRECURSIEVE  1
-//
-//    #define dTEST_SFINAE_UNSUITABLE       1
-//    #define dTEST_SFINAE_DUNSUITABLE      1
-//    #define dTEST_SFINAE_PUNSUITABLE      1
-//    #define dTEST_SFINAE_DPUNSUITABLE     1
+    // msvc2010
+    //   - has bug:
+    //     - not worked: private/protected access
+    //     - not worked: derived for int()
+
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
+
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
+
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    // #define dTEST_SFINAE_PUNSUITABLE   0
+    // #define dTEST_SFINAE_DPUNSUITABLE  0
+
+    #define dTEST_SFINAE_INT              1
+    // #define dTEST_SFINAE_DINT          1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
+
 #else
     // msvc20008 or older
 #endif
@@ -536,39 +582,184 @@ TEST_COMPONENT(024)
 }
 #endif // dTEST_SFINAE_PUNSUITABLE
 
-//==============================================================================
-//==============================================================================
-#if 0
-class PConstEx
-{
-    void* begin() const;
-public:
-    PConstEx();
-};
+//..............................................................................
+//..............................................................................
 
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_INT
+// --- non-const
 TEST_COMPONENT(025)
+{
+    //       |   type      | expected |
+    make_test(IntConst     ,  true    );
+    make_test(IntMutable   ,  true    );
+    make_test(Int          ,  true    );
+                           
+    make_test(IntConst&    ,  true    );
+    make_test(IntMutable&  ,  true    );
+    make_test(Int&         ,  true    );
+
+    make_test(IntConst&&   ,  true    );
+    make_test(IntMutable&& ,  true    );
+    make_test(Int&&        ,  true    );
+}
+
+// --- const
+TEST_COMPONENT(026)
+{
+    //       |   type            | expected |
+    make_test(const IntConst     ,  true    );
+    make_test(const IntMutable   ,  false   );
+    make_test(const Int          ,  true    );
+                           
+    make_test(const IntConst&    ,  true    );
+    make_test(const IntMutable&  ,  false   );
+    make_test(const Int&         ,  true    );
+              
+    make_test(const IntConst&&   ,  true    );
+    make_test(const IntMutable&& ,  false   );
+    make_test(const Int&&        ,  true    );
+}
+#endif // dTEST_SFINAE_INT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DINT
+// --- non-const
+TEST_COMPONENT(027)
+{
+    //       |   type       | expected |
+    make_test(DIntConst     ,  true    );
+    make_test(DIntMutable   ,  true    );
+    make_test(DInt          ,  true    );
+                           
+    make_test(DIntConst&    ,  true    );
+    make_test(DIntMutable&  ,  true    );
+    make_test(DInt&         ,  true    );
+              
+    make_test(DIntConst&&   ,  true    );
+    make_test(DIntMutable&& ,  true    );
+    make_test(DInt&&        ,  true    );
+}
+
+// --- const
+TEST_COMPONENT(028)
+{
+    //       |   type             | expected |
+    make_test(const DIntConst     ,  true    );
+    make_test(const DIntMutable   ,  false   );
+    make_test(const DInt          ,  true    );
+                           
+    make_test(const DIntConst&    ,  true    );
+    make_test(const DIntMutable&  ,  false   );
+    make_test(const DInt&         ,  true    );
+                    
+    make_test(const DIntConst&&   ,  true    );
+    make_test(const DIntMutable&& ,  false   );
+    make_test(const DInt&&        ,  true    );
+}
+#endif // dTEST_SFINAE_DINT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PINT
+// --- non-const
+TEST_COMPONENT(029)
+{
+    //       |   type       | expected |
+    make_test(PIntConst     ,  false   );
+    make_test(PIntMutable   ,  false   );
+    make_test(PInt          ,  false   );
+                               
+    make_test(PIntConst&    ,  false   );
+    make_test(PIntMutable&  ,  false   );
+    make_test(PInt&         ,  false   );
+                               
+    make_test(PIntConst&&   ,  false   );
+    make_test(PIntMutable&& ,  false   );
+    make_test(PInt&&        ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(030)
+{
+    //       |   type             | expected |
+    make_test(const PIntConst     ,  false   );
+    make_test(const PIntMutable   ,  false   );
+    make_test(const PInt          ,  false   );
+                               
+    make_test(const PIntConst&    ,  false   );
+    make_test(const PIntMutable&  ,  false   );
+    make_test(const PInt&         ,  false   );
+                               
+    make_test(const PIntConst&&   ,  false   );
+    make_test(const PIntMutable&& ,  false   );
+    make_test(const PInt&&        ,  false   );
+}
+#endif // dTEST_SFINAE_PINT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPINT
+// --- non-const
+TEST_COMPONENT(031)
+{
+    //       |   type        | expected |
+    make_test(DPIntConst     ,  false   );
+    make_test(DPIntMutable   ,  false   );
+    make_test(DPInt          ,  false   );
+              
+    make_test(DPIntConst&    ,  false   );
+    make_test(DPIntMutable&  ,  false   );
+    make_test(DPInt&         ,  false   );
+                          
+    make_test(DPIntConst&&   ,  false   );
+    make_test(DPIntMutable&& ,  false   );
+    make_test(DPInt&&        ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(032)
+{
+    //       |   type              | expected |
+    make_test(const DPIntConst     ,  false   );
+    make_test(const DPIntMutable   ,  false   );
+    make_test(const DPInt          ,  false   );
+                               
+    make_test(const DPIntConst&    ,  false   );
+    make_test(const DPIntMutable&  ,  false   );
+    make_test(const DPInt&         ,  false   );
+                    
+    make_test(const DPIntConst&&   ,  false   );
+    make_test(const DPIntMutable&& ,  false   );
+    make_test(const DPInt&&        ,  false   );
+}
+#endif // dTEST_SFINAE_DPINT
+
+
+//==============================================================================
+//==============================================================================
+
+TEST_COMPONENT(sfinae_1)
 { 
-    typedef tools::sfinae::available::detail::begin_<PConstEx>
-		result_t;
-	typedef result_t::result_t x;
-    std::cout << typeid(x).name() << '\n';
+    typedef ::tools::sfinae::available::detail_begin::impl_<DIntConst, true>
+        impl;
 
-    typedef tools::sfinae::available::detail::begin_<PConstEx>
-		check_t;
-	typedef check_t::check_t z;
-    std::cout << typeid(z).name() << '\n';
-
+    enum { v1 = impl::Const } ;
+    enum { v2 = impl::Mutab } ;
+    enum { v3 = impl::isConst } ;
+    enum { v4 = impl::valid } ;
+    
+    std::cout << "Const = "   << v1 << '\n';
+    std::cout << "Mutab = "   << v2 << '\n';
+    std::cout << "isConst = " << v3 << '\n';
+    std::cout << "valid = "   << v4 << '\n';
     int a = 10;
     (void)a;
-
-    //const bool v = tools::sfinae::available::begin<PConst>::value;
-    //ASSERT_TRUE(!v);
-
-
-    //       |   type      | expected |
-    //make_test(PConst       ,  false   );
 }
-#endif
+
+
 //==============================================================================
 //==============================================================================
 #endif // !TEST_TOOLS_SFINAE_BEGIN

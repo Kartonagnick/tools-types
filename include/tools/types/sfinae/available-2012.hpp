@@ -24,16 +24,17 @@ namespace tools
 {
     struct empty;
 
-namespace sfinae    {
-namespace available {
-
+namespace sfinae
+{
     template<class t> t obj();
 
-    template<class a, class b>
-    struct help
-    { 
-        typedef ::std::true_type type; 
-    };
+    template<class a, class b> struct decltype_
+    {
+		typedef ::std::true_type type;
+		typedef b second;
+	};
+
+namespace available {
 
     namespace detail
     {
@@ -243,9 +244,8 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, 
-                    decltype(*::std::declval<u>())
-                >::type check(u*);
+                typename decltype_<u, decltype(*::std::declval<u>())>::type 
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -273,9 +273,8 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, 
-                    decltype(::std::declval<u>()[::std::declval<i>()]) 
-                >::type check(u*);
+                typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type
+				check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -303,7 +302,7 @@ namespace available {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename help<u, decltype(::std::declval<u>().begin()) >::type
+                typename decltype_<u, decltype(::std::declval<u>().begin()) >::type
                 check(u*);
 
             template <class> static
@@ -315,36 +314,6 @@ namespace available {
             begin_();
             enum { value = result::value };
         };
-
-		#if 0
-        // diagnostic version
-        template<class t> class begin_
-        {
-        public:
-            dNO_REFERENCE_(t, x);
-
-            template <class u> static 
-                help<u, decltype(::std::declval<u>().begin())>
-				check(u*);
-
-            template <class> static
-                ::std::false_type check(...);
-
-            typedef decltype(check<x>(nullptr)) 
-				check_t;
-
-            enum { v = ! ::std::is_same<check_t, ::std::false_type>::value };
-
-            typedef ::std::conditional<v, ::std::true_type, ::std::false_type>
-				cond_t;
-
-            typedef typename cond_t::type 
-				result_t;
-        public:
-            begin_();
-            enum { value = result_t::value };
-        };
-		#endif
 
     } // namespace detail
 

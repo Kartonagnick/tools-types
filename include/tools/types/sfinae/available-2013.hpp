@@ -16,11 +16,15 @@
 
 namespace tools     {
 namespace sfinae    {
-namespace available {
 
     template<class a, class b>
-    struct help 
-        { using type = ::std::true_type;};
+    struct decltype_ 
+    { 
+        using type = ::std::true_type; 
+        using second = b;
+    };
+
+namespace available {
 
     namespace detail
     {
@@ -29,7 +33,7 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, decltype(::std::declval<u>()(::std::declval<args>()...))>::type 
+                typename decltype_<u, decltype(::std::declval<u>()(::std::declval<args>()...))>::type 
 				check(u*);
 
             template<class> static
@@ -60,7 +64,7 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, decltype(*::std::declval<u>())>::type 
+                typename decltype_<u, decltype(*::std::declval<u>())>::type 
 				check(u*);
 
             template <class> static
@@ -89,7 +93,7 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, decltype(::std::declval<u>()[::std::declval<i>()])>::type 
+                typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()])>::type 
 				check(u*);
 
             template <class> static
@@ -119,7 +123,7 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                typename help<u, decltype(::std::declval<u>().begin())>::type
+                typename decltype_<u, decltype(::std::declval<u>().begin())>::type
 				check(u*);
 
             template <class> static
@@ -139,7 +143,7 @@ namespace available {
             using x = ::std::remove_reference_t<t>;
 
             template <class u> static 
-                help<u, decltype(::std::declval<u>().begin())>
+                decltype_<u, decltype(::std::declval<u>().begin())>
 				check(u*);
 
             template <class> static

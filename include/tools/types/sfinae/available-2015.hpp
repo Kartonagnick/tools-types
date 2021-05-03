@@ -66,7 +66,7 @@ namespace available {
     struct access : ::std::false_type {};
  
     template<class t> struct access<t, size_t,
-            ::std::void_t<decltype(::std::declval<t>()[0])>
+            ::std::void_t<decltype(::std::declval<t>()[0u])>
         > : ::std::true_type
     {};
 
