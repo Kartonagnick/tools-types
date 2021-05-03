@@ -32,18 +32,8 @@ namespace available {
     template<class a, class b>
     struct help
     { 
-        //enum { v = ::std::is_same<a, b>::value };
-        //typedef ::std::integral_constant<bool, !v>
-        //    type;
         typedef ::std::true_type type; 
     };
-#if 0
-    template<class a> struct help<a, a>
-    { 
-        typedef ::std::false_type
-            type;
-    };
-#endif
 
     namespace detail
     {
@@ -309,7 +299,6 @@ namespace available {
 
     namespace detail
     {
-#if 1
         template<class t> class begin_
         {
             dNO_REFERENCE_(t, x);
@@ -326,9 +315,8 @@ namespace available {
             begin_();
             enum { value = result::value };
         };
-#endif
 
-#if 0
+		#if 0
         // diagnostic version
         template<class t> class begin_
         {
@@ -356,7 +344,8 @@ namespace available {
             begin_();
             enum { value = result_t::value };
         };
-#endif
+		#endif
+
     } // namespace detail
 
     template<class t> 

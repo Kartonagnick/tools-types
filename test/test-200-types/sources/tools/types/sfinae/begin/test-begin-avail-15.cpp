@@ -44,21 +44,21 @@
     #define dTEST_SFINAE_PUNSUITABLE      1
     #define dTEST_SFINAE_DPUNSUITABLE     1
 #elif defined(dHAS_TYPE_TRAITS) 
-    // msvc2010 - msvc2012
-    #define dTEST_SFINAE_REGULAR          1
-    #define dTEST_SFINAE_DERIVED          1
-    // #define dTEST_SFINAE_PRIVATE       1
-    // #define dTEST_SFINAE_DPRVATE       1
-
-    #define dTEST_SFINAE_RECURSIEVE       1
-    #define dTEST_SFINAE_DRECURSIEVE      1
-    // #define dTEST_SFINAE_PRECURSIEVE   1
-    // #define dTEST_SFINAE_DPRECURSIEVE  1
-
-    #define dTEST_SFINAE_UNSUITABLE       1
-    #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      1
-    #define dTEST_SFINAE_DPUNSUITABLE     1
+//    // msvc2010 - msvc2012
+//    #define dTEST_SFINAE_REGULAR          1
+//    #define dTEST_SFINAE_DERIVED          1
+//    // #define dTEST_SFINAE_PRIVATE       1
+//    // #define dTEST_SFINAE_DPRVATE       1
+//
+//    #define dTEST_SFINAE_RECURSIEVE       1
+//    #define dTEST_SFINAE_DRECURSIEVE      1
+//    // #define dTEST_SFINAE_PRECURSIEVE   1
+//    // #define dTEST_SFINAE_DPRECURSIEVE  1
+//
+//    #define dTEST_SFINAE_UNSUITABLE       1
+//    #define dTEST_SFINAE_DUNSUITABLE      1
+//    #define dTEST_SFINAE_PUNSUITABLE      1
+//    #define dTEST_SFINAE_DPUNSUITABLE     1
 #else
     // msvc20008 or older
 #endif

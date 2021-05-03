@@ -309,7 +309,7 @@ namespace available {
 
     namespace detail
     {
-#if 1
+#if 0
         template<class t> class begin_
         {
             dNO_REFERENCE_(t, x);
@@ -328,7 +328,7 @@ namespace available {
         };
 #endif
 
-#if 0
+#if 1
         // diagnostic version
         template<class t> class begin_
         {
