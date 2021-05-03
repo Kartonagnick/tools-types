@@ -43,17 +43,17 @@
     // #define dTEST_SFINAE_PRIVATE          0
     // #define dTEST_SFINAE_DPRVATE          0
                                           
-    // #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_RECURSIEVE          1
     // #define dTEST_SFINAE_DRECURSIEVE      1
     // #define dTEST_SFINAE_PRECURSIEVE      0
     // #define dTEST_SFINAE_DPRECURSIEVE     0
 
-    // #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_UNSUITABLE          1
     // #define dTEST_SFINAE_DUNSUITABLE      1
     // #define dTEST_SFINAE_PUNSUITABLE      1
     // #define dTEST_SFINAE_DPUNSUITABLE     1
 
-    // #define dTEST_SFINAE_INT              1
+    #define dTEST_SFINAE_INT                 1
     // #define dTEST_SFINAE_DINT             1
     // #define dTEST_SFINAE_PINT             0
     // #define dTEST_SFINAE_DPINT            0
@@ -61,24 +61,25 @@
 #elif defined(dHAS_ENUM_CLASS) 
     // msvc2012
     //   - has bug:
-    //     - ignore private/protected access
+    //     - not worked: private/protected access
+    //     - not worked: derived
 
     #define dTEST_SFINAE_REGULAR            1
     // #define dTEST_SFINAE_DERIVED         1
     // #define dTEST_SFINAE_PRIVATE         0
     // #define dTEST_SFINAE_DPRVATE         0
-    //                                      
-    // #define dTEST_SFINAE_RECURSIEVE      1
+    
+    #define dTEST_SFINAE_RECURSIEVE         1
     // #define dTEST_SFINAE_DRECURSIEVE     1
     // #define dTEST_SFINAE_PRECURSIEVE     0
     // #define dTEST_SFINAE_DPRECURSIEVE    0
-    //                                      
-    // #define dTEST_SFINAE_UNSUITABLE      1
-    // #define dTEST_SFINAE_DUNSUITABLE     1
+    
+    #define dTEST_SFINAE_UNSUITABLE         1
+    #define dTEST_SFINAE_DUNSUITABLE        1
     // #define dTEST_SFINAE_PUNSUITABLE     1
     // #define dTEST_SFINAE_DPUNSUITABLE    1
-    //                                      
-    // #define dTEST_SFINAE_INT             1
+    
+    #define dTEST_SFINAE_INT                1
     // #define dTEST_SFINAE_DINT            1
     // #define dTEST_SFINAE_PINT            0
     // #define dTEST_SFINAE_DPINT           0
@@ -90,46 +91,46 @@
     //     - not worked: derived for int()
 
     #define dTEST_SFINAE_REGULAR          1
-    #define dTEST_SFINAE_DERIVED          1
-    #define dTEST_SFINAE_PRIVATE          0
-    #define dTEST_SFINAE_DPRVATE          0
+    // #define dTEST_SFINAE_DERIVED       1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
 
-    #define dTEST_SFINAE_RECURSIEVE       1
-    #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      0
-    #define dTEST_SFINAE_DPRECURSIEVE     0
+    // #define dTEST_SFINAE_RECURSIEVE    1
+    // #define dTEST_SFINAE_DRECURSIEVE   1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
 
-    #define dTEST_SFINAE_UNSUITABLE       1
-    #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      0
-    #define dTEST_SFINAE_DPUNSUITABLE     0
+    // #define dTEST_SFINAE_UNSUITABLE    1
+    // #define dTEST_SFINAE_DUNSUITABLE   1
+    // #define dTEST_SFINAE_PUNSUITABLE   0
+    // #define dTEST_SFINAE_DPUNSUITABLE  0
 
-    #define dTEST_SFINAE_INT              1
-    #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             0
-    #define dTEST_SFINAE_DPINT            0
+    // #define dTEST_SFINAE_INT           1
+    // #define dTEST_SFINAE_DINT          1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
 
 #else
     // msvc20008 or older
     #define dTEST_SFINAE_REGULAR          1
-    #define dTEST_SFINAE_DERIVED          1
-    #define dTEST_SFINAE_PRIVATE          0
-    #define dTEST_SFINAE_DPRVATE          0
-                                          
-    #define dTEST_SFINAE_RECURSIEVE       1
-    #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      0
-    #define dTEST_SFINAE_DPRECURSIEVE     0
-                                          
-    #define dTEST_SFINAE_UNSUITABLE       1
-    #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      1
-    #define dTEST_SFINAE_DPUNSUITABLE     1
-
-    #define dTEST_SFINAE_INT              1
-    #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             0
-    #define dTEST_SFINAE_DPINT            0
+    // #define dTEST_SFINAE_DERIVED       1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
+    //                                    
+    // #define dTEST_SFINAE_RECURSIEVE    1
+    // #define dTEST_SFINAE_DRECURSIEVE   1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
+    //                                    
+    // #define dTEST_SFINAE_UNSUITABLE    1
+    // #define dTEST_SFINAE_DUNSUITABLE   1
+    // #define dTEST_SFINAE_PUNSUITABLE   1
+    // #define dTEST_SFINAE_DPUNSUITABLE  1
+    // 
+    // #define dTEST_SFINAE_INT           1
+    // #define dTEST_SFINAE_DINT          1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
 #endif
 
 namespace
@@ -745,63 +746,63 @@ TEST_COMPONENT(035)
 {
     //       |   type             | signature                   | expected |
     make_test(UnsuitableConst     , void(UnsuitableConst::*)()  ,  false   );
-    make_test(UnsuitableMutable   , void(Mutable::*)()          ,  false   );
+    make_test(UnsuitableMutable   , void(UnsuitableMutable::*)(),  false   );
     make_test(Unsuitable          , void(Container::*)()        ,  false   );
                                   
     make_test(UnsuitableConst&    , void(UnsuitableConst::*)()  ,  false   );
-    make_test(UnsuitableMutable&  , void(Mutable::*)()          ,  false   );
+    make_test(UnsuitableMutable&  , void(UnsuitableMutable::*)(),  false   );
     make_test(Unsuitable&         , void(Container::*)()        ,  false   );
 
     make_rval(UnsuitableConst&&   , void(UnsuitableConst::*)()  ,  false   );
-    make_rval(UnsuitableMutable&& , void(Mutable::*)()          ,  false   );
+    make_rval(UnsuitableMutable&& , void(UnsuitableMutable::*)(),  false   );
     make_rval(Unsuitable&&        , void(Container::*)()        ,  false   );
 }
 TEST_COMPONENT(036)
 {
-    //       |   type             | signature                        | expected |
-    make_test(UnsuitableConst     , void(UnsuitableConst::*)() const ,  false   );
-    make_test(UnsuitableMutable   , void(Mutable::*)()         const ,  false   );
-    make_test(Unsuitable          , void(Container::*)()       const ,  false   );
+    //       |   type             | signature                          | expected |
+    make_test(UnsuitableConst     , void(UnsuitableConst::*)()   const ,  false   );
+    make_test(UnsuitableMutable   , void(UnsuitableMutable::*)() const ,  false   );
+    make_test(Unsuitable          , void(Container::*)()         const ,  false   );
 
-    make_test(UnsuitableConst&    , void(UnsuitableConst::*)() const ,  false   );
-    make_test(UnsuitableMutable&  , void(Mutable::*)()         const ,  false   );
-    make_test(Unsuitable&         , void(Container::*)()       const ,  false   );
+    make_test(UnsuitableConst&    , void(UnsuitableConst::*)()   const ,  false   );
+    make_test(UnsuitableMutable&  , void(UnsuitableMutable::*)() const ,  false   );
+    make_test(Unsuitable&         , void(Container::*)()         const ,  false   );
 
-    make_rval(UnsuitableConst&&   , void(UnsuitableConst::*)() const ,  false   );
-    make_rval(UnsuitableMutable&& , void(Mutable::*)()         const ,  false   );
-    make_rval(Unsuitable&&        , void(Container::*)()       const ,  false   );
+    make_rval(UnsuitableConst&&   , void(UnsuitableConst::*)()   const ,  false   );
+    make_rval(UnsuitableMutable&& , void(UnsuitableMutable::*)() const ,  false   );
+    make_rval(Unsuitable&&        , void(Container::*)()         const ,  false   );
 }
 
 // --- const
 TEST_COMPONENT(037)
 {
-    //       |   type                   | signature                   | expected |
-    make_test(const UnsuitableConst     , void(UnsuitableConst::*)()  ,  false   );
-    make_test(const UnsuitableMutable   , void(Mutable::*)()          ,  false   );
-    make_test(const Unsuitable          , void(Container::*)()        ,  false   );
+    //       |   type                   | signature                    | expected |
+    make_test(const UnsuitableConst     , void(UnsuitableConst::*)()   ,  false   );
+    make_test(const UnsuitableMutable   , void(UnsuitableMutable::*)() ,  false   );
+    make_test(const Unsuitable          , void(Unsuitable::*)()        ,  false   );
                                   
-    make_test(const UnsuitableConst&    , void(UnsuitableConst::*)()  ,  false   );
-    make_test(const UnsuitableMutable&  , void(Mutable::*)()          ,  false   );
-    make_test(const Unsuitable&         , void(Container::*)()        ,  false   );
+    make_test(const UnsuitableConst&    , void(UnsuitableConst::*)()   ,  false   );
+    make_test(const UnsuitableMutable&  , void(UnsuitableMutable::*)() ,  false   );
+    make_test(const Unsuitable&         , void(Unsuitable::*)()        ,  false   );
               
-    make_rval(const UnsuitableConst&&   , void(UnsuitableConst::*)()  ,  false   );
-    make_rval(const UnsuitableMutable&& , void(Mutable::*)()          ,  false   );
-    make_rval(const Unsuitable&&        , void(Container::*)()        ,  false   );
+    make_rval(const UnsuitableConst&&   , void(UnsuitableConst::*)()   ,  false   );
+    make_rval(const UnsuitableMutable&& , void(UnsuitableMutable::*)() ,  false   );
+    make_rval(const Unsuitable&&        , void(Unsuitable::*)()        ,  false   );
 }
 TEST_COMPONENT(038)
 {
-    //       |   type                   | signature                         | expected |
-    make_test(const UnsuitableConst     , void(UnsuitableConst::*)()  const ,  false   );
-    make_test(const UnsuitableMutable   , void(Mutable::*)()          const ,  false   );
-    make_test(const Unsuitable          , void(Container::*)()        const ,  false   );
+    //       |   type                   | signature                          | expected |
+    make_test(const UnsuitableConst     , void(UnsuitableConst::*)()   const ,  false   );
+    make_test(const UnsuitableMutable   , void(UnsuitableMutable::*)() const ,  false   );
+    make_test(const Unsuitable          , void(Unsuitable::*)()        const ,  false   );
 
-    make_test(const UnsuitableConst&    , void(UnsuitableConst::*)()  const ,  false   );
-    make_test(const UnsuitableMutable&  , void(Mutable::*)()          const ,  false   );
-    make_test(const Unsuitable&         , void(Container::*)()        const ,  false   );
+    make_test(const UnsuitableConst&    , void(UnsuitableConst::*)()   const ,  false   );
+    make_test(const UnsuitableMutable&  , void(UnsuitableMutable::*)() const ,  false   );
+    make_test(const Unsuitable&         , void(Unsuitable::*)()        const ,  false   );
 
-    make_rval(const UnsuitableConst&&   , void(UnsuitableConst::*)()  const ,  false   );
-    make_rval(const UnsuitableMutable&& , void(Mutable::*)()          const ,  false   );
-    make_rval(const Unsuitable&&        , void(Container::*)()        const ,  false   );
+    make_rval(const UnsuitableConst&&   , void(UnsuitableConst::*)()   const ,  false   );
+    make_rval(const UnsuitableMutable&& , void(UnsuitableMutable::*)() const ,  false   );
+    make_rval(const Unsuitable&&        , void(Unsuitable::*)()        const ,  false   );
 }
 #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -813,31 +814,31 @@ TEST_COMPONENT(039)
 {
     //       |   type              | signature                    | expected |
     make_test(DUnsuitableConst     , void(DUnsuitableConst::*)()  ,  false   );
-    make_test(DUnsuitableMutable   , void(DMutable::*)()          ,  false   );
-    make_test(DUnsuitable          , void(DContainer::*)()        ,  false   );
+    make_test(DUnsuitableMutable   , void(DUnsuitableMutable::*)(),  false   );
+    make_test(DUnsuitable          , void(DUnsuitable::*)()       ,  false   );
                                           
     make_test(DUnsuitableConst&    , void(DUnsuitableConst::*)()  ,  false   );
-    make_test(DUnsuitableMutable&  , void(DMutable::*)()          ,  false   );
-    make_test(DUnsuitable&         , void(DContainer::*)()        ,  false   );
+    make_test(DUnsuitableMutable&  , void(DUnsuitableMutable::*)(),  false   );
+    make_test(DUnsuitable&         , void(DUnsuitable::*)()       ,  false   );
                                           
     make_rval(DUnsuitableConst&&   , void(DUnsuitableConst::*)()  ,  false   );
-    make_rval(DUnsuitableMutable&& , void(DMutable::*)()          ,  false   );
-    make_rval(DUnsuitable&&        , void(DContainer::*)()        ,  false   );
+    make_rval(DUnsuitableMutable&& , void(DUnsuitableMutable::*)(),  false   );
+    make_rval(DUnsuitable&&        , void(DUnsuitable::*)()       ,  false   );
 }
 TEST_COMPONENT(040)
 {
-    //       |   type              | signature                         | expected |
-    make_test(DUnsuitableConst     , void(DUnsuitableConst::*)() const ,  false   );
-    make_test(DUnsuitableMutable   , void(DMutable::*)()         const ,  false   );
-    make_test(DUnsuitable          , void(DContainer::*)()       const ,  false   );
+    //       |   type              | signature                           | expected |
+    make_test(DUnsuitableConst     , void(DUnsuitableConst::*)()   const ,  false   );
+    make_test(DUnsuitableMutable   , void(DUnsuitableMutable::*)() const ,  false   );
+    make_test(DUnsuitable          , void(DUnsuitable::*)()        const ,  false   );
               
-    make_test(DUnsuitableConst&    , void(DUnsuitableConst::*)() const ,  false   );
-    make_test(DUnsuitableMutable&  , void(DMutable::*)()         const ,  false   );
-    make_test(DUnsuitable&         , void(DContainer::*)()       const ,  false   );
+    make_test(DUnsuitableConst&    , void(DUnsuitableConst::*)()   const ,  false   );
+    make_test(DUnsuitableMutable&  , void(DUnsuitableMutable::*)() const ,  false   );
+    make_test(DUnsuitable&         , void(DUnsuitable::*)()        const ,  false   );
               
-    make_rval(DUnsuitableConst&&   , void(DUnsuitableConst::*)() const ,  false   );
-    make_rval(DUnsuitableMutable&& , void(DMutable::*)()         const ,  false   );
-    make_rval(DUnsuitable&&        , void(DContainer::*)()       const ,  false   );
+    make_rval(DUnsuitableConst&&   , void(DUnsuitableConst::*)()   const ,  false   );
+    make_rval(DUnsuitableMutable&& , void(DUnsuitableMutable::*)() const ,  false   );
+    make_rval(DUnsuitable&&        , void(DUnsuitable::*)()        const ,  false   );
 }
 
 // --- const
@@ -845,31 +846,31 @@ TEST_COMPONENT(041)
 { 
     //       |   type                    | signature                    | expected |
     make_test(const DUnsuitableConst     , void(DUnsuitableConst::*)()  ,  false   );
-    make_test(const DUnsuitableMutable   , void(DMutable::*)()          ,  false   );
-    make_test(const DUnsuitable          , void(DContainer::*)()        ,  false   );
+    make_test(const DUnsuitableMutable   , void(DUnsuitableMutable::*)(),  false   );
+    make_test(const DUnsuitable          , void(DUnsuitable::*)()       ,  false   );
 
     make_test(const DUnsuitableConst&    , void(DUnsuitableConst::*)()  ,  false   );
-    make_test(const DUnsuitableMutable&  , void(DMutable::*)()          ,  false   );
-    make_test(const DUnsuitable&         , void(DContainer::*)()        ,  false   );
+    make_test(const DUnsuitableMutable&  , void(DUnsuitableMutable::*)(),  false   );
+    make_test(const DUnsuitable&         , void(DUnsuitable::*)()       ,  false   );
 
     make_rval(const DUnsuitableConst&&   , void(DUnsuitableConst::*)()  ,  false   );
-    make_rval(const DUnsuitableMutable&& , void(DMutable::*)()          ,  false   );
-    make_rval(const DUnsuitable&&        , void(DContainer::*)()        ,  false   );
+    make_rval(const DUnsuitableMutable&& , void(DUnsuitableMutable::*)(),  false   );
+    make_rval(const DUnsuitable&&        , void(DUnsuitable::*)()       ,  false   );
 }
 TEST_COMPONENT(042)
 {
-    //       |   type                    | signature                          | expected |
-    make_test(const DUnsuitableConst     , void(DUnsuitableConst::*)()  const ,  false   );
-    make_test(const DUnsuitableMutable   , void(DMutable::*)()          const ,  false   );
-    make_test(const DUnsuitable          , void(DContainer::*)()        const ,  false   );
+    //       |   type                    | signature                           | expected |
+    make_test(const DUnsuitableConst     , void(DUnsuitableConst::*)()   const ,  false   );
+    make_test(const DUnsuitableMutable   , void(DUnsuitableMutable::*)() const ,  false   );
+    make_test(const DUnsuitable          , void(DUnsuitable::*)()        const ,  false   );
 
-    make_test(const DUnsuitableConst&    , void(DUnsuitableConst::*)()  const ,  false   );
-    make_test(const DUnsuitableMutable&  , void(DMutable::*)()          const ,  false   );
-    make_test(const DUnsuitable&         , void(DContainer::*)()        const ,  false   );
+    make_test(const DUnsuitableConst&    , void(DUnsuitableConst::*)()   const ,  false   );
+    make_test(const DUnsuitableMutable&  , void(DUnsuitableMutable::*)() const ,  false   );
+    make_test(const DUnsuitable&         , void(DUnsuitable::*)()        const ,  false   );
 
-    make_rval(const DUnsuitableConst&&   , void(DUnsuitableConst::*)()  const ,  false   );
-    make_rval(const DUnsuitableMutable&& , void(DMutable::*)()          const ,  false   );
-    make_rval(const DUnsuitable&&        , void(DContainer::*)()        const ,  false   );
+    make_rval(const DUnsuitableConst&&   , void(DUnsuitableConst::*)()   const ,  false   );
+    make_rval(const DUnsuitableMutable&& , void(DUnsuitableMutable::*)() const ,  false   );
+    make_rval(const DUnsuitable&&        , void(DUnsuitable::*)()        const ,  false   );
 }
 #endif // dTEST_SFINAE_DUNSUITABLE
 
@@ -879,65 +880,65 @@ TEST_COMPONENT(042)
 // --- non-const
 TEST_COMPONENT(043)
 {
-    //       |   type              | signature                    | expected |
-    make_test(PUnsuitableConst     , void(PUnsuitableConst::*)()  ,  false   );
-    make_test(PUnsuitableMutable   , void(PMutable::*)()          ,  false   );
-    make_test(PUnsuitable          , void(PContainer::*)()        ,  false   );
-              
-    make_test(PUnsuitableConst&    , void(PUnsuitableConst::*)()  ,  false   );
-    make_test(PUnsuitableMutable&  , void(PMutable::*)()          ,  false   );
-    make_test(PUnsuitable&         , void(PContainer::*)()        ,  false   );
-              
-    make_rval(PUnsuitableConst&&   , void(PUnsuitableConst::*)()  ,  false   );
-    make_rval(PUnsuitableMutable&& , void(PMutable::*)()          ,  false   );
-    make_rval(PUnsuitable&&        , void(PContainer::*)()        ,  false   );
+    //       |   type              | signature                     | expected |
+    make_test(PUnsuitableConst     , void(PUnsuitableConst::*)()   ,  false   );
+    make_test(PUnsuitableMutable   , void(PUnsuitableMutable::*)() ,  false   );
+    make_test(PUnsuitable          , void(PUnsuitable::*)()        ,  false   );
+              													   
+    make_test(PUnsuitableConst&    , void(PUnsuitableConst::*)()   ,  false   );
+    make_test(PUnsuitableMutable&  , void(PUnsuitableMutable::*)() ,  false   );
+    make_test(PUnsuitable&         , void(PUnsuitable::*)()        ,  false   );
+              													   
+    make_rval(PUnsuitableConst&&   , void(PUnsuitableConst::*)()   ,  false   );
+    make_rval(PUnsuitableMutable&& , void(PUnsuitableMutable::*)() ,  false   );
+    make_rval(PUnsuitable&&        , void(PUnsuitable::*)()        ,  false   );
 }
 TEST_COMPONENT(044)
 {
-    //       |   type              | signature                         | expected |
-    make_test(PUnsuitableConst     , void(PUnsuitableConst::*)() const ,  false   );
-    make_test(PUnsuitableMutable   , void(PMutable::*)()         const ,  false   );
-    make_test(PUnsuitable          , void(PContainer::*)()       const ,  false   );
+    //       |   type              | signature                           | expected |
+    make_test(PUnsuitableConst     , void(PUnsuitableConst::*)()   const ,  false   );
+    make_test(PUnsuitableMutable   , void(PUnsuitableMutable::*)() const ,  false   );
+    make_test(PUnsuitable          , void(PUnsuitable::*)()        const ,  false   );
               
-    make_test(PUnsuitableConst&    , void(PUnsuitableConst::*)() const ,  false   );
-    make_test(PUnsuitableMutable&  , void(PMutable::*)()         const ,  false   );
-    make_test(PUnsuitable&         , void(PContainer::*)()       const ,  false   );
+    make_test(PUnsuitableConst&    , void(PUnsuitableConst::*)()   const ,  false   );
+    make_test(PUnsuitableMutable&  , void(PUnsuitableMutable::*)() const ,  false   );
+    make_test(PUnsuitable&         , void(PUnsuitable::*)()        const ,  false   );
               
-    make_rval(PUnsuitableConst&&   , void(PUnsuitableConst::*)() const ,  false   );
-    make_rval(PUnsuitableMutable&& , void(PMutable::*)()         const ,  false   );
-    make_rval(PUnsuitable&&        , void(PContainer::*)()       const ,  false   );
+    make_rval(PUnsuitableConst&&   , void(PUnsuitableConst::*)()   const ,  false   );
+    make_rval(PUnsuitableMutable&& , void(PUnsuitableMutable::*)() const ,  false   );
+    make_rval(PUnsuitable&&        , void(PUnsuitable::*)()        const ,  false   );
 }
 
 // --- const
 TEST_COMPONENT(045)
 { 
-    //       |   type                    | signature                    | expected |
-    make_test(const PUnsuitableConst     , void(PUnsuitableConst::*)()  ,  false   );
-    make_test(const PUnsuitableMutable   , void(PMutable::*)()          ,  false   );
-    make_test(const PUnsuitable          , void(PContainer::*)()        ,  false   );
+    //       |   type                    | signature                     | expected |
+    make_test(const PUnsuitableConst     , void(PUnsuitableConst::*)()   ,  false   );
+    make_test(const PUnsuitableMutable   , void(PUnsuitableMutable::*)() ,  false   );
+    make_test(const PUnsuitable          , void(PUnsuitable::*)()        ,  false   );
                     
-    make_test(const PUnsuitableConst&    , void(PUnsuitableConst::*)()  ,  false   );
-    make_test(const PUnsuitableMutable&  , void(PMutable::*)()          ,  false   );
-    make_test(const PUnsuitable&         , void(PContainer::*)()        ,  false   );
+    make_test(const PUnsuitableConst&    , void(PUnsuitableConst::*)()   ,  false   );
+    make_test(const PUnsuitableMutable&  , void(PUnsuitableMutable::*)() ,  false   );
+    make_test(const PUnsuitable&         , void(PUnsuitable::*)()        ,  false   );
                     
-    make_rval(const PUnsuitableConst&&   , void(PUnsuitableConst::*)()  ,  false   );
-    make_rval(const PUnsuitableMutable&& , void(PMutable::*)()          ,  false   );
-    make_rval(const PUnsuitable&&        , void(PContainer::*)()        ,  false   );
+    make_rval(const PUnsuitableConst&&   , void(PUnsuitableConst::*)()   ,  false   );
+    make_rval(const PUnsuitableMutable&& , void(PUnsuitableMutable::*)() ,  false   );
+    make_rval(const PUnsuitable&&        , void(PUnsuitable::*)()        ,  false   );
 }
 TEST_COMPONENT(046)
 {
-    //       |   type                    | signature                          | expected |
-    make_test(const PUnsuitableConst     , void(PUnsuitableConst::*)()  const ,  false   );
-    make_test(const PUnsuitableMutable   , void(PMutable::*)()          const ,  false   );
-    make_test(const PUnsuitable          , void(PContainer::*)()        const ,  false   );
+    //       |   type                    | signature                           | expected |
+    make_test(const PUnsuitableConst     , void(PUnsuitableConst::*)()   const ,  false   );
+    make_test(const PUnsuitableMutable   , void(PUnsuitableMutable::*)() const ,  false   );
+    make_test(const PUnsuitable          , void(PUnsuitable::*)()        const ,  false   );
                     
-    make_test(const PUnsuitableConst&    , void(PUnsuitableConst::*)()  const ,  false   );
-    make_test(const PUnsuitableMutable&  , void(PMutable::*)()          const ,  false   );
-    make_test(const PUnsuitable&         , void(PContainer::*)()        const ,  false   );
+    make_test(const PUnsuitableConst&    , void(PUnsuitableConst::*)()   const ,  false   );
+    make_test(const PUnsuitableMutable&  , void(PUnsuitableMutable::*)() const ,  false   );
+    make_test(const PUnsuitable&         , void(PUnsuitable::*)()        const ,  false   );
                     
-    make_rval(const PUnsuitableConst&&   , void(PUnsuitableConst::*)()  const ,  false   );
-    make_rval(const PUnsuitableMutable&& , void(PMutable::*)()          const ,  false   );
-    make_rval(const PUnsuitable&&        , void(PContainer::*)()        const ,  false   );
+    make_rval(const PUnsuitableConst&&   , void(PUnsuitableConst::*)()   const ,  false   );
+    make_rval(const PUnsuitableMutable&& , void(PUnsuitableMutable::*)() const ,  false   );
+    make_rval(const PUnsuitable&&        , void(PUnsuitable::*)()        const ,  false   );
 }
 #endif // dTEST_SFINAE_PUNSUITABLE
 
@@ -947,65 +948,65 @@ TEST_COMPONENT(046)
 // --- non-const
 TEST_COMPONENT(047)
 {
-    //       |   type               | signature                     | expected |
-    make_test(DPUnsuitableConst     , void(DPUnsuitableConst::*)()  ,  false   );
-    make_test(DPUnsuitableMutable   , void(DPMutable::*)()          ,  false   );
-    make_test(DPUnsuitable          , void(DPContainer::*)()        ,  false   );
+    //       |   type               | signature                      | expected |
+    make_test(DPUnsuitableConst     , void(DPUnsuitableConst::*)()   ,  false   );
+    make_test(DPUnsuitableMutable   , void(DPUnsuitableMutable::*)() ,  false   );
+    make_test(DPUnsuitable          , void(DPUnsuitable::*)()        ,  false   );
               
-    make_test(DPUnsuitableConst&    , void(DPUnsuitableConst::*)()  ,  false   );
-    make_test(DPUnsuitableMutable&  , void(DPMutable::*)()          ,  false   );
-    make_test(DPUnsuitable&         , void(DPContainer::*)()        ,  false   );
+    make_test(DPUnsuitableConst&    , void(DPUnsuitableConst::*)()   ,  false   );
+    make_test(DPUnsuitableMutable&  , void(DPUnsuitableMutable::*)() ,  false   );
+    make_test(DPUnsuitable&         , void(DPUnsuitable::*)()        ,  false   );
               
-    make_rval(DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()  ,  false   );
-    make_rval(DPUnsuitableMutable&& , void(DPMutable::*)()          ,  false   );
-    make_rval(DPUnsuitable&&        , void(DPContainer::*)()        ,  false   );
+    make_rval(DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()   ,  false   );
+    make_rval(DPUnsuitableMutable&& , void(DPUnsuitableMutable::*)() ,  false   );
+    make_rval(DPUnsuitable&&        , void(DPUnsuitable::*)()        ,  false   );
 }
 TEST_COMPONENT(048)
 {
-    //       |   type               | signature                          | expected |
-    make_test(DPUnsuitableConst     , void(DPUnsuitableConst::*)() const ,  false   );
-    make_test(DPUnsuitableMutable   , void(DPMutable::*)()         const ,  false   );
-    make_test(DPUnsuitable          , void(DPContainer::*)()       const ,  false   );
+    //       |   type               | signature                            | expected |
+    make_test(DPUnsuitableConst     , void(DPUnsuitableConst::*)()   const ,  false   );
+    make_test(DPUnsuitableMutable   , void(DPUnsuitableMutable::*)() const ,  false   );
+    make_test(DPUnsuitable          , void(DPUnsuitable::*)()        const ,  false   );
 
-    make_test(DPUnsuitableConst&    , void(DPUnsuitableConst::*)() const ,  false   );
-    make_test(DPUnsuitableMutable&  , void(DPMutable::*)()         const ,  false   );
-    make_test(DPUnsuitable&         , void(DPContainer::*)()       const ,  false   );
+    make_test(DPUnsuitableConst&    , void(DPUnsuitableConst::*)()   const ,  false   );
+    make_test(DPUnsuitableMutable&  , void(DPUnsuitableMutable::*)() const ,  false   );
+    make_test(DPUnsuitable&         , void(DPUnsuitable::*)()        const ,  false   );
 
-    make_rval(DPUnsuitableConst&&   , void(DPUnsuitableConst::*)() const ,  false   );
-    make_rval(DPUnsuitableMutable&& , void(DPMutable::*)()         const ,  false   );
-    make_rval(DPUnsuitable&&        , void(DPContainer::*)()       const ,  false   );
+    make_rval(DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()   const ,  false   );
+    make_rval(DPUnsuitableMutable&& , void(DPUnsuitableMutable::*)() const ,  false   );
+    make_rval(DPUnsuitable&&        , void(DPUnsuitable::*)()        const ,  false   );
 }
 
 // --- const
 TEST_COMPONENT(049)
 { 
-    //       |   type                     | signature                     | expected |
-    make_test(const DPUnsuitableConst     , void(DPUnsuitableConst::*)()  ,  false   );
-    make_test(const DPUnsuitableMutable   , void(DPMutable::*)()          ,  false   );
-    make_test(const DPUnsuitable          , void(DPContainer::*)()        ,  false   );
+    //       |   type                     | signature                      | expected |
+    make_test(const DPUnsuitableConst     , void(DPUnsuitableConst::*)()   ,  false   );
+    make_test(const DPUnsuitableMutable   , void(DPUnsuitableMutable::*)() ,  false   );
+    make_test(const DPUnsuitable          , void(DPUnsuitable::*)()        ,  false   );
                     
-    make_test(const DPUnsuitableConst&    , void(DPUnsuitableConst::*)()  ,  false   );
-    make_test(const DPUnsuitableMutable&  , void(DPMutable::*)()          ,  false   );
-    make_test(const DPUnsuitable&         , void(DPContainer::*)()        ,  false   );
+    make_test(const DPUnsuitableConst&    , void(DPUnsuitableConst::*)()   ,  false   );
+    make_test(const DPUnsuitableMutable&  , void(DPUnsuitableMutable::*)() ,  false   );
+    make_test(const DPUnsuitable&         , void(DPUnsuitable::*)()        ,  false   );
                     
-    make_rval(const DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()  ,  false   );
-    make_rval(const DPUnsuitableMutable&& , void(DPMutable::*)()          ,  false   );
-    make_rval(const DPUnsuitable&&        , void(DPContainer::*)()        ,  false   );
+    make_rval(const DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()   ,  false   );
+    make_rval(const DPUnsuitableMutable&& , void(DPUnsuitableMutable::*)() ,  false   );
+    make_rval(const DPUnsuitable&&        , void(DPUnsuitable::*)()        ,  false   );
 }
 TEST_COMPONENT(050)
 {
-    //       |   type                     | signature                           | expected |
-    make_test(const DPUnsuitableConst     , void(DPUnsuitableConst::*)()  const ,  false   );
-    make_test(const DPUnsuitableMutable   , void(DPMutable::*)()          const ,  false   );
-    make_test(const DPUnsuitable          , void(DPContainer::*)()        const ,  false   );
+    //       |   type                     | signature                            | expected |
+    make_test(const DPUnsuitableConst     , void(DPUnsuitableConst::*)()   const ,  false   );
+    make_test(const DPUnsuitableMutable   , void(DPUnsuitableMutable::*)() const ,  false   );
+    make_test(const DPUnsuitable          , void(DPUnsuitable::*)()        const ,  false   );
 
-    make_test(const DPUnsuitableConst&    , void(DPUnsuitableConst::*)()  const ,  false   );
-    make_test(const DPUnsuitableMutable&  , void(DPMutable::*)()          const ,  false   );
-    make_test(const DPUnsuitable&         , void(DPContainer::*)()        const ,  false   );
+    make_test(const DPUnsuitableConst&    , void(DPUnsuitableConst::*)()   const ,  false   );
+    make_test(const DPUnsuitableMutable&  , void(DPUnsuitableMutable::*)() const ,  false   );
+    make_test(const DPUnsuitable&         , void(DPUnsuitable::*)()        const ,  false   );
 
-    make_rval(const DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()  const ,  false   );
-    make_rval(const DPUnsuitableMutable&& , void(DPMutable::*)()          const ,  false   );
-    make_rval(const DPUnsuitable&&        , void(DPContainer::*)()        const ,  false   );
+    make_rval(const DPUnsuitableConst&&   , void(DPUnsuitableConst::*)()   const ,  false   );
+    make_rval(const DPUnsuitableMutable&& , void(DPUnsuitableMutable::*)() const ,  false   );
+    make_rval(const DPUnsuitable&&        , void(DPUnsuitable::*)()        const ,  false   );
 }
 #endif // dTEST_SFINAE_DPUNSUITABLE
 

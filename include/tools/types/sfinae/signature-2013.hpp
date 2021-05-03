@@ -2,23 +2,8 @@
 #pragma once
 #ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
 #define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
-//==============================================================================
-//==============================================================================
 
-#include <type_traits>
-
-#define dIMPLEMENT_(...)                  \
-    public ::std::integral_constant<bool, \
-        detail::__VA_ARGS__::value        \
-    >
-
-namespace tools  {
-namespace sfinae {
-
-    template<class v, v> struct signature_;
-
-} // namespace sfinae 
-} // namespace tools
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //==============================================================================
@@ -122,15 +107,13 @@ namespace signature {
         template<class t, class sig, bool>
         class impl_
         {
-            using x = ::std::remove_reference_t<t>;
-            
             template <class u> static 
                 ::std::true_type check(signature_<sig, &u::begin>*);
 
             template <class> static 
                 ::std::false_type check(...);
 
-            using result = decltype(check<x>(0));
+            using result = decltype(check<t>(0));
         public:
             impl_() = delete;
             enum { value = result::value };

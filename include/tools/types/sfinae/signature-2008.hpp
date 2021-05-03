@@ -1,7 +1,7 @@
 // [2021y-04m-30d][03:26:10] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
-#define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_SIGNATURE_2008_USED_ 
+#define dTOOLS_SFINAE_SIGNATURE_2008_USED_ 100 PRE
 
 #include <tools/types/sfinae/staff.hpp>
 
@@ -52,7 +52,6 @@ namespace signature {
 
             enum { sz = sizeof(check<x>(0)) };
         public:
-            dereference_();
             enum { value = sz < sizeof(no) };
         };
 
@@ -78,7 +77,6 @@ namespace signature {
 
             enum { sz = sizeof(check<x>(0)) };
         public:
-            access_();
             enum { value = sz < sizeof(no) };
         };
 
@@ -90,44 +88,20 @@ namespace signature {
 //==============================================================================
 //==============================================================================
 
-#if 0
-    namespace detail
-    {
-        template<class t, class sig>
-        class begin_
-        {
-            dNO_REFERENCE_(t, x);
-
-            template <class u> static 
-                yes check(signature_<sig, &u::begin>*);
-
-            template <class> static no check(...);
-
-            enum { sz = sizeof(check<x>(0)) };
-        public:
-            begin_();
-            enum { value = sz < sizeof(no) };
-        };
-
-    } // namespace detail
-#endif
-
 	namespace detail_begin
     {
         template<class t, class sig, bool>
         class impl_
         {
             template <class u> static 
-                ::std::true_type check(signature_<sig, &u::begin>*);
+                yes check(signature_<sig, &u::begin>*);
 
             template <class> static 
-                ::std::false_type check(...);
+                no check(...);
 
-            typedef decltype(check<t>(0))
-                checked;
+            enum { sz = sizeof(check<t>(0)) };
         public:
-            impl_();
-            enum { value = checked::value };
+            enum { value = sz < sizeof(no) };
         };
 
         template<class t, class sig> class impl_<t, sig, false>
@@ -150,7 +124,6 @@ namespace signature {
 
     } // namespace detail
 
-
     template<class t, class sig> 
     class begin : dIMPLEMENT_(begin_<t, sig>) {};
 
@@ -163,4 +136,4 @@ namespace signature {
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SFINAE_SIGNATURE_2013_USED_
+#endif // !dTOOLS_SFINAE_SIGNATURE_2008_USED_

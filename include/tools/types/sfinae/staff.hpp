@@ -13,7 +13,6 @@
         public ::std::integral_constant<bool,   \
             detail::__VA_ARGS__::value          \
         >
-
 #else
     #include <tools/types/traits.hpp>
 
@@ -21,13 +20,7 @@
         public ::tools::integral_constant<bool, \
             detail::__VA_ARGS__::value          \
         >
-
 #endif
-
-#define dNO_REFERENCE_(t, x)             \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
-    typedef typename no_ref::type x
 
 #ifdef _MSC_VER
     #define dSFINAE_PROTECTOR_(name, x, impl)        \

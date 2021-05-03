@@ -1,7 +1,7 @@
 // [2021y-04m-30d][03:11:14] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
-#define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_SIGNATURE_2010_USED_ 
+#define dTOOLS_SFINAE_SIGNATURE_2010_USED_ 100 PRE
 
 #include <tools/types/sfinae/staff.hpp>
 
@@ -109,15 +109,13 @@ namespace signature {
         template<class t, class sig, bool>
         class impl_
         {
-            dNO_REFERENCE_(t, x);
-            
             template <class u> static 
                 ::std::true_type check(signature_<sig, &u::begin>*);
 
             template <class> static 
                 ::std::false_type check(...);
 
-            typedef decltype(check<x>(0))
+            typedef decltype(check<t>(0))
                 checked;
         public:
             impl_();
@@ -158,4 +156,4 @@ namespace signature {
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SFINAE_SIGNATURE_2013_USED_
+#endif // !dTOOLS_SFINAE_SIGNATURE_2010_USED_
