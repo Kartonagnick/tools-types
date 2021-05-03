@@ -3,39 +3,19 @@
 #ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
 #define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
 
-#include <tools/types/traits/no_ref.hpp>
-#include <type_traits>
 #include <cstddef>
+#include <type_traits>
+#include <tools/types/traits/no_ref.hpp>
 
 #define dIMPLEMENT_(...)                  \
     public ::std::integral_constant<bool, \
         detail::__VA_ARGS__::value        \
     >
 
-#define dNO_REFERENCE_(t,x)              \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
+#define dNO_REFERENCE_(t, x)              \
+    typedef ::tools::remove_reference<t>  \
+        no_ref;                           \
     typedef typename no_ref::type x
-
-//==============================================================================
-//==============================================================================
-namespace tools     
-{
-    struct empty;
-    namespace sfinae    
-    {
-        template<class t> t obj();
-
-        template<class a, class b> struct decltype_
-        {
-		    typedef ::std::true_type type;
-		    typedef b second;
-    	};
-
-        template<class v, v> struct signature_;
-
-    } // namespace sfinae
-} // namespace tools
 
 //==============================================================================
 //=== call =====================================================================

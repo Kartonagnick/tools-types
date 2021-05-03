@@ -1,8 +1,13 @@
-// [2021y-04m-30d][01:09:28] Idrisov Denis R. 001 PRE
+// [2021y-04m-30d][01:09:28] Idrisov Denis R. 003 PRE
 #pragma once
 #ifndef dTOOLS_REMOVE_REFERENCE_USED_ 
 #define dTOOLS_REMOVE_REFERENCE_USED_ 3 PRE
 #include <tools/features.hpp>
+
+#define dNO_REFERENCE_(t, x)              \
+    typedef ::tools::remove_reference<t>  \
+        no_ref;                           \
+    typedef typename no_ref::type x
 
 //==============================================================================
 //==============================================================================
@@ -56,11 +61,6 @@ namespace tools
         #endif
 
     #endif
-
-    #define dNO_REFERENCE_(t,x)              \
-        typedef ::tools::remove_reference<t> \
-            no_ref;                          \
-        typedef typename no_ref::type x
 
 } // namespace tools 
 //==============================================================================

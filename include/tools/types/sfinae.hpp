@@ -4,9 +4,7 @@
 #ifndef dTOOLS_SFINAE_USED_ 
 #define dTOOLS_SFINAE_USED_ 100 PRE
 
-#include <tools/features.hpp>
-#include <tools/types/traits/no_ref.hpp>
-
+#include <tools/types/sfinae/staff.hpp>
 //==============================================================================
 //==============================================================================
 

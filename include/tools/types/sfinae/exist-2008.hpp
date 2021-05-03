@@ -14,10 +14,12 @@ namespace tools  {
 namespace sfinae {
 namespace exist  {
 
+#if 0
     #define dNO_REFERENCE_(t,x)              \
         typedef ::tools::remove_reference<t> \
             no_ref;                          \
         typedef typename no_ref::type x
+#endif
 
     #if _MSC_VER != 1928
     // bug msvc2019: not worked in (Visual Studio 2019 version 16.8, 16.9)

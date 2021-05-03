@@ -11,29 +11,35 @@
         detail::__VA_ARGS__::value          \
     >
 
-#define dNO_REFERENCE_(t,x)              \
+#define dNO_REFERENCE_(t, x)             \
     typedef ::tools::remove_reference<t> \
         no_ref;                          \
     typedef typename no_ref::type x
 
 //==============================================================================
 //==============================================================================
-
-namespace tools     
+#if 0
+namespace tools
 {
     struct empty;
 
+    namespace sfinae
+    {
+        typedef char(&no)[1000000];
+
+        template<size_t n> struct sizeof_ 
+            { typedef char(&type)[n]; };
+
+        template<class t> t obj();
+        
+    } // namespace sfinae
+} // namespace tools
+#endif
+//==============================================================================
+//==============================================================================
+
+namespace tools     {
 namespace sfinae    {
-
-    //typedef char(&no)[569456500];
-    typedef char(&no)[1000000];
-    //typedef char(&yes)[2];
-
-    template<size_t n> struct sizeof_ 
-        { typedef char(&type)[n]; };
-
-    template<class t> t obj();
-
 namespace available {
 
     namespace detail

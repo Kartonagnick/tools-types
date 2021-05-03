@@ -20,20 +20,8 @@
 //==============================================================================
 //==============================================================================
 
-namespace tools     
-{
-    struct empty;
-
-namespace sfinae
-{
-    template<class t> t obj();
-
-    template<class a, class b> struct decltype_
-    {
-		typedef ::std::true_type type;
-		typedef b second;
-	};
-
+namespace tools     {
+namespace sfinae    {
 namespace available {
 
     namespace detail
