@@ -130,6 +130,48 @@ namespace signature {
 //==============================================================================
 //==============================================================================
 
+	namespace detail_end
+    {
+        template<class t, class sig, bool>
+        class impl_
+        {
+            template <class u> static 
+                yes check(signature_<sig, &u::end>*);
+
+            template <class> static 
+                no check(...);
+
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t, class sig> class impl_<t, sig, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail
+
+    namespace detail
+    {
+        template<class t, class sig> class end_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_SIG_(end, x, sig, impl_);
+        public:
+            enum { value = impl_::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class end : dIMPLEMENT_(end_<t, sig>) {};
+
+//==============================================================================
+//==============================================================================
+
 } // namespace signature
 } // namespace sfinae
 } // namespace tools

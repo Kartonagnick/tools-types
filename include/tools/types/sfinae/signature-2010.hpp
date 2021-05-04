@@ -21,6 +21,7 @@ namespace signature {
         class call_
         {
             dNO_REFERENCE_(t, x);
+
             template <class u> static 
                 ::std::true_type check(signature_<sig, &u::operator()>*);
 
@@ -128,7 +129,7 @@ namespace signature {
             enum { value = false };
         };
 
-    } // namespace detail
+    } // namespace detail_begin
 
     namespace detail
     {
@@ -145,6 +146,52 @@ namespace signature {
     template<class t, class sig> 
     class begin
         : dIMPLEMENT_(begin_<t, sig>)
+    {};
+
+//==============================================================================
+//==============================================================================
+
+	namespace detail_end
+    {
+        template<class t, class sig, bool>
+        class impl_
+        {
+            template <class u> static 
+                ::std::true_type check(signature_<sig, &u::end>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(0))
+                checked;
+        public:
+            impl_();
+            enum { value = checked::value };
+        };
+
+        template<class t, class sig> class impl_<t, sig, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail_end
+
+    namespace detail
+    {
+        template<class t, class sig> class end_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_SIG_(end, x, sig, impl_);
+        public:
+            enum { value = impl_::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class end
+        : dIMPLEMENT_(end_<t, sig>)
     {};
 
 //==============================================================================
