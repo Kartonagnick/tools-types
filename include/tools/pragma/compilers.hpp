@@ -41,8 +41,10 @@
 
     #if defined(_MSC_VER)
         
+
         #pragma message("msvc: lang : " dSSTRINGIZE(_MSVC_LANG))
         #pragma message("msvc: full version: " dSSTRINGIZE(_MSC_FULL_VER))
+        #pragma message("msvc: extension: " dSSTRINGIZE(_MSC_EXTENSIONS))
 
         #if _MSC_VER >= 1929 
             #pragma message("msvc2019: 16.10") 

@@ -7,7 +7,6 @@
 #ifndef _MSC_VER
     #error Visual Studio compiler required.
 #else
-
 #include <tools/types/traits/no_ref.hpp>
 
 namespace tools  {
