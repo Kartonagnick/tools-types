@@ -171,7 +171,6 @@ namespace tools
 #undef dIMPLEMENT_
 #undef dSFINAE_PROTECTOR_
 #undef dSFINAE_PROTECTOR_SIG_
-
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_USED_
