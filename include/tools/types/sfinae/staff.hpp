@@ -43,11 +43,10 @@
 namespace tools  
 {
     struct empty;
+    template<class t> t obj();
 
     namespace sfinae 
     {
-        template<class t> t obj();
-
         typedef char(&no)[1000000];
         typedef char(&yes)[1];
 
