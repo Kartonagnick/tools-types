@@ -1,5 +1,6 @@
 // [2021y-04m-13d][15:08:02] Idrisov Denis R. 100 
 // [2021y-04m-19d][11:41:29] Idrisov Denis R. 101 PRE
+// [2021y-05m-04d][21:16:17] Idrisov Denis R. 101 PRE
 #pragma once
 #ifndef dTOOLS_VOID_T_USED_ 
 #define dTOOLS_VOID_T_USED_ 101 PRE
@@ -20,13 +21,27 @@
     namespace tools { using ::std::void_t; }
 
 #elif _MSC_VER == 1900
-    // msvc2015 has bug (see: docs/articles/using-declaration.md)
-    #include <type_traits>
+    // msvc2015 has bug
+    //   - see: docs/articles/void_t-2015.md
+
     namespace tools 
     {
-        template<class ...args>
-        using void_t = ::std::void_t<args...>;
-    }
+        namespace detail_void
+        {
+            template<class...> struct check_params_
+                { typedef void type; };
+
+        } // namespace detail_void
+
+        template<class... args>
+        using void_t
+            = typename detail_void::check_params_<args...>::type;
+
+        // msvc2015 has bug
+        //   - see: docs/articles/using-declaration.md
+        // template<class ...args> using void_t = ::std::void_t<args...>;
+
+    } // namespace tools 
 
 #elif _MSC_VER == 1800
     // msvc2013 has problem (see: docs/articles/void_t.md)
