@@ -50,6 +50,13 @@ namespace exist  {
         __if_not_exists(x::begin) { enum { value = 0 }; }
     };                                      
 
+    template<class t> struct end
+    {
+        dNO_REFERENCE_(t, x);
+        __if_exists    (x::end) { enum { value = 1 }; }
+        __if_not_exists(x::end) { enum { value = 0 }; }
+    };                                      
+
 } // namespace exist
 } // namespace sfinae
 } // namespace tools
