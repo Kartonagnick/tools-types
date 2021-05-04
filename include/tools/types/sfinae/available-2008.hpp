@@ -220,6 +220,47 @@ namespace available {
         : dIMPLEMENT_(begin_<t>)
     {};
 
+//==============================================================================
+//==============================================================================
+
+    namespace detail_end
+    {
+        template<class t, bool> class impl_
+        {
+            template <class u> static 
+                typename sizeof_< sizeof(obj<u>().end()) >::type
+                check(u*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t> class impl_<t, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail_begin
+
+    namespace detail
+    {
+        template<class t> class end_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_(end, x, impl_);
+        public:
+            enum { value = impl_::value };
+        };
+
+    } // namespace detail
+
+    template<class t> 
+    class end
+        : dIMPLEMENT_(end_<t>)
+    {};
+
 } // namespace available
 } // namespace sfinae
 } // namespace tools

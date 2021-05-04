@@ -145,6 +145,54 @@ namespace available {
         : dIMPLEMENT_(begin_<t>)
     {};
 
+//==============================================================================
+//==============================================================================
+
+    namespace detail_end
+    {
+        template<class t, bool> class impl_
+        {
+            using x = ::std::remove_reference_t<t>;
+
+            template <class u> static 
+                typename decltype_<u, decltype(::std::declval<u>().end())>::type
+				check(u*);
+
+            template <class> static
+                ::std::false_type check(...);
+
+            using result_t = decltype(check<x>(nullptr));
+        public:
+            impl_() = delete;
+            enum { value = result_t::value };
+        };
+
+        template<class t> class impl_<t, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail_begin
+
+    namespace detail
+    {
+        template<class t> class end_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_(end, x, impl_);
+        public:
+            enum { value = impl_::value };
+        };
+
+    } // namespace detail
+
+    template<class t> 
+    class end
+        : dIMPLEMENT_(end_<t>)
+    {};
+
+
 } // namespace available
 } // namespace sfinae
 } // namespace tools

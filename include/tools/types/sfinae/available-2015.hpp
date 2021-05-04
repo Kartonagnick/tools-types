@@ -6,6 +6,7 @@
 
 #include <cstddef>
 #include <type_traits>
+#include <tools/types/void_t.hpp>
 
 #define dIMPLEMENT_(...)                  \
     public ::std::integral_constant<bool, \
@@ -79,10 +80,27 @@ namespace available {
 //==============================================================================
 
     template<class, class = void>
-    struct begin : ::std::false_type {};
+    struct begin: ::std::false_type {};
  
     template<class t> struct begin<t,
             ::std::void_t<decltype(::std::declval<t>().begin())>
+        > : ::std::true_type 
+    {};
+
+//==============================================================================
+//==============================================================================
+
+    #ifdef _MSC_VER
+        #if _MSC_VER >= 1900 && _MSC_VER < 1919
+            // msvc2015
+        #endif
+    #endif
+
+    template<class, class = void>
+    struct end: ::std::false_type {};
+ 
+    template<class t> struct end<t,
+        dSFINAE_VOID_TYPE(decltype(::std::declval<t>().end()))
         > : ::std::true_type 
     {};
 
