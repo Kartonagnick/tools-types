@@ -23,22 +23,22 @@ namespace exist  {
     template<class t> struct call
     {
         dNO_REFERENCE_(t, x);
-        __if_exists    (t::operator()) { enum { value = 1 }; }
-        __if_not_exists(t::operator()) { enum { value = 0 }; }
+        __if_exists    (x::operator()) { enum { value = 1 }; }
+        __if_not_exists(x::operator()) { enum { value = 0 }; }
     };                                      
 
     template<class t> struct dereference
     {            
         dNO_REFERENCE_(t, x);
-        __if_exists    (t::operator*) { enum { value = 1 }; }
-        __if_not_exists(t::operator*) { enum { value = 0 }; }
+        __if_exists    (x::operator*) { enum { value = 1 }; }
+        __if_not_exists(x::operator*) { enum { value = 0 }; }
     };               
 
     template<class t> struct access
     {            
         dNO_REFERENCE_(t, x);
-        __if_exists    (t::operator[]) { enum { value = 1 }; }
-        __if_not_exists(t::operator[]) { enum { value = 0 }; }
+        __if_exists    (x::operator[]) { enum { value = 1 }; }
+        __if_not_exists(x::operator[]) { enum { value = 0 }; }
     };              
 
     #endif // _MSC_VER != 1928

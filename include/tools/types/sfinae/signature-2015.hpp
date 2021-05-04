@@ -18,6 +18,42 @@ namespace tools  {
 namespace sfinae {
 namespace signature {
 
+//==============================================================================
+//==============================================================================
+
+    namespace detail
+    {
+        template<class t, class sig>
+        class call_
+        {
+            template <class u>
+            using method
+                = decltype(static_cast<sig>(&u::operator()));
+
+            using x = ::std::remove_reference_t<t>;
+
+            template <class u> static 
+                ::std::true_type check(method<u>*);
+
+            template <class> static 
+                ::std::false_type  check(...);
+
+            using result = decltype(check<x>(0));
+        public:
+            call_() = delete;
+            enum { value = result::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class call
+        : dIMPLEMENT_(call_<t, sig>)
+    {};
+
+//==============================================================================
+//==============================================================================
+
     namespace detail
     {
         template<class t, class sig>
@@ -85,39 +121,6 @@ namespace signature {
     template<class t, class sig> 
     class access
         : dIMPLEMENT_(access_<t, sig>)
-    {};
-
-//==============================================================================
-//==============================================================================
-
-    namespace detail
-    {
-        template<class t, class sig>
-        class call_
-        {
-            template <class u>
-            using method
-                = decltype(static_cast<sig>(&u::operator()));
-
-            using x = ::std::remove_reference_t<t>;
-
-            template <class u> static 
-                ::std::true_type check(method<u>*);
-
-            template <class> static 
-                ::std::false_type  check(...);
-
-            using result = decltype(check<x>(0));
-        public:
-            call_() = delete;
-            enum { value = result::value };
-        };
-
-    } // namespace detail
-
-    template<class t, class sig> 
-    class call
-        : dIMPLEMENT_(call_<t, sig>)
     {};
 
 //==============================================================================

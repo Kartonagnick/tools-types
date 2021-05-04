@@ -244,14 +244,21 @@ namespace available {
 
 //==============================================================================
 //=== access ===================================================================
-namespace available {
-    namespace detail
+namespace available 
+{
+    namespace detail_access
     {
-        template<class t, class i> class access_
+        template<class t, class i, bool> class check_
+        {
+        public:
+            enum { value = true };
+        };
+
+        template<class t, class i> class check_<t, i, false>
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type 
+                typename decltype_<u, decltype(obj<u>()[obj<i>()]) >::type 
                 check(u*);
 
             template <class> static
@@ -260,8 +267,41 @@ namespace available {
             typedef decltype(check<x>(0))
                 result;
         public:
-            access_();
             enum { value = result::value };
+        };
+
+        template<class t, class i, bool> class impl_
+        {
+            enum { a = ::std::is_array<t>::value   };
+            enum { p = ::std::is_pointer<t>::value };
+            typedef detail_access::check_<t, i, (a || p)> 
+                check;
+        public:
+            enum { value = check::value };
+        };
+
+        template<class t, class i> class impl_<t, i, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail_access
+
+    namespace detail
+    {
+        template<class t, class i> class access_
+        {
+            dNO_REFERENCE_(t, x);
+            #ifdef _MSC_VER
+                __if_exists    (x::op) { enum { v = 1 }; }
+                __if_not_exists(x::op) { enum { v = 0 }; }
+                typedef detail_access::impl_<x, i, v> impl;
+            #else
+                typedef detail_access::impl_<x, i, true> impl;
+            #endif
+        public:
+            enum { value = impl::value };
         };
 
     } // namespace detail
