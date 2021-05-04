@@ -4,7 +4,7 @@
 namespace me = ::tools::sfinae::available;
 //==============================================================================
 //==============================================================================
-namespace
+namespace test_begin
 {
     #define dexpression(type, expected) \
         me::begin<type>::value == expected
@@ -32,6 +32,7 @@ namespace
             void()
     #endif
 
-} // namespace
+} // namespace test_begin
+using namespace test_begin;
 //==============================================================================
 //==============================================================================

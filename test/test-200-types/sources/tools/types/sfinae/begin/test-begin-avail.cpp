@@ -130,14 +130,15 @@
     #define dTEST_SFINAE_DPINT            0
 #endif
 
-namespace
+namespace 
 {
     #if defined (dTEST_SFINAE_PRIVATE) &&  dTEST_SFINAE_PRIVATE == 0
         const bool privat = true;
     #else
         const bool privat = false;
     #endif
-}
+
+} // namespace 
 
 #include "test-begin.hpp"
 #include "test-avail.hpp"
@@ -767,22 +768,6 @@ TEST_COMPONENT(032)
 }
 #endif // dTEST_SFINAE_DPINT
 
-//==============================================================================
-//==============================================================================
-#if 0
-TEST_COMPONENT(sfinae_1)
-{ 
-    //typedef ::tools::sfinae::available::detail_begin::impl_<DIntConst, true>
-
-	typedef ::tools::sfinae::available::detail::begin_<Maket>
-        impl;
-
-	std::cout << "sz = " << impl::sz << '\n';
-
-    int a = 10;
-    (void)a;
-}
-#endif
 //==============================================================================
 //==============================================================================
 #endif // !TEST_TOOLS_SFINAE_BEGIN

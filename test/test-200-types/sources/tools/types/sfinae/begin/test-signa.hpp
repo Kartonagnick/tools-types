@@ -4,7 +4,7 @@
 namespace me = ::tools::sfinae::signature;
 //==============================================================================
 //==============================================================================
-namespace
+namespace test_begin
 {
     #define dexpression(type, sig, expected) \
         me::begin<type, sig>::value == expected
@@ -32,6 +32,8 @@ namespace
             void()
     #endif
 
-} // namespace
+} // namespace test_begin
+
+using namespace test_begin;
 //==============================================================================
 //==============================================================================

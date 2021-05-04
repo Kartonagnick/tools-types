@@ -26,7 +26,7 @@
 
 //==============================================================================
 //=== [first unit-tests] =======================================================
-namespace
+namespace test_begin
 {
     #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
@@ -73,11 +73,11 @@ namespace
         struct DPConst     : PConst     {};
         struct DPContainer : PContainer {};
     #endif // dTEST_SFINAE_DPRVATE
-} // namespace
+} // namespace test_begin
 
 //==============================================================================
 //=== [ recursieve containers ] ================================================
-namespace
+namespace test_begin
 {
     #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
@@ -128,11 +128,11 @@ namespace
         struct DPRConst     : PRConst     {};
         struct DPRContainer : PRContainer {};
     #endif // dTEST_SFINAE_DPRECURSIEVE
-} // namespace
+} // namespace test_begin
 
 //==============================================================================
 //=== [ unsuitable containers ] ================================================
-namespace
+namespace test_begin
 {
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
@@ -183,11 +183,11 @@ namespace
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
-} // namespace
+} // namespace test_begin
 
 //==============================================================================
 //=== [ return int ] ===========================================================
-namespace
+namespace test_begin
 {
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
@@ -239,8 +239,9 @@ namespace
         struct DPInt        : PInt        {};
     #endif
 
-} // namespace
+} // namespace test_begin
 
+using namespace test_begin;
 //==============================================================================
 //==============================================================================
 
