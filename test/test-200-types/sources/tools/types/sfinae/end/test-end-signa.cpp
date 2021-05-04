@@ -1,9 +1,9 @@
-// [2021y-04m-29d][12:21:22] Idrisov Denis R.
+// [2021y-05m-04d][16:34:05] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_END
 #define dTEST_COMPONENT tools, types, sfinae, signature
-#define dTEST_METHOD begin
+#define dTEST_METHOD end
 #define dTEST_TAG tdd
 
 //==============================================================================
@@ -142,7 +142,7 @@ namespace
     #endif
 }
 
-#include "test-begin.hpp"
+#include "test-end.hpp"
 #include "test-signa.hpp"
 
 //==============================================================================
@@ -1284,4 +1284,4 @@ TEST_COMPONENT(066)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_BEGIN
+#endif // !TEST_TOOLS_SFINAE_END

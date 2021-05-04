@@ -13,7 +13,6 @@
         public ::std::integral_constant<bool,   \
             detail::__VA_ARGS__::value          \
         >
-
 #else
     #include <tools/types/traits.hpp>
 
@@ -21,33 +20,35 @@
         public ::tools::integral_constant<bool, \
             detail::__VA_ARGS__::value          \
         >
-
 #endif
-
-#define dNO_REFERENCE_(t, x)             \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
-    typedef typename no_ref::type x
 
 #ifdef _MSC_VER
     #define dSFINAE_PROTECTOR_(name, x, impl)        \
         __if_exists    (x::name) { enum { v = 1 }; } \
         __if_not_exists(x::name) { enum { v = 0 }; } \
-        typedef detail_##name::impl_<x, v> impl
+        typedef detail_##name::impl<x, v> impl
+
+    #define dSFINAE_PROTECTOR_SIG_(name, x, sig, impl) \
+        __if_exists    (x::name) { enum { v = 1 }; }   \
+        __if_not_exists(x::name) { enum { v = 0 }; }   \
+        typedef detail_##name::impl<x, sig, v> impl
 #else
     #define dSFINAE_PROTECTOR_(name, x, impl) \
-        typedef detail_##name::impl_<x, true> impl
+        typedef detail_##name::impl<x, true> impl
+
+    #define dSFINAE_PROTECTOR_SIG_(name, x, sig, impl) \
+        typedef detail_##name::impl<x, sig, true> impl
 #endif
 
 namespace tools  
 {
     struct empty;
+    template<class t> t obj();
 
     namespace sfinae 
     {
-        template<class t> t obj();
-
         typedef char(&no)[1000000];
+        typedef char(&yes)[1];
 
         template<size_t n> struct sizeof_ 
             { typedef char(&type)[n]; };

@@ -93,7 +93,7 @@ namespace tools
 
     // if the syntax is valid: *obj ---> dereferencable 
     template<class t> struct is_dereferencable
-        : dDETAIL_CONSTANT(is_dereferencable_<t>)
+        : dIMPLEMENT_(is_dereferencable_<t>)
     {};
 
     namespace detail
@@ -163,14 +163,14 @@ namespace tools
 
     // if the syntax is valid: *obj ---> dereferencable 
     template<class t> struct is_lambda
-        : dDETAIL_CONSTANT(is_lambda_<t>)
+        : dIMPLEMENT_(is_lambda_<t>)
     {};
 
 } // namespace tools
 
-//#include <tools/types/sfinae/is_dereferencable.hpp>
-//#include <tools/types/sfinae/begin.hpp>
-
+#undef dIMPLEMENT_
+#undef dSFINAE_PROTECTOR_
+#undef dSFINAE_PROTECTOR_SIG_
 //==============================================================================
 //==============================================================================
 #endif // !dTOOLS_SFINAE_USED_

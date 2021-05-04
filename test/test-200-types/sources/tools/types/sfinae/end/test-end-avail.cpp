@@ -1,11 +1,11 @@
-// [2021y-04m-29d][12:57:49] Idrisov Denis R.
+// [2021y-05m-04d][16:34:05] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE_BEGIN
+#define TEST_TOOLS_SFINAE_END
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_END
 #define dTEST_COMPONENT tools, types, sfinae, available
-#define dTEST_METHOD begin
+#define dTEST_METHOD end
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -16,7 +16,7 @@
     #define dTEST_SFINAE_DERIVED          1
     #define dTEST_SFINAE_PRIVATE          1
     #define dTEST_SFINAE_DPRVATE          1
-                                          
+    
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
     #define dTEST_SFINAE_PRECURSIEVE      1
@@ -26,11 +26,12 @@
     #define dTEST_SFINAE_DUNSUITABLE      1
     #define dTEST_SFINAE_PUNSUITABLE      1
     #define dTEST_SFINAE_DPUNSUITABLE     1
-
+                                          
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             1
     #define dTEST_SFINAE_DPINT            1
+
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
@@ -130,21 +131,21 @@
     #define dTEST_SFINAE_DPINT            0
 #endif
 
-namespace 
+namespace
 {
     #if defined (dTEST_SFINAE_PRIVATE) &&  dTEST_SFINAE_PRIVATE == 0
         const bool privat = true;
     #else
         const bool privat = false;
     #endif
+}
 
-} // namespace 
-
-#include "test-begin.hpp"
+#include "test-end.hpp"
 #include "test-avail.hpp"
 
 //==============================================================================
 //==============================================================================
+
 #ifdef dTEST_SFINAE_REGULAR
 // --- simple: false
 TEST_COMPONENT(000)
@@ -770,4 +771,4 @@ TEST_COMPONENT(032)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_BEGIN
+#endif // !TEST_TOOLS_SFINAE_END

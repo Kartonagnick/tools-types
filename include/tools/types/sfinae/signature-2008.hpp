@@ -1,19 +1,9 @@
 // [2021y-04m-30d][03:26:10] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_SIGNATURE_2013_USED_ 
-#define dTOOLS_SFINAE_SIGNATURE_2013_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_SIGNATURE_2008_USED_ 
+#define dTOOLS_SFINAE_SIGNATURE_2008_USED_ 100 PRE
 
-#include <tools/types/traits.hpp>
-
-#define dIMPLEMENT_(...)                    \
-    public ::tools::integral_constant<bool, \
-        detail::__VA_ARGS__::value          \
-    >
-
-#define dNO_REFERENCE_(t,x)              \
-    typedef ::tools::remove_reference<t> \
-        no_ref;                          \
-    typedef typename no_ref::type x
+#include <tools/types/sfinae/staff.hpp>
 
 //==============================================================================
 //==============================================================================
@@ -21,11 +11,6 @@
 namespace tools  {
 namespace sfinae {
 namespace signature {
-
-    typedef char(&no )[1];
-    typedef char(&yes)[2];
-
-    template<class v, v> struct help;
 
 //==============================================================================
 //==============================================================================
@@ -36,11 +21,11 @@ namespace signature {
         {
             dNO_REFERENCE_(t, x);
             template <class u> static 
-                yes check(help<sig, &u::operator()>*);
+                yes check(signature_<sig, &u::operator()>*);
             template <class> static no check(...);
             enum { sz = sizeof(check<x>(0)) };
         public:
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -61,14 +46,13 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                yes check(help<sig, &u::operator*>*);
+                yes check(signature_<sig, &u::operator*>*);
 
             template <class> static no check(...);
 
             enum { sz = sizeof(check<x>(0)) };
         public:
-            dereference_();
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -87,14 +71,13 @@ namespace signature {
             dNO_REFERENCE_(t, x);
 
             template <class u> static 
-                yes check(help<sig, &u::operator[]>*);
+                yes check(signature_<sig, &u::operator[]>*);
 
             template <class> static no check(...);
 
             enum { sz = sizeof(check<x>(0)) };
         public:
-            access_();
-            enum { value = sz != sizeof(no) };
+            enum { value = sz < sizeof(no) };
         };
 
     } // namespace detail
@@ -105,22 +88,38 @@ namespace signature {
 //==============================================================================
 //==============================================================================
 
+	namespace detail_begin
+    {
+        template<class t, class sig, bool>
+        class impl_
+        {
+            template <class u> static 
+                yes check(signature_<sig, &u::begin>*);
+
+            template <class> static 
+                no check(...);
+
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t, class sig> class impl_<t, sig, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail
+
     namespace detail
     {
-        template<class t, class sig>
-        class begin_
+        template<class t, class sig> class begin_
         {
             dNO_REFERENCE_(t, x);
-
-            template <class u> static 
-                yes check(help<sig, &u::begin>*);
-
-            template <class> static no check(...);
-
-            enum { sz = sizeof(check<x>(0)) };
+            dSFINAE_PROTECTOR_SIG_(begin, x, sig, impl_);
         public:
-            begin_();
-            enum { value = sz != sizeof(no) };
+            enum { value = impl_::value };
         };
 
     } // namespace detail
@@ -131,11 +130,52 @@ namespace signature {
 //==============================================================================
 //==============================================================================
 
+	namespace detail_end
+    {
+        template<class t, class sig, bool>
+        class impl_
+        {
+            template <class u> static 
+                yes check(signature_<sig, &u::end>*);
+
+            template <class> static 
+                no check(...);
+
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t, class sig> class impl_<t, sig, false>
+        {
+        public:
+            enum { value = false };
+        };
+
+    } // namespace detail
+
+    namespace detail
+    {
+        template<class t, class sig> class end_
+        {
+            dNO_REFERENCE_(t, x);
+            dSFINAE_PROTECTOR_SIG_(end, x, sig, impl_);
+        public:
+            enum { value = impl_::value };
+        };
+
+    } // namespace detail
+
+    template<class t, class sig> 
+    class end : dIMPLEMENT_(end_<t, sig>) {};
+
+//==============================================================================
+//==============================================================================
+
 } // namespace signature
 } // namespace sfinae
 } // namespace tools
 
-#undef dIMPLEMENT_
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SFINAE_SIGNATURE_2013_USED_
+#endif // !dTOOLS_SFINAE_SIGNATURE_2008_USED_

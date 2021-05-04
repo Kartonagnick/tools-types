@@ -1,11 +1,11 @@
-// [2021y-04m-29d][12:57:49] Idrisov Denis R.
+// [2021y-05m-04d][21:27:57] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
 #define TEST_TOOLS_SFINAE_BEGIN
 
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, available
-#define dTEST_METHOD begin
+#define dTEST_METHOD access
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -13,24 +13,24 @@
 #ifdef dHAS_CPP11
     // msvc2015 or newer 
     #define dTEST_SFINAE_REGULAR          1
-    #define dTEST_SFINAE_DERIVED          1
-    #define dTEST_SFINAE_PRIVATE          1
-    #define dTEST_SFINAE_DPRVATE          1
-                                          
-    #define dTEST_SFINAE_RECURSIEVE       1
-    #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      1
-    #define dTEST_SFINAE_DPRECURSIEVE     1
-                                          
-    #define dTEST_SFINAE_UNSUITABLE       1
-    #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      1
-    #define dTEST_SFINAE_DPUNSUITABLE     1
-
-    #define dTEST_SFINAE_INT              1
-    #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             1
-    #define dTEST_SFINAE_DPINT            1
+    // #define dTEST_SFINAE_DERIVED          1
+    // #define dTEST_SFINAE_PRIVATE          1
+    // #define dTEST_SFINAE_DPRVATE          1
+    //                                       
+    // #define dTEST_SFINAE_RECURSIEVE       1
+    // #define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE      1
+    // #define dTEST_SFINAE_DPRECURSIEVE     1
+    //                                       
+    // #define dTEST_SFINAE_UNSUITABLE       1
+    // #define dTEST_SFINAE_DUNSUITABLE      1
+    // #define dTEST_SFINAE_PUNSUITABLE      1
+    // #define dTEST_SFINAE_DPUNSUITABLE     1
+    // 
+    // #define dTEST_SFINAE_INT              1
+    // #define dTEST_SFINAE_DINT             1
+    // #define dTEST_SFINAE_PINT             1
+    // #define dTEST_SFINAE_DPINT            1
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
@@ -140,12 +140,15 @@ namespace
 
 } // namespace 
 
-#include "test-begin.hpp"
+#include "test-access.hpp"
 #include "test-avail.hpp"
 
 //==============================================================================
 //==============================================================================
 #ifdef dTEST_SFINAE_REGULAR
+
+int foo() { return 1;  }
+
 // --- simple: false
 TEST_COMPONENT(000)
 {
@@ -165,10 +168,14 @@ TEST_COMPONENT(000)
     make_rval(int&&     ,  false   );
     make_rval(int(&&)() ,  false   );
 //-----------------------------------------
-    make_test(Maket*    ,  false   );
-    make_test(Dummy*    ,  false   );
-    make_test(int*      ,  false   );
+    make_test(Maket*    ,  true    );
+    make_test(Dummy*    ,  true    );
+    make_test(int*      ,  true    );
     make_test(int(*)()  ,  false   );
+
+    // int(*p)() = foo;
+    // const auto re = p[0]();
+    // ASSERT_TRUE(re == 1);
 }
 
 // --- non-const

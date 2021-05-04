@@ -1,5 +1,6 @@
-// [2021y-05m-02d][22:23:34] Idrisov Denis R.
+// [2021y-05m-04d][21:27:57] Idrisov Denis R.
 #pragma once
+#include <cstddef>
 #include <tools/features.hpp>
 
 #if 0
@@ -26,17 +27,17 @@
 
 //==============================================================================
 //=== [first unit-tests] =======================================================
-namespace test_begin
+namespace test_access
 {
     #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
         struct Dummy {};
-        struct Mutable { void begin(); };
-        struct Const   { void begin() const; };
+        struct Mutable { void operator[](const size_t); };
+        struct Const   { void operator[](const size_t) const; };
         struct Container
         {
-            void begin();
-            void begin() const;
+            void operator[](const size_t);
+            void operator[](const size_t) const;
         };
     #endif // dTEST_SFINAE_REGULAR
 
@@ -49,20 +50,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
-            void begin();
+            void operator[](const size_t);
         public:
             PMutable();
         };
         class PConst
         {
-            void begin() const;
+            void operator[](const size_t) const;
         public:
             PConst();
         };
         class PContainer
         {
-            void begin() ;
-            void begin() const;
+            void operator[](const size_t) ;
+            void operator[](const size_t) const;
         public:
             PContainer();
         };
@@ -73,25 +74,25 @@ namespace test_begin
         struct DPConst     : PConst     {};
         struct DPContainer : PContainer {};
     #endif // dTEST_SFINAE_DPRVATE
-} // namespace test_begin
+} // namespace test_access
 
 //==============================================================================
 //=== [ recursieve containers ] ================================================
-namespace test_begin
+namespace test_access
 {
     #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
-            RMutable begin();
+            RMutable operator[](const size_t);
         };
         struct RConst 
         {
-            RConst begin() const;
+            RConst operator[](const size_t) const;
         };
         struct RContainer
         {
-            RContainer begin() ;
-            RContainer begin() const;
+            RContainer operator[](const size_t) ;
+            RContainer operator[](const size_t) const;
         };
     #endif // dTEST_SFINAE_RECURSIEVE
 
@@ -104,20 +105,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
-            PRMutable begin();
+            PRMutable operator[](const size_t);
         public:
             PRMutable();
         };
         class PRConst
         {
-            PRConst begin() const;
+            PRConst operator[](const size_t) const;
         public:
             PRConst();
         };
         class PRContainer
         {
-            PRContainer begin() ;
-            PRContainer begin() const;
+            PRContainer operator[](const size_t) ;
+            PRContainer operator[](const size_t) const;
         public:
             PRContainer();
         };
@@ -128,11 +129,11 @@ namespace test_begin
         struct DPRConst     : PRConst     {};
         struct DPRContainer : PRContainer {};
     #endif // dTEST_SFINAE_DPRECURSIEVE
-} // namespace test_begin
+} // namespace test_access
 
 //==============================================================================
 //=== [ unsuitable containers ] ================================================
-namespace test_begin
+namespace test_access
 {
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
@@ -183,25 +184,25 @@ namespace test_begin
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
-} // namespace test_begin
+} // namespace test_access
 
 //==============================================================================
 //=== [ return int ] ===========================================================
-namespace test_begin
+namespace test_access
 {
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-             int begin(); 
+             int operator[](const size_t); 
         };
         struct IntConst
         {
-             int begin() const; 
+             int operator[](const size_t) const; 
         };
         struct Int
         {
-             int begin() ; 
-             int begin() const; 
+             int operator[](const size_t) ; 
+             int operator[](const size_t) const; 
         };
     #endif // dTEST_SFINAE_INT
 
@@ -214,20 +215,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-             int begin(); 
+             int operator[](const size_t); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-             int begin() const; 
+             int operator[](const size_t) const; 
         public:
             PIntConst();
         };
         class PInt
         {
-             int begin() ; 
-             int begin() const; 
+             int operator[](const size_t) ; 
+             int operator[](const size_t) const; 
         public:
             PInt();
         };
@@ -239,9 +240,9 @@ namespace test_begin
         struct DPInt        : PInt        {};
     #endif
 
-} // namespace test_begin
+} // namespace test_access
 
-using namespace test_begin;
+using namespace test_access;
 //==============================================================================
 //==============================================================================
 

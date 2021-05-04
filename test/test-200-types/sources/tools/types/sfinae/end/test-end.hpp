@@ -1,4 +1,4 @@
-// [2021y-05m-02d][22:23:34] Idrisov Denis R.
+// [2021y-05m-04d][16:34:05] Idrisov Denis R.
 #pragma once
 #include <tools/features.hpp>
 
@@ -26,17 +26,17 @@
 
 //==============================================================================
 //=== [first unit-tests] =======================================================
-namespace test_begin
+namespace test_end
 {
     #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
         struct Dummy {};
-        struct Mutable { void begin(); };
-        struct Const   { void begin() const; };
+        struct Mutable { void end(); };
+        struct Const   { void end() const; };
         struct Container
         {
-            void begin();
-            void begin() const;
+            void end();
+            void end() const;
         };
     #endif // dTEST_SFINAE_REGULAR
 
@@ -49,20 +49,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
-            void begin();
+            void end();
         public:
             PMutable();
         };
         class PConst
         {
-            void begin() const;
+            void end() const;
         public:
             PConst();
         };
         class PContainer
         {
-            void begin() ;
-            void begin() const;
+            void end() ;
+            void end() const;
         public:
             PContainer();
         };
@@ -73,25 +73,25 @@ namespace test_begin
         struct DPConst     : PConst     {};
         struct DPContainer : PContainer {};
     #endif // dTEST_SFINAE_DPRVATE
-} // namespace test_begin
+} // namespace test_end
 
 //==============================================================================
 //=== [ recursieve containers ] ================================================
-namespace test_begin
+namespace test_end
 {
     #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
-            RMutable begin();
+            RMutable end();
         };
         struct RConst 
         {
-            RConst begin() const;
+            RConst end() const;
         };
         struct RContainer
         {
-            RContainer begin() ;
-            RContainer begin() const;
+            RContainer end() ;
+            RContainer end() const;
         };
     #endif // dTEST_SFINAE_RECURSIEVE
 
@@ -104,20 +104,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
-            PRMutable begin();
+            PRMutable end();
         public:
             PRMutable();
         };
         class PRConst
         {
-            PRConst begin() const;
+            PRConst end() const;
         public:
             PRConst();
         };
         class PRContainer
         {
-            PRContainer begin() ;
-            PRContainer begin() const;
+            PRContainer end() ;
+            PRContainer end() const;
         public:
             PRContainer();
         };
@@ -128,25 +128,25 @@ namespace test_begin
         struct DPRConst     : PRConst     {};
         struct DPRContainer : PRContainer {};
     #endif // dTEST_SFINAE_DPRECURSIEVE
-} // namespace test_begin
+} // namespace test_end
 
 //==============================================================================
 //=== [ unsuitable containers ] ================================================
-namespace test_begin
+namespace test_end
 {
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
         {
-             void begin(int); 
+             void end(int); 
         };
         struct UnsuitableConst
         {
-             void begin(int) const; 
+             void end(int) const; 
         };
         struct Unsuitable
         {
-             void begin(int) ; 
-             void begin(int) const; 
+             void end(int) ; 
+             void end(int) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -159,20 +159,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
-             void begin(int); 
+             void end(int); 
         public:
             PUnsuitableMutable();
         };
         class PUnsuitableConst
         {
-             void begin(int) const; 
+             void end(int) const; 
         public:
             PUnsuitableConst();
         };
         class PUnsuitable
         {
-             void begin(int) ; 
-             void begin(int) const; 
+             void end(int) ; 
+             void end(int) const; 
         public:
             PUnsuitable();
         };
@@ -183,25 +183,25 @@ namespace test_begin
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
-} // namespace test_begin
+} // namespace test_end
 
 //==============================================================================
 //=== [ return int ] ===========================================================
-namespace test_begin
+namespace test_end
 {
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-             int begin(); 
+             int end(); 
         };
         struct IntConst
         {
-             int begin() const; 
+             int end() const; 
         };
         struct Int
         {
-             int begin() ; 
-             int begin() const; 
+             int end() ; 
+             int end() const; 
         };
     #endif // dTEST_SFINAE_INT
 
@@ -214,20 +214,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-             int begin(); 
+             int end(); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-             int begin() const; 
+             int end() const; 
         public:
             PIntConst();
         };
         class PInt
         {
-             int begin() ; 
-             int begin() const; 
+             int end() ; 
+             int end() const; 
         public:
             PInt();
         };
@@ -239,9 +239,9 @@ namespace test_begin
         struct DPInt        : PInt        {};
     #endif
 
-} // namespace test_begin
+} // namespace test_end
 
-using namespace test_begin;
+using namespace test_end;
 //==============================================================================
 //==============================================================================
 

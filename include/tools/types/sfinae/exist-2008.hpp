@@ -7,7 +7,6 @@
 #ifndef _MSC_VER
     #error Visual Studio compiler required.
 #else
-
 #include <tools/types/traits/no_ref.hpp>
 
 namespace tools  {
@@ -24,22 +23,22 @@ namespace exist  {
     template<class t> struct call
     {
         dNO_REFERENCE_(t, x);
-        __if_exists    (t::operator()) { enum { value = 1 }; }
-        __if_not_exists(t::operator()) { enum { value = 0 }; }
+        __if_exists    (x::operator()) { enum { value = 1 }; }
+        __if_not_exists(x::operator()) { enum { value = 0 }; }
     };                                      
 
     template<class t> struct dereference
     {            
         dNO_REFERENCE_(t, x);
-        __if_exists    (t::operator*) { enum { value = 1 }; }
-        __if_not_exists(t::operator*) { enum { value = 0 }; }
+        __if_exists    (x::operator*) { enum { value = 1 }; }
+        __if_not_exists(x::operator*) { enum { value = 0 }; }
     };               
 
     template<class t> struct access
     {            
         dNO_REFERENCE_(t, x);
-        __if_exists    (t::operator[]) { enum { value = 1 }; }
-        __if_not_exists(t::operator[]) { enum { value = 0 }; }
+        __if_exists    (x::operator[]) { enum { value = 1 }; }
+        __if_not_exists(x::operator[]) { enum { value = 0 }; }
     };              
 
     #endif // _MSC_VER != 1928
@@ -49,6 +48,13 @@ namespace exist  {
         dNO_REFERENCE_(t, x);
         __if_exists    (x::begin) { enum { value = 1 }; }
         __if_not_exists(x::begin) { enum { value = 0 }; }
+    };                                      
+
+    template<class t> struct end
+    {
+        dNO_REFERENCE_(t, x);
+        __if_exists    (x::end) { enum { value = 1 }; }
+        __if_not_exists(x::end) { enum { value = 0 }; }
     };                                      
 
 } // namespace exist

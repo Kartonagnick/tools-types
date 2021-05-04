@@ -1,20 +1,20 @@
-// [2021y-05m-02d][22:43:13] Idrisov Denis R.B
+// [2021y-05m-04d][16:34:05] Idrisov Denis R.
 #pragma once
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::signature;
 //==============================================================================
 //==============================================================================
-namespace test_begin
+namespace test_end
 {
     #define dexpression(type, sig, expected) \
-        me::begin<type, sig>::value == expected
+        me::end<type, sig>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, sig, expected)                         \
-            static_assert(                                             \
-                dexpression(type, sig, expected),                      \
-                "tools::sfinae::signature::begin<" #type "," #sig "> " \
-                "must be '" #expected "'"                              \
+        #define make_test(type, sig, expected)                       \
+            static_assert(                                           \
+                dexpression(type, sig, expected),                    \
+                "tools::sfinae::signature::end<" #type "," #sig "> " \
+                "must be '" #expected "'"                            \
             )
     #else
         #define make_test(type, sig, expected)   \
@@ -32,8 +32,7 @@ namespace test_begin
             void()
     #endif
 
-} // namespace test_begin
-
-using namespace test_begin;
+} // namespace
+using namespace test_end;
 //==============================================================================
 //==============================================================================
