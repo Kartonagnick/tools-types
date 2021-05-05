@@ -135,19 +135,21 @@ namespace test_access
 //=== [ unsuitable containers ] ================================================
 namespace test_access
 {
+    struct index;
+
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
         {
-             void begin(int); 
+             void operator[](const index&); 
         };
         struct UnsuitableConst
         {
-             void begin(int) const; 
+             void operator[](const index&) const; 
         };
         struct Unsuitable
         {
-             void begin(int) ; 
-             void begin(int) const; 
+             void operator[](const index&) ; 
+             void operator[](const index&) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -160,20 +162,20 @@ namespace test_access
     #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
-             void begin(int); 
+             void operator[](const index&);
         public:
             PUnsuitableMutable();
         };
         class PUnsuitableConst
         {
-             void begin(int) const; 
+             void operator[](const index&) const; 
         public:
             PUnsuitableConst();
         };
         class PUnsuitable
         {
-             void begin(int) ; 
-             void begin(int) const; 
+             void operator[](const index&) ; 
+             void operator[](const index&) const; 
         public:
             PUnsuitable();
         };
