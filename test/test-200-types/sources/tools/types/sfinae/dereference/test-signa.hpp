@@ -1,20 +1,20 @@
-// [2021y-05m-04d][21:27:57] Idrisov Denis R.
+// [2021y-05m-05d][23:02:09] Idrisov Denis R.
 #pragma once
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::signature;
 //==============================================================================
 //==============================================================================
-namespace test_access
+namespace test_dereference
 {
     #define dexpression(type, sig, expected) \
-        me::access<type, sig>::value == expected
+        me::dereference<type, sig>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, sig, expected)                          \
-            static_assert(                                              \
-                dexpression(type, sig, expected),                       \
-                "tools::sfinae::signature::access<" #type "," #sig "> " \
-                "must be '" #expected "'"                               \
+        #define make_test(type, sig, expected)                               \
+            static_assert(                                                   \
+                dexpression(type, sig, expected),                            \
+                "tools::sfinae::signature::dereference<" #type "," #sig "> " \
+                "must be '" #expected "'"                                    \
             )
     #else
         #define make_test(type, sig, expected)   \
@@ -32,7 +32,8 @@ namespace test_access
             void()
     #endif
 
-} // namespace test_access
-using namespace test_access;
+} // namespace test_dereference
+
+using namespace test_dereference;
 //==============================================================================
 //==============================================================================

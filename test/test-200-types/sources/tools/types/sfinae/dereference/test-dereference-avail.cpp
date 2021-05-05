@@ -1,9 +1,11 @@
-// [2021y-05m-04d][21:27:57] Idrisov Denis R.
+// [2021y-05m-05d][23:02:09] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_ACCESS
+#define TEST_TOOLS_SFINAE_DEREFERENCE
+
+#ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, available
-#define dTEST_METHOD access
+#define dTEST_METHOD dereference
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -82,7 +84,8 @@
 #elif defined(dHAS_TYPE_TRAITS) 
     // msvc2010
     //   - has bug:
-    //     - ignore private/protected access
+    //     - not worked: private/protected access
+    //     - not worked: derived for int()
 
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
@@ -93,12 +96,12 @@
     #define dTEST_SFINAE_DRECURSIEVE      1
     #define dTEST_SFINAE_PRECURSIEVE      0
     #define dTEST_SFINAE_DPRECURSIEVE     0
-                                          
+
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
     #define dTEST_SFINAE_PUNSUITABLE      0
     #define dTEST_SFINAE_DPUNSUITABLE     0
-                                          
+
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             0
@@ -129,7 +132,7 @@
 
 namespace 
 {
-    #if defined (dTEST_SFINAE_PRIVATE) && dTEST_SFINAE_PRIVATE == 0
+    #if defined (dTEST_SFINAE_PRIVATE) &&  dTEST_SFINAE_PRIVATE == 0
         const bool privat = true;
     #else
         const bool privat = false;
@@ -137,15 +140,12 @@ namespace
 
 } // namespace 
 
-#include "test-access.hpp"
+#include "test-dereference.hpp"
 #include "test-avail.hpp"
 
 //==============================================================================
 //==============================================================================
 #ifdef dTEST_SFINAE_REGULAR
-
-int foo() { return 1;  }
-
 // --- simple: false
 TEST_COMPONENT(000)
 {
@@ -153,22 +153,22 @@ TEST_COMPONENT(000)
     make_test(Maket     ,  false   );
     make_test(Dummy     ,  false   );
     make_test(int       ,  false   );
-    make_test(int()     ,  false   );
+    make_test(int()     ,  true    );
 //-----------------------------------------
     make_test(Maket&    ,  false   );
     make_test(Dummy&    ,  false   );
     make_test(int&      ,  false   );
-    make_test(int(&)()  ,  false   );
+    make_test(int(&)()  ,  true    );
 //-----------------------------------------
     make_rval(Maket&&   ,  false   );
     make_rval(Dummy&&   ,  false   );
     make_rval(int&&     ,  false   );
-    make_rval(int(&&)() ,  false   );
+    make_rval(int(&&)() ,  true    );
 //-----------------------------------------
     make_test(Maket*    ,  true    );
     make_test(Dummy*    ,  true    );
     make_test(int*      ,  true    );
-    make_test(int(*)()  ,  false   );
+    make_test(int(*)()  ,  true    );
 }
 
 // --- non-const
@@ -770,4 +770,4 @@ TEST_COMPONENT(032)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_ACCESS
+#endif // !TEST_TOOLS_SFINAE_DEREFERENCE

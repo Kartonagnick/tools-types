@@ -1,6 +1,5 @@
-// [2021y-05m-04d][21:27:57] Idrisov Denis R.
+// [2021y-05m-05d][23:02:09] Idrisov Denis R.
 #pragma once
-#include <cstddef>
 #include <tools/features.hpp>
 
 #if 0
@@ -27,17 +26,17 @@
 
 //==============================================================================
 //=== [first unit-tests] =======================================================
-namespace test_access
+namespace test_dereference
 {
     #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
         struct Dummy {};
-        struct Mutable { void operator[](const size_t); };
-        struct Const   { void operator[](const size_t) const; };
+        struct Mutable { void operator*(); };
+        struct Const   { void operator*() const; };
         struct Container
         {
-            void operator[](const size_t);
-            void operator[](const size_t) const;
+            void operator*();
+            void operator*() const;
         };
     #endif // dTEST_SFINAE_REGULAR
 
@@ -50,20 +49,20 @@ namespace test_access
     #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
-            void operator[](const size_t);
+            void operator*();
         public:
             PMutable();
         };
         class PConst
         {
-            void operator[](const size_t) const;
+            void operator*() const;
         public:
             PConst();
         };
         class PContainer
         {
-            void operator[](const size_t) ;
-            void operator[](const size_t) const;
+            void operator*() ;
+            void operator*() const;
         public:
             PContainer();
         };
@@ -74,25 +73,25 @@ namespace test_access
         struct DPConst     : PConst     {};
         struct DPContainer : PContainer {};
     #endif // dTEST_SFINAE_DPRVATE
-} // namespace test_access
+} // namespace test_dereference
 
 //==============================================================================
 //=== [ recursieve containers ] ================================================
-namespace test_access
+namespace test_dereference
 {
     #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
-            RMutable operator[](const size_t);
+            RMutable operator*();
         };
         struct RConst 
         {
-            RConst operator[](const size_t) const;
+            RConst operator*() const;
         };
         struct RContainer
         {
-            RContainer operator[](const size_t) ;
-            RContainer operator[](const size_t) const;
+            RContainer operator*() ;
+            RContainer operator*() const;
         };
     #endif // dTEST_SFINAE_RECURSIEVE
 
@@ -105,20 +104,20 @@ namespace test_access
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
-            PRMutable operator[](const size_t);
+            PRMutable operator*();
         public:
             PRMutable();
         };
         class PRConst
         {
-            PRConst operator[](const size_t) const;
+            PRConst operator*() const;
         public:
             PRConst();
         };
         class PRContainer
         {
-            PRContainer operator[](const size_t) ;
-            PRContainer operator[](const size_t) const;
+            PRContainer operator*() ;
+            PRContainer operator*() const;
         public:
             PRContainer();
         };
@@ -129,27 +128,25 @@ namespace test_access
         struct DPRConst     : PRConst     {};
         struct DPRContainer : PRContainer {};
     #endif // dTEST_SFINAE_DPRECURSIEVE
-} // namespace test_access
+} // namespace test_dereference
 
 //==============================================================================
 //=== [ unsuitable containers ] ================================================
-namespace test_access
+namespace test_dereference
 {
-    struct index;
-
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
         {
-             void operator[](const index&); 
+             void operator*(int); 
         };
         struct UnsuitableConst
         {
-             void operator[](const index&) const; 
+             void operator*(int) const; 
         };
         struct Unsuitable
         {
-             void operator[](const index&) ; 
-             void operator[](const index&) const; 
+             void operator*(int) ; 
+             void operator*(int) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -162,20 +159,20 @@ namespace test_access
     #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
-             void operator[](const index&);
+             void operator*(int); 
         public:
             PUnsuitableMutable();
         };
         class PUnsuitableConst
         {
-             void operator[](const index&) const; 
+             void operator*(int) const; 
         public:
             PUnsuitableConst();
         };
         class PUnsuitable
         {
-             void operator[](const index&) ; 
-             void operator[](const index&) const; 
+             void operator*(int) ; 
+             void operator*(int) const; 
         public:
             PUnsuitable();
         };
@@ -186,25 +183,25 @@ namespace test_access
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
-} // namespace test_access
+} // namespace test_dereference
 
 //==============================================================================
 //=== [ return int ] ===========================================================
-namespace test_access
+namespace test_dereference
 {
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-             int operator[](const size_t); 
+             int operator*(); 
         };
         struct IntConst
         {
-             int operator[](const size_t) const; 
+             int operator*() const; 
         };
         struct Int
         {
-             int operator[](const size_t) ; 
-             int operator[](const size_t) const; 
+             int operator*() ; 
+             int operator*() const; 
         };
     #endif // dTEST_SFINAE_INT
 
@@ -217,20 +214,20 @@ namespace test_access
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-             int operator[](const size_t); 
+             int operator*(); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-             int operator[](const size_t) const; 
+             int operator*() const; 
         public:
             PIntConst();
         };
         class PInt
         {
-             int operator[](const size_t) ; 
-             int operator[](const size_t) const; 
+             int operator*() ; 
+             int operator*() const; 
         public:
             PInt();
         };
@@ -242,9 +239,9 @@ namespace test_access
         struct DPInt        : PInt        {};
     #endif
 
-} // namespace test_access
+} // namespace test_dereference
 
-using namespace test_access;
+using namespace test_dereference;
 //==============================================================================
 //==============================================================================
 

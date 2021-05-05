@@ -1,10 +1,10 @@
-// [2021y-05m-04d][21:27:57] Idrisov Denis R.
-#if defined(_MSC_VER) &&  _MSC_VER < 1928
+// [2021y-05m-05d][23:02:09] Idrisov Denis R.
+#ifdef _MSC_VER
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_ACCESS
+#ifdef TEST_TOOLS_SFINAE_DEREFERENCE
 #define dTEST_COMPONENT tools, types, sfinae, exist
-#define dTEST_METHOD access
+#define dTEST_METHOD dereference
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -43,7 +43,7 @@
     #define dTEST_SFINAE_DPINT        1
 #endif
 
-#include "test-access.hpp"
+#include "test-dereference.hpp"
 #include "test-exist.hpp"
 
 //==============================================================================
@@ -529,5 +529,5 @@ TEST_COMPONENT(024)
 
 //==============================================================================
 //==============================================================================
-#endif // TEST_TOOLS_SFINAE_ACCESS
-#endif // defined(_MSC_VER) &&  _MSC_VER < 1928
+#endif // TEST_TOOLS_SFINAE_DEREFERENCE
+#endif // _MSC_VER
