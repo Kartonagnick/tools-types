@@ -2,10 +2,10 @@
 #if defined(_MSC_VER) &&  _MSC_VER < 1928
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_ACCESS
 #define dTEST_COMPONENT tools, types, sfinae, exist
 #define dTEST_METHOD access
-#define dTEST_TAG new
+#define dTEST_TAG tdd
 
 #include <tools/features.hpp>
 
@@ -529,5 +529,5 @@ TEST_COMPONENT(024)
 
 //==============================================================================
 //==============================================================================
-#endif // TEST_TOOLS_SFINAE_BEGIN
+#endif // TEST_TOOLS_SFINAE_ACCESS
 #endif // defined(_MSC_VER) &&  _MSC_VER < 1928
