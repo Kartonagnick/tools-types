@@ -156,20 +156,73 @@ namespace available {
     {};
 
 //==============================================================================
-//==============================================================================
+//=== access ===================================================================
+
+    namespace detail_access
+    {
+        template<class t, class i, bool> 
+        struct check_
+        {
+            template <class u> static 
+                typename sizeof_< sizeof(obj<u>()[obj<i>()]) >::type
+                check(u*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<t>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t, class i> 
+        struct check_<t, i, false>
+            { enum { value = false }; };
+
+        template<class t, class i, int> 
+            class impl_;
+
+        // --- !array && !pointer && !class
+        template<class t, class i> struct impl_<t, i, 0>
+            { enum { value = false }; };
+
+        // --- array or pointer
+        template<class t, class i> struct impl_<t, i, 1>
+            { enum { value = true }; };
+
+        // --- class
+        template<class t, class i> struct impl_<t, i, 2>
+        {
+        private:
+            #ifdef _MSC_VER
+                __if_exists    (t::operator[]) { enum { v = 1 }; }
+                __if_not_exists(t::operator[]) { enum { v = 0 }; }
+                typedef check_<t, i, v> check;
+            #else
+                typedef check_<t, i, true> check;
+            #endif
+        public:
+            enum { value = check::value };
+        };
+
+    } // namespace detail_access
 
     namespace detail
     {
         template<class t, class i> class access_
         {
             dNO_REFERENCE_(t, x);
-            template <class u> static 
-                typename sizeof_<sizeof(obj<u>()[ obj<i>() ]) >::type
-                check(u*);
-            template <class> static no check(...);
-            enum { sz = sizeof(check<x>(0)) };
+            typedef dTRAIT::remove_pointer<x>                
+                no_ptr;
+            typedef typename no_ptr::type                
+                z;
+            enum { f = dTRAIT::is_function<z>::value };
+            enum { p = dTRAIT::is_pointer<x>::value  };
+            enum { a = dTRAIT::is_array<x>::value    };
+            enum { c = dTRAIT::is_class<x>::value    };
+            enum { ap = !f && (a || p)  };
+            enum { v = ap ? 1: c? 2 : 0 };
+            typedef detail_access::impl_<x, i, v> 
+                impl;
         public:
-            enum { value = sz != sizeof(no) };
+            enum { value = impl::value };
         };
 
     } // namespace detail

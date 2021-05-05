@@ -248,42 +248,44 @@ namespace available
 {
     namespace detail_access
     {
-        template<class t, class i, bool> class check_
+        template<class t, class i, bool> struct check_
         {
-        public:
-            enum { value = true };
-        };
-
-        template<class t, class i> class check_<t, i, false>
-        {
-            dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename decltype_<u, decltype(obj<u>()[obj<i>()]) >::type 
+                typename sizeof_< sizeof(obj<u>()[obj<i>()]) >::type
                 check(u*);
-
-            template <class> static
-                ::std::false_type check(...);
-
-            typedef decltype(check<x>(0))
-                result;
+            template <class> static no check(...);
+            enum { sz = sizeof(check<t>(0)) };
         public:
-            enum { value = result::value };
+            enum { value = sz < sizeof(no) };
         };
 
-        template<class t, class i, bool> class impl_
+        template<class t, class i> struct check_<t, i, false>
+            { enum { value = false }; };
+
+        template<class t, class i, int> 
+            class impl_;
+
+        // --- !array && !pointer && !class
+        template<class t, class i> struct impl_<t, i, 0>
+            { enum { value = false }; };
+
+        // --- array or pointer
+        template<class t, class i> struct impl_<t, i, 1>
+            { enum { value = true }; };
+
+        // --- class
+        template<class t, class i> struct impl_<t, i, 2>
         {
-            enum { a = ::std::is_array<t>::value   };
-            enum { p = ::std::is_pointer<t>::value };
-            typedef detail_access::check_<t, i, (a || p)> 
-                check;
+        private:
+            #ifdef _MSC_VER
+                __if_exists    (t::operator[]) { enum { v = 1 }; }
+                __if_not_exists(t::operator[]) { enum { v = 0 }; }
+                typedef check_<t, i, v> check;
+            #else
+                typedef check_<t, i, true> check;
+            #endif
         public:
             enum { value = check::value };
-        };
-
-        template<class t, class i> class impl_<t, i, false>
-        {
-        public:
-            enum { value = false };
         };
 
     } // namespace detail_access
@@ -293,13 +295,18 @@ namespace available
         template<class t, class i> class access_
         {
             dNO_REFERENCE_(t, x);
-            #ifdef _MSC_VER
-                __if_exists    (x::op) { enum { v = 1 }; }
-                __if_not_exists(x::op) { enum { v = 0 }; }
-                typedef detail_access::impl_<x, i, v> impl;
-            #else
-                typedef detail_access::impl_<x, i, true> impl;
-            #endif
+            typedef ::std::remove_pointer<x>                
+                no_ptr;
+            typedef typename no_ptr::type                
+                z;
+            enum { f = ::std::is_function<z>::value };
+            enum { p = ::std::is_pointer<x>::value  };
+            enum { a = ::std::is_array<x>::value    };
+            enum { c = ::std::is_class<x>::value    };
+            enum { ap = !f && (a || p)  };
+            enum { v = ap ? 1: c? 2 : 0 };
+            typedef detail_access::impl_<x, i, v> 
+                impl;
         public:
             enum { value = impl::value };
         };
