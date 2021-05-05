@@ -63,39 +63,6 @@ namespace available {
 //==============================================================================
 //==============================================================================
 
-#if 0
-    namespace detail
-    {
-        template<class, class = size_t, class = void>
-        struct access : ::std::false_type {};
-
-        template<class t> struct access<t, size_t,
-                ::std::void_t<decltype(::std::declval<t>()[0u])>
-            > : ::std::true_type
-        {};
-
-        template<class t, class i> struct access<t, i,
-                ::std::void_t<decltype(::std::declval<t>()[::std::declval<i>()])>
-            > : ::std::true_type
-        {};
-
-        template<class t, class i> class access_
-        {
-            enum { p = ::std::is_pointer<t>::value };
-            enum { a = ::std::is_array<t>::value   };
-            using result = access_impl_<t, i, p || a>;
-        public:
-            enum { value = result::value };
-        };
-
-    } // namespace detail
-
-    template<class t, class i>
-    struct access
-        : dIMPLEMENT_(access_<t, i>)
-    {};
-#endif
-
     template<class, class = size_t, class = void>
     struct access : ::std::false_type {};
 
