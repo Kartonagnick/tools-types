@@ -36,11 +36,11 @@
     #define dTEST_SFINAE_DBODY            1
     #define dTEST_SFINAE_PBODY            1
     #define dTEST_SFINAE_DPBODY           1
+
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
     //     - ignore private/protected access
-
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
     #define dTEST_SFINAE_PRIVATE          0
@@ -48,8 +48,8 @@
                                           
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      0
-    #define dTEST_SFINAE_DPRECURSIEVE     0
+    #define dTEST_SFINAE_PRECURSIEVE      1
+    #define dTEST_SFINAE_DPRECURSIEVE     1
 
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
@@ -58,13 +58,13 @@
 
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             0
-    #define dTEST_SFINAE_DPINT            0
+    #define dTEST_SFINAE_PINT             1
+    #define dTEST_SFINAE_DPINT            1
 
     #define dTEST_SFINAE_BODY             1
     #define dTEST_SFINAE_DBODY            1
-    #define dTEST_SFINAE_PBODY            0
-    #define dTEST_SFINAE_DPBODY           0
+    #define dTEST_SFINAE_PBODY            1
+    #define dTEST_SFINAE_DPBODY           1
 
 #elif defined(dHAS_ENUM_CLASS) 
     // msvc2012
@@ -839,7 +839,7 @@ TEST_COMPONENT(034)
 
 //==============================================================================
 //==============================================================================
-#ifdef dTEST_SFINAE_DERIVED
+#ifdef dTEST_SFINAE_DBODY
 // --- derived non-const
 TEST_COMPONENT(035)
 {
@@ -877,7 +877,7 @@ TEST_COMPONENT(036)
 
 //==============================================================================
 //==============================================================================
-#ifdef dTEST_SFINAE_PRIVATE
+#ifdef dTEST_SFINAE_PBODY
 // --- private non-const
 TEST_COMPONENT(037)
 {
@@ -911,11 +911,11 @@ TEST_COMPONENT(038)
     make_rval(const PBodyMutable&& ,  false   );
     make_rval(const PBody&&        ,  privat  );
 }
-#endif // dTEST_SFINAE_PRIVATE
+#endif // dTEST_SFINAE_PBODY
 
 //==============================================================================
 //==============================================================================
-#ifdef dTEST_SFINAE_DPRVATE
+#ifdef dTEST_SFINAE_DPBODY
 // --- derived private  non-const
 TEST_COMPONENT(039)
 {
@@ -949,7 +949,7 @@ TEST_COMPONENT(040)
     make_rval(const DPBodyMutable&& ,  false   );
     make_rval(const DPBody&&        ,  privat  );
 }
-#endif // dTEST_SFINAE_DPRVATE
+#endif // dTEST_SFINAE_DPBODY
 
 //..............................................................................
 //..............................................................................
