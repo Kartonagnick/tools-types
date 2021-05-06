@@ -28,7 +28,7 @@
 //=== [first unit-tests] =======================================================
 namespace test_dereference
 {
-    #ifdef dTEST_SFINAE_REGULAR
+    //#ifdef dTEST_SFINAE_REGULAR
         struct Maket;
         struct Dummy {};
         struct Mutable { void operator*(); };
@@ -38,7 +38,7 @@ namespace test_dereference
             void operator*();
             void operator*() const;
         };
-    #endif // dTEST_SFINAE_REGULAR
+    //#endif // dTEST_SFINAE_REGULAR
 
     #ifdef dTEST_SFINAE_DERIVED
         struct DMutable   : Mutable   {};
