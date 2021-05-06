@@ -3,28 +3,6 @@
 #include <cstddef>
 #include <tools/features.hpp>
 
-#if 0
-#define dTEST_SFINAE_REGULAR       1
-#define dTEST_SFINAE_DERIVED       1
-#define dTEST_SFINAE_PRIVATE       1
-#define dTEST_SFINAE_DPRVATE       1
-
-#define dTEST_SFINAE_RECURSIEVE    1
-#define dTEST_SFINAE_DRECURSIEVE   1
-#define dTEST_SFINAE_PRECURSIEVE   1
-#define dTEST_SFINAE_DPRECURSIEVE  1
-
-#define dTEST_SFINAE_UNSUITABLE    1
-#define dTEST_SFINAE_DUNSUITABLE   1
-#define dTEST_SFINAE_PUNSUITABLE   1
-#define dTEST_SFINAE_DPUNSUITABLE  1
-
-#define dTEST_SFINAE_INT           1
-#define dTEST_SFINAE_DINT          1
-#define dTEST_SFINAE_PINT          1
-#define dTEST_SFINAE_DPINT         1
-#endif
-
 //==============================================================================
 //=== [first unit-tests] =======================================================
 namespace test_access
@@ -241,6 +219,68 @@ namespace test_access
         struct DPIntConst   : PIntConst   {};
         struct DPInt        : PInt        {};
     #endif
+
+} // namespace test_access
+
+//==============================================================================
+//=== [ return body ] ==========================================================
+namespace test_access
+{
+    #ifdef dTEST_SFINAE_BODY
+        struct BodyMutable 
+        {
+            double operator[](const size_t); 
+            char buf[300]; 
+        };
+        struct BodyConst   
+        {
+            double operator[](const size_t) const; 
+            char buf[300]; 
+        };
+        struct Body
+        {
+            double operator[](const size_t);
+            double operator[](const size_t) const;
+            char buf[300]; 
+        };
+    #endif // dTEST_SFINAE_BODY
+
+    #ifdef dTEST_SFINAE_DBODY
+        struct DBodyMutable : BodyMutable {};
+        struct DBodyConst   : BodyConst   {};
+        struct DBody        : Body        {};
+    #endif // dTEST_SFINAE_DBODY
+
+    #if defined(dTEST_SFINAE_PBODY) || defined(dTEST_SFINAE_DPRVATE)
+        class PBodyMutable 
+        {
+            double operator[](const size_t);
+            char buf[300]; 
+        public:
+            PBodyMutable();
+        };
+        class PBodyConst
+        {
+            double operator[](const size_t) const;
+            char buf[300]; 
+        public:
+            PBodyConst();
+        };
+        class PBody
+        {
+            double operator[](const size_t) ;
+            double operator[](const size_t) const;
+            char buf[300]; 
+        public:
+            PBody();
+        };
+    #endif // defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
+
+    #ifdef dTEST_SFINAE_DPBODY
+        struct DPBodyMutable : PBodyMutable {};
+        struct DPBodyConst   : PBodyConst   {};
+        struct DPBody        : PBody        {};
+    #endif // dTEST_SFINAE_DPBODY
 
 } // namespace test_access
 
