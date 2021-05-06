@@ -28,17 +28,29 @@
 //=== [first unit-tests] =======================================================
 namespace test_dereference
 {
-    //#ifdef dTEST_SFINAE_REGULAR
+    #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
-        struct Dummy {};
-        struct Mutable { void operator*(); };
-        struct Const   { void operator*() const; };
+        struct Dummy   
+        { 
+            char buf[255]; 
+        };
+        struct Mutable 
+        {
+            double operator*(); 
+            char buf[255]; 
+        };
+        struct Const   
+        {
+            double operator*() const; 
+            char buf[255]; 
+        };
         struct Container
         {
-            void operator*();
-            void operator*() const;
+            double operator*();
+            double operator*() const;
+            char buf[255]; 
         };
-    //#endif // dTEST_SFINAE_REGULAR
+    #endif // dTEST_SFINAE_REGULAR
 
     #ifdef dTEST_SFINAE_DERIVED
         struct DMutable   : Mutable   {};
@@ -49,20 +61,23 @@ namespace test_dereference
     #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
-            void operator*();
+            double operator*();
+            char buf[255]; 
         public:
             PMutable();
         };
         class PConst
         {
-            void operator*() const;
+            double operator*() const;
+            char buf[255]; 
         public:
             PConst();
         };
         class PContainer
         {
-            void operator*() ;
-            void operator*() const;
+            double operator*() ;
+            double operator*() const;
+            char buf[255]; 
         public:
             PContainer();
         };
@@ -79,43 +94,49 @@ namespace test_dereference
 //=== [ recursieve containers ] ================================================
 namespace test_dereference
 {
-    #ifdef dTEST_SFINAE_RECURSIEVE
+    //#ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
             RMutable operator*();
+            char buf[255]; 
         };
         struct RConst 
         {
             RConst operator*() const;
+            char buf[255]; 
         };
         struct RContainer
         {
             RContainer operator*() ;
             RContainer operator*() const;
+            char buf[255]; 
         };
-    #endif // dTEST_SFINAE_RECURSIEVE
+    //#endif // dTEST_SFINAE_RECURSIEVE
 
-    #ifdef dTEST_SFINAE_DRECURSIEVE
+    //#ifdef dTEST_SFINAE_DRECURSIEVE
         struct DRMutable   : RMutable   {};
         struct DRConst     : RConst     {};
         struct DRContainer : RContainer {};
-    #endif // dTEST_SFINAE_DRECURSIEVE
+    //#endif // dTEST_SFINAE_DRECURSIEVE
 
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
+            char buf[255]; 
             PRMutable operator*();
         public:
             PRMutable();
         };
         class PRConst
         {
+            char buf[255]; 
             PRConst operator*() const;
         public:
             PRConst();
         };
         class PRContainer
         {
+            char buf[255]; 
             PRContainer operator*() ;
             PRContainer operator*() const;
         public:
@@ -137,16 +158,19 @@ namespace test_dereference
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
         {
-             void operator*(int); 
+            char buf[255]; 
+            double operator*(int); 
         };
         struct UnsuitableConst
         {
-             void operator*(int) const; 
+            char buf[255]; 
+            double operator*(int) const; 
         };
         struct Unsuitable
         {
-             void operator*(int) ; 
-             void operator*(int) const; 
+            char buf[255]; 
+            double operator*(int) ; 
+            double operator*(int) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -159,20 +183,23 @@ namespace test_dereference
     #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
-             void operator*(int); 
+            char buf[255]; 
+            double operator*(int); 
         public:
             PUnsuitableMutable();
         };
         class PUnsuitableConst
         {
-             void operator*(int) const; 
+            char buf[255]; 
+            double operator*(int) const; 
         public:
             PUnsuitableConst();
         };
         class PUnsuitable
         {
-             void operator*(int) ; 
-             void operator*(int) const; 
+            char buf[255]; 
+            double operator*(int) ; 
+            double operator*(int) const; 
         public:
             PUnsuitable();
         };
@@ -192,16 +219,19 @@ namespace test_dereference
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-             int operator*(); 
+            char buf[255]; 
+            int operator*(); 
         };
         struct IntConst
         {
-             int operator*() const; 
+            char buf[255]; 
+            int operator*() const; 
         };
         struct Int
         {
-             int operator*() ; 
-             int operator*() const; 
+            char buf[255]; 
+            int operator*() ; 
+            int operator*() const; 
         };
     #endif // dTEST_SFINAE_INT
 
@@ -214,20 +244,23 @@ namespace test_dereference
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-             int operator*(); 
+            char buf[255]; 
+            int operator*(); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-             int operator*() const; 
+            char buf[255]; 
+            int operator*() const; 
         public:
             PIntConst();
         };
         class PInt
         {
-             int operator*() ; 
-             int operator*() const; 
+            char buf[255]; 
+            int operator*() ; 
+            int operator*() const; 
         public:
             PInt();
         };
