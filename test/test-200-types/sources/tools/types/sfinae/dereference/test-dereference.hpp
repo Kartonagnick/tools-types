@@ -22,6 +22,11 @@
 #define dTEST_SFINAE_DINT          1
 #define dTEST_SFINAE_PINT          1
 #define dTEST_SFINAE_DPINT         1
+
+#define dTEST_SFINAE_BODY          1
+#define dTEST_SFINAE_DBODY         1
+#define dTEST_SFINAE_PBODY         1
+#define dTEST_SFINAE_DPBODY        1
 #endif
 
 //==============================================================================
@@ -30,25 +35,13 @@ namespace test_dereference
 {
     #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
-        struct Dummy   
-        { 
-            char buf[255]; 
-        };
-        struct Mutable 
-        {
-            double operator*(); 
-            char buf[255]; 
-        };
-        struct Const   
-        {
-            double operator*() const; 
-            char buf[255]; 
-        };
+        struct Dummy   {};
+        struct Mutable { void operator*(); };
+        struct Const   { void operator*() const;  };
         struct Container
         {
-            double operator*();
-            double operator*() const;
-            char buf[255]; 
+            void operator*();
+            void operator*() const;
         };
     #endif // dTEST_SFINAE_REGULAR
 
@@ -61,23 +54,20 @@ namespace test_dereference
     #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
-            double operator*();
-            char buf[255]; 
+            void operator*();
         public:
             PMutable();
         };
         class PConst
         {
-            double operator*() const;
-            char buf[255]; 
+            void operator*() const;
         public:
             PConst();
         };
         class PContainer
         {
-            double operator*() ;
-            double operator*() const;
-            char buf[255]; 
+            void operator*() ;
+            void operator*() const;
         public:
             PContainer();
         };
@@ -88,55 +78,50 @@ namespace test_dereference
         struct DPConst     : PConst     {};
         struct DPContainer : PContainer {};
     #endif // dTEST_SFINAE_DPRVATE
+
 } // namespace test_dereference
 
 //==============================================================================
 //=== [ recursieve containers ] ================================================
 namespace test_dereference
 {
-    //#ifdef dTEST_SFINAE_RECURSIEVE
+    #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
             RMutable operator*();
-            char buf[255]; 
         };
         struct RConst 
         {
             RConst operator*() const;
-            char buf[255]; 
         };
         struct RContainer
         {
             RContainer operator*() ;
             RContainer operator*() const;
-            char buf[255]; 
         };
-    //#endif // dTEST_SFINAE_RECURSIEVE
+    #endif // dTEST_SFINAE_RECURSIEVE
 
-    //#ifdef dTEST_SFINAE_DRECURSIEVE
+    #ifdef dTEST_SFINAE_DRECURSIEVE
         struct DRMutable   : RMutable   {};
         struct DRConst     : RConst     {};
         struct DRContainer : RContainer {};
-    //#endif // dTEST_SFINAE_DRECURSIEVE
+    #endif // dTEST_SFINAE_DRECURSIEVE
 
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
-            char buf[255]; 
             PRMutable operator*();
         public:
             PRMutable();
         };
         class PRConst
         {
-            char buf[255]; 
             PRConst operator*() const;
         public:
             PRConst();
         };
         class PRContainer
         {
-            char buf[255]; 
             PRContainer operator*() ;
             PRContainer operator*() const;
         public:
@@ -149,6 +134,7 @@ namespace test_dereference
         struct DPRConst     : PRConst     {};
         struct DPRContainer : PRContainer {};
     #endif // dTEST_SFINAE_DPRECURSIEVE
+
 } // namespace test_dereference
 
 //==============================================================================
@@ -158,19 +144,16 @@ namespace test_dereference
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
         {
-            char buf[255]; 
-            double operator*(int); 
+            void operator*(int); 
         };
         struct UnsuitableConst
         {
-            char buf[255]; 
-            double operator*(int) const; 
+            void operator*(int) const; 
         };
         struct Unsuitable
         {
-            char buf[255]; 
-            double operator*(int) ; 
-            double operator*(int) const; 
+            void operator*(int) ; 
+            void operator*(int) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -183,23 +166,20 @@ namespace test_dereference
     #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
-            char buf[255]; 
-            double operator*(int); 
+            void operator*(int); 
         public:
             PUnsuitableMutable();
         };
         class PUnsuitableConst
         {
-            char buf[255]; 
-            double operator*(int) const; 
+            void operator*(int) const; 
         public:
             PUnsuitableConst();
         };
         class PUnsuitable
         {
-            char buf[255]; 
-            double operator*(int) ; 
-            double operator*(int) const; 
+            void operator*(int) ; 
+            void operator*(int) const; 
         public:
             PUnsuitable();
         };
@@ -210,6 +190,7 @@ namespace test_dereference
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
+
 } // namespace test_dereference
 
 //==============================================================================
@@ -219,17 +200,14 @@ namespace test_dereference
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-            char buf[255]; 
             int operator*(); 
         };
         struct IntConst
         {
-            char buf[255]; 
             int operator*() const; 
         };
         struct Int
         {
-            char buf[255]; 
             int operator*() ; 
             int operator*() const; 
         };
@@ -244,21 +222,18 @@ namespace test_dereference
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-            char buf[255]; 
             int operator*(); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-            char buf[255]; 
             int operator*() const; 
         public:
             PIntConst();
         };
         class PInt
         {
-            char buf[255]; 
             int operator*() ; 
             int operator*() const; 
         public:
@@ -271,6 +246,68 @@ namespace test_dereference
         struct DPIntConst   : PIntConst   {};
         struct DPInt        : PInt        {};
     #endif
+
+} // namespace test_dereference
+
+//==============================================================================
+//=== [ return body ] ==========================================================
+namespace test_dereference
+{
+    #ifdef dTEST_SFINAE_BODY
+        struct BodyMutable 
+        {
+            double operator*(); 
+            char buf[300]; 
+        };
+        struct BodyConst   
+        {
+            double operator*() const; 
+            char buf[300]; 
+        };
+        struct Body
+        {
+            double operator*();
+            double operator*() const;
+            char buf[300]; 
+        };
+    #endif // dTEST_SFINAE_BODY
+
+    #ifdef dTEST_SFINAE_DBODY
+        struct DBodyMutable : BodyMutable {};
+        struct DBodyConst   : BodyConst   {};
+        struct DBody        : Body        {};
+    #endif // dTEST_SFINAE_DBODY
+
+    #if defined(dTEST_SFINAE_PBODY) || defined(dTEST_SFINAE_DPRVATE)
+        class PBodyMutable 
+        {
+            double operator*();
+            char buf[300]; 
+        public:
+            PBodyMutable();
+        };
+        class PBodyConst
+        {
+            double operator*() const;
+            char buf[300]; 
+        public:
+            PBodyConst();
+        };
+        class PBody
+        {
+            double operator*() ;
+            double operator*() const;
+            char buf[300]; 
+        public:
+            PBody();
+        };
+    #endif // defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
+
+    #ifdef dTEST_SFINAE_DPBODY
+        struct DPBodyMutable : PBodyMutable {};
+        struct DPBodyConst   : PBodyConst   {};
+        struct DPBody        : PBody        {};
+    #endif // dTEST_SFINAE_DPBODY
 
 } // namespace test_dereference
 
