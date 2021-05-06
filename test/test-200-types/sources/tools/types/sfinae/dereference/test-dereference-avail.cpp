@@ -3,7 +3,7 @@
 
 #define TEST_TOOLS_SFINAE_DEREFERENCE
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_DEREFERENCE
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD dereference
 #define dTEST_TAG tdd
@@ -59,75 +59,77 @@
 #elif defined(dHAS_ENUM_CLASS) 
     // msvc2012
     //   - has bug:
-    //     - ignore private/protected access
+    //     - not worked: private/protected access
 
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
-    #define dTEST_SFINAE_PRIVATE          0
-    #define dTEST_SFINAE_DPRVATE          0
+    //  #define dTEST_SFINAE_PRIVATE      0
+    //  #define dTEST_SFINAE_DPRVATE      0
 
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      0
-    #define dTEST_SFINAE_DPRECURSIEVE     0
-
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
+    
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      1
-    #define dTEST_SFINAE_DPUNSUITABLE     1
+    // #define dTEST_SFINAE_PUNSUITABLE   1
+    // #define dTEST_SFINAE_DPUNSUITABLE  1
 
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             0
-    #define dTEST_SFINAE_DPINT            0
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
 
 #elif defined(dHAS_TYPE_TRAITS) 
     // msvc2010
     //   - has bug:
     //     - not worked: private/protected access
-    //     - not worked: derived for int()
 
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
-    #define dTEST_SFINAE_PRIVATE          0
-    #define dTEST_SFINAE_DPRVATE          0
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
 
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      0
-    #define dTEST_SFINAE_DPRECURSIEVE     0
-
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
+    
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      0
-    #define dTEST_SFINAE_DPUNSUITABLE     0
+    // #define dTEST_SFINAE_PUNSUITABLE   0
+    // #define dTEST_SFINAE_DPUNSUITABLE  0
 
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             0
-    #define dTEST_SFINAE_DPINT            0
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
 
 #else
     // msvc20008 or older
+    //   - has bug:
+    //     - not worked: private/protected access
+
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
-    #define dTEST_SFINAE_PRIVATE          0
-    #define dTEST_SFINAE_DPRVATE          0
+    // #define dTEST_SFINAE_PRIVATE          0
+    // #define dTEST_SFINAE_DPRVATE          0
                                           
     #define dTEST_SFINAE_RECURSIEVE       1
-    #define dTEST_SFINAE_DRECURSIEVE      1
-    #define dTEST_SFINAE_PRECURSIEVE      0
-    #define dTEST_SFINAE_DPRECURSIEVE     0
+    //#define dTEST_SFINAE_DRECURSIEVE      1
+    // #define dTEST_SFINAE_PRECURSIEVE      0
+    // #define dTEST_SFINAE_DPRECURSIEVE     0
                                           
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      1
-    #define dTEST_SFINAE_DPUNSUITABLE     1
+    // #define dTEST_SFINAE_PUNSUITABLE      0
+    // #define dTEST_SFINAE_DPUNSUITABLE     0
 
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
-    #define dTEST_SFINAE_PINT             0
-    #define dTEST_SFINAE_DPINT            0
+    // #define dTEST_SFINAE_PINT             0
+    // #define dTEST_SFINAE_DPINT            0
 #endif
 
 namespace 
@@ -145,6 +147,42 @@ namespace
 
 //==============================================================================
 //==============================================================================
+#if 0
+struct Base
+{
+    char buf[5];
+    Base operator*();
+};
+struct Dom: Base
+{
+    char buf[100];
+    //Dom operator*();
+};
+
+void foo();
+
+#define dVIEW(name) \
+    std::cout << #name << " = " << name  << '\n'
+
+TEST_COMPONENT(xxx)
+{
+    typedef ::tools::sfinae::available::detail_dereference::check_<DRMutable, true>
+    //typedef ::tools::sfinae::available::detail_dereference::check_<Dom, true>
+        xxx;
+    dVIEW(xxx::sz);
+    dVIEW(xxx::f1);
+    dVIEW(xxx::f2);
+    dVIEW(xxx::f3);
+    dVIEW(xxx::f4);
+    dVIEW(xxx::isConst);
+    dVIEW(xxx::inva);
+    dVIEW(xxx::value);
+
+    int a = 10;
+    (void)a;
+}
+#endif
+
 #ifdef dTEST_SFINAE_REGULAR
 // --- simple: false
 TEST_COMPONENT(000)

@@ -174,7 +174,7 @@ TEST_COMPONENT(000)
 }
 TEST_COMPONENT(001)
 {
-    //       |   type   | signature        | expected |
+    //       |   type   | signature             | expected |
     make_test(Maket     , void(Maket::*)() const,  false   );
     make_test(Dummy     , void(Dummy::*)() const,  false   );
     make_test(int       , void(Maket::*)() const,  false   );

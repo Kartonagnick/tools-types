@@ -12,6 +12,7 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
+#if 0
     namespace detail
     {
         template<class t, class ...args> class call_
@@ -39,6 +40,7 @@ namespace available {
     struct call
         : dIMPLEMENT_(call_<t, args...>)
     {};
+#endif
 
 //==============================================================================
 //==============================================================================

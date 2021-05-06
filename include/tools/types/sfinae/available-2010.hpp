@@ -214,24 +214,105 @@ namespace available {
 
 //==============================================================================
 //=== dereference ==============================================================
-namespace available {
+namespace available 
+{
+    namespace detail_dereference
+    {
+        template<class t, class sig>
+        class sig_
+        {
+            template <class u> static 
+                ::std::true_type check(signature_<sig, &u::operator*>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(nullptr))
+                result;
+        public:
+            enum { value = result::value };
+        };
+
+        template<class t, bool> struct check_
+        {
+            typedef ::std::remove_cv<t> no_cv;
+            typedef typename no_cv::type x;
+
+            enum { ms = sig_<x, x(x::*)()     >::value };
+            enum { cs = sig_<x, x(x::*)()const>::value };
+
+            template <class u> static 
+                    typename decltype_<u, decltype(*obj<u>())>::second 
+                    check(u*);
+
+            template <class> static
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(nullptr))
+                checked;
+
+            typedef ::std::add_pointer<checked> add;
+            typedef typename add::type z;
+
+            enum { inva = ::std::is_same<checked, ::std::false_type>::value };
+            enum { same = ::std::is_same<z, t*>::value };
+            enum { isConst = ::std::is_const<t>::value };
+            enum { first = isConst? cs : (cs || ms)    };
+        public:
+            enum { value = inva ? false: (!same || first) };
+        };
+
+        template<class t> struct check_<t, false>
+            { enum { value = false }; };
+
+        template<class t, int> 
+            class impl_;
+
+        // --- !array && !pointer && !class
+        template<class t> struct impl_<t, 0>
+            { enum { value = false }; };
+
+        // --- array or pointer or function
+        template<class t> struct impl_<t, 1>
+            { enum { value = true }; };
+
+        // --- class
+        template<class t> struct impl_<t, 2>
+        {
+        private:
+            #ifdef _MSC_VER
+                __if_exists    (t::operator*) { enum { v = 1 }; };
+                __if_not_exists(t::operator*) { enum { v = 0 }; };
+                typedef check_<t, v> result;
+            #else
+                typedef check_<t, true> result;
+            #endif
+        public:
+            enum { value = result::value };
+        };
+
+    } // namespace detail_dereference
+
     namespace detail
     {
         template<class t> class dereference_
         {
             dNO_REFERENCE_(t, x);
-            template <class u> static 
-                typename decltype_<u, decltype(*::std::declval<u>())>::type 
-                check(u*);
 
-            template <class> static
-                ::std::false_type check(...);
-
-            typedef decltype(check<x>(0))
-                result;
+            typedef ::std::remove_pointer<x>                
+                no_ptr;
+            typedef typename no_ptr::type                
+                z;
+            enum { f = ::std::is_function<z>::value };
+            enum { p = ::std::is_pointer<x>::value  };
+            enum { a = ::std::is_array<x>::value    };
+            enum { c = ::std::is_class<x>::value    };
+            enum { apf = a || p || f     };
+            enum { v = apf ? 1: c? 2 : 0 };
+            typedef detail_dereference::impl_<x, v> 
+                impl;
         public:
-            dereference_();
-            enum { value = result::value };
+            enum { value = impl::value };
         };
 
     } // namespace detail
@@ -240,6 +321,7 @@ namespace available {
     class dereference
         : dIMPLEMENT_(dereference_<t>)
     {};
+
 } // namespace available
 
 //==============================================================================

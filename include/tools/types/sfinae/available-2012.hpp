@@ -1,7 +1,7 @@
 // [2021y-05m-03d][16:50:15] Idrisov Denis R. 100 PRE
 #pragma once
-#ifndef dTOOLS_SFINAE_AVAILABLE_2010_USED_ 
-#define dTOOLS_SFINAE_AVAILABLE_2010_USED_ 100 PRE
+#ifndef dTOOLS_SFINAE_AVAILABLE_2012_USED_ 
+#define dTOOLS_SFINAE_AVAILABLE_2012_USED_ 100 PRE
 
 #include <tools/types/sfinae/staff.hpp>
 
@@ -12,6 +12,7 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
+#if 0
     namespace detail
     {
         template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> class call_
@@ -20,19 +21,19 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>(), 
-                    ::std::declval<t5>(),
-                    ::std::declval<t6>(), 
-                    ::std::declval<t7>()
+                decltype(::std::declval<u>()(
+                ::std::declval<t1>(),
+                ::std::declval<t2>(), 
+                ::std::declval<t3>(), 
+                ::std::declval<t4>(), 
+                ::std::declval<t5>(),
+                ::std::declval<t6>(), 
+                ::std::declval<t7>()
                 ), ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -47,18 +48,18 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>(), 
-                    ::std::declval<t5>(),
-                    ::std::declval<t6>()
+                decltype(::std::declval<u>()(
+                ::std::declval<t1>(),
+                ::std::declval<t2>(), 
+                ::std::declval<t3>(), 
+                ::std::declval<t4>(), 
+                ::std::declval<t5>(),
+                ::std::declval<t6>()
                 ), ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -73,17 +74,17 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>(), 
-                    ::std::declval<t5>()
+                decltype(::std::declval<u>()(
+                ::std::declval<t1>(),
+                ::std::declval<t2>(), 
+                ::std::declval<t3>(), 
+                ::std::declval<t4>(), 
+                ::std::declval<t5>()
                 ), ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -98,16 +99,16 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>() 
+                decltype(::std::declval<u>()(
+                ::std::declval<t1>(),
+                ::std::declval<t2>(), 
+                ::std::declval<t3>(), 
+                ::std::declval<t4>() 
                 ), ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -122,15 +123,15 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>() 
+                decltype(::std::declval<u>()(
+                ::std::declval<t1>(),
+                ::std::declval<t2>(), 
+                ::std::declval<t3>() 
                 ), ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -145,14 +146,14 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>()
+                decltype(::std::declval<u>()(
+                ::std::declval<t1>(),
+                ::std::declval<t2>()
                 ), ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -167,12 +168,12 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(::std::declval<t1>()), 
+                decltype(::std::declval<u>()(::std::declval<t1>()), 
                 ::std::true_type()
-            ) check(u*);
+                ) check(u*);
 
             template<class> static
-            ::std::false_type check(...);
+                ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -187,11 +188,11 @@ namespace available {
             typedef typename no_ref::type x;
 
             template<class u> static
-            decltype(::std::declval<u>()(), ::std::true_type())
+                decltype(::std::declval<u>()(), ::std::true_type())
                 check(u*);
 
             template<class> static
-            ::std::false_type
+                ::std::false_type
                 check(...);
 
             typedef decltype(check<x>(0))
@@ -210,100 +211,111 @@ namespace available {
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t4,t6,t7>)
     {};
+#endif
 
 //==============================================================================
 //==============================================================================
 
-    namespace detail
+    namespace detail_dereference
     {
-
-#if 1
-        template<class t> class dereference_
+        template<class t, class sig>
+        class sig_
         {
-            dNO_REFERENCE_(t, x);
             template <class u> static 
-                typename decltype_<u, decltype(*::std::declval<u>())>::type 
-				check(u*);
+                ::std::true_type check(signature_<sig, &u::operator*>*);
+
+            template <class> static 
+                ::std::false_type check(...);
+
+            typedef decltype(check<t>(nullptr))
+                result;
+        public:
+            enum { value = result::value };
+        };
+
+        template<class t, bool> struct check_
+        {
+            typedef ::std::remove_cv<t> no_cv;
+            typedef typename no_cv::type x;
+
+            enum { ms = sig_<x, x(x::*)()     >::value };
+            enum { cs = sig_<x, x(x::*)()const>::value };
+
+            template <class u> static 
+                    typename decltype_<u, decltype(*::std::declval<u>())>::second 
+                    check(u*);
 
             template <class> static
                 ::std::false_type check(...);
 
-            typedef decltype(check<x>(0))
-                result;
+            typedef decltype(check<t>(nullptr))
+                checked;
+
+            typedef ::std::add_pointer<checked> add;
+            typedef typename add::type z;
+
+            enum { inva = ::std::is_same<checked, ::std::false_type>::value };
+            enum { same = ::std::is_same<z, t*>::value };
+            enum { isConst = ::std::is_const<t>::value };
+            enum { first = isConst? cs : (cs || ms)    };
         public:
-            dereference_();
+            enum { value = inva ? false: (!same || first) };
+        };
+
+        template<class t> struct check_<t, false>
+            { enum { value = false }; };
+
+        template<class t, int> 
+            class impl_;
+
+        // --- !array && !pointer && !class
+        template<class t> struct impl_<t, 0>
+            { enum { value = false }; };
+
+        // --- array or pointer or function
+        template<class t> struct impl_<t, 1>
+            { enum { value = true }; };
+
+        // --- class
+        template<class t> struct impl_<t, 2>
+        {
+        private:
+            #ifdef _MSC_VER
+                __if_exists    (t::operator*) { enum { v = 1 }; };
+                __if_not_exists(t::operator*) { enum { v = 0 }; };
+                typedef check_<t, v> result;
+            #else
+                typedef check_<t, true> result;
+            #endif
+        public:
             enum { value = result::value };
         };
-#endif
 
-#if 0
-	namespace detail_access
-	{
-		template<class t, class i, bool> struct check_
-		{
-			template <class u> static 
-				typename sizeof_< sizeof(obj<u>()[obj<i>()]) >::type
-				check(u*);
-			template <class> static no check(...);
-			enum { sz = sizeof(check<t>(0)) };
-		public:
-			enum { value = sz < sizeof(no) };
-		};
+    } // namespace detail_dereference
 
-		template<class t, class i> struct check_<t, i, false>
-			{ enum { value = false }; };
+    namespace detail
+    {
+        template<class t> class dereference_
+        {
+            dNO_REFERENCE_(t, x);
 
-		template<class t, class i, int> 
-			class impl_;
+            typedef ::std::remove_pointer<x>                
+                no_ptr;
+            typedef typename no_ptr::type                
+                z;
+            enum { f = ::std::is_function<z>::value };
+            enum { p = ::std::is_pointer<x>::value  };
+            enum { a = ::std::is_array<x>::value    };
+            enum { c = ::std::is_class<x>::value    };
+            enum { apf = a || p || f     };
+            enum { v = apf ? 1: c? 2 : 0 };
+            typedef detail_dereference::impl_<x, v> 
+                impl;
+        public:
+            enum { value = impl::value };
+        };
 
-		// --- !array && !pointer && !class
-		template<class t, class i> struct impl_<t, i, 0>
-			{ enum { value = false }; };
-
-		// --- array or pointer
-		template<class t, class i> struct impl_<t, i, 1>
-			{ enum { value = true }; };
-
-		// --- class
-		template<class t, class i> struct impl_<t, i, 2>
-		{
-		private:
-			#ifdef _MSC_VER
-				__if_exists    (t::operator[]) { enum { v = 1 }; }
-				__if_not_exists(t::operator[]) { enum { v = 0 }; }
-				typedef check_<t, i, v> check;
-			#else
-				typedef check_<t, i, true> check;
-			#endif
-		public:
-			enum { value = check::value };
-		};
-
-	} // namespace detail_access
-
-	namespace detail
-	{
-		template<class t, class i> class access_
-		{
-			dNO_REFERENCE_(t, x);
-			typedef ::std::remove_pointer<x>                
-				no_ptr;
-			typedef typename no_ptr::type                
-				z;
-			enum { f = ::std::is_function<z>::value };
-			enum { p = ::std::is_pointer<x>::value  };
-			enum { a = ::std::is_array<x>::value    };
-			enum { c = ::std::is_class<x>::value    };
-			enum { ap = !f && (a || p)  };
-			enum { v = ap ? 1: c? 2 : 0 };
-			typedef detail_access::impl_<x, i, v> 
-				impl;
-		public:
-			enum { value = impl::value };
-		};
-
-	} // namespace detail
-#endif
+    } // namespace detail
 
     template<class t> 
     class dereference
@@ -320,7 +332,7 @@ namespace available {
             dNO_REFERENCE_(t, x);
             template <class u> static 
                 typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type
-				check(u*);
+                check(u*);
 
             template <class> static
                 ::std::false_type check(...);
@@ -435,4 +447,4 @@ namespace available {
 
 //==============================================================================
 //==============================================================================
-#endif // !dTOOLS_SFINAE_AVAILABLE_2010_USED_
+#endif // !dTOOLS_SFINAE_AVAILABLE_2012_USED_
