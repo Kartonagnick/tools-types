@@ -61,6 +61,11 @@
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
 
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
+
 #elif defined(dHAS_ENUM_CLASS) 
     // msvc2012
     //   - has bug:
@@ -85,6 +90,11 @@
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
+
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
 
 #elif defined(dHAS_TYPE_TRAITS) 
     // msvc2010
@@ -112,6 +122,11 @@
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
 
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
+
 #else
     // msvc20008 or older
     #define dTEST_SFINAE_REGULAR          1
@@ -133,6 +148,11 @@
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
+
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
 #endif
 
 namespace 
