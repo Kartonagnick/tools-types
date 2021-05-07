@@ -237,11 +237,13 @@ namespace available {
 
         // --- !array && !pointer && !class
         template<class t, class i> struct impl_<t, i, 0>
-            { enum { value = false }; };
+        { enum { value = false }; };
 
         // --- array or pointer
         template<class t, class i> struct impl_<t, i, 1>
-            { enum { value = true }; };
+        {
+            enum { value = dTRAIT::is_integral<i>::value }; 
+        };
 
         // --- class
         template<class t, class i> struct impl_<t, i, 2>

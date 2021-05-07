@@ -99,7 +99,7 @@
     // msvc2010
     //   - has bug:
     //     - ignore private/protected access
-
+#if 1
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
     #define dTEST_SFINAE_PRIVATE          0
@@ -124,7 +124,7 @@
     #define dTEST_SFINAE_DBODY            1
     #define dTEST_SFINAE_PBODY            0
     #define dTEST_SFINAE_DPBODY           0
-
+#endif
 #else
     // msvc20008 or older
     #define dTEST_SFINAE_REGULAR          1
@@ -168,8 +168,19 @@ namespace
 
 //==============================================================================
 //==============================================================================
-#ifdef dTEST_SFINAE_REGULAR
+#if 0
+TEST_COMPONENT(xxx)
+{
+    typedef me::detail_access::check_<Maket*, void*, true>
+        func;
+    std::cout << func::sz << '\n';
+    std::cout << func::value << '\n';
+    int a = 10;
+    (void) a;
+}
+#endif
 
+#ifdef dTEST_SFINAE_REGULAR
 // --- simple: false
 TEST_COMPONENT(000)
 {
@@ -429,17 +440,17 @@ TEST_COMPONENT(007)
     make_rval(DPContainer&& , size_t ,  privat  );
 //-----------------------------------------------------
     //       |   type       | index  | expected |
-    make_test(DPConst       , void*  ,  privat  );
-    make_test(DPMutable     , void*  ,  privat  );
-    make_test(DPContainer   , void*  ,  privat  );
+    make_test(DPConst       , void*  ,  false   );
+    make_test(DPMutable     , void*  ,  false   );
+    make_test(DPContainer   , void*  ,  false   );
                               
-    make_test(DPConst&      , void*  ,  privat  );
-    make_test(DPMutable&    , void*  ,  privat  );
-    make_test(DPContainer&  , void*  ,  privat  );
+    make_test(DPConst&      , void*  ,  false   );
+    make_test(DPMutable&    , void*  ,  false   );
+    make_test(DPContainer&  , void*  ,  false   );
                               
-    make_rval(DPConst&&     , void*  ,  privat  );
-    make_rval(DPMutable&&   , void*  ,  privat  );
-    make_rval(DPContainer&& , void*  ,  privat  );
+    make_rval(DPConst&&     , void*  ,  false   );
+    make_rval(DPMutable&&   , void*  ,  false   );
+    make_rval(DPContainer&& , void*  ,  false   );
 }
 
 // --- derived private const

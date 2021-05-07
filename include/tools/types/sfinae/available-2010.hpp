@@ -353,7 +353,9 @@ namespace available
 
         // --- array or pointer
         template<class t, class i> struct impl_<t, i, 1>
-            { enum { value = true }; };
+        {
+            enum { value = ::std::is_integral<i>::value }; 
+        };
 
         // --- class
         template<class t, class i> struct impl_<t, i, 2>
