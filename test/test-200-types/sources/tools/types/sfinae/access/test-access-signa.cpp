@@ -195,6 +195,14 @@ TEST_COMPONENT(000)
     make_test(Dummy*    , void(Dummy::*)(size_t) ,  false   );
     make_test(int*      , void(Maket::*)(size_t) ,  false   );
     make_test(int(*)()  , void(Maket::*)(size_t) ,  false   );
+//------------------------------------------
+    make_test(Const    , void(Const::*)(void*)     ,  false );
+    make_test(Mutable  , void(Mutable::*)(void*)   ,  false );
+    make_test(Container, void(Container::*)(void*) ,  false );
+//------------------------------------------
+    make_test(Const    , void(Const::*)(void*) const    ,  false );
+    make_test(Mutable  , void(Mutable::*)(void*) const  ,  false );
+    make_test(Container, void(Container::*)(void*) const,  false );
 }
 TEST_COMPONENT(001)
 {
