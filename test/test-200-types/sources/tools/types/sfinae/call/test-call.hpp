@@ -123,7 +123,7 @@ namespace test_call
         };
         struct Unsuitable
         {
-             void operator()(int) ; 
+             void operator()(int); 
              void operator()(int) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
@@ -149,7 +149,7 @@ namespace test_call
         };
         class PUnsuitable
         {
-             void operator()(int) ; 
+             void operator()(int); 
              void operator()(int) const; 
         public:
             PUnsuitable();
