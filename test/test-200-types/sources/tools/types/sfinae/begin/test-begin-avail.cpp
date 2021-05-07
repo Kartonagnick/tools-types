@@ -1,8 +1,6 @@
 // [2021y-04m-29d][12:57:49] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE_BEGIN
-
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD begin

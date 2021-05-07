@@ -13,8 +13,8 @@ namespace test_call
         struct Const   { void operator()() const; };
         struct Container
         {
-            void operator();
-            void operator() const;
+            void operator()();
+            void operator()() const;
         };
     #endif // dTEST_SFINAE_REGULAR
 
@@ -60,16 +60,16 @@ namespace test_call
     #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
-            RMutable operator();
+            RMutable operator()();
         };
         struct RConst 
         {
-            RConst operator() const;
+            RConst operator()() const;
         };
         struct RContainer
         {
-            RContainer operator() ;
-            RContainer operator() const;
+            RContainer operator()() ;
+            RContainer operator()() const;
         };
     #endif // dTEST_SFINAE_RECURSIEVE
 
@@ -82,20 +82,20 @@ namespace test_call
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
-            PRMutable operator();
+            PRMutable operator()();
         public:
             PRMutable();
         };
         class PRConst
         {
-            PRConst operator() const;
+            PRConst operator()() const;
         public:
             PRConst();
         };
         class PRContainer
         {
-            PRContainer operator() ;
-            PRContainer operator() const;
+            PRContainer operator()() ;
+            PRContainer operator()() const;
         public:
             PRContainer();
         };
@@ -170,16 +170,16 @@ namespace test_call
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-             int operator(); 
+             int operator()(); 
         };
         struct IntConst
         {
-             int operator() const; 
+             int operator()() const; 
         };
         struct Int
         {
-             int operator() ; 
-             int operator() const; 
+             int operator()() ; 
+             int operator()() const; 
         };
     #endif // dTEST_SFINAE_INT
 
@@ -192,20 +192,20 @@ namespace test_call
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-             int operator(); 
+             int operator()(); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-             int operator() const; 
+             int operator()() const; 
         public:
             PIntConst();
         };
         class PInt
         {
-             int operator() ; 
-             int operator() const; 
+             int operator()(); 
+             int operator()() const; 
         public:
             PInt();
         };
@@ -226,18 +226,18 @@ namespace test_call
     #ifdef dTEST_SFINAE_BODY
         struct BodyMutable 
         {
-            double operator(); 
+            double operator()(); 
             char buf[300]; 
         };
         struct BodyConst   
         {
-            double operator() const; 
+            double operator()() const; 
             char buf[300]; 
         };
         struct Body
         {
-            double operator();
-            double operator() const;
+            double operator()();
+            double operator()() const;
             char buf[300]; 
         };
     #endif // dTEST_SFINAE_BODY
@@ -251,22 +251,22 @@ namespace test_call
     #if defined(dTEST_SFINAE_PBODY) || defined(dTEST_SFINAE_DPRVATE)
         class PBodyMutable 
         {
-            double operator();
+            double operator()();
             char buf[300]; 
         public:
             PBodyMutable();
         };
         class PBodyConst
         {
-            double operator() const;
+            double operator()() const;
             char buf[300]; 
         public:
             PBodyConst();
         };
         class PBody
         {
-            double operator() ;
-            double operator() const;
+            double operator()();
+            double operator()() const;
             char buf[300]; 
         public:
             PBody();

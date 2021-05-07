@@ -1,9 +1,7 @@
 // [2021y-05m-07d][17:10:153] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE_CALL
-
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_CALL
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD call
 #define dTEST_TAG tdd
@@ -181,22 +179,22 @@ TEST_COMPONENT(000)
     make_test(Maket     ,  false   );
     make_test(Dummy     ,  false   );
     make_test(int       ,  false   );
-    make_test(int()     ,  false   );
+    make_test(int()     ,  true    );
 //-----------------------------------------
     make_test(Maket&    ,  false   );
     make_test(Dummy&    ,  false   );
     make_test(int&      ,  false   );
-    make_test(int(&)()  ,  false   );
+    make_test(int(&)()  ,  true    );
 //-----------------------------------------
     make_rval(Maket&&   ,  false   );
     make_rval(Dummy&&   ,  false   );
     make_rval(int&&     ,  false   );
-    make_rval(int(&&)() ,  false   );
+    make_rval(int(&&)() ,  true    );
 //-----------------------------------------
     make_test(Maket*    ,  false   );
     make_test(Dummy*    ,  false   );
     make_test(int*      ,  false   );
-    make_test(int(*)()  ,  false   );
+    make_test(int(*)()  ,  true    );
 }
 
 // --- non-const

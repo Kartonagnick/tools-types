@@ -12,10 +12,10 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
-#if 0
     namespace detail
     {
-        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> class call_
+        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> 
+        class call_
         {
             typedef ::std::remove_reference<t> no_ref;
             typedef typename no_ref::type x;
@@ -203,15 +203,14 @@ namespace available {
 
     } // namespace detail
 
-    #define dVARIADIC_7 \
-        class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
+    #define dVARIADIC_0_7 \
+        class t1 = empty, class t2 = empty, class t3 = empty, class t4 = empty, \
         class t5 = empty, class t6 = empty, class t7  = empty
 
-    template<class t, dVARIADIC_7>
+    template<class t, dVARIADIC_0_7>
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t4,t6,t7>)
     {};
-#endif
 
 //==============================================================================
 //==============================================================================

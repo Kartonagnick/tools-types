@@ -1,8 +1,6 @@
 // [2021y-05m-05d][23:02:09] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE_DEREFERENCE
-
 #ifdef TEST_TOOLS_SFINAE_DEREFERENCE
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD dereference
