@@ -1,9 +1,9 @@
-// [2021y-05m-05d][23:02:09] Idrisov Denis R.
+// [2021y-05m-07d][17:10:153] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_DEREFERENCE
+#ifdef TEST_TOOLS_SFINAE_CALL
 #define dTEST_COMPONENT tools, types, sfinae, available
-#define dTEST_METHOD dereference
+#define dTEST_METHOD call
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -34,8 +34,38 @@
     #define dTEST_SFINAE_DBODY            1
     #define dTEST_SFINAE_PBODY            1
     #define dTEST_SFINAE_DPBODY           1
+
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
+    //   - has bug:
+    //     - ignore private/protected access
+    #define dTEST_SFINAE_REGULAR          1
+    #define dTEST_SFINAE_DERIVED          1
+    #define dTEST_SFINAE_PRIVATE          0
+    #define dTEST_SFINAE_DPRVATE          0
+                                          
+    #define dTEST_SFINAE_RECURSIEVE       1
+    #define dTEST_SFINAE_DRECURSIEVE      1
+    #define dTEST_SFINAE_PRECURSIEVE      1
+    #define dTEST_SFINAE_DPRECURSIEVE     1
+
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
+
+    #define dTEST_SFINAE_INT              1
+    #define dTEST_SFINAE_DINT             1
+    #define dTEST_SFINAE_PINT             1
+    #define dTEST_SFINAE_DPINT            1
+
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            1
+    #define dTEST_SFINAE_DPBODY           1
+
+#elif defined(dHAS_ENUM_CLASS) 
+    // msvc2012
     //   - has bug:
     //     - ignore private/protected access
 
@@ -43,7 +73,7 @@
     #define dTEST_SFINAE_DERIVED          1
     #define dTEST_SFINAE_PRIVATE          0
     #define dTEST_SFINAE_DPRVATE          0
-                                          
+
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
     #define dTEST_SFINAE_PRECURSIEVE      0
@@ -61,73 +91,42 @@
 
     #define dTEST_SFINAE_BODY             1
     #define dTEST_SFINAE_DBODY            1
-    #define dTEST_SFINAE_PBODY            1
-    #define dTEST_SFINAE_DPBODY           1
-#elif defined(dHAS_ENUM_CLASS) 
-    // msvc2012
-    //   - has bug:
-    //     - not worked: private/protected access
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
 
-    #define dTEST_SFINAE_REGULAR          1
-    #define dTEST_SFINAE_DERIVED          1
-    //  #define dTEST_SFINAE_PRIVATE      0
-    //  #define dTEST_SFINAE_DPRVATE      0
-
-    #define dTEST_SFINAE_RECURSIEVE       1
-    #define dTEST_SFINAE_DRECURSIEVE      1
-    // #define dTEST_SFINAE_PRECURSIEVE   0
-    // #define dTEST_SFINAE_DPRECURSIEVE  0
-    
-    #define dTEST_SFINAE_UNSUITABLE       1
-    #define dTEST_SFINAE_DUNSUITABLE      1
-    // #define dTEST_SFINAE_PUNSUITABLE   1
-    // #define dTEST_SFINAE_DPUNSUITABLE  1
-
-    #define dTEST_SFINAE_INT              1
-    #define dTEST_SFINAE_DINT             1
-    // #define dTEST_SFINAE_PINT          0
-    // #define dTEST_SFINAE_DPINT         0
-
-    #define dTEST_SFINAE_BODY             1
-    #define dTEST_SFINAE_DBODY            1
-    // #define dTEST_SFINAE_PBODY         0
-    // #define dTEST_SFINAE_DPBODY        0
 #elif defined(dHAS_TYPE_TRAITS) 
     // msvc2010
     //   - has bug:
     //     - not worked: private/protected access
+    //     - not worked: derived for int()
 
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
-    // #define dTEST_SFINAE_PRIVATE       0
-    // #define dTEST_SFINAE_DPRVATE       0
+    #define dTEST_SFINAE_PRIVATE          0
+    #define dTEST_SFINAE_DPRVATE          0
 
     #define dTEST_SFINAE_RECURSIEVE       1
     #define dTEST_SFINAE_DRECURSIEVE      1
-    // #define dTEST_SFINAE_PRECURSIEVE   0
-    // #define dTEST_SFINAE_DPRECURSIEVE  0
-    
+    #define dTEST_SFINAE_PRECURSIEVE      0
+    #define dTEST_SFINAE_DPRECURSIEVE     0
+
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
-    // #define dTEST_SFINAE_PUNSUITABLE   0
-    // #define dTEST_SFINAE_DPUNSUITABLE  0
+    #define dTEST_SFINAE_PUNSUITABLE      0
+    #define dTEST_SFINAE_DPUNSUITABLE     0
 
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
-    // #define dTEST_SFINAE_PINT          0
-    // #define dTEST_SFINAE_DPINT         0
+    #define dTEST_SFINAE_PINT             0
+    #define dTEST_SFINAE_DPINT            0
 
     #define dTEST_SFINAE_BODY             1
     #define dTEST_SFINAE_DBODY            1
-    // #define dTEST_SFINAE_PBODY         0
-    // #define dTEST_SFINAE_DPBODY        0
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
+
 #else
     // msvc20008 or older
-    //   - has bug:
-    //     - ignore: method() const/volatile 
-    //     - ignore: private/protected access
-    //     - confuses: multiplication and dereferencing
-
     #define dTEST_SFINAE_REGULAR          1
     #define dTEST_SFINAE_DERIVED          1
     #define dTEST_SFINAE_PRIVATE          0
@@ -140,8 +139,8 @@
                                           
     #define dTEST_SFINAE_UNSUITABLE       1
     #define dTEST_SFINAE_DUNSUITABLE      1
-    #define dTEST_SFINAE_PUNSUITABLE      0
-    #define dTEST_SFINAE_DPUNSUITABLE     0
+    #define dTEST_SFINAE_PUNSUITABLE      1
+    #define dTEST_SFINAE_DPUNSUITABLE     1
 
     #define dTEST_SFINAE_INT              1
     #define dTEST_SFINAE_DINT             1
@@ -162,84 +161,46 @@ namespace
         const bool privat = false;
     #endif
 
-    #if defined(_MSC_VER) && _MSC_VER <= 1500
-        const bool bug2008 = true;
-    #else
-        const bool bug2008 = false;
-    #endif
-
 } // namespace 
 
-#include "test-dereference.hpp"
+#include "test-call.hpp"
 #include "test-avail.hpp"
 
+//..............................................................................
+//..............................................................................
+
 //==============================================================================
 //==============================================================================
-#if 0
-struct Base
-{
-    //char buf[5];
-    //Base operator*();
-    void operator*();
-};
-struct Dom: Base
-{
-    //char buf[100];
-    //Dom operator*();
-};
-
-void foo();
-
-#define dVIEW(name) \
-    std::cout << #name << " = " << name  << '\n'
-
-TEST_COMPONENT(xxx)
-{
-    //typedef ::tools::sfinae::available::detail_dereference::check_<const Mutable, true>
-    typedef ::tools::sfinae::available::detail_dereference::check_<Dom, true>
-        xxx;
-    dVIEW(xxx::sz);
-
-    /*
-    
-    dVIEW(xxx::f1);
-    dVIEW(xxx::f2);
-    dVIEW(xxx::f3);
-    dVIEW(xxx::f4);
-    dVIEW(xxx::isConst);
-    dVIEW(xxx::inva);
-    dVIEW(xxx::value);
-    */
-
-    int a = 10;
-    (void)a;
-}
-#endif
-
 #ifdef dTEST_SFINAE_REGULAR
 // --- simple: false
 TEST_COMPONENT(000)
 {
-    //       |   type   | expected |
-    make_test(Maket     ,  false   );
-    make_test(Dummy     ,  false   );
-    make_test(int       ,  false   );
-    make_test(int()     ,  true    );
-//-----------------------------------------
-    make_test(Maket&    ,  false   );
-    make_test(Dummy&    ,  false   );
-    make_test(int&      ,  false   );
-    make_test(int(&)()  ,  true    );
-//-----------------------------------------
-    make_rval(Maket&&   ,  false   );
-    make_rval(Dummy&&   ,  false   );
-    make_rval(int&&     ,  false   );
-    make_rval(int(&&)() ,  true    );
-//-----------------------------------------
-    make_test(Maket*    ,  true    );
-    make_test(Dummy*    ,  true    );
-    make_test(int*      ,  true    );
-    make_test(int(*)()  ,  true    );
+    //       |   type         | expected |
+    make_test(Maket           ,  false   );
+    make_test(Dummy           ,  false   );
+    make_test(int             ,  false   );
+    make_test(int()           ,  true    );
+//-----------------------------------------------
+    make_test(Maket&          ,  false   );
+    make_test(Dummy&          ,  false   );
+    make_test(int&            ,  false   );
+    make_test(int(&)()        ,  true    );
+//-----------------------------------------------
+    make_rval(Maket&&         ,  false   );
+    make_rval(Dummy&&         ,  false   );
+    make_rval(int&&           ,  false   );
+    make_rval(int(&&)()       ,  true    );
+//-----------------------------------------------
+    make_test(Maket*          ,  false   );
+    make_test(Dummy*          ,  false   );
+    make_test(int*            ,  false   );
+    make_test(int(*)()        ,  true    );
+//-----------------------------------------------
+    make_test(int(Dummy::*)() ,  false   );
+    make_test(int(*)(...)     ,  true    );
+    make_test(int(&)(...)     ,  true    );
+    make_test(int(int, ...)   ,  false   );
+    make_test(int(...)        ,  true    );
 }
 
 // --- non-const
@@ -264,11 +225,11 @@ TEST_COMPONENT(002)
 {
     //       |   type           | expected |
     make_test(const Const       ,  true    );
-    make_test(const Mutable     ,  bug2008 );
+    make_test(const Mutable     ,  false   );
     make_test(const Container   ,  true    );
 
     make_test(const Const&      ,  true    );
-    make_test(const Mutable&    ,  bug2008 );
+    make_test(const Mutable&    ,  false   );
     make_test(const Container&  ,  true    );
 
     make_rval(const Const&&     ,  true    );
@@ -302,11 +263,11 @@ TEST_COMPONENT(004)
 {
     //       |   type            | expected |
     make_test(const DConst       ,  true    );
-    make_test(const DMutable     ,  bug2008 );
+    make_test(const DMutable     ,  false   );
     make_test(const DContainer   ,  true    );
 
     make_test(const DConst&      ,  true    );
-    make_test(const DMutable&    ,  bug2008 );
+    make_test(const DMutable&    ,  false   );
     make_test(const DContainer&  ,  true    );
 
     make_rval(const DConst&&     ,  true    );
@@ -340,11 +301,11 @@ TEST_COMPONENT(006)
 {
     //       |   type            | expected |
     make_test(const PConst       ,  privat  );
-    make_test(const PMutable     ,  bug2008 );
+    make_test(const PMutable     ,  false   );
     make_test(const PContainer   ,  privat  );
                                     
     make_test(const PConst&      ,  privat  );
-    make_test(const PMutable&    ,  bug2008 );
+    make_test(const PMutable&    ,  false   );
     make_test(const PContainer&  ,  privat  );
                                     
     make_rval(const PConst&&     ,  privat  );
@@ -376,14 +337,13 @@ TEST_COMPONENT(007)
 // --- derived private const
 TEST_COMPONENT(008)
 {
-
     //       |   type             | expected |
     make_test(const DPConst       ,  privat  );
-    make_test(const DPMutable     ,  bug2008 );
+    make_test(const DPMutable     ,  false   );
     make_test(const DPContainer   ,  privat  );
                                      
     make_test(const DPConst&      ,  privat  );
-    make_test(const DPMutable&    ,  bug2008 );
+    make_test(const DPMutable&    ,  false   );
     make_test(const DPContainer&  ,  privat  );
                                      
     make_rval(const DPConst&&     ,  privat  );
@@ -419,17 +379,17 @@ TEST_COMPONENT(009)
 TEST_COMPONENT(010)
 {
     //       |   type            | expected |
-    make_test(const RConst       ,  true    );
-    make_test(const RMutable     ,  bug2008 );
-    make_test(const RContainer   ,  true    );
-                                    
-    make_test(const RConst&      ,  true    );
-    make_test(const RMutable&    ,  bug2008 );
-    make_test(const RContainer&  ,  true    );
-                                    
-    make_rval(const RConst&&     ,  true    );
-    make_rval(const RMutable&&   ,  false   );
-    make_rval(const RContainer&& ,  true    );
+    make_test(const RConst       ,   true   );
+    make_test(const RMutable     ,   false  );
+    make_test(const RContainer   ,   true   );
+                                     
+    make_test(const RConst&      ,   true   );
+    make_test(const RMutable&    ,   false  );
+    make_test(const RContainer&  ,   true   );
+                                     
+    make_rval(const RConst&&     ,   true   );
+    make_rval(const RMutable&&   ,   false  );
+    make_rval(const RContainer&& ,   true   );
 }
 
 #endif // dTEST_SFINAE_RECURSIEVE
@@ -457,17 +417,17 @@ TEST_COMPONENT(011)
 TEST_COMPONENT(012)
 {
     //       |   type             | expected |
-    make_test(const DRConst       ,  true    );
-    make_test(const DRMutable     ,  bug2008 );
-    make_test(const DRContainer   ,  true    );
+    make_test(const DRConst       ,   true   );
+    make_test(const DRMutable     ,   false  );
+    make_test(const DRContainer   ,   true   );
                                       
-    make_test(const DRConst&      ,  true    );
-    make_test(const DRMutable&    ,  bug2008 );
-    make_test(const DRContainer&  ,  true    );
+    make_test(const DRConst&      ,   true   );
+    make_test(const DRMutable&    ,   false  );
+    make_test(const DRContainer&  ,   true   );
                                       
-    make_rval(const DRConst&&     ,  true    );
-    make_rval(const DRMutable&&   ,  false   );
-    make_rval(const DRContainer&& ,  true    );
+    make_rval(const DRConst&&     ,   true   );
+    make_rval(const DRMutable&&   ,   false  );
+    make_rval(const DRContainer&& ,   true   );
 }
 #endif // dTEST_SFINAE_DRECURSIEVE
 
@@ -496,11 +456,11 @@ TEST_COMPONENT(014)
 {
     //       |   type             | expected |
     make_test(const PRConst       ,  privat  );
-    make_test(const PRMutable     ,  bug2008 );
+    make_test(const PRMutable     ,  false   );
     make_test(const PRContainer   ,  privat  );
                                      
     make_test(const PRConst&      ,  privat  );
-    make_test(const PRMutable&    ,  bug2008 );
+    make_test(const PRMutable&    ,  false   );
     make_test(const PRContainer&  ,  privat  );
                                      
     make_rval(const PRConst&&     ,  privat  );
@@ -534,11 +494,11 @@ TEST_COMPONENT(016)
 {
     //       |   type              | expected |
     make_test(const DPRConst       ,  privat  );
-    make_test(const DPRMutable     ,  bug2008 );
+    make_test(const DPRMutable     ,  false   );
     make_test(const DPRContainer   ,  privat  );
                                       
     make_test(const DPRConst&      ,  privat  );
-    make_test(const DPRMutable&    ,  bug2008 );
+    make_test(const DPRMutable&    ,  false   );
     make_test(const DPRContainer&  ,  privat  );
                                       
     make_rval(const DPRConst&&     ,  privat  );
@@ -557,13 +517,13 @@ TEST_COMPONENT(016)
 TEST_COMPONENT(017)
 {
     //       |   type             | expected |
-    make_test(UnsuitableConst     ,  bug2008 );
-    make_test(UnsuitableMutable   ,  bug2008 );
-    make_test(Unsuitable          ,  bug2008 );
+    make_test(UnsuitableConst     ,  false   );
+    make_test(UnsuitableMutable   ,  false   );
+    make_test(Unsuitable          ,  false   );
                                             
-    make_test(UnsuitableConst&    ,  bug2008 );
-    make_test(UnsuitableMutable&  ,  bug2008 );
-    make_test(Unsuitable&         ,  bug2008 );
+    make_test(UnsuitableConst&    ,  false   );
+    make_test(UnsuitableMutable&  ,  false   );
+    make_test(Unsuitable&         ,  false   );
                                             
     make_rval(UnsuitableConst&&   ,  false   );
     make_rval(UnsuitableMutable&& ,  false   );
@@ -572,13 +532,13 @@ TEST_COMPONENT(017)
 TEST_COMPONENT(018)
 {
     //       |   type                   | expected |
-    make_test(const UnsuitableConst     ,  bug2008 );
-    make_test(const UnsuitableMutable   ,  bug2008 );
-    make_test(const Unsuitable          ,  bug2008 );
+    make_test(const UnsuitableConst     ,  false   );
+    make_test(const UnsuitableMutable   ,  false   );
+    make_test(const Unsuitable          ,  false   );
 
-    make_test(const UnsuitableConst&    ,  bug2008 );
-    make_test(const UnsuitableMutable&  ,  bug2008 );
-    make_test(const Unsuitable&         ,  bug2008 );
+    make_test(const UnsuitableConst&    ,  false   );
+    make_test(const UnsuitableMutable&  ,  false   );
+    make_test(const Unsuitable&         ,  false   );
                               
     make_rval(const UnsuitableConst&&   ,  false   );
     make_rval(const UnsuitableMutable&& ,  false   );
@@ -590,13 +550,13 @@ TEST_COMPONENT(018)
 TEST_COMPONENT(019)
 { 
     //       |   type              | expected |
-    make_test(DUnsuitableConst     ,  bug2008 );
-    make_test(DUnsuitableMutable   ,  bug2008 );
-    make_test(DUnsuitable          ,  bug2008 );
+    make_test(DUnsuitableConst     ,  false   );
+    make_test(DUnsuitableMutable   ,  false   );
+    make_test(DUnsuitable          ,  false   );
                                             
-    make_test(DUnsuitableConst&    ,  bug2008 );
-    make_test(DUnsuitableMutable&  ,  bug2008 );
-    make_test(DUnsuitable&         ,  bug2008 );
+    make_test(DUnsuitableConst&    ,  false   );
+    make_test(DUnsuitableMutable&  ,  false   );
+    make_test(DUnsuitable&         ,  false   );
                                             
     make_rval(DUnsuitableConst&&   ,  false   );
     make_rval(DUnsuitableMutable&& ,  false   );
@@ -605,13 +565,13 @@ TEST_COMPONENT(019)
 TEST_COMPONENT(020)
 { 
     //       |   type                    | expected |
-    make_test(const DUnsuitableConst     ,  bug2008 );
-    make_test(const DUnsuitableMutable   ,  bug2008 );
-    make_test(const DUnsuitable          ,  bug2008 );
+    make_test(const DUnsuitableConst     ,  false   );
+    make_test(const DUnsuitableMutable   ,  false   );
+    make_test(const DUnsuitable          ,  false   );
               
-    make_test(const DUnsuitableConst&    ,  bug2008 );
-    make_test(const DUnsuitableMutable&  ,  bug2008 );
-    make_test(const DUnsuitable&         ,  bug2008 );
+    make_test(const DUnsuitableConst&    ,  false   );
+    make_test(const DUnsuitableMutable&  ,  false   );
+    make_test(const DUnsuitable&         ,  false   );
                                             
     make_rval(const DUnsuitableConst&&   ,  false   );
     make_rval(const DUnsuitableMutable&& ,  false   );
@@ -623,13 +583,13 @@ TEST_COMPONENT(020)
 TEST_COMPONENT(021)
 { 
     //       |   type              | expected |
-    make_test(PUnsuitableConst     ,  bug2008 );
-    make_test(PUnsuitableMutable   ,  bug2008 );
-    make_test(PUnsuitable          ,  bug2008 );
+    make_test(PUnsuitableConst     ,  false   );
+    make_test(PUnsuitableMutable   ,  false   );
+    make_test(PUnsuitable          ,  false   );
                                               
-    make_test(PUnsuitableConst&    ,  bug2008 );
-    make_test(PUnsuitableMutable&  ,  bug2008 );
-    make_test(PUnsuitable&         ,  bug2008 );
+    make_test(PUnsuitableConst&    ,  false   );
+    make_test(PUnsuitableMutable&  ,  false   );
+    make_test(PUnsuitable&         ,  false   );
                                               
     make_rval(PUnsuitableConst&&   ,  false   );
     make_rval(PUnsuitableMutable&& ,  false   );
@@ -638,13 +598,13 @@ TEST_COMPONENT(021)
 TEST_COMPONENT(022)
 { 
     //       |   type                    | expected |
-    make_test(const PUnsuitableConst     ,  bug2008 );
-    make_test(const PUnsuitableMutable   ,  bug2008 );
-    make_test(const PUnsuitable          ,  bug2008 );
+    make_test(const PUnsuitableConst     ,  false   );
+    make_test(const PUnsuitableMutable   ,  false   );
+    make_test(const PUnsuitable          ,  false   );
                                             
-    make_test(const PUnsuitableConst&    ,  bug2008 );
-    make_test(const PUnsuitableMutable&  ,  bug2008 );
-    make_test(const PUnsuitable&         ,  bug2008 );
+    make_test(const PUnsuitableConst&    ,  false   );
+    make_test(const PUnsuitableMutable&  ,  false   );
+    make_test(const PUnsuitable&         ,  false   );
                                             
     make_rval(const PUnsuitableConst&&   ,  false   );
     make_rval(const PUnsuitableMutable&& ,  false   );
@@ -656,13 +616,13 @@ TEST_COMPONENT(022)
 TEST_COMPONENT(023)
 { 
     //       |   type               | expected |
-    make_test(DPUnsuitableConst     ,  bug2008 );
-    make_test(DPUnsuitableMutable   ,  bug2008 );
-    make_test(DPUnsuitable          ,  bug2008 );
+    make_test(DPUnsuitableConst     ,  false   );
+    make_test(DPUnsuitableMutable   ,  false   );
+    make_test(DPUnsuitable          ,  false   );
                                        
-    make_test(DPUnsuitableConst&    ,  bug2008 );
-    make_test(DPUnsuitableMutable&  ,  bug2008 );
-    make_test(DPUnsuitable&         ,  bug2008 );
+    make_test(DPUnsuitableConst&    ,  false   );
+    make_test(DPUnsuitableMutable&  ,  false   );
+    make_test(DPUnsuitable&         ,  false   );
                                        
     make_rval(DPUnsuitableConst&&   ,  false   );
     make_rval(DPUnsuitableMutable&& ,  false   );
@@ -671,13 +631,13 @@ TEST_COMPONENT(023)
 TEST_COMPONENT(024)
 { 
     //       |   type                     | expected |
-    make_test(const DPUnsuitableConst     ,  bug2008 );
-    make_test(const DPUnsuitableMutable   ,  bug2008 );
-    make_test(const DPUnsuitable          ,  bug2008 );
+    make_test(const DPUnsuitableConst     ,  false   );
+    make_test(const DPUnsuitableMutable   ,  false   );
+    make_test(const DPUnsuitable          ,  false   );
                                              
-    make_test(const DPUnsuitableConst&    ,  bug2008 );
-    make_test(const DPUnsuitableMutable&  ,  bug2008 );
-    make_test(const DPUnsuitable&         ,  bug2008 );
+    make_test(const DPUnsuitableConst&    ,  false   );
+    make_test(const DPUnsuitableMutable&  ,  false   );
+    make_test(const DPUnsuitable&         ,  false   );
                                              
     make_rval(const DPUnsuitableConst&&   ,  false   );
     make_rval(const DPUnsuitableMutable&& ,  false   );
@@ -713,11 +673,11 @@ TEST_COMPONENT(026)
 {
     //       |   type            | expected |
     make_test(const IntConst     ,  true    );
-    make_test(const IntMutable   ,  bug2008 );
+    make_test(const IntMutable   ,  false   );
     make_test(const Int          ,  true    );
                            
     make_test(const IntConst&    ,  true    );
-    make_test(const IntMutable&  ,  bug2008 );
+    make_test(const IntMutable&  ,  false   );
     make_test(const Int&         ,  true    );
               
     make_rval(const IntConst&&   ,  true    );
@@ -751,11 +711,11 @@ TEST_COMPONENT(028)
 {
     //       |   type             | expected |
     make_test(const DIntConst     ,  true    );
-    make_test(const DIntMutable   ,  bug2008 );
+    make_test(const DIntMutable   ,  false   );
     make_test(const DInt          ,  true    );
                            
     make_test(const DIntConst&    ,  true    );
-    make_test(const DIntMutable&  ,  bug2008 );
+    make_test(const DIntMutable&  ,  false   );
     make_test(const DInt&         ,  true    );
                     
     make_rval(const DIntConst&&   ,  true    );
@@ -789,11 +749,11 @@ TEST_COMPONENT(030)
 {
     //       |   type             | expected |
     make_test(const PIntConst     ,  privat  );
-    make_test(const PIntMutable   ,  bug2008 );
+    make_test(const PIntMutable   ,  false   );
     make_test(const PInt          ,  privat  );
                                      
     make_test(const PIntConst&    ,  privat  );
-    make_test(const PIntMutable&  ,  bug2008 );
+    make_test(const PIntMutable&  ,  false   );
     make_test(const PInt&         ,  privat  );
                                      
     make_rval(const PIntConst&&   ,  privat  );
@@ -827,11 +787,11 @@ TEST_COMPONENT(032)
 {
     //       |   type              | expected |
     make_test(const DPIntConst     ,  privat  );
-    make_test(const DPIntMutable   ,  bug2008 );
+    make_test(const DPIntMutable   ,  false   );
     make_test(const DPInt          ,  privat  );
                                       
     make_test(const DPIntConst&    ,  privat  );
-    make_test(const DPIntMutable&  ,  bug2008 );
+    make_test(const DPIntMutable&  ,  false   );
     make_test(const DPInt&         ,  privat  );
                                       
     make_rval(const DPIntConst&&   ,  privat  );
@@ -868,11 +828,11 @@ TEST_COMPONENT(034)
 {
     //       |   type              | expected |
     make_test(const BodyConst      ,  true    );
-    make_test(const BodyMutable    ,  bug2008 );
+    make_test(const BodyMutable    ,  false   );
     make_test(const Body           ,  true    );
                     
     make_test(const BodyConst&     ,  true    );
-    make_test(const BodyMutable&   ,  bug2008 );
+    make_test(const BodyMutable&   ,  false   );
     make_test(const Body&          ,  true    );
                     
     make_rval(const BodyConst&&    ,  true    );
@@ -906,11 +866,11 @@ TEST_COMPONENT(036)
 {
     //       |   type              | expected |
     make_test(const DBodyConst     ,  true    );
-    make_test(const DBodyMutable   ,  bug2008 );
+    make_test(const DBodyMutable   ,  false   );
     make_test(const DBody          ,  true    );
 
     make_test(const DBodyConst&    ,  true    );
-    make_test(const DBodyMutable&  ,  bug2008 );
+    make_test(const DBodyMutable&  ,  false   );
     make_test(const DBody&         ,  true    );
 
     make_rval(const DBodyConst&&   ,  true    );
@@ -944,11 +904,11 @@ TEST_COMPONENT(038)
 {
     //       |   type              | expected |
     make_test(const PBodyConst     ,  privat  );
-    make_test(const PBodyMutable   ,  bug2008 );
+    make_test(const PBodyMutable   ,  false   );
     make_test(const PBody          ,  privat  );
                                     
     make_test(const PBodyConst&    ,  privat  );
-    make_test(const PBodyMutable&  ,  bug2008 );
+    make_test(const PBodyMutable&  ,  false   );
     make_test(const PBody&         ,  privat  );
                                     
     make_rval(const PBodyConst&&   ,  privat  );
@@ -982,11 +942,11 @@ TEST_COMPONENT(040)
 {
     //       |   type               | expected |
     make_test(const DPBodyConst     ,  privat  );
-    make_test(const DPBodyMutable   ,  bug2008 );
+    make_test(const DPBodyMutable   ,  false   );
     make_test(const DPBody          ,  privat  );
                                     
     make_test(const DPBodyConst&    ,  privat  );
-    make_test(const DPBodyMutable&  ,  bug2008 );
+    make_test(const DPBodyMutable&  ,  false   );
     make_test(const DPBody&         ,  privat  );
                                     
     make_rval(const DPBodyConst&&   ,  privat  );
@@ -1000,4 +960,4 @@ TEST_COMPONENT(040)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_DEREFERENCE
+#endif // !TEST_TOOLS_SFINAE_CALL

@@ -1,9 +1,9 @@
-// [2021y-05m-05d][23:02:09] Idrisov Denis R.
+// [2021y-05m-07d][17:10:153] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_DEREFERENCE
+#ifdef TEST_TOOLS_SFINAE_CALL
 #define dTEST_COMPONENT tools, types, sfinae, signature
-#define dTEST_METHOD dereference
+#define dTEST_METHOD call
 #define dTEST_TAG tdd
 
 //==============================================================================
@@ -42,7 +42,6 @@
     //   - has bug:
     //     - error: private/protected access
     //     - error: derived
-
     #define dTEST_SFINAE_REGULAR          1
     // #define dTEST_SFINAE_DERIVED       1
     // #define dTEST_SFINAE_PRIVATE       0
@@ -164,7 +163,7 @@ namespace
     #endif
 }
 
-#include "test-dereference.hpp"
+#include "test-call.hpp"
 #include "test-signa.hpp"
 
 //==============================================================================
@@ -196,7 +195,7 @@ TEST_COMPONENT(000)
 }
 TEST_COMPONENT(001)
 {
-    //       |   type   | signature             | expected |
+    //       |   type   | signature        | expected |
     make_test(Maket     , void(Maket::*)() const,  false   );
     make_test(Dummy     , void(Dummy::*)() const,  false   );
     make_test(int       , void(Maket::*)() const,  false   );
@@ -1578,4 +1577,4 @@ TEST_COMPONENT(082)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_DEREFERENCE
+#endif // !TEST_TOOLS_SFINAE_CALL

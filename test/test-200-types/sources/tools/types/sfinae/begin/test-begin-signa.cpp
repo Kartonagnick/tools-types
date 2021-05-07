@@ -63,7 +63,7 @@
     // #define dTEST_SFINAE_DPINT         0
 
     #define dTEST_SFINAE_BODY             1
-    // #define dTEST_SFINAE_DBODY         0
+    // #define dTEST_SFINAE_DBODY         1
     // #define dTEST_SFINAE_PBODY         0
     // #define dTEST_SFINAE_DPBODY        0
 #elif defined(dHAS_ENUM_CLASS) 
@@ -93,7 +93,7 @@
     // #define dTEST_SFINAE_DPINT         0
 
     #define dTEST_SFINAE_BODY             1
-    // #define dTEST_SFINAE_DBODY         0
+    // #define dTEST_SFINAE_DBODY         1
     // #define dTEST_SFINAE_PBODY         0
     // #define dTEST_SFINAE_DPBODY        0
 #elif defined(dHAS_TYPE_TRAITS) 
@@ -123,7 +123,7 @@
     // #define dTEST_SFINAE_DPINT         0
 
     #define dTEST_SFINAE_BODY             1
-    // #define dTEST_SFINAE_DBODY         0
+    // #define dTEST_SFINAE_DBODY         1
     // #define dTEST_SFINAE_PBODY         0
     // #define dTEST_SFINAE_DPBODY        0
 #else
@@ -149,7 +149,7 @@
     // #define dTEST_SFINAE_DPINT         0
 
     #define dTEST_SFINAE_BODY             1
-    // #define dTEST_SFINAE_DBODY         0
+    // #define dTEST_SFINAE_DBODY         1
     // #define dTEST_SFINAE_PBODY         0
     // #define dTEST_SFINAE_DPBODY        0
 #endif
@@ -1318,9 +1318,9 @@ TEST_COMPONENT(067)
     make_test(BodyMutable&  , double (BodyMutable::*)() ,  true    );
     make_test(Body&         , double (Body::*)()        ,  true    );
 
-    make_test(BodyConst&&   , double (BodyConst::*)()   ,  false   );
-    make_test(BodyMutable&& , double (BodyMutable::*)() ,  true    );
-    make_test(Body&&        , double (Body::*)()        ,  true    );
+    make_rval(BodyConst&&   , double (BodyConst::*)()   ,  false   );
+    make_rval(BodyMutable&& , double (BodyMutable::*)() ,  true    );
+    make_rval(Body&&        , double (Body::*)()        ,  true    );
 }
 TEST_COMPONENT(068)
 {
@@ -1333,9 +1333,9 @@ TEST_COMPONENT(068)
     make_test(BodyMutable&  , double (BodyMutable::*)() const ,  false   );
     make_test(Body&         , double (Body::*)()        const ,  true    );
 
-    make_test(BodyConst&&   , double (BodyConst::*)()   const ,  true    );
-    make_test(BodyMutable&& , double (BodyMutable::*)() const ,  false   );
-    make_test(Body&&        , double (Body::*)()        const ,  true    );
+    make_rval(BodyConst&&   , double (BodyConst::*)()   const ,  true    );
+    make_rval(BodyMutable&& , double (BodyMutable::*)() const ,  false   );
+    make_rval(Body&&        , double (Body::*)()        const ,  true    );
 }
 
 // --- const
@@ -1350,9 +1350,9 @@ TEST_COMPONENT(069)
     make_test(const BodyMutable&  , double (BodyMutable::*)() ,  true    );
     make_test(const Body&         , double (Body::*)()        ,  true    );
 
-    make_test(const BodyConst&&   , double (BodyConst::*)()   ,  false   );
-    make_test(const BodyMutable&& , double (BodyMutable::*)() ,  true    );
-    make_test(const Body&&        , double (Body::*)()        ,  true    );
+    make_rval(const BodyConst&&   , double (BodyConst::*)()   ,  false   );
+    make_rval(const BodyMutable&& , double (BodyMutable::*)() ,  true    );
+    make_rval(const Body&&        , double (Body::*)()        ,  true    );
 }
 TEST_COMPONENT(070)
 {
@@ -1365,9 +1365,9 @@ TEST_COMPONENT(070)
     make_test(const BodyMutable&  , double (BodyMutable::*)() const ,  false   );
     make_test(const Body&         , double (Body::*)()        const ,  true    );
 
-    make_test(const BodyConst&&   , double (BodyConst::*)()   const ,  true    );
-    make_test(const BodyMutable&& , double (BodyMutable::*)() const ,  false   );
-    make_test(const Body&&        , double (Body::*)()        const ,  true    );
+    make_rval(const BodyConst&&   , double (BodyConst::*)()   const ,  true    );
+    make_rval(const BodyMutable&& , double (BodyMutable::*)() const ,  false   );
+    make_rval(const Body&&        , double (Body::*)()        const ,  true    );
 }
 #endif // dTEST_SFINAE_BODY
 
@@ -1386,9 +1386,9 @@ TEST_COMPONENT(071)
     make_test(DBodyMutable&  , double (DBodyMutable::*)() ,  true    );
     make_test(DBody&         , double (DBody::*)()        ,  true    );
 
-    make_test(DBodyConst&&   , double (DBodyConst::*)()   ,  false   );
-    make_test(DBodyMutable&& , double (DBodyMutable::*)() ,  true    );
-    make_test(DBody&&        , double (DBody::*)()        ,  true    );
+    make_rval(DBodyConst&&   , double (DBodyConst::*)()   ,  false   );
+    make_rval(DBodyMutable&& , double (DBodyMutable::*)() ,  true    );
+    make_rval(DBody&&        , double (DBody::*)()        ,  true    );
 }
 TEST_COMPONENT(072)
 {
@@ -1401,9 +1401,9 @@ TEST_COMPONENT(072)
     make_test(DBodyMutable&  , double (DBodyMutable::*)() const ,  false   );
     make_test(DBody&         , double (DBody::*)()        const ,  true    );
 
-    make_test(DBodyConst&&   , double (DBodyConst::*)()   const ,  true    );
-    make_test(DBodyMutable&& , double (DBodyMutable::*)() const ,  false   );
-    make_test(DBody&&        , double (DBody::*)()        const ,  true    );
+    make_rval(DBodyConst&&   , double (DBodyConst::*)()   const ,  true    );
+    make_rval(DBodyMutable&& , double (DBodyMutable::*)() const ,  false   );
+    make_rval(DBody&&        , double (DBody::*)()        const ,  true    );
 }
 
 // --- const
@@ -1418,9 +1418,9 @@ TEST_COMPONENT(073)
     make_test(const DBodyMutable&  , double (DBodyMutable::*)() ,  true    );
     make_test(const DBody&         , double (DBody::*)()        ,  true    );
 
-    make_test(const DBodyConst&&   , double (DBodyConst::*)()   ,  false   );
-    make_test(const DBodyMutable&& , double (DBodyMutable::*)() ,  true    );
-    make_test(const DBody&&        , double (DBody::*)()        ,  true    );
+    make_rval(const DBodyConst&&   , double (DBodyConst::*)()   ,  false   );
+    make_rval(const DBodyMutable&& , double (DBodyMutable::*)() ,  true    );
+    make_rval(const DBody&&        , double (DBody::*)()        ,  true    );
 }
 TEST_COMPONENT(074)
 {
@@ -1433,9 +1433,9 @@ TEST_COMPONENT(074)
     make_test(const DBodyMutable&  , double (DBodyMutable::*)() const ,  false   );
     make_test(const DBody&         , double (DBody::*)()        const ,  true    );
 
-    make_test(const DBodyConst&&   , double (DBodyConst::*)()   const ,  true    );
-    make_test(const DBodyMutable&& , double (DBodyMutable::*)() const ,  false   );
-    make_test(const DBody&&        , double (DBody::*)()        const ,  true    );
+    make_rval(const DBodyConst&&   , double (DBodyConst::*)()   const ,  true    );
+    make_rval(const DBodyMutable&& , double (DBodyMutable::*)() const ,  false   );
+    make_rval(const DBody&&        , double (DBody::*)()        const ,  true    );
 }
 #endif // dTEST_SFINAE_DBODY
 
@@ -1454,9 +1454,9 @@ TEST_COMPONENT(075)
     make_test(PBodyMutable&  , double (PBodyMutable::*)() ,  false   );
     make_test(PBody&         , double (PBody::*)()        ,  false   );
 
-    make_test(PBodyConst&&   , double (PBodyConst::*)()   ,  false   );
-    make_test(PBodyMutable&& , double (PBodyMutable::*)() ,  false   );
-    make_test(PBody&&        , double (PBody::*)()        ,  false   );
+    make_rval(PBodyConst&&   , double (PBodyConst::*)()   ,  false   );
+    make_rval(PBodyMutable&& , double (PBodyMutable::*)() ,  false   );
+    make_rval(PBody&&        , double (PBody::*)()        ,  false   );
 }
 TEST_COMPONENT(076)
 {
@@ -1469,9 +1469,9 @@ TEST_COMPONENT(076)
     make_test(PBodyMutable&  , double (PBodyMutable::*)() const ,  false   );
     make_test(PBody&         , double (PBody::*)()        const ,  false   );
 
-    make_test(PBodyConst&&   , double (PBodyConst::*)()   const ,  false   );
-    make_test(PBodyMutable&& , double (PBodyMutable::*)() const ,  false   );
-    make_test(PBody&&        , double (PBody::*)()        const ,  false   );
+    make_rval(PBodyConst&&   , double (PBodyConst::*)()   const ,  false   );
+    make_rval(PBodyMutable&& , double (PBodyMutable::*)() const ,  false   );
+    make_rval(PBody&&        , double (PBody::*)()        const ,  false   );
 }
 
 // --- const
@@ -1486,9 +1486,9 @@ TEST_COMPONENT(077)
     make_test(const PBodyMutable&  , double (PBodyMutable::*)() ,  false   );
     make_test(const PBody&         , double (PBody::*)()        ,  false   );
 
-    make_test(const PBodyConst&&   , double (PBodyConst::*)()   ,  false   );
-    make_test(const PBodyMutable&& , double (PBodyMutable::*)() ,  false   );
-    make_test(const PBody&&        , double (PBody::*)()        ,  false   );
+    make_rval(const PBodyConst&&   , double (PBodyConst::*)()   ,  false   );
+    make_rval(const PBodyMutable&& , double (PBodyMutable::*)() ,  false   );
+    make_rval(const PBody&&        , double (PBody::*)()        ,  false   );
 }
 TEST_COMPONENT(078)
 {
@@ -1501,9 +1501,9 @@ TEST_COMPONENT(078)
     make_test(const PBodyMutable&  , double (PBodyMutable::*)() const ,  false   );
     make_test(const PBody&         , double (PBody::*)()        const ,  false   );
 
-    make_test(const PBodyConst&&   , double (PBodyConst::*)()   const ,  false   );
-    make_test(const PBodyMutable&& , double (PBodyMutable::*)() const ,  false   );
-    make_test(const PBody&&        , double (PBody::*)()        const ,  false   );
+    make_rval(const PBodyConst&&   , double (PBodyConst::*)()   const ,  false   );
+    make_rval(const PBodyMutable&& , double (PBodyMutable::*)() const ,  false   );
+    make_rval(const PBody&&        , double (PBody::*)()        const ,  false   );
 }
 #endif // dTEST_SFINAE_PBODY
 
@@ -1522,9 +1522,9 @@ TEST_COMPONENT(079)
     make_test(DPBodyMutable&  , double (DPBodyMutable::*)() ,  false   );
     make_test(DPBody&         , double (DPBody::*)()        ,  false   );
 
-    make_test(DPBodyConst&&   , double (DPBodyConst::*)()   ,  false   );
-    make_test(DPBodyMutable&& , double (DPBodyMutable::*)() ,  false   );
-    make_test(DPBody&&        , double (DPBody::*)()        ,  false   );
+    make_rval(DPBodyConst&&   , double (DPBodyConst::*)()   ,  false   );
+    make_rval(DPBodyMutable&& , double (DPBodyMutable::*)() ,  false   );
+    make_rval(DPBody&&        , double (DPBody::*)()        ,  false   );
 }
 TEST_COMPONENT(080)
 {
@@ -1537,9 +1537,9 @@ TEST_COMPONENT(080)
     make_test(DPBodyMutable&  , double (DPBodyMutable::*)() const ,  false   );
     make_test(DPBody&         , double (DPBody::*)()        const ,  false   );
 
-    make_test(DPBodyConst&&   , double (DPBodyConst::*)()   const ,  false   );
-    make_test(DPBodyMutable&& , double (DPBodyMutable::*)() const ,  false   );
-    make_test(DPBody&&        , double (DPBody::*)()        const ,  false   );
+    make_rval(DPBodyConst&&   , double (DPBodyConst::*)()   const ,  false   );
+    make_rval(DPBodyMutable&& , double (DPBodyMutable::*)() const ,  false   );
+    make_rval(DPBody&&        , double (DPBody::*)()        const ,  false   );
 }
 
 // --- const
@@ -1554,9 +1554,9 @@ TEST_COMPONENT(081)
     make_test(const DPBodyMutable&  , double (DPBodyMutable::*)() ,  false   );
     make_test(const DPBody&         , double (DPBody::*)()        ,  false   );
 
-    make_test(const DPBodyConst&&   , double (DPBodyConst::*)()   ,  false   );
-    make_test(const DPBodyMutable&& , double (DPBodyMutable::*)() ,  false   );
-    make_test(const DPBody&&        , double (DPBody::*)()        ,  false   );
+    make_rval(const DPBodyConst&&   , double (DPBodyConst::*)()   ,  false   );
+    make_rval(const DPBodyMutable&& , double (DPBodyMutable::*)() ,  false   );
+    make_rval(const DPBody&&        , double (DPBody::*)()        ,  false   );
 }
 TEST_COMPONENT(082)
 {
@@ -1569,9 +1569,9 @@ TEST_COMPONENT(082)
     make_test(const DPBodyMutable&  , double (DPBodyMutable::*)() const ,  false   );
     make_test(const DPBody&         , double (DPBody::*)()        const ,  false   );
 
-    make_test(const DPBodyConst&&   , double (DPBodyConst::*)()   const ,  false   );
-    make_test(const DPBodyMutable&& , double (DPBodyMutable::*)() const ,  false   );
-    make_test(const DPBody&&        , double (DPBody::*)()        const ,  false   );
+    make_rval(const DPBodyConst&&   , double (DPBodyConst::*)()   const ,  false   );
+    make_rval(const DPBodyMutable&& , double (DPBodyMutable::*)() const ,  false   );
+    make_rval(const DPBody&&        , double (DPBody::*)()        const ,  false   );
 }
 #endif // dTEST_SFINAE_DPBODY
 

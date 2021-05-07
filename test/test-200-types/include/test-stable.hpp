@@ -56,6 +56,15 @@
     
 //==============================================================================
 //===== tools/types/sfinae =================================||==================
+    #define TEST_TOOLS_SFINAE_DEREFERENCE                   // ready!
+    #define TEST_TOOLS_SFINAE_ACCESS                        // ready!
+    #define TEST_TOOLS_SFINAE_CALL                          // in progress...
+
+    #define TEST_TOOLS_SFINAE_BEGIN                         // ready!
+    #define TEST_TOOLS_SFINAE_END                           // ready!
+
+//==============================================================================
+//===== tools/types/sfinae =================================||==================
     // #define TEST_TOOLS_DEREF_AVAILABLE                   // in progress...
     #define TEST_TOOLS_SFINAE                               // ready!
     // #define TEST_TOOLS_IS_LAMBDA                         // in progress...

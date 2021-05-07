@@ -12,10 +12,10 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
-#if 0
     namespace detail
     {
-        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> class call_
+        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> 
+        class call_
         {
             typedef ::std::remove_reference<t> no_ref;
             typedef typename no_ref::type x;
@@ -203,15 +203,14 @@ namespace available {
 
     } // namespace detail
 
-    #define dVARIADIC_7 \
-        class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
+    #define dVARIADIC_0_7 \
+        class t1 = empty, class t2 = empty, class t3 = empty, class t4 = empty, \
         class t5 = empty, class t6 = empty, class t7  = empty
 
-    template<class t, dVARIADIC_7>
+    template<class t, dVARIADIC_0_7>
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t4,t6,t7>)
     {};
-#endif
 
 //==============================================================================
 //==============================================================================
@@ -325,11 +324,10 @@ namespace available {
 //==============================================================================
 //==============================================================================
 
-    namespace detail
+    namespace detail_access
     {
-        template<class t, class i> class access_
+        template<class t, class i, bool> struct check_
         {
-            dNO_REFERENCE_(t, x);
             template <class u> static 
                 typename decltype_<u, decltype(::std::declval<u>()[::std::declval<i>()]) >::type
                 check(u*);
@@ -337,11 +335,64 @@ namespace available {
             template <class> static
                 ::std::false_type check(...);
 
-            typedef decltype(check<x>(0))
+            typedef decltype(check<t>(nullptr))
                 result;
         public:
-            access_();
             enum { value = result::value };
+        };
+
+        template<class t, class i> struct check_<t, i, false>
+            { enum { value = false }; };
+
+        template<class t, class i, int> 
+            class impl_;
+
+        // --- !array && !pointer && !class
+        template<class t, class i> struct impl_<t, i, 0>
+            { enum { value = false }; };
+
+        // --- array or pointer
+        template<class t, class i> struct impl_<t, i, 1>
+        {
+            enum { value = ::std::is_integral<i>::value }; 
+        };
+
+        // --- class
+        template<class t, class i> struct impl_<t, i, 2>
+        {
+        private:
+            #ifdef _MSC_VER
+                __if_exists    (t::operator[]) { enum { v = 1 }; }
+                __if_not_exists(t::operator[]) { enum { v = 0 }; }
+                typedef check_<t, i, v> check;
+            #else
+                typedef check_<t, i, true> check;
+            #endif
+        public:
+            enum { value = check::value };
+        };
+
+    } // namespace detail_access
+
+    namespace detail
+    {
+        template<class t, class i> class access_
+        {
+            dNO_REFERENCE_(t, x);
+            typedef ::std::remove_pointer<x>                
+                no_ptr;
+            typedef typename no_ptr::type                
+                z;
+            enum { f = ::std::is_function<z>::value };
+            enum { p = ::std::is_pointer<x>::value  };
+            enum { a = ::std::is_array<x>::value    };
+            enum { c = ::std::is_class<x>::value    };
+            enum { ap = !f && (a || p)  };
+            enum { v = ap ? 1: c? 2 : 0 };
+            typedef detail_access::impl_<x, i, v> 
+                impl;
+        public:
+            enum { value = impl::value };
         };
 
     } // namespace detail

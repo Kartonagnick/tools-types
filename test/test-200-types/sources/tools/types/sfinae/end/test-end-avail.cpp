@@ -1,8 +1,6 @@
 // [2021y-05m-04d][16:34:05] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE_END
-
 #ifdef TEST_TOOLS_SFINAE_END
 #define dTEST_COMPONENT tools, types, sfinae, available
 #define dTEST_METHOD end
@@ -32,6 +30,11 @@
     #define dTEST_SFINAE_PINT             1
     #define dTEST_SFINAE_DPINT            1
 
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            1
+    #define dTEST_SFINAE_DPBODY           1
+
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
@@ -57,6 +60,11 @@
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
 
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            1
+    #define dTEST_SFINAE_DPBODY           1
+
 #elif defined(dHAS_ENUM_CLASS) 
     // msvc2012
     //   - has bug:
@@ -81,6 +89,11 @@
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
+
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
 
 #elif defined(dHAS_TYPE_TRAITS) 
     // msvc2010
@@ -108,6 +121,10 @@
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
 
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
 #else
     // msvc20008 or older
     #define dTEST_SFINAE_REGULAR          1
@@ -129,6 +146,11 @@
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             0
     #define dTEST_SFINAE_DPINT            0
+
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            0
+    #define dTEST_SFINAE_DPBODY           0
 #endif
 
 namespace
@@ -768,6 +790,164 @@ TEST_COMPONENT(032)
     make_rval(const DPInt&&        ,  privat  );
 }
 #endif // dTEST_SFINAE_DPINT
+
+//..............................................................................
+//..............................................................................
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_BODY
+// --- non-const
+TEST_COMPONENT(033)
+{
+    //       |   type         | expected |
+    make_test(BodyConst       ,  true    );
+    make_test(BodyMutable     ,  true    );
+    make_test(Body            ,  true    );
+
+    make_test(BodyConst&      ,  true    );
+    make_test(BodyMutable&    ,  true    );
+    make_test(Body&           ,  true    );
+
+    make_rval(BodyConst&&     ,  true    );
+    make_rval(BodyMutable&&   ,  true    );
+    make_rval(Body&&          ,  true    );
+}
+
+// --- const
+TEST_COMPONENT(034)
+{
+    //       |   type              | expected |
+    make_test(const BodyConst      ,  true    );
+    make_test(const BodyMutable    ,  false   );
+    make_test(const Body           ,  true    );
+                    
+    make_test(const BodyConst&     ,  true    );
+    make_test(const BodyMutable&   ,  false   );
+    make_test(const Body&          ,  true    );
+                    
+    make_rval(const BodyConst&&    ,  true    );
+    make_rval(const BodyMutable&&  ,  false   );
+    make_rval(const Body&&         ,  true    );
+}
+#endif // dTEST_SFINAE_REGULAR
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DBODY
+// --- derived non-const
+TEST_COMPONENT(035)
+{
+    //       |   type        | expected |
+    make_test(DBodyConst     ,  true    );
+    make_test(DBodyMutable   ,  true    );
+    make_test(DBody          ,  true    );
+
+    make_test(DBodyConst&    ,  true    );
+    make_test(DBodyMutable&  ,  true    );
+    make_test(DBody&         ,  true    );
+
+    make_rval(DBodyConst&&   ,  true    );
+    make_rval(DBodyMutable&& ,  true    );
+    make_rval(DBody&&        ,  true    );
+}
+
+// --- derived const
+TEST_COMPONENT(036)
+{
+    //       |   type              | expected |
+    make_test(const DBodyConst     ,  true    );
+    make_test(const DBodyMutable   ,  false   );
+    make_test(const DBody          ,  true    );
+
+    make_test(const DBodyConst&    ,  true    );
+    make_test(const DBodyMutable&  ,  false   );
+    make_test(const DBody&         ,  true    );
+
+    make_rval(const DBodyConst&&   ,  true    );
+    make_rval(const DBodyMutable&& ,  false   );
+    make_rval(const DBody&&        ,  true    );
+}
+#endif  // dTEST_SFINAE_DERIVED
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PBODY
+// --- private non-const
+TEST_COMPONENT(037)
+{
+    //       |   type        | expected |
+    make_test(PBodyConst     ,  privat  );
+    make_test(PBodyMutable   ,  privat  );
+    make_test(PBody          ,  privat  );
+                             
+    make_test(PBodyConst&    ,  privat  );
+    make_test(PBodyMutable&  ,  privat  );
+    make_test(PBody&         ,  privat  );
+               
+    make_rval(PBodyConst&&   ,  privat  );
+    make_rval(PBodyMutable&& ,  privat  );
+    make_rval(PBody&&        ,  privat  );
+}
+
+// --- private const
+TEST_COMPONENT(038)
+{
+    //       |   type              | expected |
+    make_test(const PBodyConst     ,  privat  );
+    make_test(const PBodyMutable   ,  false   );
+    make_test(const PBody          ,  privat  );
+                                    
+    make_test(const PBodyConst&    ,  privat  );
+    make_test(const PBodyMutable&  ,  false   );
+    make_test(const PBody&         ,  privat  );
+                                    
+    make_rval(const PBodyConst&&   ,  privat  );
+    make_rval(const PBodyMutable&& ,  false   );
+    make_rval(const PBody&&        ,  privat  );
+}
+#endif // dTEST_SFINAE_PBODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPBODY
+// --- derived private  non-const
+TEST_COMPONENT(039)
+{
+    //       |   type         | expected |
+    make_test(DPBodyConst     ,  privat  );
+    make_test(DPBodyMutable   ,  privat  );
+    make_test(DPBody          ,  privat  );
+                              
+    make_test(DPBodyConst&    ,  privat  );
+    make_test(DPBodyMutable&  ,  privat  );
+    make_test(DPBody&         ,  privat  );
+                              
+    make_rval(DPBodyConst&&   ,  privat  );
+    make_rval(DPBodyMutable&& ,  privat  );
+    make_rval(DPBody&&        ,  privat  );
+}
+
+// --- derived private const
+TEST_COMPONENT(040)
+{
+    //       |   type               | expected |
+    make_test(const DPBodyConst     ,  privat  );
+    make_test(const DPBodyMutable   ,  false   );
+    make_test(const DPBody          ,  privat  );
+                                    
+    make_test(const DPBodyConst&    ,  privat  );
+    make_test(const DPBodyMutable&  ,  false   );
+    make_test(const DPBody&         ,  privat  );
+                                    
+    make_rval(const DPBodyConst&&   ,  privat  );
+    make_rval(const DPBodyMutable&& ,  false   );
+    make_rval(const DPBody&&        ,  privat  );
+}
+#endif // dTEST_SFINAE_DPBODY
+
+//..............................................................................
+//..............................................................................
 
 //==============================================================================
 //==============================================================================

@@ -1,20 +1,20 @@
-// [2021y-05m-04d][21:27:57] Idrisov Denis R.
+// [2021y-05m-07d][17:10:153] Idrisov Denis R.
 #pragma once
 #include <tools/types/sfinae.hpp>
 namespace me = ::tools::sfinae::available;
 //==============================================================================
 //==============================================================================
-namespace test_access
+namespace test_call
 {
     #define dexpression(type, expected) \
-        me::access<type>::value == expected
+        me::call<type>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, expected)                      \
-            static_assert(                                     \
-                dexpression(type, expected),                   \
-                "tools::sfinae::available::access<" #type "> " \
-                "must be '" #expected "'"                      \
+        #define make_test(type, expected)                    \
+            static_assert(                                   \
+                dexpression(type, expected),                 \
+                "tools::sfinae::available::call<" #type "> " \
+                "must be '" #expected "'"                    \
             )
     #else
         #define make_test(type, expected)   \
@@ -32,7 +32,7 @@ namespace test_access
             void()
     #endif
 
-} // namespace test_access
-
+} // namespace test_call
+using namespace test_call;
 //==============================================================================
 //==============================================================================

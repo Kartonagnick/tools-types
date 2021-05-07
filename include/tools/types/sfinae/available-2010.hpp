@@ -14,27 +14,22 @@ namespace available {
 
     namespace detail
     {
-        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> class call_
-        {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+        #define dARG(n)  obj<t##n>()
 
-            template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>(), 
-                    ::std::declval<t5>(),
-                    ::std::declval<t6>(), 
-                    ::std::declval<t7>()
-                ), ::std::true_type()
+        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> 
+        class call_
+        {
+            dNO_REFERENCE_(t, x);
+
+            template<class u> static decltype(
+                obj<u&>()(dARG(1), dARG(2), dARG(3), dARG(4), dARG(5), dARG(6), dARG(7)), 
+                ::std::true_type()
             ) check(u*);
 
-            template<class> static
-            ::std::false_type check(...);
+            template<class> static ::std::false_type 
+                check(...);
 
-            typedef decltype(check<x>(0))
+            typedef decltype(check<x>(0)) 
                 checked;
         public:
             enum { value = checked::value };
@@ -43,22 +38,15 @@ namespace available {
         template<class t, class t1, class t2, class t3, class t4, class t5, class t6> 
         class call_<t, t1, t2, t3, t4, t5, t6, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
-            template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>(), 
-                    ::std::declval<t5>(),
-                    ::std::declval<t6>()
-                ), ::std::true_type()
+            template<class u> static decltype(
+                obj<u&>()(dARG(1), dARG(2), dARG(3), dARG(4), dARG(5), dARG(6)), 
+                ::std::true_type()
             ) check(u*);
 
-            template<class> static
-            ::std::false_type check(...);
+            template<class> static ::std::false_type
+                check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -69,21 +57,15 @@ namespace available {
         template<class t, class t1, class t2, class t3, class t4, class t5> 
         class call_<t, t1, t2, t3, t4, t5, empty, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
-            template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>(), 
-                    ::std::declval<t5>()
-                ), ::std::true_type()
+            template<class u> static decltype(
+                obj<u&>()(dARG(1), dARG(2), dARG(3), dARG(4), dARG(5)), 
+                ::std::true_type()
             ) check(u*);
 
-            template<class> static
-            ::std::false_type check(...);
+            template<class> static ::std::false_type 
+                check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -94,20 +76,15 @@ namespace available {
         template<class t, class t1, class t2, class t3, class t4> 
         class call_<t, t1, t2, t3, t4, empty, empty, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
-            template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>(), 
-                    ::std::declval<t4>() 
-                ), ::std::true_type()
+            template<class u> static decltype(
+                obj<u&>()(dARG(1), dARG(2), dARG(3), dARG(4)), 
+                ::std::true_type()
             ) check(u*);
 
-            template<class> static
-            ::std::false_type check(...);
+            template<class> static ::std::false_type 
+                check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -118,15 +95,11 @@ namespace available {
         template<class t, class t1, class t2, class t3> 
         class call_<t, t1, t2, t3, empty, empty, empty, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
-            template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>(), 
-                    ::std::declval<t3>() 
-                ), ::std::true_type()
+            template<class u> static decltype(
+                obj<u&>()(dARG(1), dARG(2), dARG(3)), 
+                ::std::true_type()
             ) check(u*);
 
             template<class> static
@@ -141,14 +114,11 @@ namespace available {
         template<class t, class t1, class t2> 
         class call_<t, t1, t2, empty, empty, empty, empty, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
-            template<class u> static
-            decltype(::std::declval<u>()(
-                    ::std::declval<t1>(),
-                    ::std::declval<t2>()
-                ), ::std::true_type()
+            template<class u> static decltype(
+                obj<u&>()(dARG(1), dARG(2)), 
+                ::std::true_type()
             ) check(u*);
 
             template<class> static
@@ -163,16 +133,13 @@ namespace available {
         template<class t, class t1> 
         class call_<t, t1, empty, empty, empty, empty, empty, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
-            template<class u> static
-            decltype(::std::declval<u>()(::std::declval<t1>()), 
-                ::std::true_type()
+            template<class u> static decltype(
+                obj<u&>()(dARG(1)), ::std::true_type()
             ) check(u*);
 
-            template<class> static
-            ::std::false_type check(...);
+            template<class> static ::std::false_type check(...);
 
             typedef decltype(check<x>(0))
                 checked;
@@ -183,15 +150,13 @@ namespace available {
         template<class t> 
         class call_<t, empty, empty, empty, empty, empty, empty, empty>
         {
-            typedef ::std::remove_reference<t> no_ref;
-            typedef typename no_ref::type x;
+            dNO_REFERENCE_(t, x);
 
             template<class u> static
-            decltype(::std::declval<u>()(), ::std::true_type())
+            decltype(obj<u&>()(), ::std::true_type())
                 check(u*);
 
-            template<class> static
-            ::std::false_type
+            template<class> static ::std::false_type 
                 check(...);
 
             typedef decltype(check<x>(0))
@@ -200,16 +165,20 @@ namespace available {
             enum { value = checked::value };
         };
 
+        #undef dARG
+
     } // namespace detail
 
-    #define dVARIADIC_7 \
-        class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
-        class t5 = empty, class t6 = empty, class t7  = empty
+    #define dVARIADIC_0_7 \
+        class t1 = empty, class t2 = empty, class t3 = empty, \
+        class t4 = empty, class t5 = empty, class t6 = empty, \
+        class t7 = empty
 
-    template<class t, dVARIADIC_7>
+    template<class t, dVARIADIC_0_7>
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t4,t6,t7>)
     {};
+
 } // namespace available 
 
 //==============================================================================
@@ -353,7 +322,9 @@ namespace available
 
         // --- array or pointer
         template<class t, class i> struct impl_<t, i, 1>
-            { enum { value = true }; };
+        {
+            enum { value = ::std::is_integral<i>::value }; 
+        };
 
         // --- class
         template<class t, class i> struct impl_<t, i, 2>
@@ -444,6 +415,7 @@ namespace available
         : dIMPLEMENT_(begin_<t>)
     {};
 } // namespace available
+
 //==============================================================================
 //=== end ======================================================================
 namespace available

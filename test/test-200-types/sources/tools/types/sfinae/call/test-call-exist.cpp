@@ -1,10 +1,10 @@
-// [2021y-05m-04d][16:34:05] Idrisov Denis R.
-#ifdef _MSC_VER
+// [2021y-05m-07d][17:10:153] Idrisov Denis R.
+#if defined(_MSC_VER) &&  _MSC_VER < 1928
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_END
+#ifdef TEST_TOOLS_SFINAE_CALL
 #define dTEST_COMPONENT tools, types, sfinae, exist
-#define dTEST_METHOD end
+#define dTEST_METHOD call
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -48,7 +48,7 @@
     #define dTEST_SFINAE_DPBODY       1
 #endif
 
-#include "test-end.hpp"
+#include "test-call.hpp"
 #include "test-exist.hpp"
 
 //==============================================================================
@@ -688,5 +688,5 @@ TEST_COMPONENT(032)
 
 //==============================================================================
 //==============================================================================
-#endif // TEST_TOOLS_SFINAE_END
-#endif // _MSC_VER
+#endif //  defined(_MSC_VER) &&  _MSC_VER < 1928
+#endif // TEST_TOOLS_SFINAE_CALL

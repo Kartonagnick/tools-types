@@ -32,57 +32,71 @@
     #define dTEST_SFINAE_DINT             1
     #define dTEST_SFINAE_PINT             1
     #define dTEST_SFINAE_DPINT            1
+
+    #define dTEST_SFINAE_BODY             1
+    #define dTEST_SFINAE_DBODY            1
+    #define dTEST_SFINAE_PBODY            1
+    #define dTEST_SFINAE_DPBODY           1
 #elif defined(dHAS_VARIADIC_TEMPLATE) 
     // msvc2013
     //   - has bug:
     //     - error: private/protected access
     //     - error: derived
 
-    #define dTEST_SFINAE_REGULAR             1
-    // #define dTEST_SFINAE_DERIVED          1
-    // #define dTEST_SFINAE_PRIVATE          0
-    // #define dTEST_SFINAE_DPRVATE          0
+    #define dTEST_SFINAE_REGULAR          1
+    // #define dTEST_SFINAE_DERIVED       1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
                                           
-    #define dTEST_SFINAE_RECURSIEVE          1
-    // #define dTEST_SFINAE_DRECURSIEVE      1
-    // #define dTEST_SFINAE_PRECURSIEVE      0
-    // #define dTEST_SFINAE_DPRECURSIEVE     0
+    #define dTEST_SFINAE_RECURSIEVE       1
+    // #define dTEST_SFINAE_DRECURSIEVE   1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
 
-    #define dTEST_SFINAE_UNSUITABLE          1
-    // #define dTEST_SFINAE_DUNSUITABLE      1
-    // #define dTEST_SFINAE_PUNSUITABLE      1
-    // #define dTEST_SFINAE_DPUNSUITABLE     1
+    #define dTEST_SFINAE_UNSUITABLE       1
+    // #define dTEST_SFINAE_DUNSUITABLE   1
+    // #define dTEST_SFINAE_PUNSUITABLE   1
+    // #define dTEST_SFINAE_DPUNSUITABLE  1
 
-    #define dTEST_SFINAE_INT                 1
-    // #define dTEST_SFINAE_DINT             1
-    // #define dTEST_SFINAE_PINT             0
-    // #define dTEST_SFINAE_DPINT            0
+    #define dTEST_SFINAE_INT              1
+    // #define dTEST_SFINAE_DINT          1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
 
+    #define dTEST_SFINAE_BODY             1
+    // #define dTEST_SFINAE_DBODY         1
+    // #define dTEST_SFINAE_PBODY         0
+    // #define dTEST_SFINAE_DPBODY        0
 #elif defined(dHAS_ENUM_CLASS) 
     // msvc2012
     //   - has bug:
     //     - not worked: private/protected access
     //     - not worked: derived
 
-    #define dTEST_SFINAE_REGULAR            1
-    // #define dTEST_SFINAE_DERIVED         1
-    // #define dTEST_SFINAE_PRIVATE         0
-    // #define dTEST_SFINAE_DPRVATE         0
+    #define dTEST_SFINAE_REGULAR          1
+    // #define dTEST_SFINAE_DERIVED       1
+    // #define dTEST_SFINAE_PRIVATE       0
+    // #define dTEST_SFINAE_DPRVATE       0
     
-    #define dTEST_SFINAE_RECURSIEVE         1
-    // #define dTEST_SFINAE_DRECURSIEVE     1
-    // #define dTEST_SFINAE_PRECURSIEVE     0
-    // #define dTEST_SFINAE_DPRECURSIEVE    0
+    #define dTEST_SFINAE_RECURSIEVE       1
+    // #define dTEST_SFINAE_DRECURSIEVE   1
+    // #define dTEST_SFINAE_PRECURSIEVE   0
+    // #define dTEST_SFINAE_DPRECURSIEVE  0
     
-    #define dTEST_SFINAE_UNSUITABLE         1
-    #define dTEST_SFINAE_DUNSUITABLE        1
-    // #define dTEST_SFINAE_PUNSUITABLE     1
-    // #define dTEST_SFINAE_DPUNSUITABLE    1
+    #define dTEST_SFINAE_UNSUITABLE       1
+    #define dTEST_SFINAE_DUNSUITABLE      1
+    // #define dTEST_SFINAE_PUNSUITABLE   1
+    // #define dTEST_SFINAE_DPUNSUITABLE  1
     
-    #define dTEST_SFINAE_INT                1
-    // #define dTEST_SFINAE_DINT            1
-    // #define dTEST_SFINAE_PINT            0
-    // #define dTEST_SFINAE_DPINT           0
+    #define dTEST_SFINAE_INT              1
+    // #define dTEST_SFINAE_DINT          1
+    // #define dTEST_SFINAE_PINT          0
+    // #define dTEST_SFINAE_DPINT         0
+
+    #define dTEST_SFINAE_BODY             1
+    // #define dTEST_SFINAE_DBODY         1
+    // #define dTEST_SFINAE_PBODY         0
+    // #define dTEST_SFINAE_DPBODY        0
 
 #elif defined(dHAS_TYPE_TRAITS) 
     // msvc2010
@@ -110,6 +124,11 @@
     // #define dTEST_SFINAE_PINT          0
     // #define dTEST_SFINAE_DPINT         0
 
+    #define dTEST_SFINAE_BODY             1
+    // #define dTEST_SFINAE_DBODY         1
+    // #define dTEST_SFINAE_PBODY         0
+    // #define dTEST_SFINAE_DPBODY        0
+
 #else
     // msvc20008 or older
     #define dTEST_SFINAE_REGULAR          1
@@ -131,6 +150,11 @@
     // #define dTEST_SFINAE_DINT          1
     // #define dTEST_SFINAE_PINT          0
     // #define dTEST_SFINAE_DPINT         0
+
+    #define dTEST_SFINAE_BODY             1
+    // #define dTEST_SFINAE_DBODY         1
+    // #define dTEST_SFINAE_PBODY         0
+    // #define dTEST_SFINAE_DPBODY        0
 #endif
 
 namespace
@@ -171,6 +195,14 @@ TEST_COMPONENT(000)
     make_test(Dummy*    , void(Dummy::*)(size_t) ,  false   );
     make_test(int*      , void(Maket::*)(size_t) ,  false   );
     make_test(int(*)()  , void(Maket::*)(size_t) ,  false   );
+//------------------------------------------
+    make_test(Const    , void(Const::*)(void*)     ,  false );
+    make_test(Mutable  , void(Mutable::*)(void*)   ,  false );
+    make_test(Container, void(Container::*)(void*) ,  false );
+//------------------------------------------
+    make_test(Const    , void(Const::*)(void*) const    ,  false );
+    make_test(Mutable  , void(Mutable::*)(void*) const  ,  false );
+    make_test(Container, void(Container::*)(void*) const,  false );
 }
 TEST_COMPONENT(001)
 {
@@ -1281,6 +1313,278 @@ TEST_COMPONENT(066)
     make_rval(const DPInt&&        , int(DPInt::*)(size_t)        const ,   false  );
 }
 #endif // dTEST_SFINAE_DPINT
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_BODY
+// --- non-const
+TEST_COMPONENT(067)
+{
+    //       |   type       | signature                       | expected |
+    make_test(BodyConst     , double (BodyConst::*)(size_t)   ,  false   );
+    make_test(BodyMutable   , double (BodyMutable::*)(size_t) ,  true    );
+    make_test(Body          , double (Body::*)(size_t)        ,  true    );
+
+    make_test(BodyConst&    , double (BodyConst::*)(size_t)   ,  false   );
+    make_test(BodyMutable&  , double (BodyMutable::*)(size_t) ,  true    );
+    make_test(Body&         , double (Body::*)(size_t)        ,  true    );
+
+    make_rval(BodyConst&&   , double (BodyConst::*)(size_t)   ,  false   );
+    make_rval(BodyMutable&& , double (BodyMutable::*)(size_t) ,  true    );
+    make_rval(Body&&        , double (Body::*)(size_t)        ,  true    );
+}
+TEST_COMPONENT(068)
+{
+    //       |   type       | signature                             | expected |
+    make_test(BodyConst     , double (BodyConst::*)(size_t)   const ,  true    );
+    make_test(BodyMutable   , double (BodyMutable::*)(size_t) const ,  false   );
+    make_test(Body          , double (Body::*)(size_t)        const ,  true    );
+
+    make_test(BodyConst&    , double (BodyConst::*)(size_t)   const ,  true    );
+    make_test(BodyMutable&  , double (BodyMutable::*)(size_t) const ,  false   );
+    make_test(Body&         , double (Body::*)(size_t)        const ,  true    );
+
+    make_rval(BodyConst&&   , double (BodyConst::*)(size_t)   const ,  true    );
+    make_rval(BodyMutable&& , double (BodyMutable::*)(size_t) const ,  false   );
+    make_rval(Body&&        , double (Body::*)(size_t)        const ,  true    );
+}
+
+// --- const
+TEST_COMPONENT(069)
+{
+    //       |   type             | signature                       | expected |
+    make_test(const BodyConst     , double (BodyConst::*)(size_t)   ,  false   );
+    make_test(const BodyMutable   , double (BodyMutable::*)(size_t) ,  true    );
+    make_test(const Body          , double (Body::*)(size_t)        ,  true    );
+
+    make_test(const BodyConst&    , double (BodyConst::*)(size_t)   ,  false   );
+    make_test(const BodyMutable&  , double (BodyMutable::*)(size_t) ,  true    );
+    make_test(const Body&         , double (Body::*)(size_t)        ,  true    );
+
+    make_rval(const BodyConst&&   , double (BodyConst::*)(size_t)   ,  false   );
+    make_rval(const BodyMutable&& , double (BodyMutable::*)(size_t) ,  true    );
+    make_rval(const Body&&        , double (Body::*)(size_t)        ,  true    );
+}
+TEST_COMPONENT(070)
+{
+    //       |   type             | signature                             | expected |
+    make_test(const BodyConst     , double (BodyConst::*)(size_t)   const ,  true    );
+    make_test(const BodyMutable   , double (BodyMutable::*)(size_t) const ,  false   );
+    make_test(const Body          , double (Body::*)(size_t)        const ,  true    );
+
+    make_test(const BodyConst&    , double (BodyConst::*)(size_t)   const ,  true    );
+    make_test(const BodyMutable&  , double (BodyMutable::*)(size_t) const ,  false   );
+    make_test(const Body&         , double (Body::*)(size_t)        const ,  true    );
+
+    make_rval(const BodyConst&&   , double (BodyConst::*)(size_t)   const ,  true    );
+    make_rval(const BodyMutable&& , double (BodyMutable::*)(size_t) const ,  false   );
+    make_rval(const Body&&        , double (Body::*)(size_t)        const ,  true    );
+}
+#endif // dTEST_SFINAE_BODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DBODY
+// --- non-const
+TEST_COMPONENT(071)
+{
+    //       |   type        | signature                        | expected |
+    make_test(DBodyConst     , double (DBodyConst::*)(size_t)   ,  false   );
+    make_test(DBodyMutable   , double (DBodyMutable::*)(size_t) ,  true    );
+    make_test(DBody          , double (DBody::*)(size_t)        ,  true    );
+
+    make_test(DBodyConst&    , double (DBodyConst::*)(size_t)   ,  false   );
+    make_test(DBodyMutable&  , double (DBodyMutable::*)(size_t) ,  true    );
+    make_test(DBody&         , double (DBody::*)(size_t)        ,  true    );
+
+    make_rval(DBodyConst&&   , double (DBodyConst::*)(size_t)   ,  false   );
+    make_rval(DBodyMutable&& , double (DBodyMutable::*)(size_t) ,  true    );
+    make_rval(DBody&&        , double (DBody::*)(size_t)        ,  true    );
+}
+TEST_COMPONENT(072)
+{
+    //       |   type        | signature                              | expected |
+    make_test(DBodyConst     , double (DBodyConst::*)(size_t)   const ,  true    );
+    make_test(DBodyMutable   , double (DBodyMutable::*)(size_t) const ,  false   );
+    make_test(DBody          , double (DBody::*)(size_t)        const ,  true    );
+
+    make_test(DBodyConst&    , double (DBodyConst::*)(size_t)   const ,  true    );
+    make_test(DBodyMutable&  , double (DBodyMutable::*)(size_t) const ,  false   );
+    make_test(DBody&         , double (DBody::*)(size_t)        const ,  true    );
+
+    make_rval(DBodyConst&&   , double (DBodyConst::*)(size_t)   const ,  true    );
+    make_rval(DBodyMutable&& , double (DBodyMutable::*)(size_t) const ,  false   );
+    make_rval(DBody&&        , double (DBody::*)(size_t)        const ,  true    );
+}
+
+// --- const
+TEST_COMPONENT(073)
+{
+    //       |   type              | signature                        | expected |
+    make_test(const DBodyConst     , double (DBodyConst::*)(size_t)   ,  false   );
+    make_test(const DBodyMutable   , double (DBodyMutable::*)(size_t) ,  true    );
+    make_test(const DBody          , double (DBody::*)(size_t)        ,  true    );
+
+    make_test(const DBodyConst&    , double (DBodyConst::*)(size_t)   ,  false   );
+    make_test(const DBodyMutable&  , double (DBodyMutable::*)(size_t) ,  true    );
+    make_test(const DBody&         , double (DBody::*)(size_t)        ,  true    );
+
+    make_rval(const DBodyConst&&   , double (DBodyConst::*)(size_t)   ,  false   );
+    make_rval(const DBodyMutable&& , double (DBodyMutable::*)(size_t) ,  true    );
+    make_rval(const DBody&&        , double (DBody::*)(size_t)        ,  true    );
+}
+TEST_COMPONENT(074)
+{
+    //       |   type              | signature                              | expected |
+    make_test(const DBodyConst     , double (DBodyConst::*)(size_t)   const ,  true    );
+    make_test(const DBodyMutable   , double (DBodyMutable::*)(size_t) const ,  false   );
+    make_test(const DBody          , double (DBody::*)(size_t)        const ,  true    );
+
+    make_test(const DBodyConst&    , double (DBodyConst::*)(size_t)   const ,  true    );
+    make_test(const DBodyMutable&  , double (DBodyMutable::*)(size_t) const ,  false   );
+    make_test(const DBody&         , double (DBody::*)(size_t)        const ,  true    );
+
+    make_rval(const DBodyConst&&   , double (DBodyConst::*)(size_t)   const ,  true    );
+    make_rval(const DBodyMutable&& , double (DBodyMutable::*)(size_t) const ,  false   );
+    make_rval(const DBody&&        , double (DBody::*)(size_t)        const ,  true    );
+}
+#endif // dTEST_SFINAE_DBODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PBODY
+// --- non-const
+TEST_COMPONENT(075)
+{
+    //       |   type        | signature                        | expected |
+    make_test(PBodyConst     , double (PBodyConst::*)(size_t)   ,  false   );
+    make_test(PBodyMutable   , double (PBodyMutable::*)(size_t) ,  false   );
+    make_test(PBody          , double (PBody::*)(size_t)        ,  false   );
+
+    make_test(PBodyConst&    , double (PBodyConst::*)(size_t)   ,  false   );
+    make_test(PBodyMutable&  , double (PBodyMutable::*)(size_t) ,  false   );
+    make_test(PBody&         , double (PBody::*)(size_t)        ,  false   );
+
+    make_rval(PBodyConst&&   , double (PBodyConst::*)(size_t)   ,  false   );
+    make_rval(PBodyMutable&& , double (PBodyMutable::*)(size_t) ,  false   );
+    make_rval(PBody&&        , double (PBody::*)(size_t)        ,  false   );
+}
+TEST_COMPONENT(076)
+{
+    //       |   type        | signature                              | expected |
+    make_test(PBodyConst     , double (PBodyConst::*)(size_t)   const ,  false   );
+    make_test(PBodyMutable   , double (PBodyMutable::*)(size_t) const ,  false   );
+    make_test(PBody          , double (PBody::*)(size_t)        const ,  false   );
+
+    make_test(PBodyConst&    , double (PBodyConst::*)(size_t)   const ,  false   );
+    make_test(PBodyMutable&  , double (PBodyMutable::*)(size_t) const ,  false   );
+    make_test(PBody&         , double (PBody::*)(size_t)        const ,  false   );
+
+    make_rval(PBodyConst&&   , double (PBodyConst::*)(size_t)   const ,  false   );
+    make_rval(PBodyMutable&& , double (PBodyMutable::*)(size_t) const ,  false   );
+    make_rval(PBody&&        , double (PBody::*)(size_t)        const ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(077)
+{
+    //       |   type              | signature                        | expected |
+    make_test(const PBodyConst     , double (PBodyConst::*)(size_t)   ,  false   );
+    make_test(const PBodyMutable   , double (PBodyMutable::*)(size_t) ,  false   );
+    make_test(const PBody          , double (PBody::*)(size_t)        ,  false   );
+
+    make_test(const PBodyConst&    , double (PBodyConst::*)(size_t)   ,  false   );
+    make_test(const PBodyMutable&  , double (PBodyMutable::*)(size_t) ,  false   );
+    make_test(const PBody&         , double (PBody::*)(size_t)        ,  false   );
+
+    make_rval(const PBodyConst&&   , double (PBodyConst::*)(size_t)   ,  false   );
+    make_rval(const PBodyMutable&& , double (PBodyMutable::*)(size_t) ,  false   );
+    make_rval(const PBody&&        , double (PBody::*)(size_t)        ,  false   );
+}
+TEST_COMPONENT(078)
+{
+    //       |   type              | signature                              | expected |
+    make_test(const PBodyConst     , double (PBodyConst::*)(size_t)   const ,  false   );
+    make_test(const PBodyMutable   , double (PBodyMutable::*)(size_t) const ,  false   );
+    make_test(const PBody          , double (PBody::*)(size_t)        const ,  false   );
+
+    make_test(const PBodyConst&    , double (PBodyConst::*)(size_t)   const ,  false   );
+    make_test(const PBodyMutable&  , double (PBodyMutable::*)(size_t) const ,  false   );
+    make_test(const PBody&         , double (PBody::*)(size_t)        const ,  false   );
+
+    make_rval(const PBodyConst&&   , double (PBodyConst::*)(size_t)   const ,  false   );
+    make_rval(const PBodyMutable&& , double (PBodyMutable::*)(size_t) const ,  false   );
+    make_rval(const PBody&&        , double (PBody::*)(size_t)        const ,  false   );
+}
+#endif // dTEST_SFINAE_PBODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPBODY
+// --- non-const
+TEST_COMPONENT(079)
+{
+    //       |   type         | signature                         | expected |
+    make_test(DPBodyConst     , double (DPBodyConst::*)(size_t)   ,  false   );
+    make_test(DPBodyMutable   , double (DPBodyMutable::*)(size_t) ,  false   );
+    make_test(DPBody          , double (DPBody::*)(size_t)        ,  false   );
+
+    make_test(DPBodyConst&    , double (DPBodyConst::*)(size_t)   ,  false   );
+    make_test(DPBodyMutable&  , double (DPBodyMutable::*)(size_t) ,  false   );
+    make_test(DPBody&         , double (DPBody::*)(size_t)        ,  false   );
+
+    make_rval(DPBodyConst&&   , double (DPBodyConst::*)(size_t)   ,  false   );
+    make_rval(DPBodyMutable&& , double (DPBodyMutable::*)(size_t) ,  false   );
+    make_rval(DPBody&&        , double (DPBody::*)(size_t)        ,  false   );
+}
+TEST_COMPONENT(080)
+{
+    //       |   type         | signature                               | expected |
+    make_test(DPBodyConst     , double (DPBodyConst::*)(size_t)   const ,  false   );
+    make_test(DPBodyMutable   , double (DPBodyMutable::*)(size_t) const ,  false   );
+    make_test(DPBody          , double (DPBody::*)(size_t)        const ,  false   );
+
+    make_test(DPBodyConst&    , double (DPBodyConst::*)(size_t)   const ,  false   );
+    make_test(DPBodyMutable&  , double (DPBodyMutable::*)(size_t) const ,  false   );
+    make_test(DPBody&         , double (DPBody::*)(size_t)        const ,  false   );
+
+    make_rval(DPBodyConst&&   , double (DPBodyConst::*)(size_t)   const ,  false   );
+    make_rval(DPBodyMutable&& , double (DPBodyMutable::*)(size_t) const ,  false   );
+    make_rval(DPBody&&        , double (DPBody::*)(size_t)        const ,  false   );
+}
+
+// --- const
+TEST_COMPONENT(081)
+{
+    //       |   type               | signature                         | expected |
+    make_test(const DPBodyConst     , double (DPBodyConst::*)(size_t)   ,  false   );
+    make_test(const DPBodyMutable   , double (DPBodyMutable::*)(size_t) ,  false   );
+    make_test(const DPBody          , double (DPBody::*)(size_t)        ,  false   );
+
+    make_test(const DPBodyConst&    , double (DPBodyConst::*)(size_t)   ,  false   );
+    make_test(const DPBodyMutable&  , double (DPBodyMutable::*)(size_t) ,  false   );
+    make_test(const DPBody&         , double (DPBody::*)(size_t)        ,  false   );
+
+    make_rval(const DPBodyConst&&   , double (DPBodyConst::*)(size_t)   ,  false   );
+    make_rval(const DPBodyMutable&& , double (DPBodyMutable::*)(size_t) ,  false   );
+    make_rval(const DPBody&&        , double (DPBody::*)(size_t)        ,  false   );
+}
+TEST_COMPONENT(082)
+{
+    //       |   type               | signature                               | expected |
+    make_test(const DPBodyConst     , double (DPBodyConst::*)(size_t)   const ,  false   );
+    make_test(const DPBodyMutable   , double (DPBodyMutable::*)(size_t) const ,  false   );
+    make_test(const DPBody          , double (DPBody::*)(size_t)        const ,  false   );
+
+    make_test(const DPBodyConst&    , double (DPBodyConst::*)(size_t)   const ,  false   );
+    make_test(const DPBodyMutable&  , double (DPBodyMutable::*)(size_t) const ,  false   );
+    make_test(const DPBody&         , double (DPBody::*)(size_t)        const ,  false   );
+
+    make_rval(const DPBodyConst&&   , double (DPBodyConst::*)(size_t)   const ,  false   );
+    make_rval(const DPBodyMutable&& , double (DPBodyMutable::*)(size_t) const ,  false   );
+    make_rval(const DPBody&&        , double (DPBody::*)(size_t)        const ,  false   );
+}
+#endif // dTEST_SFINAE_DPBODY
 
 //==============================================================================
 //==============================================================================

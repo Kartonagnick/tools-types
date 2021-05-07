@@ -41,6 +41,11 @@
     #define dTEST_SFINAE_DINT         1
     #define dTEST_SFINAE_PINT         1
     #define dTEST_SFINAE_DPINT        1
+
+    #define dTEST_SFINAE_BODY         1
+    #define dTEST_SFINAE_DBODY        1
+    #define dTEST_SFINAE_PBODY        1
+    #define dTEST_SFINAE_DPBODY       1
 #endif
 
 #include "test-access.hpp"
@@ -526,6 +531,160 @@ TEST_COMPONENT(024)
     make_rval(const DPInt&&        ,  true    );
 }
 #endif // dTEST_SFINAE_PINT
+
+//==============================================================================
+//==============================================================================
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_BODY
+// --- int non-const
+TEST_COMPONENT(025)
+{
+    //       |   type       | expected |
+    make_test(BodyConst     ,  true    );
+    make_test(BodyMutable   ,  true    );
+    make_test(Body          ,  true    );
+
+    make_test(BodyConst&    ,  true    );
+    make_test(BodyMutable&  ,  true    );
+    make_test(Body&         ,  true    );
+
+    make_rval(BodyConst&&   ,  true    );
+    make_rval(BodyMutable&& ,  true    );
+    make_rval(Body&&        ,  true    );
+}
+
+// --- int const
+TEST_COMPONENT(026)
+{
+    //       |   type             | expected |
+    make_test(const BodyConst     ,  true    );
+    make_test(const BodyMutable   ,  true    );
+    make_test(const Body          ,  true    );
+                    
+    make_test(const BodyConst&    ,  true    );
+    make_test(const BodyMutable&  ,  true    );
+    make_test(const Body&         ,  true    );
+                    
+    make_rval(const BodyConst&&   ,  true    );
+    make_rval(const BodyMutable&& ,  true    );
+    make_rval(const Body&&        ,  true    );
+}
+#endif // dTEST_SFINAE_BODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DBODY
+// --- derived int non-const
+TEST_COMPONENT(027)
+{
+    //       |   type        | expected |
+    make_test(DBodyConst     ,  true    );
+    make_test(DBodyMutable   ,  true    );
+    make_test(DBody          ,  true    );
+
+    make_test(DBodyConst&    ,  true    );
+    make_test(DBodyMutable&  ,  true    );
+    make_test(DBody&         ,  true    );
+
+    make_rval(DBodyConst&&   ,  true    );
+    make_rval(DBodyMutable&& ,  true    );
+    make_rval(DBody&&        ,  true    );
+}
+
+// --- derived int const
+TEST_COMPONENT(028)
+{
+    //       |   type              | expected |
+    make_test(const DBodyConst     ,  true    );
+    make_test(const DBodyMutable   ,  true    );
+    make_test(const DBody          ,  true    );
+
+    make_test(const DBodyConst&    ,  true    );
+    make_test(const DBodyMutable&  ,  true    );
+    make_test(const DBody&         ,  true    );
+
+    make_rval(const DBodyConst&&   ,  true    );
+    make_rval(const DBodyMutable&& ,  true    );
+    make_rval(const DBody&&        ,  true    );
+}
+#endif // dTEST_SFINAE_DBODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_PBODY
+// --- private int non-const
+TEST_COMPONENT(029)
+{
+    //       |   type        | expected |
+    make_test(PBodyConst     ,  true    );
+    make_test(PBodyMutable   ,  true    );
+    make_test(PBody          ,  true    );
+
+    make_test(PBodyConst&    ,  true    );
+    make_test(PBodyMutable&  ,  true    );
+    make_test(PBody&         ,  true    );
+
+    make_rval(PBodyConst&&   ,  true    );
+    make_rval(PBodyMutable&& ,  true    );
+    make_rval(PBody&&        ,  true    );
+}
+
+// --- private int const
+TEST_COMPONENT(030)
+{
+    //       |   type              | expected |
+    make_test(const PBodyConst     ,  true    );
+    make_test(const PBodyMutable   ,  true    );
+    make_test(const PBody          ,  true    );
+
+    make_test(const PBodyConst&    ,  true    );
+    make_test(const PBodyMutable&  ,  true    );
+    make_test(const PBody&         ,  true    );
+
+    make_rval(const PBodyConst&&   ,  true    );
+    make_rval(const PBodyMutable&& ,  true    );
+    make_rval(const PBody&&        ,  true    );
+}
+#endif // dTEST_SFINAE_PBODY
+
+//==============================================================================
+//==============================================================================
+#ifdef dTEST_SFINAE_DPBODY
+// --- derived private int non-const
+TEST_COMPONENT(031)
+{
+    //       |   type         | expected |
+    make_test(DPBodyConst     ,  true    );
+    make_test(DPBodyMutable   ,  true    );
+    make_test(DPBody          ,  true    );
+
+    make_test(DPBodyConst&    ,  true    );
+    make_test(DPBodyMutable&  ,  true    );
+    make_test(DPBody&         ,  true    );
+
+    make_rval(DPBodyConst&&   ,  true    );
+    make_rval(DPBodyMutable&& ,  true    );
+    make_rval(DPBody&&        ,  true    );
+}
+
+// --- derived private int const
+TEST_COMPONENT(032)
+{
+    //       |   type               | expected |
+    make_test(const DPBodyConst     ,  true    );
+    make_test(const DPBodyMutable   ,  true    );
+    make_test(const DPBody          ,  true    );
+
+    make_test(const DPBodyConst&    ,  true    );
+    make_test(const DPBodyMutable&  ,  true    );
+    make_test(const DPBody&         ,  true    );
+
+    make_rval(const DPBodyConst&&   ,  true    );
+    make_rval(const DPBodyMutable&& ,  true    );
+    make_rval(const DPBody&&        ,  true    );
+}
+#endif // dTEST_SFINAE_DPBODY
 
 //==============================================================================
 //==============================================================================
