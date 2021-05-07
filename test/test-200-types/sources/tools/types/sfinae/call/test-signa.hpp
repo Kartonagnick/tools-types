@@ -4,17 +4,17 @@
 namespace me = ::tools::sfinae::signature;
 //==============================================================================
 //==============================================================================
-namespace test_begin
+namespace test_call
 {
     #define dexpression(type, sig, expected) \
-        me::begin<type, sig>::value == expected
+        me::call<type, sig>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, sig, expected)                         \
-            static_assert(                                             \
-                dexpression(type, sig, expected),                      \
-                "tools::sfinae::signature::begin<" #type "," #sig "> " \
-                "must be '" #expected "'"                              \
+        #define make_test(type, sig, expected)                        \
+            static_assert(                                            \
+                dexpression(type, sig, expected),                     \
+                "tools::sfinae::signature::call<" #type "," #sig "> " \
+                "must be '" #expected "'"                             \
             )
     #else
         #define make_test(type, sig, expected)   \
@@ -32,8 +32,8 @@ namespace test_begin
             void()
     #endif
 
-} // namespace test_begin
+} // namespace test_call
 
-using namespace test_begin;
+using namespace test_call;
 //==============================================================================
 //==============================================================================

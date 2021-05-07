@@ -4,17 +4,17 @@
 namespace me = ::tools::sfinae::available;
 //==============================================================================
 //==============================================================================
-namespace test_begin
+namespace test_call
 {
     #define dexpression(type, expected) \
-        me::begin<type>::value == expected
+        me::call<type>::value == expected
 
     #ifdef dHAS_TYPE_TRAITS
-        #define make_test(type, expected)                     \
-            static_assert(                                    \
-                dexpression(type, expected),                  \
-                "tools::sfinae::available::begin<" #type "> " \
-                "must be '" #expected "'"                     \
+        #define make_test(type, expected)                    \
+            static_assert(                                   \
+                dexpression(type, expected),                 \
+                "tools::sfinae::available::call<" #type "> " \
+                "must be '" #expected "'"                    \
             )
     #else
         #define make_test(type, expected)   \
@@ -32,7 +32,7 @@ namespace test_begin
             void()
     #endif
 
-} // namespace test_begin
-using namespace test_begin;
+} // namespace test_call
+using namespace test_call;
 //==============================================================================
 //==============================================================================

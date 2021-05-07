@@ -2,10 +2,10 @@
 #ifdef _MSC_VER
 #include <mygtest/modern.hpp>
 
-#ifdef TEST_TOOLS_SFINAE_BEGIN
+#ifdef TEST_TOOLS_SFINAE_CALL
 #define dTEST_COMPONENT tools, types, sfinae, exist
-#define dTEST_METHOD begin
-#define dTEST_TAG new
+#define dTEST_METHOD call
+#define dTEST_TAG tdd
 
 #include <tools/features.hpp>
 
@@ -48,7 +48,7 @@
     #define dTEST_SFINAE_DPBODY       1
 #endif
 
-#include "test-begin.hpp"
+#include "test-call.hpp"
 #include "test-exist.hpp"
 
 //==============================================================================
@@ -689,4 +689,4 @@ TEST_COMPONENT(032)
 //==============================================================================
 //==============================================================================
 #endif // _MSC_VER
-#endif // TEST_TOOLS_SFINAE_BEGIN
+#endif // TEST_TOOLS_SFINAE_CALL

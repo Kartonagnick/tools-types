@@ -1,11 +1,11 @@
 // [2021y-05m-07d][17:10:153] Idrisov Denis R.
 #include <mygtest/modern.hpp>
 
-#define TEST_TOOLS_SFINAE_BEGIN
+#define TEST_TOOLS_SFINAE_CALL
 
 #ifdef TEST_TOOLS_SFINAE_BEGIN
 #define dTEST_COMPONENT tools, types, sfinae, available
-#define dTEST_METHOD begin
+#define dTEST_METHOD call
 #define dTEST_TAG tdd
 
 #include <tools/features.hpp>
@@ -165,7 +165,7 @@ namespace
 
 } // namespace 
 
-#include "test-begin.hpp"
+#include "test-call.hpp"
 #include "test-avail.hpp"
 
 //..............................................................................
@@ -956,4 +956,4 @@ TEST_COMPONENT(040)
 
 //==============================================================================
 //==============================================================================
-#endif // !TEST_TOOLS_SFINAE_BEGIN
+#endif // !TEST_TOOLS_SFINAE_CALL

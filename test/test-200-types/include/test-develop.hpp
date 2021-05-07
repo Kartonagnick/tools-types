@@ -55,10 +55,10 @@
     #define TEST_TOOLS_ENABLE_FOR                           // ready!
 
 //==============================================================================
-//===== tools/types/sfinae/exist ===========================||==================
-    #define TEST_TOOLS_SFINAE_DEREFERENCE                   // in progress...
-    #define TEST_TOOLS_SFINAE_ACCESS                        // in progress...
-    // #define TEST_TOOLS_SFINAE_CALL                       // in progress...
+//===== tools/types/sfinae =================================||==================
+    #define TEST_TOOLS_SFINAE_DEREFERENCE                   // ready!
+    #define TEST_TOOLS_SFINAE_ACCESS                        // ready!
+    #define TEST_TOOLS_SFINAE_CALL                          // in progress...
 
     #define TEST_TOOLS_SFINAE_BEGIN                         // ready!
     #define TEST_TOOLS_SFINAE_END                           // ready!

@@ -4,17 +4,17 @@
 
 //==============================================================================
 //=== [first unit-tests] =======================================================
-namespace test_begin
+namespace test_call
 {
     #ifdef dTEST_SFINAE_REGULAR
         struct Maket;
         struct Dummy {};
-        struct Mutable { void begin(); };
-        struct Const   { void begin() const; };
+        struct Mutable { void operator()(); };
+        struct Const   { void operator()() const; };
         struct Container
         {
-            void begin();
-            void begin() const;
+            void operator();
+            void operator() const;
         };
     #endif // dTEST_SFINAE_REGULAR
 
@@ -27,20 +27,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PRIVATE) || defined(dTEST_SFINAE_DPRVATE)
         class PMutable 
         {
-            void begin();
+            void operator()();
         public:
             PMutable();
         };
         class PConst
         {
-            void begin() const;
+            void operator()() const;
         public:
             PConst();
         };
         class PContainer
         {
-            void begin() ;
-            void begin() const;
+            void operator()() ;
+            void operator()() const;
         public:
             PContainer();
         };
@@ -51,25 +51,25 @@ namespace test_begin
         struct DPConst     : PConst     {};
         struct DPContainer : PContainer {};
     #endif // dTEST_SFINAE_DPRVATE
-} // namespace test_begin
+} // namespace test_call
 
 //==============================================================================
 //=== [ recursieve containers ] ================================================
-namespace test_begin
+namespace test_call
 {
     #ifdef dTEST_SFINAE_RECURSIEVE
         struct RMutable 
         {
-            RMutable begin();
+            RMutable operator();
         };
         struct RConst 
         {
-            RConst begin() const;
+            RConst operator() const;
         };
         struct RContainer
         {
-            RContainer begin() ;
-            RContainer begin() const;
+            RContainer operator() ;
+            RContainer operator() const;
         };
     #endif // dTEST_SFINAE_RECURSIEVE
 
@@ -82,20 +82,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PRECURSIEVE) || defined(dTEST_SFINAE_DPRECURSIEVE)
         class PRMutable 
         {
-            PRMutable begin();
+            PRMutable operator();
         public:
             PRMutable();
         };
         class PRConst
         {
-            PRConst begin() const;
+            PRConst operator() const;
         public:
             PRConst();
         };
         class PRContainer
         {
-            PRContainer begin() ;
-            PRContainer begin() const;
+            PRContainer operator() ;
+            PRContainer operator() const;
         public:
             PRContainer();
         };
@@ -106,25 +106,25 @@ namespace test_begin
         struct DPRConst     : PRConst     {};
         struct DPRContainer : PRContainer {};
     #endif // dTEST_SFINAE_DPRECURSIEVE
-} // namespace test_begin
+} // namespace test_call
 
 //==============================================================================
 //=== [ unsuitable containers ] ================================================
-namespace test_begin
+namespace test_call
 {
     #ifdef dTEST_SFINAE_UNSUITABLE
         struct UnsuitableMutable
         {
-             void begin(int); 
+             void operator()(int); 
         };
         struct UnsuitableConst
         {
-             void begin(int) const; 
+             void operator()(int) const; 
         };
         struct Unsuitable
         {
-             void begin(int) ; 
-             void begin(int) const; 
+             void operator()(int) ; 
+             void operator()(int) const; 
         };
     #endif // dTEST_SFINAE_UNSUITABLE
 
@@ -137,20 +137,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PUNSUITABLE) || defined(dTEST_SFINAE_DPUNSUITABLE)
         class PUnsuitableMutable
         {
-             void begin(int); 
+             void operator()(int); 
         public:
             PUnsuitableMutable();
         };
         class PUnsuitableConst
         {
-             void begin(int) const; 
+             void operator()(int) const; 
         public:
             PUnsuitableConst();
         };
         class PUnsuitable
         {
-             void begin(int) ; 
-             void begin(int) const; 
+             void operator()(int) ; 
+             void operator()(int) const; 
         public:
             PUnsuitable();
         };
@@ -161,25 +161,25 @@ namespace test_begin
         struct DPUnsuitableConst   : PUnsuitableConst   {};
         struct DPUnsuitable        : PUnsuitable        {};
     #endif
-} // namespace test_begin
+} // namespace test_call
 
 //==============================================================================
 //=== [ return int ] ===========================================================
-namespace test_begin
+namespace test_call
 {
     #ifdef dTEST_SFINAE_INT
         struct IntMutable
         {
-             int begin(); 
+             int operator(); 
         };
         struct IntConst
         {
-             int begin() const; 
+             int operator() const; 
         };
         struct Int
         {
-             int begin() ; 
-             int begin() const; 
+             int operator() ; 
+             int operator() const; 
         };
     #endif // dTEST_SFINAE_INT
 
@@ -192,20 +192,20 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PINT) || defined(dTEST_SFINAE_DPINT)
         class PIntMutable
         {
-             int begin(); 
+             int operator(); 
         public:
             PIntMutable();
         };
         class PIntConst
         {
-             int begin() const; 
+             int operator() const; 
         public:
             PIntConst();
         };
         class PInt
         {
-             int begin() ; 
-             int begin() const; 
+             int operator() ; 
+             int operator() const; 
         public:
             PInt();
         };
@@ -217,27 +217,27 @@ namespace test_begin
         struct DPInt        : PInt        {};
     #endif
 
-} // namespace test_begin
+} // namespace test_call
 
 //==============================================================================
 //=== [ return body ] ==========================================================
-namespace test_begin
+namespace test_call
 {
     #ifdef dTEST_SFINAE_BODY
         struct BodyMutable 
         {
-            double begin(); 
+            double operator(); 
             char buf[300]; 
         };
         struct BodyConst   
         {
-            double begin() const; 
+            double operator() const; 
             char buf[300]; 
         };
         struct Body
         {
-            double begin();
-            double begin() const;
+            double operator();
+            double operator() const;
             char buf[300]; 
         };
     #endif // dTEST_SFINAE_BODY
@@ -251,22 +251,22 @@ namespace test_begin
     #if defined(dTEST_SFINAE_PBODY) || defined(dTEST_SFINAE_DPRVATE)
         class PBodyMutable 
         {
-            double begin();
+            double operator();
             char buf[300]; 
         public:
             PBodyMutable();
         };
         class PBodyConst
         {
-            double begin() const;
+            double operator() const;
             char buf[300]; 
         public:
             PBodyConst();
         };
         class PBody
         {
-            double begin() ;
-            double begin() const;
+            double operator() ;
+            double operator() const;
             char buf[300]; 
         public:
             PBody();
@@ -279,9 +279,9 @@ namespace test_begin
         struct DPBody        : PBody        {};
     #endif // dTEST_SFINAE_DPBODY
 
-} // namespace test_begin
+} // namespace test_call
 
-using namespace test_begin;
+using namespace test_call;
 //==============================================================================
 //==============================================================================
 
