@@ -175,26 +175,32 @@ namespace
 // --- simple: false
 TEST_COMPONENT(000)
 {
-    //       |   type   | expected |
-    make_test(Maket     ,  false   );
-    make_test(Dummy     ,  false   );
-    make_test(int       ,  false   );
-    make_test(int()     ,  true    );
-//-----------------------------------------
-    make_test(Maket&    ,  false   );
-    make_test(Dummy&    ,  false   );
-    make_test(int&      ,  false   );
-    make_test(int(&)()  ,  true    );
-//-----------------------------------------
-    make_rval(Maket&&   ,  false   );
-    make_rval(Dummy&&   ,  false   );
-    make_rval(int&&     ,  false   );
-    make_rval(int(&&)() ,  true    );
-//-----------------------------------------
-    make_test(Maket*    ,  false   );
-    make_test(Dummy*    ,  false   );
-    make_test(int*      ,  false   );
-    make_test(int(*)()  ,  true    );
+    //       |   type         | expected |
+    make_test(Maket           ,  false   );
+    make_test(Dummy           ,  false   );
+    make_test(int             ,  false   );
+    make_test(int()           ,  true    );
+//-----------------------------------------------
+    make_test(Maket&          ,  false   );
+    make_test(Dummy&          ,  false   );
+    make_test(int&            ,  false   );
+    make_test(int(&)()        ,  true    );
+//-----------------------------------------------
+    make_rval(Maket&&         ,  false   );
+    make_rval(Dummy&&         ,  false   );
+    make_rval(int&&           ,  false   );
+    make_rval(int(&&)()       ,  true    );
+//-----------------------------------------------
+    make_test(Maket*          ,  false   );
+    make_test(Dummy*          ,  false   );
+    make_test(int*            ,  false   );
+    make_test(int(*)()        ,  true    );
+//-----------------------------------------------
+    make_test(int(Dummy::*)() ,  false   );
+    make_test(int(*)(...)     ,  true    );
+    make_test(int(&)(...)     ,  true    );
+    make_test(int(int, ...)   ,  false   );
+    make_test(int(...)        ,  true    );
 }
 
 // --- non-const
