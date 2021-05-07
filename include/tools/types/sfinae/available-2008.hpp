@@ -12,9 +12,9 @@ namespace tools     {
 namespace sfinae    {
 namespace available {
 
-#if 0
     namespace detail
     {
+#if 0
         template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> class call_
         {
             dNO_REFERENCE_(t, x);
@@ -120,19 +120,64 @@ namespace available {
         public:
             enum { value = sz != sizeof(no) };
         };
+#endif
+
+        #define dARG(n)  obj<t##n>()
+        #define dCALL obj<u&>().operator()
+
+        template<class t, class t1, class t2, class t3, class t4, class t5, class t6, class t7> class call_
+        {
+            dNO_REFERENCE_(t, x);
+            template <class u> static 
+                typename sizeof_<sizeof(dCALL(dARG(1), dARG(2), dARG(3), dARG(4), dARG(5), dARG(6), dARG(7)))>::type
+                check(u*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<x>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t, class t1> 
+        class call_<t, t1, empty, empty, empty, empty, empty, empty>
+        {
+            dNO_REFERENCE_(t, x);
+            template <class u> static 
+                typename sizeof_<sizeof(dCALL(dARG(1)))>::type
+                check(u*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<x>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+        template<class t> 
+        class call_<t, empty, empty, empty, empty, empty, empty, empty>
+        {
+            dNO_REFERENCE_(t, x);
+            template <class u> static 
+                typename sizeof_<sizeof(dCALL())>::type
+                check(u*);
+            template <class> static no check(...);
+            enum { sz = sizeof(check<x>(0)) };
+        public:
+            enum { value = sz < sizeof(no) };
+        };
+
+
+        #undef dCALL
+        #undef dARG
 
     } // namespace detail
 
-    #define dVARIADIC_7 \
-        class t1, class t2 = empty, class t3 = empty, class t4 = empty, \
-        class t5 = empty, class t6 = empty, class t7  = empty
+    #define dVARIADIC_0_7 \
+        class t1 = empty, class t2 = empty, class t3 = empty, \
+        class t4 = empty, class t5 = empty, class t6 = empty, \
+        class t7  = empty
 
-    template<class t, dVARIADIC_7>
+    template<class t, dVARIADIC_0_7>
     struct call
         : dIMPLEMENT_(call_<t, t1,t2,t3,t4,t5,t6,t7>)
     {};
-
-#endif
 
 //==============================================================================
 //==============================================================================
